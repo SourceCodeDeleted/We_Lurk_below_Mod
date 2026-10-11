@@ -1,0 +1,8251 @@
+#define __int8 char
+#define __int16 short
+#define __int32 int
+#define __int64 long long
+
+struct HWND__;
+struct HKEY__;
+struct tagBITMAPINFO;
+union _LARGE_INTEGER;
+struct _EXCEPTION_RECORD;
+struct _CONTEXT;
+struct _s_ThrowInfo;
+struct _s_CatchableTypeArray;
+struct _s_CatchableType;
+struct TypeDescriptor;
+struct _exception;
+
+/* 1 */
+struct _GUID
+{
+  unsigned int Data1;
+  unsigned __int16 Data2;
+  unsigned __int16 Data3;
+  unsigned __int8 Data4[8];
+};
+
+/* 2 */
+typedef struct _GUID GUID;
+
+/* 3 */
+enum __bitmask __TI_flags
+{
+  TI_IsConst = 0x1,
+  TI_IsVolatile = 0x2,
+  TI_IsUnaligned = 0x4,
+  TI_IsPure = 0x8,
+  TI_IsWinRT = 0x10,
+};
+
+/* 4 */
+enum __bitmask __CT_flags
+{
+  CT_IsSimpleType = 0x1,
+  CT_ByReferenceOnly = 0x2,
+  CT_HasVirtualBase = 0x4,
+  CT_IsWinRTHandle = 0x8,
+  CT_IsStdBadAlloc = 0x10,
+};
+
+/* 5 */
+typedef void *PVOID;
+
+/* 6 */
+typedef unsigned int DWORD;
+
+/* 7 */
+typedef struct _SCOPETABLE_ENTRY *PSCOPETABLE_ENTRY;
+
+/* 8 */
+struct _EH3_EXCEPTION_REGISTRATION
+{
+  struct _EH3_EXCEPTION_REGISTRATION *Next;
+  PVOID ExceptionHandler;
+  PSCOPETABLE_ENTRY ScopeTable;
+  DWORD TryLevel;
+};
+
+/* 9 */
+typedef struct _EH3_EXCEPTION_REGISTRATION EH3_EXCEPTION_REGISTRATION;
+
+/* 10 */
+typedef struct _EH3_EXCEPTION_REGISTRATION *PEH3_EXCEPTION_REGISTRATION;
+
+/* 11 */
+struct CPPEH_RECORD
+{
+  DWORD old_esp;
+  EXCEPTION_POINTERS *exc_ptr;
+  struct _EH3_EXCEPTION_REGISTRATION registration;
+};
+
+/* 12 */
+struct _EH4_SCOPETABLE_RECORD
+{
+  int EnclosingLevel;
+  void *FilterFunc;
+  void *HandlerFunc;
+};
+
+/* 13 */
+struct _EH4_SCOPETABLE
+{
+  DWORD GSCookieOffset;
+  DWORD GSCookieXOROffset;
+  DWORD EHCookieOffset;
+  DWORD EHCookieXOROffset;
+  struct _EH4_SCOPETABLE_RECORD ScopeRecord[];
+};
+
+/* 14 */
+typedef void *HANDLE;
+
+/* 15 */
+typedef void *LPVOID;
+
+/* 17 */
+typedef unsigned __int16 wchar_t;
+
+/* 16 */
+typedef wchar_t WCHAR;
+
+/* 18 */
+typedef unsigned int size_t;
+
+/* 21 */
+typedef unsigned int UINT;
+
+/* 22 */
+struct DXGI_RATIONAL
+{
+  UINT Numerator;
+  UINT Denominator;
+};
+
+/* 23 */
+enum DXGI_FORMAT
+{
+  DXGI_FORMAT_UNKNOWN = 0x0,
+  DXGI_FORMAT_R32G32B32A32_TYPELESS = 0x1,
+  DXGI_FORMAT_R32G32B32A32_FLOAT = 0x2,
+  DXGI_FORMAT_R32G32B32A32_UINT = 0x3,
+  DXGI_FORMAT_R32G32B32A32_SINT = 0x4,
+  DXGI_FORMAT_R32G32B32_TYPELESS = 0x5,
+  DXGI_FORMAT_R32G32B32_FLOAT = 0x6,
+  DXGI_FORMAT_R32G32B32_UINT = 0x7,
+  DXGI_FORMAT_R32G32B32_SINT = 0x8,
+  DXGI_FORMAT_R16G16B16A16_TYPELESS = 0x9,
+  DXGI_FORMAT_R16G16B16A16_FLOAT = 0xA,
+  DXGI_FORMAT_R16G16B16A16_UNORM = 0xB,
+  DXGI_FORMAT_R16G16B16A16_UINT = 0xC,
+  DXGI_FORMAT_R16G16B16A16_SNORM = 0xD,
+  DXGI_FORMAT_R16G16B16A16_SINT = 0xE,
+  DXGI_FORMAT_R32G32_TYPELESS = 0xF,
+  DXGI_FORMAT_R32G32_FLOAT = 0x10,
+  DXGI_FORMAT_R32G32_UINT = 0x11,
+  DXGI_FORMAT_R32G32_SINT = 0x12,
+  DXGI_FORMAT_R32G8X24_TYPELESS = 0x13,
+  DXGI_FORMAT_D32_FLOAT_S8X24_UINT = 0x14,
+  DXGI_FORMAT_R32_FLOAT_X8X24_TYPELESS = 0x15,
+  DXGI_FORMAT_X32_TYPELESS_G8X24_UINT = 0x16,
+  DXGI_FORMAT_R10G10B10A2_TYPELESS = 0x17,
+  DXGI_FORMAT_R10G10B10A2_UNORM = 0x18,
+  DXGI_FORMAT_R10G10B10A2_UINT = 0x19,
+  DXGI_FORMAT_R11G11B10_FLOAT = 0x1A,
+  DXGI_FORMAT_R8G8B8A8_TYPELESS = 0x1B,
+  DXGI_FORMAT_R8G8B8A8_UNORM = 0x1C,
+  DXGI_FORMAT_R8G8B8A8_UNORM_SRGB = 0x1D,
+  DXGI_FORMAT_R8G8B8A8_UINT = 0x1E,
+  DXGI_FORMAT_R8G8B8A8_SNORM = 0x1F,
+  DXGI_FORMAT_R8G8B8A8_SINT = 0x20,
+  DXGI_FORMAT_R16G16_TYPELESS = 0x21,
+  DXGI_FORMAT_R16G16_FLOAT = 0x22,
+  DXGI_FORMAT_R16G16_UNORM = 0x23,
+  DXGI_FORMAT_R16G16_UINT = 0x24,
+  DXGI_FORMAT_R16G16_SNORM = 0x25,
+  DXGI_FORMAT_R16G16_SINT = 0x26,
+  DXGI_FORMAT_R32_TYPELESS = 0x27,
+  DXGI_FORMAT_D32_FLOAT = 0x28,
+  DXGI_FORMAT_R32_FLOAT = 0x29,
+  DXGI_FORMAT_R32_UINT = 0x2A,
+  DXGI_FORMAT_R32_SINT = 0x2B,
+  DXGI_FORMAT_R24G8_TYPELESS = 0x2C,
+  DXGI_FORMAT_D24_UNORM_S8_UINT = 0x2D,
+  DXGI_FORMAT_R24_UNORM_X8_TYPELESS = 0x2E,
+  DXGI_FORMAT_X24_TYPELESS_G8_UINT = 0x2F,
+  DXGI_FORMAT_R8G8_TYPELESS = 0x30,
+  DXGI_FORMAT_R8G8_UNORM = 0x31,
+  DXGI_FORMAT_R8G8_UINT = 0x32,
+  DXGI_FORMAT_R8G8_SNORM = 0x33,
+  DXGI_FORMAT_R8G8_SINT = 0x34,
+  DXGI_FORMAT_R16_TYPELESS = 0x35,
+  DXGI_FORMAT_R16_FLOAT = 0x36,
+  DXGI_FORMAT_D16_UNORM = 0x37,
+  DXGI_FORMAT_R16_UNORM = 0x38,
+  DXGI_FORMAT_R16_UINT = 0x39,
+  DXGI_FORMAT_R16_SNORM = 0x3A,
+  DXGI_FORMAT_R16_SINT = 0x3B,
+  DXGI_FORMAT_R8_TYPELESS = 0x3C,
+  DXGI_FORMAT_R8_UNORM = 0x3D,
+  DXGI_FORMAT_R8_UINT = 0x3E,
+  DXGI_FORMAT_R8_SNORM = 0x3F,
+  DXGI_FORMAT_R8_SINT = 0x40,
+  DXGI_FORMAT_A8_UNORM = 0x41,
+  DXGI_FORMAT_R1_UNORM = 0x42,
+  DXGI_FORMAT_R9G9B9E5_SHAREDEXP = 0x43,
+  DXGI_FORMAT_R8G8_B8G8_UNORM = 0x44,
+  DXGI_FORMAT_G8R8_G8B8_UNORM = 0x45,
+  DXGI_FORMAT_BC1_TYPELESS = 0x46,
+  DXGI_FORMAT_BC1_UNORM = 0x47,
+  DXGI_FORMAT_BC1_UNORM_SRGB = 0x48,
+  DXGI_FORMAT_BC2_TYPELESS = 0x49,
+  DXGI_FORMAT_BC2_UNORM = 0x4A,
+  DXGI_FORMAT_BC2_UNORM_SRGB = 0x4B,
+  DXGI_FORMAT_BC3_TYPELESS = 0x4C,
+  DXGI_FORMAT_BC3_UNORM = 0x4D,
+  DXGI_FORMAT_BC3_UNORM_SRGB = 0x4E,
+  DXGI_FORMAT_BC4_TYPELESS = 0x4F,
+  DXGI_FORMAT_BC4_UNORM = 0x50,
+  DXGI_FORMAT_BC4_SNORM = 0x51,
+  DXGI_FORMAT_BC5_TYPELESS = 0x52,
+  DXGI_FORMAT_BC5_UNORM = 0x53,
+  DXGI_FORMAT_BC5_SNORM = 0x54,
+  DXGI_FORMAT_B5G6R5_UNORM = 0x55,
+  DXGI_FORMAT_B5G5R5A1_UNORM = 0x56,
+  DXGI_FORMAT_B8G8R8A8_UNORM = 0x57,
+  DXGI_FORMAT_B8G8R8X8_UNORM = 0x58,
+  DXGI_FORMAT_R10G10B10_XR_BIAS_A2_UNORM = 0x59,
+  DXGI_FORMAT_B8G8R8A8_TYPELESS = 0x5A,
+  DXGI_FORMAT_B8G8R8A8_UNORM_SRGB = 0x5B,
+  DXGI_FORMAT_B8G8R8X8_TYPELESS = 0x5C,
+  DXGI_FORMAT_B8G8R8X8_UNORM_SRGB = 0x5D,
+  DXGI_FORMAT_BC6H_TYPELESS = 0x5E,
+  DXGI_FORMAT_BC6H_UF16 = 0x5F,
+  DXGI_FORMAT_BC6H_SF16 = 0x60,
+  DXGI_FORMAT_BC7_TYPELESS = 0x61,
+  DXGI_FORMAT_BC7_UNORM = 0x62,
+  DXGI_FORMAT_BC7_UNORM_SRGB = 0x63,
+  DXGI_FORMAT_AYUV = 0x64,
+  DXGI_FORMAT_Y410 = 0x65,
+  DXGI_FORMAT_Y416 = 0x66,
+  DXGI_FORMAT_NV12 = 0x67,
+  DXGI_FORMAT_P010 = 0x68,
+  DXGI_FORMAT_P016 = 0x69,
+  DXGI_FORMAT_420_OPAQUE = 0x6A,
+  DXGI_FORMAT_YUY2 = 0x6B,
+  DXGI_FORMAT_Y210 = 0x6C,
+  DXGI_FORMAT_Y216 = 0x6D,
+  DXGI_FORMAT_NV11 = 0x6E,
+  DXGI_FORMAT_AI44 = 0x6F,
+  DXGI_FORMAT_IA44 = 0x70,
+  DXGI_FORMAT_P8 = 0x71,
+  DXGI_FORMAT_A8P8 = 0x72,
+  DXGI_FORMAT_B4G4R4A4_UNORM = 0x73,
+  DXGI_FORMAT_P208 = 0x82,
+  DXGI_FORMAT_V208 = 0x83,
+  DXGI_FORMAT_V408 = 0x84,
+  DXGI_FORMAT_FORCE_UINT = 0xFFFFFFFF,
+};
+
+/* 24 */
+enum DXGI_MODE_SCANLINE_ORDER
+{
+  DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED = 0x0,
+  DXGI_MODE_SCANLINE_ORDER_PROGRESSIVE = 0x1,
+  DXGI_MODE_SCANLINE_ORDER_UPPER_FIELD_FIRST = 0x2,
+  DXGI_MODE_SCANLINE_ORDER_LOWER_FIELD_FIRST = 0x3,
+};
+
+/* 25 */
+enum DXGI_MODE_SCALING
+{
+  DXGI_MODE_SCALING_UNSPECIFIED = 0x0,
+  DXGI_MODE_SCALING_CENTERED = 0x1,
+  DXGI_MODE_SCALING_STRETCHED = 0x2,
+};
+
+/* 20 */
+struct DXGI_MODE_DESC
+{
+  UINT Width;
+  UINT Height;
+  DXGI_RATIONAL RefreshRate;
+  DXGI_FORMAT Format;
+  DXGI_MODE_SCANLINE_ORDER ScanlineOrdering;
+  DXGI_MODE_SCALING Scaling;
+};
+
+/* 26 */
+struct DXGI_SAMPLE_DESC
+{
+  UINT Count;
+  UINT Quality;
+};
+
+/* 27 */
+typedef UINT DXGI_USAGE;
+
+/* 28 */
+typedef struct HWND__ *HWND;
+
+/* 30 */
+typedef int BOOL;
+
+/* 31 */
+enum DXGI_SWAP_EFFECT
+{
+  DXGI_SWAP_EFFECT_DISCARD = 0x0,
+  DXGI_SWAP_EFFECT_SEQUENTIAL = 0x1,
+  DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL = 0x3,
+  DXGI_SWAP_EFFECT_FLIP_DISCARD = 0x4,
+};
+
+/* 19 */
+struct DXGI_SWAP_CHAIN_DESC
+{
+  DXGI_MODE_DESC BufferDesc;
+  DXGI_SAMPLE_DESC SampleDesc;
+  DXGI_USAGE BufferUsage;
+  UINT BufferCount;
+  HWND OutputWindow;
+  BOOL Windowed;
+  DXGI_SWAP_EFFECT SwapEffect;
+  UINT Flags;
+};
+
+/* 29 */
+struct HWND__
+{
+  int unused;
+};
+
+/* 32 */
+typedef GUID IID;
+
+/* 36 */
+typedef int LONG;
+
+/* 35 */
+struct tagRECT
+{
+  LONG left;
+  LONG top;
+  LONG right;
+  LONG bottom;
+};
+
+/* 34 */
+typedef struct tagRECT RECT;
+
+/* 38 */
+typedef unsigned __int16 WORD;
+
+/* 37 */
+typedef WORD ATOM;
+
+/* 33 */
+struct tagWINDOWINFO
+{
+  DWORD cbSize;
+  RECT rcWindow;
+  RECT rcClient;
+  DWORD dwStyle;
+  DWORD dwExStyle;
+  DWORD dwWindowStatus;
+  UINT cxWindowBorders;
+  UINT cyWindowBorders;
+  ATOM atomWindowType;
+  WORD wCreatorVersion;
+};
+
+/* 39 */
+typedef struct HKEY__ *HKEY;
+
+/* 40 */
+struct HKEY__
+{
+  int unused;
+};
+
+/* 41 */
+typedef struct tagBITMAPINFO BITMAPINFO;
+
+/* 44 */
+struct tagBITMAPINFOHEADER
+{
+  DWORD biSize;
+  LONG biWidth;
+  LONG biHeight;
+  WORD biPlanes;
+  WORD biBitCount;
+  DWORD biCompression;
+  DWORD biSizeImage;
+  LONG biXPelsPerMeter;
+  LONG biYPelsPerMeter;
+  DWORD biClrUsed;
+  DWORD biClrImportant;
+};
+
+/* 43 */
+typedef struct tagBITMAPINFOHEADER BITMAPINFOHEADER;
+
+/* 47 */
+typedef unsigned __int8 BYTE;
+
+/* 46 */
+struct tagRGBQUAD
+{
+  BYTE rgbBlue;
+  BYTE rgbGreen;
+  BYTE rgbRed;
+  BYTE rgbReserved;
+};
+
+/* 45 */
+typedef struct tagRGBQUAD RGBQUAD;
+
+/* 42 */
+struct tagBITMAPINFO
+{
+  BITMAPINFOHEADER bmiHeader;
+  RGBQUAD bmiColors[1];
+};
+
+/* 48 */
+struct HINSTANCE__
+{
+  int unused;
+};
+
+/* 49 */
+typedef void (__cdecl *_PVFV)();
+
+/* 50 */
+#pragma pack(push, 8)
+struct _onexit_table_t
+{
+  _PVFV *_first;
+  _PVFV *_last;
+  _PVFV *_end;
+};
+#pragma pack(pop)
+
+/* 51 */
+struct _FILETIME
+{
+  DWORD dwLowDateTime;
+  DWORD dwHighDateTime;
+};
+
+/* 52 */
+typedef union _LARGE_INTEGER LARGE_INTEGER;
+
+/* 54 */
+struct _LARGE_INTEGER::$837407842DC9087486FDFA5FEB63B74E
+{
+  DWORD LowPart;
+  LONG HighPart;
+};
+
+/* 55 */
+typedef __int64 LONGLONG;
+
+/* 53 */
+union _LARGE_INTEGER
+{
+  struct
+  {
+    DWORD LowPart;
+    LONG HighPart;
+  };
+  struct
+  {
+    DWORD LowPart;
+    LONG HighPart;
+  } u;
+  LONGLONG QuadPart;
+};
+
+/* 58 */
+typedef struct _EXCEPTION_RECORD EXCEPTION_RECORD;
+
+/* 57 */
+typedef EXCEPTION_RECORD *PEXCEPTION_RECORD;
+
+/* 62 */
+typedef struct _CONTEXT CONTEXT;
+
+/* 61 */
+typedef CONTEXT *PCONTEXT;
+
+/* 56 */
+struct _EXCEPTION_POINTERS
+{
+  PEXCEPTION_RECORD ExceptionRecord;
+  PCONTEXT ContextRecord;
+};
+
+/* 60 */
+typedef unsigned int ULONG_PTR;
+
+/* 59 */
+struct _EXCEPTION_RECORD
+{
+  DWORD ExceptionCode;
+  DWORD ExceptionFlags;
+  struct _EXCEPTION_RECORD *ExceptionRecord;
+  PVOID ExceptionAddress;
+  DWORD NumberParameters;
+  ULONG_PTR ExceptionInformation[15];
+};
+
+/* 65 */
+struct _FLOATING_SAVE_AREA
+{
+  DWORD ControlWord;
+  DWORD StatusWord;
+  DWORD TagWord;
+  DWORD ErrorOffset;
+  DWORD ErrorSelector;
+  DWORD DataOffset;
+  DWORD DataSelector;
+  BYTE RegisterArea[80];
+  DWORD Spare0;
+};
+
+/* 64 */
+typedef struct _FLOATING_SAVE_AREA FLOATING_SAVE_AREA;
+
+/* 63 */
+#pragma pack(push, 4)
+struct _CONTEXT
+{
+  DWORD ContextFlags;
+  DWORD Dr0;
+  DWORD Dr1;
+  DWORD Dr2;
+  DWORD Dr3;
+  DWORD Dr6;
+  DWORD Dr7;
+  FLOATING_SAVE_AREA FloatSave;
+  DWORD SegGs;
+  DWORD SegFs;
+  DWORD SegEs;
+  DWORD SegDs;
+  DWORD Edi;
+  DWORD Esi;
+  DWORD Ebx;
+  DWORD Edx;
+  DWORD Ecx;
+  DWORD Eax;
+  DWORD Ebp;
+  DWORD Eip;
+  DWORD SegCs;
+  DWORD EFlags;
+  DWORD Esp;
+  DWORD SegSs;
+  BYTE ExtendedRegisters[512];
+};
+#pragma pack(pop)
+
+/* 67 */
+typedef WCHAR *LPWSTR;
+
+/* 68 */
+typedef BYTE *LPBYTE;
+
+/* 66 */
+struct _STARTUPINFOW
+{
+  DWORD cb;
+  LPWSTR lpReserved;
+  LPWSTR lpDesktop;
+  LPWSTR lpTitle;
+  DWORD dwX;
+  DWORD dwY;
+  DWORD dwXSize;
+  DWORD dwYSize;
+  DWORD dwXCountChars;
+  DWORD dwYCountChars;
+  DWORD dwFillAttribute;
+  DWORD dwFlags;
+  WORD wShowWindow;
+  WORD cbReserved2;
+  LPBYTE lpReserved2;
+  HANDLE hStdInput;
+  HANDLE hStdOutput;
+  HANDLE hStdError;
+};
+
+/* 70 */
+typedef const struct _s_ThrowInfo ThrowInfo;
+
+/* 69 */
+typedef ThrowInfo _ThrowInfo;
+
+/* 72 */
+typedef void (__cdecl *PMFN)(void *);
+
+/* 73 */
+typedef const struct _s_CatchableTypeArray CatchableTypeArray;
+
+/* 71 */
+#pragma pack(push, 4)
+struct _s_ThrowInfo
+{
+  unsigned int attributes;
+  PMFN pmfnUnwind;
+  int (__cdecl *pForwardCompat)();
+  CatchableTypeArray *pCatchableTypeArray;
+};
+#pragma pack(pop)
+
+/* 75 */
+typedef const struct _s_CatchableType CatchableType;
+
+/* 74 */
+#pragma pack(push, 4)
+struct _s_CatchableTypeArray
+{
+  int nCatchableTypes;
+  CatchableType *arrayOfCatchableTypes[];
+};
+#pragma pack(pop)
+
+/* 78 */
+#pragma pack(push, 4)
+struct PMD
+{
+  int mdisp;
+  int pdisp;
+  int vdisp;
+};
+#pragma pack(pop)
+
+/* 76 */
+#pragma pack(push, 4)
+struct _s_CatchableType
+{
+  unsigned int properties;
+  TypeDescriptor *pType;
+  PMD thisDisplacement;
+  int sizeOrOffset;
+  PMFN copyFunction;
+};
+#pragma pack(pop)
+
+/* 77 */
+#pragma pack(push, 4)
+struct TypeDescriptor
+{
+  unsigned int hash;
+  void *spare;
+  char name[];
+};
+#pragma pack(pop)
+
+/* 79 */
+typedef void (__stdcall *_tls_callback_type)(void *, unsigned int, void *);
+
+/* 80 */
+typedef int (__cdecl *_onexit_t)();
+
+/* 81 */
+typedef struct HINSTANCE__ *HINSTANCE;
+
+/* 83 */
+typedef char CHAR;
+
+/* 82 */
+typedef CHAR *LPSTR;
+
+/* 84 */
+typedef ULONG_PTR SIZE_T;
+
+/* 86 */
+typedef unsigned __int64 ULONGLONG;
+
+/* 89 */
+struct _SINGLE_LIST_ENTRY
+{
+  struct _SINGLE_LIST_ENTRY *Next;
+};
+
+/* 88 */
+typedef struct _SINGLE_LIST_ENTRY SLIST_ENTRY;
+
+/* 87 */
+struct _SLIST_HEADER::$04C3B4B3818F1694974352AE64BF5082
+{
+  SLIST_ENTRY Next;
+  WORD Depth;
+  WORD CpuId;
+};
+
+/* 85 */
+union _SLIST_HEADER
+{
+  ULONGLONG Alignment;
+  struct
+  {
+    SLIST_ENTRY Next;
+    WORD Depth;
+    WORD CpuId;
+  };
+};
+
+/* 90 */
+enum _crt_app_type
+{
+  _crt_unknown_app = 0x0,
+  _crt_console_app = 0x1,
+  _crt_gui_app = 0x2,
+};
+
+/* 91 */
+typedef int (__cdecl *_UserMathErrorFunctionPointer)(struct _exception *);
+
+/* 92 */
+#pragma pack(push, 8)
+struct _exception
+{
+  int type;
+  char *name;
+  double arg1;
+  double arg2;
+  double retval;
+};
+#pragma pack(pop)
+
+/* 93 */
+enum _crt_argv_mode
+{
+  _crt_argv_no_arguments = 0x0,
+  _crt_argv_unexpanded_arguments = 0x1,
+  _crt_argv_expanded_arguments = 0x2,
+};
+
+/* 94 */
+struct std::exception;
+
+/* 95 */
+union __declspec(align(16)) __m128
+{
+  float m128_f32[4];
+  unsigned __int64 m128_u64[2];
+  __int8 m128_i8[16];
+  __int16 m128_i16[8];
+  __int32 m128_i32[4];
+  __int64 m128_i64[2];
+  unsigned __int8 m128_u8[16];
+  unsigned __int16 m128_u16[8];
+  unsigned __int32 m128_u32[4];
+};
+
+/* 96 */
+struct bar_definition_data;
+
+/* 97 */
+struct buffdebuff_data;
+
+/* 98 */
+struct buffdebuff_save_data;
+
+/* 99 */
+struct button_definition_data;
+
+/* 100 */
+struct client_data;
+
+/* 101 */
+struct collision_result;
+
+/* 102 */
+struct config_strings;
+
+/* 103 */
+struct emitter_data;
+
+/* 104 */
+struct excel_parse_table;
+
+/* 105 */
+struct gge_gs3_buffer_data;
+
+/* 106 */
+struct ibox;
+
+/* 107 */
+struct label_definition_data;
+
+/* 108 */
+struct layout_32x32_data;
+
+/* 109 */
+struct matrix;
+
+/* 110 */
+struct particle_data;
+
+/* 111 */
+struct player_look_data;
+
+/* 112 */
+struct player_mouse_data;
+
+/* 113 */
+struct rlg_input;
+
+/* 114 */
+struct rlg_output;
+
+/* 115 */
+struct room_definition;
+
+/* 116 */
+struct savefile_table_entry;
+
+/* 117 */
+struct storystring;
+
+/* 118 */
+struct ui_element_data;
+
+/* 119 */
+struct unit_save_data_v0;
+
+/* 120 */
+struct unit_save_data_v1;
+
+/* 121 */
+struct vector3d;
+
+/* 122 */
+struct window_definition_data;
+
+/* 123 */
+typedef unsigned __int8 byte;
+
+/* 124 */
+typedef unsigned __int16 word;
+
+/* 125 */
+typedef unsigned int dword;
+
+/* 126 */
+enum $CCB218E13E675C6E04D87C1860202193
+{
+  num_damage_types = 0x6,
+};
+
+/* 127 */
+enum $09566630EE6240A763303D6431EB47BE
+{
+  max_emitters_per_unit = 0x10,
+};
+
+/* 128 */
+enum $1BE1FE7221FFAA3336C9D50D837FD3CE
+{
+  max_animation_frames = 0x10,
+};
+
+/* 129 */
+enum $96BC54294620D983134359B4C2683EB0
+{
+  unit_custom_data_size = 0x1800,
+};
+
+/* 130 */
+enum $63B787CBBC9E0D37456AB52212870432
+{
+  max_ancient_tree_nodes = 0x10,
+};
+
+/* 131 */
+enum $AEE480B7CBF50A2D84B77E8F3B4B9047
+{
+  max_enchant_affixes = 0x4,
+};
+
+/* 132 */
+enum $8FCFAFAC404CBA32BFA18A5A2DEE2E69
+{
+  num_item_zero_expansion = 0x19,
+};
+
+/* 133 */
+enum $D9673DA1CB16A4448352A1C7608EF72C
+{
+  num_item_invalid_expansion = 0x19,
+};
+
+/* 134 */
+struct vector2d
+{
+  float x;
+  float y;
+};
+
+/* 135 */
+struct ivector2d
+{
+  int x;
+  int y;
+};
+
+/* 136 */
+struct box
+{
+  float v[4];
+};
+
+/* 137 */
+struct safestring
+{
+  int length;
+  unsigned __int16 text[1024];
+};
+
+/* 138 */
+enum unit_type_t
+{
+  unit_type_invalid = 0xFFFFFFFF,
+  unit_type_player = 0x0,
+  unit_type_monster = 0x1,
+  unit_type_missile = 0x2,
+  unit_type_item = 0x3,
+  unit_type_object = 0x4,
+  unit_type_npc = 0x5,
+  unit_type_ambient = 0x6,
+  num_unit_types = 0x7,
+};
+
+/* 139 */
+enum unit_collision_shape_t
+{
+  unit_collision_shape_none = 0x0,
+  unit_collision_shape_rectangle = 0x1,
+  unit_collision_shape_circle = 0x2,
+  num_collision_shapes = 0x3,
+};
+
+/* 140 */
+struct anim_data
+{
+  dword flags;
+  int num_frames;
+  int rate;
+  int frame[16];
+  vector2d wand_direction;
+};
+
+/* 141 */
+struct unit_stats
+{
+  int attack_power;
+  int attack_power_scaled;
+  int vitality;
+  int vitality_scaled;
+  int intelligence;
+  int intelligence_scaled;
+  int old_wisdom;
+  int old_wisdom_scaled;
+  int dexterity;
+  int dexterity_scaled;
+  int vigor;
+  int vigor_scaled;
+  int speed;
+  int resistances[6];
+  int critical_hit;
+  int hit_points;
+  int hit_points_scaled;
+  int hit_points_percent;
+  int hit_points_crit_steal;
+  int hit_point_regen;
+  int mana;
+  int mana_scaled;
+  int mana_percent;
+  int armor;
+  int armor_scaled;
+  int armor_percent;
+  int damage_type;
+  int min_damage;
+  int min_plus;
+  int max_damage;
+  int max_plus;
+  int undead_percent;
+  int demon_percent;
+  int attack_rate;
+  int rate_modifier;
+  int execute;
+  int armor_damage_percent;
+  int dodge_percent;
+  int block_percent;
+  int absorb_shield;
+  int ele_damage[6];
+  int amplify;
+  int crit_damage_percent;
+  int resurrect_percent;
+  int gold_find;
+  int luck_rating;
+  int exp_percent;
+  int rank;
+  int crit_crit;
+  int crit_dodge;
+  int mind_crit;
+  dword attribute_flags;
+  dword attribute2_flags;
+  dword weapon_flags;
+  dword trigger_flags;
+  dword trigger2_flags;
+  dword status_flags;
+  int extra_attack_percent;
+  int reflect_percent;
+  int damage_done_reduction_percent;
+  int hit_point_regen_percent;
+  int purified_armor_percent;
+  int execute_reset_percent;
+  int recharge_speed;
+  int armor_penetration;
+  int elemental_crit[6];
+  int riposte;
+  int damage_taken_reduction_percent;
+  int life_steal_percent;
+  dword expansion_stats[7];
+  dword bard_flags;
+  dword cleric_flags;
+  dword enchanter_flags;
+  dword necro_flags;
+  dword paladin_flags;
+  dword rogue_flags;
+  dword warrior_flags;
+  dword wizard_flags;
+  dword aspire_set;
+  dword cosmic_set;
+  dword regen_set;
+  dword holiday_set;
+  dword future_sets[15];
+};
+
+/* 142 */
+struct unit
+{
+  dword unit_version;
+  dword id;
+  safestring name;
+  dword flags;
+  byte unknown_2064[16];
+  int unit_type;
+  int unit_class;
+  int unit_mode;
+  dword model_id;
+  anim_data *anim;
+  anim_data *default_anim;
+  int anim_delay;
+  int anim_rate;
+  int anim_frame;
+  bool anim_new_frame;
+  vector2d wand_anim_offset;
+  float wand_anim_angle;
+  float wand_anim_delta;
+  float anim_speed_mod;
+  unit_stats stats;
+  int level;
+  dword world_id;
+  vector2d position;
+  vector2d unwrapped_position;
+  vector2d movement;
+  vector2d forces;
+  vector2d facing;
+  int collision_shape;
+  box aabb;
+  float width;
+  float height;
+  float radius;
+  float light_radius;
+  float light_intensity;
+  dword unknown_2700;
+  dword emitter_ids[16];
+  dword buffdebuff_list;
+  unit *dungeon_next;
+  unit *type_previous;
+  unit *type_next;
+  unit *team_next;
+  int data_version;
+  byte custom_data[6144];
+};
+
+/* 143 */
+struct item_custom_data
+{
+  bool identified;
+  bool in_world;
+  bool never_decay;
+  int on_ground_count;
+  int bounces;
+  int stack_count;
+  int spawn_life;
+  int item_quality;
+  dword prefix_string_id;
+  dword suffix_string_id;
+  dword rare_string_id;
+  dword unique_string_id;
+  dword delivery_string_id;
+  dword unidentified_string_id;
+  dword affix_description_id;
+  int weapon_delivery_type;
+  int wand_charges;
+  int wand_recharge_ticks;
+  dword crystal_id;
+  int crystal_shards;
+  int slot_shape;
+  dword mushroom_type;
+  int gold;
+  int cost;
+  int buyback_price;
+  int cooldown_ticks;
+  bool can_upgrade;
+  int eat_amount;
+  int max_stack;
+  dword item_flags;
+  dword total_slevel;
+  byte ancient_tree[16];
+  int level_required;
+  int num_crystal_slots;
+  dword zero_expansion[24];
+  dword original_slot;
+  dword glow_id;
+  dword next_dropped;
+  dword enchant_id[4];
+  dword invalid_expansion_a[4];
+  dword crystal_ancient_affix_id;
+  dword invalid_expansion_b[20];
+};
+
+/* 144 */
+struct sound_definition_data
+{
+  char sound[64];
+  byte unknown_40[4];
+  bool is_music;
+  bool is_combat;
+  bool loops;
+  byte unknown_47[1];
+  float volume_mod;
+  int num_alts;
+  char filename1[64];
+  char filename2[64];
+  char filename3[64];
+  char filename4[64];
+};
+
+/* 145 */
+struct string_definition_data
+{
+  char string_token[64];
+  char string[2052];
+};
+
+/* 146 */
+struct achievement_definition_data
+{
+  char achievement[64];
+  byte unknown_40[4];
+  int name_string;
+  int desc_string;
+  int points;
+};
+
+/* 147 */
+struct ambient_definition_data
+{
+  char code_name[64];
+  byte unknown_40[4];
+  char sprite_filename[64];
+  byte unknown_84[960];
+  bool is_flying;
+  byte unknown_445[3];
+};
+
+/* 148 */
+struct character_class_definition_data
+{
+  char object_type[64];
+  int char_class_string;
+  int char_class_desc;
+  bool is_locked;
+  bool uses_int;
+  byte unknown_4A[2];
+  int weapon_flags;
+  int ancient_1;
+  int ancient_5;
+  int ancient_10;
+  int ancient_15;
+  int ancient_20;
+};
+
+/* 149 */
+struct damage_type_definition_data
+{
+  char damage_type[64];
+};
+
+/* 150 */
+struct tile_definition_data
+{
+  char rlg_tile[64];
+  int dig_sound;
+  int hp;
+  int item;
+  bool dirt_overlay;
+  bool creep_kill;
+  bool paladin_replace;
+  bool blocks_ambient;
+  bool is_stone;
+  bool is_dirt;
+  bool is_ore;
+  byte unknown_53[1];
+  int light;
+  int dig_prop;
+  int dirt_zone;
+  int dirt_red;
+  int dirt_green;
+  int dirt_blue;
+  byte unknown_6C[4];
+  int texture_top;
+  int texture_front;
+  int texture_side;
+  int texture_bottom;
+  int map_red;
+  int map_green;
+  int map_blue;
+  byte unknown_8C[12];
+};
+
+/* 151 */
+struct block_texture_definition_data
+{
+  char block_texture[64];
+  int alternates;
+  int tech;
+};
+
+/* 152 */
+struct prop_definition_data
+{
+  char prop_type[64];
+  int pixel_x;
+  int pixel_y;
+  int pixel_width;
+  int pixel_height;
+  byte unknown_50[8];
+  float world_z;
+  bool can_flip;
+  byte unknown_5D[19];
+  int dig_item;
+  int map_red;
+  int map_green;
+  int map_blue;
+  byte unknown_80[4];
+};
+
+/* 153 */
+struct emitter_definition_data
+{
+  char emitter_type[64];
+  int rate;
+  bool attach_unit;
+  byte unknown_45[3];
+};
+
+/* 154 */
+struct equipment_slot_definition_data
+{
+  char equipment_slot[64];
+  int display_string;
+  bool has_stats;
+  byte unknown_45[3];
+};
+
+/* 155 */
+struct item_definition_data
+{
+  char item_type[64];
+  int display_string;
+  int desc_string;
+  int use_sound;
+  int inv_sound;
+  int gfx_offset;
+  float weapon_end_x;
+  float weapon_end_y;
+  bool descent_drop;
+  bool show_ilevel;
+  bool show_desc;
+  bool char_bound;
+  int slot;
+  int icon;
+  int rightarm_index;
+  int handed;
+  int weapon_type;
+  bool is_pick;
+  bool is_axe;
+  bool is_hoe;
+  byte unknown_77[1];
+  int potion_type;
+  bool is_scroll;
+  bool is_mushroom;
+  bool is_ancient;
+  byte unknown_7F[1];
+  int ancient_rarity;
+  int ancient_ranks;
+  int ancient_version;
+  int unique_rarity;
+  int region;
+  bool is_blueprint;
+  byte unknown_95[3];
+  int is_runeword;
+  bool is_ambient;
+  byte unknown_9D[3];
+  int is_crop;
+  bool is_ore;
+  bool is_metal_bar;
+  bool is_special;
+  bool can_enchant;
+  int season_flags;
+  int block_class;
+  int object_class;
+  int operate_class;
+  int extra_percent;
+  bool is_consumable;
+  byte unknown_BD[3];
+  int feed;
+  int slevel_req;
+  int stack_count;
+  bool auto_pickup;
+  byte unknown_CD[3];
+  int slot_shape;
+  int crystal_shape;
+  int damage_type;
+  int min_damage;
+  int max_damage;
+  int atk_rate;
+  byte unknown_E8[4];
+  int emblem_cost;
+  int compost_cost;
+  int gold_cost;
+  int sell_percent;
+  bool can_trash;
+  byte unknown_FD[3];
+};
+
+/* 156 */
+struct missile_definition_data
+{
+  char missile_type[64];
+  float velocity;
+  float collision_radius;
+  float drawn_diameter;
+  byte unknown_4C[4];
+  int red;
+  int green;
+  int blue;
+  int emitter;
+  bool inaccurate;
+  bool hits_units;
+  bool gravity;
+  bool is_beam;
+  int damage_type;
+  int texture_index;
+  bool texture_rotate;
+  byte unknown_6D[3];
+};
+
+/* 157 */
+struct monster_definition_data
+{
+  char code_name[64];
+  int display_string;
+  int ultra_string;
+  byte unknown_48[4];
+  bool title;
+  bool can_deactivate;
+  byte unknown_4E[2];
+  int sprite_sheet;
+  int idle_sound;
+  int attack_sound;
+  bool ultra_100;
+  bool can_be_unique;
+  bool is_demon;
+  bool is_undead;
+  bool flies;
+  bool fly_bob;
+  bool waller;
+  bool gives_exp;
+  int hp;
+  int ultra_hp;
+  int regen_per_sec;
+  float world_width;
+  float world_height;
+  int damage_type;
+  int min_damage;
+  int max_damage;
+  int atk_rate;
+  float atk_range;
+  bool ranged_atk;
+  bool fast_atk_anim;
+  byte unknown_8E[2];
+  float speed;
+  float jump_speed;
+  float anim_speed;
+  bool has_wand;
+  byte unknown_9D[3];
+  float rotate_x;
+  float rotate_y;
+  float wand_end_x;
+  float wand_end_y;
+  int zone;
+  bool surface_respawn;
+  bool nightmare;
+  byte unknown_B6[2];
+  int badlands_zone;
+  bool gold_drop;
+  bool survival_drop;
+  byte unknown_BE[2];
+  int drop_rate;
+  int treasure;
+  byte unknown_C8[4];
+};
+
+/* 158 */
+struct monster_scaling_definition_data
+{
+  int level;
+  float monster_hp_scale;
+  float monster_dmg_scale;
+  int armor;
+  float monster_hp_creative;
+  float monster_dmg_creative;
+  int expected_plr_armor;
+  byte unknown_1C[4];
+  dword xp_per_mob;
+  byte unknown_24[4];
+};
+
+/* 159 */
+struct monster_sprite_definition_data
+{
+  char monster_sprite_sheet[64];
+  bool active;
+  char filename[64];
+  byte unknown_81[960];
+  char palette_file[64];
+  byte unknown_481[2003];
+  int height;
+};
+
+/* 160 */
+struct object_definition_data
+{
+  char object_type[64];
+  int display_string;
+  int use_sound;
+  bool can_deactivate;
+  bool is_chopable;
+  bool can_select;
+  bool can_operate;
+  bool can_pickup;
+  bool shift_pickup;
+  bool is_tall_object;
+  bool open_crafting;
+  int interact_quantity;
+  int interact_item;
+  int extra_percent;
+  int replace;
+  int pickup_item;
+  int new_world_item;
+  bool place_ground;
+  bool check_nearby;
+  byte unknown_6A[2];
+  int growth_rate;
+  int rot_rate;
+  int perennial;
+  int season_flags;
+  int season_item;
+  int hit_points;
+  bool light_flicker;
+  byte unknown_85[3];
+  float light_radius;
+  int light_red;
+  int light_green;
+  int light_blue;
+  byte unknown_98[4];
+  float world_width;
+  float world_height;
+  float world_depth;
+  bool animates;
+  byte unknown_A9[3];
+  int pixel_x;
+  int pixel_y;
+  int pixel_width;
+  int pixel_height;
+  byte unknown_BC[8];
+  float wrld_width_var;
+  float wrld_height_var;
+  byte unknown_CC[16];
+};
+
+/* 161 */
+struct level_definition_data
+{
+  int level;
+  int hit_points;
+  dword exp_needed;
+  byte unknown_C[4];
+  int death_cost;
+  int stomach;
+  int survival_exp_needed;
+  byte unknown_1C[4];
+};
+
+/* 162 */
+struct quest_definition_data
+{
+  char quest[64];
+  bool hidden;
+  byte unknown_41[3];
+  int title;
+  int text;
+  int num_objectives;
+  int obj_text_1;
+  int obj_text_2;
+  int obj_text_3;
+  int obj_text_1c;
+  int obj_text_2c;
+  int obj_text_3c;
+  bool obj_1_multi;
+  bool obj_2_multi;
+  bool obj_3_multi;
+  byte unknown_6B[1];
+  int complete_text;
+  int reward;
+  int reward_stack_size;
+  int experience;
+  int survival_exp;
+  int next_quest;
+};
+
+/* 163 */
+struct story_definition_data
+{
+  char story_type[64];
+  byte unknown_40[4];
+  char text_filename[64];
+  byte unknown_84[9156];
+};
+
+/* 164 */
+struct treasure_definition_data
+{
+  char treasure_table[64];
+  int weight_0;
+  int item_0;
+  int table_0;
+  int weight_1;
+  int item_1;
+  int table_1;
+  int weight_2;
+  int item_2;
+  int table_2;
+  int weight_3;
+  int item_3;
+  int table_3;
+  int weight_4;
+  int item_4;
+  int table_4;
+};
+
+/* 165 */
+struct runeword_definition_data
+{
+  char runeword[64];
+  int final_item;
+  int armor_slot;
+  bool any_weapon;
+  byte unknown_49[3];
+  int weapon_type;
+  bool any_crystal;
+  byte unknown_51[3];
+  int runeword_item;
+  int item_1;
+  int item_2;
+  int item_3;
+  int item_4;
+  int item_5;
+  int item_6;
+  int item_7;
+};
+
+/* 166 */
+struct recipe_definition_data
+{
+  char recipe_name[64];
+  int desc_string;
+  int sort_order;
+  int reveal_group;
+  int category;
+  int final_item;
+  int final_quantity;
+  int quantity_1;
+  int quantity_2;
+  int quantity_3;
+  int quantity_4;
+  int item_1;
+  int item_2;
+  int item_3;
+  int item_4;
+  int mushroom_1;
+  int mushroom_2;
+  int mushroom_3;
+  int mushroom_4;
+  int nearby_object;
+  int crystal_shards;
+  int compost;
+};
+
+/* 167 */
+struct player_custom_data
+{
+  dword field_0;
+  dword field_4;
+  dword field_8;
+  dword field_12;
+  dword field_16;
+  dword field_20;
+  dword field_24;
+  dword field_28;
+  byte unknown_32[4];
+  dword field_36;
+  dword field_40;
+  byte unknown_44[4];
+  dword field_48;
+  dword field_52;
+  dword field_56;
+  dword field_60;
+  byte unknown_64[4];
+  byte field_68;
+  byte unknown_69[3];
+  dword field_72;
+  dword field_76;
+  dword field_80;
+  dword field_84;
+  byte field_88;
+  byte unknown_89[3];
+  dword field_92;
+  dword field_96;
+  dword field_100;
+  dword field_104;
+  dword field_108;
+  dword field_112;
+  dword field_116;
+  dword field_120;
+  dword field_124;
+  dword field_128;
+  dword field_132;
+  byte unknown_136[4];
+  dword field_140;
+  dword field_144;
+  dword field_148;
+  dword max_mana;
+  dword field_156;
+  dword recharge_count;
+  dword field_164;
+  dword field_168;
+  float field_172;
+  float field_176;
+  dword recharge_bar_black_id;
+  float field_184;
+  float field_188;
+  int field_192;
+  dword field_196;
+  byte field_200;
+  byte unknown_201[3];
+  dword field_204;
+  float field_208;
+  float field_212;
+  byte unknown_216[8];
+  dword field_224;
+  dword field_228;
+  dword field_232;
+  dword field_236;
+  dword field_240;
+  dword field_244;
+  dword field_248;
+  dword field_252;
+  dword field_256;
+  dword field_260;
+  dword field_264;
+  int field_268;
+  dword field_272;
+  dword animation_mode;
+  dword field_280;
+  float field_284;
+  float field_288;
+  dword field_292;
+  float field_296;
+  float field_300;
+  float field_304;
+  float field_308;
+  dword field_312;
+  dword field_316;
+  byte field_320;
+  byte field_321;
+  byte unknown_322[2];
+  dword field_324;
+  dword field_328;
+  dword field_332;
+  dword field_336;
+  byte unknown_340[4];
+  dword field_344;
+  dword field_348;
+  dword field_352;
+  byte homestone_return_set;
+  byte unknown_357[3];
+  dword field_360;
+  dword field_364;
+  dword field_368;
+  dword field_372;
+  dword field_376;
+  dword field_380;
+  dword field_384;
+  dword field_388;
+  dword hotbar_selection;
+  dword field_396;
+  dword field_400;
+  dword field_404;
+  dword field_408;
+  byte unknown_412[4];
+  dword field_416;
+  dword field_420;
+  dword field_424;
+  dword field_428;
+  byte unknown_432[4];
+  dword field_436;
+  dword field_440;
+  dword field_444;
+  byte unknown_448[4];
+  dword field_452;
+  dword field_456;
+  byte unknown_460[184];
+  dword field_644;
+  dword field_648;
+  dword field_652;
+  dword field_656;
+  dword field_660;
+  dword field_664;
+  byte unknown_668[4];
+  dword field_672;
+  dword field_676;
+  dword field_680;
+  int mouse_item_stack_mode;
+  byte field_688;
+  byte unknown_689[3];
+  int mouse_item_from_location;
+  dword field_696;
+  dword field_700;
+  byte unknown_704[1440];
+  int num_banking_slots;
+  dword field_2148;
+  byte field_2152;
+  byte unknown_2153[3];
+  dword field_2156;
+  dword field_2160;
+  dword field_2164;
+  dword field_2168;
+  dword field_2172;
+  dword field_2176;
+  dword field_2180;
+  dword field_2184;
+  dword field_2188;
+  dword field_2192;
+  dword field_2196;
+  dword field_2200;
+  dword field_2204;
+  dword field_2208;
+  dword field_2212;
+  dword field_2216;
+  dword field_2220;
+  dword field_2224;
+  dword field_2228;
+  dword field_2232;
+  dword field_2236;
+  dword field_2240;
+  byte unknown_2244[656];
+  byte field_2900;
+  byte unknown_2901[6];
+  byte field_2907;
+  byte unknown_2908[215];
+  byte field_3123;
+  byte unknown_3124[289];
+  byte field_3413;
+  byte unknown_3414[1];
+  byte field_3415;
+  byte unknown_3416[9];
+  byte field_3425;
+  byte unknown_3426[2];
+  byte field_3428;
+  byte field_3429;
+  byte unknown_3430[7];
+  byte field_3437;
+  byte unknown_3438[16];
+  byte field_3454;
+  byte field_3455;
+  byte field_3456;
+  byte field_3457;
+  byte field_3458;
+  byte unknown_3459[20];
+  byte field_3479;
+  byte unknown_3480[320];
+  dword field_3800;
+  byte unknown_3804[276];
+  dword field_4080;
+  dword field_4084;
+  dword field_4088;
+  byte field_4092;
+  byte unknown_4093[283];
+  dword field_4376;
+  byte unknown_4380[8];
+  dword field_4388;
+  byte unknown_4392[8];
+  dword field_4400;
+  byte unknown_4404[8];
+  dword field_4412;
+  byte unknown_4416[20];
+  dword field_4436;
+  byte unknown_4440[28];
+  dword field_4468;
+  byte unknown_4472[4];
+  dword field_4476;
+  dword field_4480;
+  float field_4484;
+};
+
+/* 168 */
+struct monster_custom_data
+{
+  int flags;
+  dword field_4;
+  byte unknown_8[4];
+  dword field_12;
+  byte unknown_16[4];
+  dword field_20;
+  dword field_24;
+  dword is_beam;
+  dword field_32;
+  dword field_36;
+  dword field_40;
+  dword field_44;
+  dword field_48;
+  dword field_52;
+  dword field_56;
+  byte unknown_60[4];
+  dword field_64;
+  dword field_68;
+  byte unknown_72[4];
+  dword target_id;
+  dword field_80;
+  dword field_84;
+  dword field_88;
+  dword field_92;
+  dword field_96;
+  byte unknown_100[4];
+  float field_104;
+  float field_108;
+  dword field_112;
+  dword field_116;
+  byte unknown_120[4];
+  float field_124;
+  float field_128;
+  dword field_132;
+  dword field_136;
+  dword field_140;
+  dword field_144;
+  dword field_148;
+  float field_152;
+  float field_156;
+  dword hp_bar_black;
+  float field_164;
+  float field_168;
+  dword field_172;
+  byte field_176;
+  byte field_177;
+  byte unknown_178[6];
+  dword field_184;
+  dword field_188;
+  dword field_192;
+  dword field_196;
+  dword field_200;
+  dword field_204;
+  dword field_208;
+  dword field_212;
+  float field_216;
+  float field_220;
+  float field_224;
+  float field_228;
+  byte unknown_232[16];
+  float field_248;
+  float field_252;
+  float field_256;
+  float field_260;
+  float field_264;
+  float field_268;
+  float field_272;
+  float field_276;
+  float field_280;
+  float field_284;
+  dword field_288;
+  dword field_292;
+  dword field_296;
+  dword field_300;
+  dword field_304;
+  dword field_308;
+  dword field_312;
+  dword field_316;
+  dword field_320;
+  dword field_324;
+  dword field_328;
+  dword field_332;
+  byte unknown_336[8];
+  dword field_344;
+  dword field_348;
+  dword field_352;
+  dword field_356;
+  float field_360;
+  float field_364;
+  float field_368;
+  float field_372;
+  float field_376;
+  float field_380;
+  float field_384;
+  float field_388;
+  float field_392;
+  float field_396;
+  float field_400;
+  float field_404;
+  float field_408;
+  float field_412;
+  float field_416;
+  float field_420;
+  byte unknown_424[960];
+  dword field_1384;
+  byte unknown_1388[4];
+  dword field_1392;
+  byte unknown_1396[4];
+  dword field_1400;
+  byte unknown_1404[12];
+  dword field_1416;
+  byte unknown_1420[4];
+  dword field_1424;
+  byte unknown_1428[4];
+  dword field_1432;
+  dword field_1436;
+  dword field_1440;
+  dword field_1444;
+  dword field_1448;
+  dword field_1452;
+  dword field_1456;
+  dword field_1460;
+  byte unknown_1464[16];
+  dword field_1480;
+  byte unknown_1484[12];
+  dword field_1496;
+  byte unknown_1500[8];
+  dword field_1508;
+  dword field_1512;
+  byte unknown_1516[4];
+  dword field_1520;
+  byte unknown_1524[16];
+  dword field_1540;
+  byte unknown_1544[8];
+  dword field_1552;
+  byte unknown_1556[72];
+  dword field_1628;
+  byte unknown_1632[4];
+  dword field_1636;
+  dword field_1640;
+  dword field_1644;
+  dword field_1648;
+  byte unknown_1652[80];
+  dword field_1732;
+  byte unknown_1736[120];
+  dword field_1856;
+  float field_1860;
+  float field_1864;
+  float field_1868;
+  dword field_1872;
+  byte unknown_1876[4];
+  dword field_1880;
+  dword field_1884;
+  byte unknown_1888[96];
+  dword field_1984;
+  dword field_1988;
+  dword field_1992;
+  dword field_1996;
+  byte unknown_2000[112];
+};
+
+/* 169 */
+struct missile_custom_data
+{
+  byte unknown_0[4];
+  float field_4;
+  float field_8;
+  dword field_12;
+  byte unknown_16[28];
+  dword field_44;
+  dword field_48;
+  dword field_52;
+  dword field_56;
+  dword field_60;
+  dword field_64;
+  dword field_68;
+  dword field_72;
+  dword field_76;
+  byte unknown_80[8];
+  dword field_88;
+  dword field_92;
+  dword field_96;
+  dword field_100;
+  dword field_104;
+  dword field_108;
+  dword field_112;
+  dword field_116;
+  dword field_120;
+  dword field_124;
+  dword field_128;
+  dword field_132;
+  dword field_136;
+};
+
+/* 170 */
+struct object_custom_data
+{
+  dword object_flags;
+  byte unknown_4[4];
+  dword field_8;
+  dword field_12;
+  dword field_16;
+  dword field_20;
+  float field_24;
+  byte unknown_28[4];
+  float field_32;
+  float field_36;
+  float field_40;
+  float field_44;
+  dword field_48;
+  dword field_52;
+  byte unknown_56[12];
+  dword field_68;
+  dword field_72;
+  byte unknown_76[8];
+  dword field_84;
+  dword field_88;
+  byte unknown_92[112];
+  dword field_204;
+  dword field_208;
+  byte unknown_212[120];
+};
+
+/* 171 */
+struct npc_custom_data
+{
+  dword field_0;
+  float field_4;
+  float field_8;
+  float field_12;
+  float field_16;
+  float field_20;
+  float field_24;
+  byte unknown_28[24];
+  bool is_vendor;
+  byte unknown_53[71];
+  dword field_124;
+  byte unknown_128[4];
+  dword field_132;
+  dword particle_id;
+  byte unknown_140[4];
+  dword field_144;
+  dword field_148;
+  dword field_152;
+  dword field_156;
+  dword field_160;
+  dword field_164;
+  dword field_168;
+  dword field_172;
+  dword field_176;
+  dword field_180;
+  dword field_184;
+  dword field_188;
+  dword field_192;
+  dword field_196;
+};
+
+/* 172 */
+struct ambient_custom_data
+{
+  byte unknown_0[4];
+  float field_4;
+  float field_8;
+  dword field_12;
+  dword field_16;
+  dword field_20;
+  dword field_24;
+  dword field_28;
+  dword field_32;
+  dword field_36;
+  dword field_40;
+  dword field_44;
+  dword field_48;
+  dword field_52;
+  dword field_56;
+  dword field_60;
+  dword field_64;
+  dword field_68;
+  dword field_72;
+};
+
+/* 173 */
+enum sound_id
+{
+  sound_graybeard_logo = 0x0,
+  sound_ui_click = 0x1,
+  sound_error = 0x2,
+  sound_item_place = 0x3,
+  sound_place_object = 0x4,
+  sound_quest_new = 0x5,
+  sound_quest_complete = 0x6,
+  sound_level_up = 0x7,
+  sound_magic_spark = 0x8,
+  sound_step = 0x9,
+  sound_land_soft = 0xA,
+  sound_land_hard = 0xB,
+  sound_damage = 0xC,
+  sound_heal = 0xD,
+  sound_recall_start = 0xE,
+  sound_teleport = 0xF,
+  sound_dig_dirt = 0x10,
+  sound_dig_stone = 0x11,
+  sound_dig_metal = 0x12,
+  sound_dig_flesh = 0x13,
+  sound_chop = 0x14,
+  sound_door_open = 0x15,
+  sound_chest_appear = 0x16,
+  sound_open_chest = 0x17,
+  sound_shrine = 0x18,
+  sound_wind_woosh = 0x19,
+  sound_missile_collide = 0x1A,
+  sound_missile_hit_target = 0x1B,
+  sound_imp_attack = 0x1C,
+  sound_spider_birth = 0x1D,
+  sound_piano_music = 0x1E,
+  sound_wind = 0x1F,
+  sound_use_trash = 0x20,
+  sound_monster_die = 0x21,
+  sound_recharge = 0x22,
+  sound_magic_shot = 0x23,
+  sound_ambient_1 = 0x24,
+  sound_ambient_2 = 0x25,
+  sound_ambient_3 = 0x26,
+  sound_ambient_4 = 0x27,
+  sound_gore_attack = 0x28,
+  sound_break_bones = 0x29,
+  sound_melee_woosh = 0x2A,
+  sound_item_crystal = 0x2B,
+  sound_item_armor = 0x2C,
+  sound_item_potion = 0x2D,
+  sound_item_stone = 0x2E,
+  sound_item_wood = 0x2F,
+  sound_item_tool = 0x30,
+  sound_item_food = 0x31,
+  sound_item_object = 0x32,
+  sound_item_scroll = 0x33,
+  sound_item_ancient = 0x34,
+  sound_item_ring = 0x35,
+  sound_item_gold = 0x36,
+  sound_item_ore = 0x37,
+  sound_item_wand = 0x38,
+  sound_item_rune = 0x39,
+  sound_item_seeds = 0x3A,
+  sound_item_meat = 0x3B,
+  sound_crystal_socket = 0x3C,
+  sound_recipe_unlock = 0x3D,
+  sound_chew = 0x3E,
+  sound_tree_fall_start = 0x3F,
+  sound_tree_fall_end = 0x40,
+  sound_place_small_object = 0x41,
+  sound_place_building = 0x42,
+  sound_altar_success = 0x43,
+  sound_altar_fail = 0x44,
+  sound_crystal_shards = 0x45,
+  sound_ancient_upgrade = 0x46,
+  sound_time_space = 0x47,
+  sound_moo = 0x48,
+  sound_identify = 0x49,
+  sound_firestorm = 0x4A,
+  sound_sword_swing = 0x4B,
+  sound_sword_impact = 0x4C,
+  sound_warrior_dash = 0x4D,
+  sound_warrior_whirlwind = 0x4E,
+  sound_thunder_clap = 0x4F,
+  sound_ice_spear = 0x50,
+  sound_rain = 0x51,
+  sound_electric_zap = 0x52,
+  sound_small_splash = 0x53,
+  sound_big_splash = 0x54,
+  sound_morris = 0x55,
+  sound_gnome = 0x56,
+  sound_quakeboots = 0x57,
+  sound_boss_fight = 0x58,
+  sound_war = 0x59,
+  sound_march = 0x5A,
+  sound_firework_launch = 0x5B,
+  sound_firework_explode = 0x5C,
+  sound_intro_1 = 0x5D,
+  sound_intro_2 = 0x5E,
+  sound_intro_3 = 0x5F,
+  sound_intro_4 = 0x60,
+  sound_intro_5 = 0x61,
+  sound_intro_6 = 0x62,
+  sound_intro_7 = 0x63,
+  sound_intro_8 = 0x64,
+  sound_intro_9 = 0x65,
+  sound_intro_10 = 0x66,
+  sound_intro_11 = 0x67,
+  sound_intro_12 = 0x68,
+  sound_intro_13 = 0x69,
+  sound_intro_14 = 0x6A,
+  sound_intro_15 = 0x6B,
+  sound_intro_16 = 0x6C,
+  sound_door_close = 0x6D,
+  sound_ambient_5 = 0x6E,
+  sound_badlands_0 = 0x6F,
+  sound_badlands_1 = 0x70,
+  sound_badlands_2 = 0x71,
+  sound_badlands_3 = 0x72,
+  sound_grunt_zombie = 0x73,
+  sound_attack_zombie = 0x74,
+  sound_grunt_imp = 0x75,
+  sound_grunt_wraith = 0x76,
+  sound_attack_wraith = 0x77,
+  sound_grunt_chewie = 0x78,
+  sound_grunt_demon = 0x79,
+  sound_grunt_thin_eye = 0x7A,
+  sound_grunt_bat = 0x7B,
+  sound_attack_shadow = 0x7C,
+  sound_grunt_wisp = 0x7D,
+  sound_grunt_jelly = 0x7E,
+  sound_grunt_skeleton = 0x7F,
+  sound_grunt_orc = 0x80,
+  sound_dark_teleport = 0x81,
+  sound_attack_bat = 0x82,
+  sound_attack_chewie = 0x83,
+  sound_pickup_success = 0x84,
+  sound_npc_alert = 0x85,
+  sound_monster_arrow = 0x86,
+  sound_explosion_small = 0x87,
+  sound_achievement = 0x88,
+  sound_boss_laugh = 0x89,
+  num_sound_rows = 0x8A,
+};
+
+/* 174 */
+enum achievement_id
+{
+  achievement_kill_vile = 0x0,
+  achievement_unique = 0x1,
+  achievement_bling = 0x2,
+  achievement_princess = 0x3,
+  achievement_cable = 0x4,
+  achievement_reset = 0x5,
+  achievement_hat = 0x6,
+  achievement_hoarders = 0x7,
+  achievement_handle_it = 0x8,
+  achievement_slimes = 0x9,
+  achievement_bottom = 0xA,
+  achievement_berries = 0xB,
+  achievement_portal = 0xC,
+  achievement_digging = 0xD,
+  achievement_enlightenment = 0xE,
+  achievement_well_read = 0xF,
+  achievement_food = 0x10,
+  achievement_blood_rain = 0x11,
+  achievement_moo = 0x12,
+  achievement_sharing = 0x13,
+  num_achievement_rows = 0x14,
+};
+
+/* 175 */
+enum ambient_id
+{
+  num_ambient_rows = 0x1A,
+};
+
+/* 176 */
+enum character_class_id
+{
+  num_character_class_rows = 0x8,
+};
+
+/* 177 */
+enum damage_type_id
+{
+  damage_type_physical = 0x0,
+  damage_type_magic = 0x1,
+  damage_type_fire = 0x2,
+  damage_type_cold = 0x3,
+  damage_type_lightning = 0x4,
+  damage_type_poison = 0x5,
+  num_damage_type_rows = 0x6,
+};
+
+/* 178 */
+enum rlg_tile_id
+{
+  rlg_tile_empty = 0x0,
+  rlg_tile_dirt = 0x1,
+  rlg_tile_autumn_grass = 0x2,
+  rlg_tile_cobblestone = 0x3,
+  rlg_tile_wood_panel = 0x4,
+  rlg_tile_horizontal_beam = 0x5,
+  rlg_tile_vertical_beam = 0x6,
+  rlg_tile_thatched_roof = 0x7,
+  rlg_tile_stone_bricks = 0x8,
+  rlg_tile_carved_dark_stone = 0x9,
+  rlg_tile_dark_cube = 0xA,
+  rlg_tile_window = 0xB,
+  rlg_tile_blue_roof = 0xC,
+  rlg_tile_brick = 0xD,
+  rlg_tile_old_iron_ore = 0xE,
+  rlg_tile_old_copper_ore = 0xF,
+  rlg_tile_old_mithril_ore = 0x10,
+  rlg_tile_old_rubium_ore = 0x11,
+  rlg_tile_old_nickel_ore = 0x12,
+  rlg_tile_old_gold_ore_z4 = 0x13,
+  rlg_tile_old_lodestone_ore_z4 = 0x14,
+  rlg_tile_old_adamantine_ore_z5 = 0x15,
+  rlg_tile_old_ochre_ore_z5 = 0x16,
+  rlg_tile_flesh = 0x17,
+  rlg_tile_flesh_dirt = 0x18,
+  rlg_tile_lava = 0x19,
+  rlg_tile_muddy_dirt = 0x1A,
+  rlg_tile_sand = 0x1B,
+  rlg_tile_ice = 0x1C,
+  rlg_tile_gray_sand = 0x1D,
+  rlg_tile_slimy_dirt = 0x1E,
+  rlg_tile_bloody_dirt = 0x1F,
+  rlg_tile_rough_stone = 0x20,
+  rlg_tile_dark_gray_stone = 0x21,
+  rlg_tile_dark_stone = 0x22,
+  rlg_tile_gore_dirt = 0x23,
+  rlg_tile_zone_1_foreground = 0x24,
+  rlg_tile_zone_1_background = 0x25,
+  rlg_tile_zone_2_foreground = 0x26,
+  rlg_tile_zone_2_background = 0x27,
+  rlg_tile_zone_3_foreground = 0x28,
+  rlg_tile_zone_3_background = 0x29,
+  rlg_tile_zone_4_foreground = 0x2A,
+  rlg_tile_zone_4_background = 0x2B,
+  rlg_tile_runestone = 0x2C,
+  rlg_tile_gold_brick = 0x2D,
+  rlg_tile_cloud = 0x2E,
+  rlg_tile_red_cobblestone = 0x2F,
+  rlg_tile_mauve_pebblestone = 0x30,
+  rlg_tile_slime = 0x31,
+  rlg_tile_brownstone_brick = 0x32,
+  rlg_tile_metal_temple = 0x33,
+  rlg_tile_shiny_gore = 0x34,
+  rlg_tile_soft_scatter_brick = 0x35,
+  rlg_tile_red_roofing = 0x36,
+  rlg_tile_metal_cube_hole = 0x37,
+  rlg_tile_putrid_stone = 0x38,
+  rlg_tile_rusted_mini_brick = 0x39,
+  rlg_tile_fleshsore_dirt = 0x3A,
+  rlg_tile_blood_light = 0x3B,
+  rlg_tile_shrine_base = 0x3C,
+  rlg_tile_old_verdant_ore_z2 = 0x3D,
+  rlg_tile_old_russet_ore_z2 = 0x3E,
+  rlg_tile_special_room_dirt = 0x3F,
+  rlg_tile_old_bronzed_ore_z4 = 0x40,
+  rlg_tile_old_cobalt_ore_z4 = 0x41,
+  rlg_tile_old_crimson_ore_z1 = 0x42,
+  rlg_tile_old_vibrant_ore_z1 = 0x43,
+  rlg_tile_spring_grass = 0x44,
+  rlg_tile_summer_grass = 0x45,
+  rlg_tile_winter_grass = 0x46,
+  rlg_tile_halloween_grass = 0x47,
+  rlg_tile_paladin_light = 0x48,
+  rlg_tile_harvest_grass = 0x49,
+  rlg_tile_harvest_dirt = 0x4A,
+  rlg_tile_old_gold_ore_z5 = 0x4B,
+  rlg_tile_old_lodestone_ore_z5 = 0x4C,
+  rlg_tile_old_adamantine_ore_z1 = 0x4D,
+  rlg_tile_old_ochre_ore_z1 = 0x4E,
+  rlg_tile_old_verdant_ore_z3 = 0x4F,
+  rlg_tile_old_russet_ore_z3 = 0x50,
+  rlg_tile_old_bronzed_ore_z5 = 0x51,
+  rlg_tile_old_cobalt_ore_z5 = 0x52,
+  rlg_tile_old_crimson_ore_z2 = 0x53,
+  rlg_tile_old_vibrant_ore_z2 = 0x54,
+  rlg_tile_old_crimson_ore_z3 = 0x55,
+  rlg_tile_old_vibrant_ore_z3 = 0x56,
+  rlg_tile_old_crimson_ore_z4 = 0x57,
+  rlg_tile_old_vibrant_ore_z4 = 0x58,
+  rlg_tile_old_crimson_ore_z5 = 0x59,
+  rlg_tile_old_vibrant_ore_z5 = 0x5A,
+  rlg_tile_corruption_grass = 0x5B,
+  rlg_tile_corruption_dirt = 0x5C,
+  rlg_tile_planterbox_dirt = 0x5D,
+  rlg_tile_old_ash_ore_z4 = 0x5E,
+  rlg_tile_old_aqua_ore_z4 = 0x5F,
+  rlg_tile_old_ash_ore_z5 = 0x60,
+  rlg_tile_old_aqua_ore_z5 = 0x61,
+  rlg_tile_old_ash_ore_z1 = 0x62,
+  rlg_tile_old_aqua_ore_z1 = 0x63,
+  rlg_tile_old_nether_ore_z2 = 0x64,
+  rlg_tile_old_sunrise_ore_z2 = 0x65,
+  rlg_tile_old_nether_ore_z3 = 0x66,
+  rlg_tile_old_sunrise_ore_z3 = 0x67,
+  rlg_tile_old_nether_ore_z4 = 0x68,
+  rlg_tile_old_sunrise_ore_z4 = 0x69,
+  rlg_tile_old_nether_ore_z5 = 0x6A,
+  rlg_tile_old_sunrise_ore_z5 = 0x6B,
+  rlg_tile_prince_dirt = 0x6C,
+  rlg_tile_prince_blood = 0x6D,
+  rlg_tile_barn_roof = 0x6E,
+  rlg_tile_barn_side = 0x6F,
+  rlg_tile_barn_trim_left = 0x70,
+  rlg_tile_barn_trim_right = 0x71,
+  rlg_tile_barn_trim_down = 0x72,
+  rlg_tile_story_dark_stone = 0x73,
+  rlg_tile_story_fire_stone = 0x74,
+  rlg_tile_badlands_basic = 0x75,
+  rlg_tile_badlands_red = 0x76,
+  rlg_tile_badlands_light = 0x77,
+  rlg_tile_badlands_white = 0x78,
+  rlg_tile_badlands_purple = 0x79,
+  rlg_tile_badlands_brown = 0x7A,
+  rlg_tile_badlands_basic_green = 0x7B,
+  rlg_tile_badlands_light_green = 0x7C,
+  rlg_tile_badlands_bright_green = 0x7D,
+  rlg_tile_badlands_olive_green = 0x7E,
+  rlg_tile_badlands_green_sand = 0x7F,
+  rlg_tile_badlands_dark_gray = 0x80,
+  rlg_tile_badlands_gray = 0x81,
+  rlg_tile_badlands_slate = 0x82,
+  rlg_tile_badlands_clay = 0x83,
+  rlg_tile_badlands_metal = 0x84,
+  rlg_tile_badlands_green_weave = 0x85,
+  rlg_tile_badlands_dark_mini_brick = 0x86,
+  rlg_tile_badlands_basic_grass = 0x87,
+  rlg_tile_badlands_z1_dirt_room = 0x88,
+  rlg_tile_badlands_z2_dirt_room = 0x89,
+  rlg_tile_badlands_putrid_brick = 0x8A,
+  rlg_tile_badlands_skull_block = 0x8B,
+  rlg_tile_badlands_blood_dirt = 0x8C,
+  rlg_tile_badlands_flesh_dirt = 0x8D,
+  rlg_tile_badlands_basic_red = 0x8E,
+  rlg_tile_badlands_dark_red = 0x8F,
+  rlg_tile_badlands_pink = 0x90,
+  rlg_tile_badlands_sand_brick = 0x91,
+  rlg_tile_badlands_cactus_block = 0x92,
+  rlg_tile_winter_event_grass = 0x93,
+  rlg_tile_harvest_dirt_block = 0x94,
+  rlg_tile_harvest_back_block = 0x95,
+  num_rlg_tile_rows = 0x96,
+};
+
+/* 179 */
+enum block_texture_id
+{
+  block_texture_dirt = 0x0,
+  block_texture_autumn_grass_top = 0x1,
+  block_texture_autumn_grass_side = 0x2,
+  block_texture_cobblestone = 0x3,
+  block_texture_flesh_top = 0x6,
+  block_texture_flesh_bottom = 0x7,
+  block_texture_unused_old_lava = 0x8,
+  block_texture_flesh_side = 0x9,
+  block_texture_flesh_dirt = 0xA,
+  block_texture_zone1_back = 0xB,
+  block_texture_zone1_fore = 0xC,
+  block_texture_wood = 0xD,
+  block_texture_muddy_dirt = 0xE,
+  block_texture_rough_stone = 0xF,
+  block_texture_window = 0x11,
+  block_texture_zone2_back = 0x12,
+  block_texture_zone2_fore = 0x13,
+  block_texture_thatched_roof = 0x14,
+  block_texture_vertical_wood = 0x15,
+  block_texture_horizontal_wood = 0x16,
+  block_texture_stone_bricks = 0x17,
+  block_texture_dark_stone_bricks = 0x18,
+  block_texture_brick = 0x19,
+  block_texture_dark_stone = 0x1A,
+  block_texture_slimy_dirt = 0x1B,
+  block_texture_bloody_dirt = 0x1C,
+  block_texture_puss_stone = 0x1D,
+  block_texture_zone_4_fore = 0x1E,
+  block_texture_zone_4_back = 0x1F,
+  block_texture_gold_brick = 0x20,
+  block_texture_zone_3_fore = 0x21,
+  block_texture_large_red_stone = 0x22,
+  block_texture_blue_roof = 0x23,
+  block_texture_blue_brick = 0x24,
+  block_texture_sand = 0x25,
+  block_texture_dark_gray_stone = 0x26,
+  block_texture_gray_sand = 0x27,
+  block_texture_ice = 0x28,
+  block_texture_runestone = 0x29,
+  block_texture_slime = 0x2A,
+  block_texture_red_cobblestone = 0x2B,
+  block_texture_mauve_pebblestone = 0x2C,
+  block_texture_zone_3_back = 0x2F,
+  block_texture_brownstone_brick = 0x32,
+  block_texture_blue_fog_brick = 0x33,
+  block_texture_metal_temple = 0x34,
+  block_texture_shiny_gore = 0x35,
+  block_texture_gore_trails = 0x36,
+  block_texture_soft_scatter_brick = 0x37,
+  block_texture_clouds = 0x38,
+  block_texture_perfect_dark_block = 0x39,
+  block_texture_gray_cube_hole = 0x3A,
+  block_texture_red_roofing = 0x3B,
+  block_texture_metal_cube_hole = 0x3C,
+  block_texture_putrid_stone = 0x3D,
+  block_texture_blue_gray_mini_brick = 0x3E,
+  block_texture_rusted_mini_brick = 0x3F,
+  block_texture_fleshsore_dirt = 0x40,
+  block_texture_blood_light = 0x43,
+  block_texture_shrine_base = 0x44,
+  block_texture_special_room_dirt = 0x4B,
+  block_texture_spring_grass_top = 0x4C,
+  block_texture_spring_grass_side = 0x4D,
+  block_texture_summer_grass_top = 0x4E,
+  block_texture_summer_grass_side = 0x4F,
+  block_texture_winter_grass_top = 0x50,
+  block_texture_winter_grass_side = 0x51,
+  block_texture_halloween_grass_top = 0x52,
+  block_texture_halloween_grass_side = 0x53,
+  block_texture_paladin_light = 0x54,
+  block_texture_prince_dirt = 0x73,
+  block_texture_prince_blood = 0x74,
+  block_texture_barn_roof = 0x75,
+  block_texture_barn_side = 0x76,
+  block_texture_barn_trim_left = 0x77,
+  block_texture_barn_trim_right = 0x78,
+  block_texture_barn_trim_down = 0x79,
+  block_texture_barn_trim_ll = 0x7A,
+  block_texture_barn_trim_lr = 0x7B,
+  block_texture_story_dark_stone = 0x7C,
+  block_texture_story_fire_stone = 0x7D,
+  block_texture_badlands_basic = 0x7E,
+  block_texture_badlands_red = 0x7F,
+  block_texture_badlands_light = 0x80,
+  block_texture_badlands_white = 0x81,
+  block_texture_badlands_purple = 0x82,
+  block_texture_badlands_brown = 0x83,
+  block_texture_badlands_basic_green = 0x84,
+  block_texture_badlands_light_green = 0x85,
+  block_texture_badlands_bright_green = 0x86,
+  block_texture_badlands_olive_green = 0x87,
+  block_texture_badlands_green_sand = 0x88,
+  block_texture_badlands_dark_gray = 0x89,
+  block_texture_lava = 0x8A,
+  block_texture_badlands_gray = 0x8B,
+  block_texture_badlands_slate = 0x8C,
+  block_texture_badlands_clay = 0x8D,
+  block_texture_badlands_metal = 0x8E,
+  block_texture_badlands_green_weave = 0x8F,
+  block_texture_badlands_dark_mini_brick = 0x90,
+  block_texture_badlands_basic_grass_top = 0x91,
+  block_texture_badlands_basic_grass_side = 0x92,
+  block_texture_badlands_z1_room_top = 0x94,
+  block_texture_badlands_z1_room_bottom = 0x95,
+  block_texture_badlands_z1_room_side = 0x96,
+  block_texture_badlands_z2_room = 0x97,
+  block_texture_badlands_putrid_brick = 0x98,
+  block_texture_badlands_skull_block_side = 0x99,
+  block_texture_badlands_skull_block_tb = 0x9A,
+  block_texture_badlands_blood_dirt = 0x9B,
+  block_texture_badlands_flesh_dirt = 0x9C,
+  block_texture_badlands_basic_red = 0x9D,
+  block_texture_badlands_dark_red = 0x9E,
+  block_texture_badlands_pink = 0x9F,
+  block_texture_badlands_sand_brick = 0xA0,
+  block_texture_badlands_cactus = 0xA1,
+  block_texture_winter_event_top = 0xA2,
+  block_texture_winter_event_side = 0xA3,
+  block_texture_harvest_event_dirt = 0xA4,
+  block_texture_harvest_event_back = 0xA5,
+  num_block_texture_rows = 0xA6,
+};
+
+/* 180 */
+enum prop_id
+{
+  prop_break_1 = 0x0,
+  prop_break_2 = 0x1,
+  prop_break_3 = 0x2,
+  prop_break_4 = 0x3,
+  prop_autumn_grass_1 = 0x4,
+  prop_autumn_grass_2 = 0x5,
+  prop_autumn_grass_3 = 0x6,
+  prop_autumn_grass_4 = 0x7,
+  prop_platform = 0x8,
+  prop_flesh_1 = 0x9,
+  prop_flesh_2 = 0xA,
+  prop_flesh_3 = 0xB,
+  prop_flesh_4 = 0xC,
+  prop_dirt_edge_0001 = 0xD,
+  prop_dirt_edge_0010 = 0xE,
+  prop_dirt_edge_0011 = 0xF,
+  prop_dirt_edge_0100 = 0x10,
+  prop_dirt_edge_0101 = 0x11,
+  prop_dirt_edge_0110 = 0x12,
+  prop_dirt_edge_0111 = 0x13,
+  prop_dirt_edge_1000 = 0x14,
+  prop_dirt_edge_1001 = 0x15,
+  prop_dirt_edge_1010 = 0x16,
+  prop_dirt_edge_1011 = 0x17,
+  prop_dirt_edge_1100 = 0x18,
+  prop_dirt_edge_1101 = 0x19,
+  prop_dirt_edge_1110 = 0x1A,
+  prop_dirt_edge_1111 = 0x1B,
+  prop_water = 0x1C,
+  prop_block_select = 0x24,
+  prop_block_invalid_select = 0x25,
+  prop_backblock_select = 0x26,
+  prop_backblock_invalid_select = 0x27,
+  prop_spring_grass_1 = 0x30,
+  prop_spring_grass_2 = 0x31,
+  prop_spring_grass_3 = 0x32,
+  prop_spring_grass_4 = 0x33,
+  prop_summer_grass_1 = 0x34,
+  prop_summer_grass_2 = 0x35,
+  prop_summer_grass_3 = 0x36,
+  prop_summer_grass_4 = 0x37,
+  prop_winter_grass_1 = 0x38,
+  prop_winter_grass_2 = 0x39,
+  prop_winter_grass_3 = 0x3A,
+  prop_winter_grass_4 = 0x3B,
+  prop_red_roof_left = 0x3C,
+  prop_red_roof_right = 0x3D,
+  prop_blue_roof_left = 0x3E,
+  prop_blue_roof_right = 0x3F,
+  prop_thatched_roof_left = 0x40,
+  prop_thatched_roof_right = 0x41,
+  prop_farblock_select = 0x42,
+  prop_farblock_invalid_select = 0x43,
+  prop_badlands_grass_1 = 0x44,
+  prop_badlands_grass_2 = 0x45,
+  prop_badlands_grass_3 = 0x46,
+  prop_badlands_grass_4 = 0x47,
+  prop_ore_iron = 0x48,
+  prop_ore_copper = 0x49,
+  prop_ore_mithril = 0x4A,
+  prop_ore_rubium = 0x4B,
+  prop_ore_nickel = 0x4C,
+  prop_ore_gold = 0x4D,
+  prop_ore_lodestone = 0x4E,
+  prop_ore_adamantine = 0x4F,
+  prop_ore_ochre = 0x50,
+  prop_ore_verdant = 0x51,
+  prop_ore_russet = 0x52,
+  prop_ore_bronzed = 0x53,
+  prop_ore_cobalt = 0x54,
+  prop_ore_crimson = 0x55,
+  prop_ore_vibrant = 0x56,
+  prop_ore_ash = 0x57,
+  prop_ore_aqua = 0x58,
+  prop_ore_nether = 0x59,
+  prop_ore_sunrise = 0x5A,
+  prop_quartz_normal = 0x5B,
+  prop_quartz_green = 0x5C,
+  prop_quartz_blue = 0x5D,
+  prop_quartz_purple = 0x5E,
+  prop_quartz_orange = 0x5F,
+  prop_gem_green = 0x60,
+  prop_gem_blue = 0x61,
+  prop_gem_purple = 0x62,
+  prop_gem_orange = 0x63,
+  prop_unique_platform = 0x64,
+  num_prop_rows = 0x65,
+};
+
+/* 181 */
+enum emitter_id
+{
+  emitter_zombie_vomit = 0x0,
+  emitter_forge_smoke = 0x1,
+  emitter_torch_fire = 0x2,
+  emitter_magic_spark = 0x3,
+  emitter_magic_missile = 0x4,
+  emitter_charged_bolt = 0x5,
+  emitter_stinking_cloud = 0x6,
+  emitter_evil = 0x7,
+  emitter_homestone_sparkle = 0x8,
+  emitter_campfire = 0x9,
+  emitter_porting_swirl = 0xA,
+  emitter_healing_surge = 0xB,
+  emitter_level_up = 0xC,
+  emitter_stamina_surge = 0xD,
+  emitter_mana_surge = 0xE,
+  emitter_time_space = 0xF,
+  emitter_physical = 0x10,
+  emitter_music = 0x11,
+  emitter_music_aoe = 0x12,
+  emitter_gut_rope = 0x13,
+  emitter_beholder_fire = 0x14,
+  emitter_beholder_warmup = 0x15,
+  emitter_frozen_shield = 0x16,
+  emitter_translocate = 0x17,
+  emitter_recharge = 0x18,
+  emitter_heartboss_shield = 0x19,
+  emitter_secret_portal = 0x1A,
+  emitter_mind_break = 0x1B,
+  emitter_jade_skull = 0x1C,
+  emitter_prism = 0x1D,
+  emitter_warrior_dash = 0x1E,
+  emitter_warrior_whirlwind = 0x1F,
+  emitter_magic_bolt = 0x20,
+  emitter_fire_bolt = 0x21,
+  emitter_cold_bolt = 0x22,
+  emitter_poison_bolt = 0x23,
+  emitter_paladin_aoe = 0x24,
+  emitter_purified = 0x25,
+  emitter_paladin_bubble = 0x26,
+  emitter_holiday_aura = 0x27,
+  emitter_translocate_leave = 0x28,
+  emitter_invulnerable = 0x29,
+  emitter_homestone_aura = 0x2A,
+  emitter_phoenix_aoe = 0x2B,
+  emitter_phoenix_fire = 0x2C,
+  emitter_warrior_shield = 0x2D,
+  emitter_crit_prot = 0x2E,
+  emitter_beehive = 0x2F,
+  emitter_new_campfire = 0x30,
+  emitter_melee_fire = 0x31,
+  emitter_melee_cold = 0x32,
+  emitter_melee_poison = 0x33,
+  emitter_melee_lightning = 0x34,
+  emitter_melee_magic = 0x35,
+  num_emitter_rows = 0x36,
+};
+
+/* 182 */
+enum equipment_slot_id
+{
+  equipment_slot_hands = 0x0,
+  equipment_slot_head = 0x1,
+  equipment_slot_chest = 0x2,
+  equipment_slot_legs = 0x3,
+  equipment_slot_feet = 0x4,
+  equipment_slot_ring = 0x5,
+  equipment_slot_ring_25 = 0x6,
+  equipment_slot_hat = 0x7,
+  equipment_slot_pet = 0x8,
+  equipment_slot_class = 0x9,
+  equipment_slot_back = 0xA,
+  equipment_slot_outfit = 0xB,
+  num_equipment_slot_rows = 0xC,
+};
+
+/* 183 */
+enum item_type_id
+{
+  item_type_gold = 0x0,
+  item_type_dirt_tile = 0x1,
+  item_type_cobblestone_tile = 0x2,
+  item_type_wood_tile = 0x3,
+  item_type_zone_1_fore_tile = 0x4,
+  item_type_zone_1_back_tile = 0x5,
+  item_type_thatched_tile = 0x6,
+  item_type_horizontal_beam_tile = 0x7,
+  item_type_vertical_beam_tile = 0x8,
+  item_type_shaped_stone_tile = 0x9,
+  item_type_dark_stone_tile = 0xA,
+  item_type_zone_2_fore_tile = 0xB,
+  item_type_zone_2_back_tile = 0xC,
+  item_type_muddy_dirt_tile = 0xD,
+  item_type_rough_stone_tile = 0xE,
+  item_type_dark_gray_stone_tile = 0xF,
+  item_type_ice_tile = 0x10,
+  item_type_mauve_pebblestone_tile = 0x11,
+  item_type_slimy_dirt_tile = 0x12,
+  item_type_dark_cube_tile = 0x13,
+  item_type_sand_tile = 0x14,
+  item_type_dark_sand_tile = 0x15,
+  item_type_gold_brick_tile = 0x16,
+  item_type_blue_roof_tile = 0x17,
+  item_type_window_tile = 0x18,
+  item_type_brick_tile = 0x19,
+  item_type_zone_3_fore_tile = 0x1A,
+  item_type_zone_3_back_tile = 0x1B,
+  item_type_red_cobblestone_tile = 0x1C,
+  item_type_brownstone_brick_tile = 0x1D,
+  item_type_metal_temple_tile = 0x1E,
+  item_type_shiny_gore_tile = 0x1F,
+  item_type_soft_scatter_brick_tile = 0x20,
+  item_type_red_roof_tile = 0x21,
+  item_type_metal_cube_hole_tile = 0x22,
+  item_type_putrid_stone_tile = 0x23,
+  item_type_rusted_mini_tile = 0x24,
+  item_type_fleshsore_dirt_tile = 0x25,
+  item_type_slime_tile = 0x26,
+  item_type_zone_4_back_tile = 0x27,
+  item_type_bloody_dirt_tile = 0x28,
+  item_type_rock = 0x29,
+  item_type_pickaxe = 0x2A,
+  item_type_copper_pickaxe = 0x2B,
+  item_type_mithril_pickaxe = 0x2C,
+  item_type_axe = 0x2D,
+  item_type_hoe = 0x2E,
+  item_type_pulaski = 0x2F,
+  item_type_old_compost = 0x30,
+  item_type_fertilizer = 0x31,
+  item_type_wheat = 0x32,
+  item_type_wheat_seeds = 0x33,
+  item_type_berry = 0x34,
+  item_type_berry_seeds = 0x35,
+  item_type_carrot = 0x36,
+  item_type_carrot_seeds = 0x37,
+  item_type_cabbage = 0x38,
+  item_type_cabbage_seeds = 0x39,
+  item_type_tomato = 0x3A,
+  item_type_tomato_seeds = 0x3B,
+  item_type_sunflower = 0x3C,
+  item_type_sunflower_seeds = 0x3D,
+  item_type_coffee_berries = 0x3E,
+  item_type_roasted_coffee_beans = 0x3F,
+  item_type_coffee_beans = 0x40,
+  item_type_potato = 0x41,
+  item_type_potato_seeds = 0x42,
+  item_type_corn = 0x43,
+  item_type_corn_seeds = 0x44,
+  item_type_black_beans = 0x45,
+  item_type_black_bean_seeds = 0x46,
+  item_type_garlic = 0x47,
+  item_type_garlic_seeds = 0x48,
+  item_type_cauliflower = 0x49,
+  item_type_cauliflower_seeds = 0x4A,
+  item_type_bread = 0x4B,
+  item_type_veggie_bowl = 0x4C,
+  item_type_energy_bar = 0x4D,
+  item_type_berry_pie = 0x4E,
+  item_type_pot_pie = 0x4F,
+  item_type_chili = 0x50,
+  item_type_raw_meat = 0x51,
+  item_type_cooked_meat = 0x52,
+  item_type_sapling = 0x53,
+  item_type_unused_sapling = 0x54,
+  item_type_stick = 0x55,
+  item_type_platform = 0x56,
+  item_type_torch = 0x57,
+  item_type_door = 0x58,
+  item_type_small_door = 0x59,
+  item_type_campfire = 0x5A,
+  item_type_reed = 0x5B,
+  item_type_iron_ore = 0x5C,
+  item_type_iron_bar = 0x5D,
+  item_type_copper_ore = 0x5E,
+  item_type_copper_bar = 0x5F,
+  item_type_mithril_ore = 0x60,
+  item_type_mithril_bar = 0x61,
+  item_type_rubium_ore = 0x62,
+  item_type_rubium_bar = 0x63,
+  item_type_nickel_ore = 0x64,
+  item_type_nickel_bar = 0x65,
+  item_type_gold_ore = 0x66,
+  item_type_gold_bar = 0x67,
+  item_type_lodestone_ore = 0x68,
+  item_type_lodestone_bar = 0x69,
+  item_type_adamantine_ore = 0x6A,
+  item_type_adamantine_bar = 0x6B,
+  item_type_ochre_ore = 0x6C,
+  item_type_ochre_bar = 0x6D,
+  item_type_forge = 0x6E,
+  item_type_anvil = 0x6F,
+  item_type_workbench = 0x70,
+  item_type_bed = 0x71,
+  item_type_homestone = 0x72,
+  item_type_iron_helm = 0x73,
+  item_type_iron_breastplate = 0x74,
+  item_type_iron_leggings = 0x75,
+  item_type_iron_boots = 0x76,
+  item_type_copper_helm = 0x77,
+  item_type_copper_breastplate = 0x78,
+  item_type_copper_leggings = 0x79,
+  item_type_copper_boots = 0x7A,
+  item_type_mithril_helm = 0x7B,
+  item_type_mithril_breastplate = 0x7C,
+  item_type_mithril_leggings = 0x7D,
+  item_type_mithril_boots = 0x7E,
+  item_type_rubium_helm = 0x7F,
+  item_type_rubium_breastplate = 0x80,
+  item_type_rubium_leggings = 0x81,
+  item_type_rubium_boots = 0x82,
+  item_type_gold_helm = 0x83,
+  item_type_gold_breastplate = 0x84,
+  item_type_gold_leggings = 0x85,
+  item_type_gold_boots = 0x86,
+  item_type_adamantine_helm = 0x87,
+  item_type_adamantine_breastplate = 0x88,
+  item_type_adamantine_leggings = 0x89,
+  item_type_adamantine_boots = 0x8A,
+  item_type_hat_no_helm = 0x8B,
+  item_type_hat_bandana = 0x8C,
+  item_type_hat_wings = 0x8D,
+  item_type_hat_plague_dr = 0x8E,
+  item_type_hat_pirate_red = 0x8F,
+  item_type_hat_pirate_green = 0x90,
+  item_type_hat_straw = 0x91,
+  item_type_hat_sombrero = 0x92,
+  item_type_hat_military_beret = 0x93,
+  item_type_hat_top_hat = 0x94,
+  item_type_hat_police_trooper = 0x95,
+  item_type_hat_winter = 0x96,
+  item_type_hat_cowboy = 0x97,
+  item_type_hat_fez = 0x98,
+  item_type_hat_fez_blue = 0x99,
+  item_type_hat_wizard_blue = 0x9A,
+  item_type_hat_mouse_ears = 0x9B,
+  item_type_hat_crown = 0x9C,
+  item_type_wand_magic_spark = 0x9D,
+  item_type_wand_magic_missile = 0x9E,
+  item_type_wand_physical = 0x9F,
+  item_type_wand_magic = 0xA0,
+  item_type_wand_fire = 0xA1,
+  item_type_wand_cold = 0xA2,
+  item_type_wand_lightning = 0xA3,
+  item_type_wand_poison = 0xA4,
+  item_type_wand_good_physical = 0xA5,
+  item_type_wand_good_magic = 0xA6,
+  item_type_wand_good_fire = 0xA7,
+  item_type_wand_good_cold = 0xA8,
+  item_type_wand_good_lightning = 0xA9,
+  item_type_wand_good_poison = 0xAA,
+  item_type_staff_rogue = 0xAB,
+  item_type_staff_cleric = 0xAC,
+  item_type_staff_bard = 0xAD,
+  item_type_staff_wizard = 0xAE,
+  item_type_potion_tutorial = 0xAF,
+  item_type_potion_minor_heal = 0xB0,
+  item_type_potion_coffee = 0xB1,
+  item_type_potion_cure_poison = 0xB2,
+  item_type_potion_lesser_heal = 0xB3,
+  item_type_potion_healing = 0xB4,
+  item_type_scroll_regen = 0xB5,
+  item_type_scroll_blessing = 0xB6,
+  item_type_scroll_sustain = 0xB7,
+  item_type_scroll_stamina = 0xB8,
+  item_type_scroll_identify = 0xB9,
+  item_type_scroll_magic_mapping = 0xBA,
+  item_type_scroll_light = 0xBB,
+  item_type_scroll_destruction = 0xBC,
+  item_type_scroll_acquirement = 0xBD,
+  item_type_scroll_death = 0xBE,
+  item_type_scroll_cleanse = 0xBF,
+  item_type_scroll_room_location = 0xC0,
+  item_type_scroll_portal_location = 0xC1,
+  item_type_parchment = 0xC2,
+  item_type_mushroom_brown = 0xC3,
+  item_type_mushroom_yellow = 0xC4,
+  item_type_mushroom_green = 0xC5,
+  item_type_mushroom_purple = 0xC6,
+  item_type_mushroom_cyan = 0xC7,
+  item_type_mushroom_blue = 0xC8,
+  item_type_mushroom_white = 0xC9,
+  item_type_mushroom_black = 0xCA,
+  item_type_unused_ring_aoe = 0xCB,
+  item_type_unused_recipe_ring_aoe = 0xCC,
+  item_type_ring_lifetap = 0xCD,
+  item_type_recipe_ring_lifetap = 0xCE,
+  item_type_ring_defense = 0xCF,
+  item_type_recipe_ring_defense = 0xD0,
+  item_type_ring_infrared = 0xD1,
+  item_type_recipe_ring_infrared = 0xD2,
+  item_type_ring_crit_prot = 0xD3,
+  item_type_recipe_ring_crit_prot = 0xD4,
+  item_type_ring_high_jump = 0xD5,
+  item_type_recipe_ring_high_jump = 0xD6,
+  item_type_ring_triple_jump = 0xD7,
+  item_type_recipe_ring_triple_jump = 0xD8,
+  item_type_ring_slow_digestion = 0xD9,
+  item_type_recipe_ring_slow_digest = 0xDA,
+  item_type_ring_feather_fall = 0xDB,
+  item_type_recipe_ring_feather_fall = 0xDC,
+  item_type_ring_resistance = 0xDD,
+  item_type_recipe_ring_resistance = 0xDE,
+  item_type_ring_steady_feet = 0xDF,
+  item_type_recipe_ring_steady_feet = 0xE0,
+  item_type_ring_digging = 0xE1,
+  item_type_recipe_ring_digging = 0xE2,
+  item_type_ring_light = 0xE3,
+  item_type_recipe_ring_light = 0xE4,
+  item_type_bar_crystal = 0xE5,
+  item_type_bar_crystal_common = 0xE6,
+  item_type_bar_crystal_uncommon = 0xE7,
+  item_type_bar_crystal_rare = 0xE8,
+  item_type_bar_crystal_ultra = 0xE9,
+  item_type_tri_crystal = 0xEA,
+  item_type_tri_crystal_common = 0xEB,
+  item_type_tri_crystal_uncommon = 0xEC,
+  item_type_tri_crystal_rare = 0xED,
+  item_type_tri_crystal_ultra = 0xEE,
+  item_type_square_crystal = 0xEF,
+  item_type_square_crystal_common = 0xF0,
+  item_type_square_crystal_uncommon = 0xF1,
+  item_type_square_crystal_rare = 0xF2,
+  item_type_square_crystal_ultra = 0xF3,
+  item_type_diamond_crystal = 0xF4,
+  item_type_diamond_crystal_common = 0xF5,
+  item_type_diamond_crystal_uncommon = 0xF6,
+  item_type_diamond_crystal_rare = 0xF7,
+  item_type_diamond_crystal_ultra = 0xF8,
+  item_type_ancient_all = 0xF9,
+  item_type_ancient_cloak = 0xFA,
+  item_type_ancient_cowl = 0xFB,
+  item_type_ancient_boots = 0xFC,
+  item_type_ancient_dagger = 0xFD,
+  item_type_ancient_seal = 0xFE,
+  item_type_ancient_kite_shield = 0xFF,
+  item_type_ancient_circlet = 0x100,
+  item_type_ancient_holy_vial = 0x101,
+  item_type_ancient_shield = 0x102,
+  item_type_unique_leveler = 0x103,
+  item_type_ancient_ukulele = 0x104,
+  item_type_ancient_drum = 0x105,
+  item_type_ancient_flute = 0x106,
+  item_type_ancient_harp = 0x107,
+  item_type_ancient_base = 0x108,
+  item_type_t_ancient_frozen_shield = 0x109,
+  item_type_ancient_fire_tome = 0x10A,
+  item_type_t_ancient_translocate = 0x10B,
+  item_type_t_ancient_firestorm = 0x10C,
+  item_type_ancient_jade_skull = 0x10D,
+  item_type_ancient_amulet = 0x10E,
+  item_type_ancient_wisp = 0x10F,
+  item_type_ancient_brain = 0x110,
+  item_type_ancient_ice_skull = 0x111,
+  item_type_ancient_scythe = 0x112,
+  item_type_ancient_bone = 0x113,
+  item_type_ancient_ice_heart = 0x114,
+  item_type_blueprint_chef = 0x115,
+  item_type_chef_recipe = 0x116,
+  item_type_blueprint_banker = 0x117,
+  item_type_banker_recipe = 0x118,
+  item_type_blueprint_wizard = 0x119,
+  item_type_blueprint_hats = 0x11A,
+  item_type_blueprint_pet_shop = 0x11B,
+  item_type_scroll_time_space_normal = 0x11C,
+  item_type_scroll_time_space_nightmare = 0x11D,
+  item_type_scroll_time_space_hell = 0x11E,
+  item_type_rune_ala = 0x11F,
+  item_type_rune_zed = 0x120,
+  item_type_rune_mol = 0x121,
+  item_type_rune_del = 0x122,
+  item_type_unused_rune_1 = 0x123,
+  item_type_unused_rune_2 = 0x124,
+  item_type_unused_rune_3 = 0x125,
+  item_type_unused_rune_4 = 0x126,
+  item_type_rune_mue = 0x127,
+  item_type_rune_zigh = 0x128,
+  item_type_rune_omni = 0x129,
+  item_type_rune_pi = 0x12A,
+  item_type_rune_sig = 0x12B,
+  item_type_rune_roe = 0x12C,
+  item_type_rune_om = 0x12D,
+  item_type_boss_pack_1 = 0x12E,
+  item_type_boss_pack_2 = 0x12F,
+  item_type_runeword_upgrade = 0x130,
+  item_type_runeword_cleric = 0x131,
+  item_type_runeword_bard = 0x132,
+  item_type_runeword_rogue = 0x133,
+  item_type_runeword_wizard = 0x134,
+  item_type_runeword_aspire_helm = 0x135,
+  item_type_runeword_aspire_chest = 0x136,
+  item_type_runeword_aspire_legs = 0x137,
+  item_type_runeword_aspire_boots = 0x138,
+  item_type_runeword_aspire_ring = 0x139,
+  item_type_runeword_cosmic_helm = 0x13A,
+  item_type_runeword_cosmic_chest = 0x13B,
+  item_type_runeword_cosmic_legs = 0x13C,
+  item_type_runeword_cosmic_boots = 0x13D,
+  item_type_runeword_cosmic_ring = 0x13E,
+  item_type_aspire_helm = 0x13F,
+  item_type_aspire_breastplate = 0x140,
+  item_type_aspire_leggings = 0x141,
+  item_type_aspire_boots = 0x142,
+  item_type_aspire_ring = 0x143,
+  item_type_cosmic_helm = 0x144,
+  item_type_cosmic_breastplate = 0x145,
+  item_type_cosmic_leggings = 0x146,
+  item_type_cosmic_boots = 0x147,
+  item_type_cosmic_ring = 0x148,
+  item_type_ambient_black_wolf = 0x149,
+  item_type_ambient_dark_wolf = 0x14A,
+  item_type_ambient_light_wolf = 0x14B,
+  item_type_ambient_white_wolf = 0x14C,
+  item_type_ambient_black_cat = 0x14D,
+  item_type_ambient_white_cat = 0x14E,
+  item_type_ambient_cc_unicorn = 0x14F,
+  item_type_ambient_dark_unicorn = 0x150,
+  item_type_ambient_rainbow_unicorn = 0x151,
+  item_type_ambient_chicken = 0x152,
+  item_type_bank_tab_1 = 0x153,
+  item_type_bank_tab_2 = 0x154,
+  item_type_bank_tab_3 = 0x155,
+  item_type_bank_tab_4 = 0x156,
+  item_type_gold_fertilizer = 0x163,
+  item_type_adamantine_pickaxe = 0x164,
+  item_type_unique_berzerker = 0x165,
+  item_type_unique_swiftness = 0x166,
+  item_type_blood_light_tile = 0x167,
+  item_type_bar_crystal_unique = 0x168,
+  item_type_tri_crystal_unique = 0x169,
+  item_type_square_crystal_unique = 0x16A,
+  item_type_diamond_crystal_unique = 0x16B,
+  item_type_ancient_goblet = 0x16C,
+  item_type_ancient_mic = 0x16D,
+  item_type_ancient_prism = 0x16E,
+  item_type_ancient_black_heart = 0x16F,
+  item_type_ancient_soul_jar = 0x170,
+  item_type_ancient_phial = 0x171,
+  item_type_t_ancient_familiar = 0x172,
+  item_type_t_ancient_thunderstorm = 0x173,
+  item_type_unique_light_helm = 0x174,
+  item_type_unique_regen_helm = 0x175,
+  item_type_unique_deadly_helm = 0x176,
+  item_type_unique_armor_chest = 0x177,
+  item_type_unique_regen_chest = 0x178,
+  item_type_unique_jump_legs = 0x179,
+  item_type_unique_exp_legs = 0x17A,
+  item_type_unique_regen_legs = 0x17B,
+  item_type_unique_steady_boots = 0x17C,
+  item_type_unique_regen_boots = 0x17D,
+  item_type_unique_haste_boots = 0x17E,
+  item_type_unique_lightning_chest = 0x17F,
+  item_type_unique_treasure_chest = 0x180,
+  item_type_unique_ice_helm = 0x181,
+  item_type_unique_poison_legs = 0x182,
+  item_type_unique_vigor_legs = 0x183,
+  item_type_unique_fire_boots = 0x184,
+  item_type_octagon_crystal = 0x185,
+  item_type_octagon_crystal_common = 0x186,
+  item_type_octagon_crystal_uncommon = 0x187,
+  item_type_octagon_crystal_rare = 0x188,
+  item_type_octagon_crystal_ultra = 0x189,
+  item_type_octagon_crystal_unique = 0x18A,
+  item_type_potion_major_heal = 0x18B,
+  item_type_verdant_ore = 0x18C,
+  item_type_verdant_bar = 0x18D,
+  item_type_russet_ore = 0x18E,
+  item_type_russet_bar = 0x18F,
+  item_type_verdant_helm = 0x190,
+  item_type_verdant_breastplate = 0x191,
+  item_type_verdant_leggings = 0x192,
+  item_type_verdant_boots = 0x193,
+  item_type_vault = 0x194,
+  item_type_ancient_flask = 0x195,
+  item_type_bar_crystal_bulb = 0x197,
+  item_type_tri_crystal_bulb = 0x198,
+  item_type_square_crystal_bulb = 0x199,
+  item_type_diamond_crystal_bulb = 0x19A,
+  item_type_octagon_crystal_bulb = 0x19B,
+  item_type_nickel_ore_bulb = 0x19C,
+  item_type_lodestone_ore_bulb = 0x19D,
+  item_type_ochre_ore_bulb = 0x19E,
+  item_type_russet_ore_bulb = 0x19F,
+  item_type_money_tree_bulb = 0x1A0,
+  item_type_tree_gold = 0x1A1,
+  item_type_refrigerator = 0x1A2,
+  item_type_composter = 0x1A3,
+  item_type_starter_sword = 0x1A4,
+  item_type_short_sword = 0x1A5,
+  item_type_sword_physical = 0x1A6,
+  item_type_sword_magic = 0x1A7,
+  item_type_sword_fire = 0x1A8,
+  item_type_sword_cold = 0x1A9,
+  item_type_sword_lightning = 0x1AA,
+  item_type_sword_poison = 0x1AB,
+  item_type_sword_good_physical = 0x1AC,
+  item_type_sword_good_magic = 0x1AD,
+  item_type_sword_good_fire = 0x1AE,
+  item_type_sword_good_cold = 0x1AF,
+  item_type_sword_good_lightning = 0x1B0,
+  item_type_sword_good_poison = 0x1B1,
+  item_type_ancient_deadly_nimble = 0x1B2,
+  item_type_ancient_lifeforce = 0x1B3,
+  item_type_ancient_reverse_fate = 0x1B4,
+  item_type_ancient_cauterize = 0x1B5,
+  item_type_starter_dual = 0x1B6,
+  item_type_improved_dual = 0x1B7,
+  item_type_dual_physical = 0x1B8,
+  item_type_dual_magic = 0x1B9,
+  item_type_dual_fire = 0x1BA,
+  item_type_dual_cold = 0x1BB,
+  item_type_dual_lightning = 0x1BC,
+  item_type_dual_poison = 0x1BD,
+  item_type_dual_good_physical = 0x1BE,
+  item_type_dual_good_magic = 0x1BF,
+  item_type_dual_good_fire = 0x1C0,
+  item_type_dual_good_cold = 0x1C1,
+  item_type_dual_good_lightning = 0x1C2,
+  item_type_dual_good_poison = 0x1C3,
+  item_type_ancient_endless_elixir = 0x1C4,
+  item_type_sword_bard = 0x1C5,
+  item_type_dual_rogue = 0x1C6,
+  item_type_runeword_bard_sword = 0x1C7,
+  item_type_runeword_rogue_dual = 0x1C8,
+  item_type_potion_heal_select = 0x1C9,
+  item_type_crystal_shape_select = 0x1CA,
+  item_type_t_ancient_plate_boots = 0x1CB,
+  item_type_t_ancient_plate_bracers = 0x1CC,
+  item_type_t_ancient_tower_shield = 0x1CD,
+  item_type_t_ancient_plate_chest = 0x1CE,
+  item_type_t_ancient_charm = 0x1CF,
+  item_type_starter_mace = 0x1D0,
+  item_type_improved_mace = 0x1D1,
+  item_type_mace_physical = 0x1D2,
+  item_type_mace_magic = 0x1D3,
+  item_type_mace_fire = 0x1D4,
+  item_type_mace_cold = 0x1D5,
+  item_type_mace_lightning = 0x1D6,
+  item_type_mace_poison = 0x1D7,
+  item_type_mace_good_physical = 0x1D8,
+  item_type_mace_good_magic = 0x1D9,
+  item_type_mace_good_fire = 0x1DA,
+  item_type_mace_good_cold = 0x1DB,
+  item_type_mace_good_lightning = 0x1DC,
+  item_type_mace_good_poison = 0x1DD,
+  item_type_ancient_tabard = 0x1DE,
+  item_type_blueprint_graveyard = 0x1DF,
+  item_type_bank_grave_bag = 0x1E0,
+  item_type_raw_meat_chunk = 0x1E1,
+  item_type_cooked_meat_chunk = 0x1E2,
+  item_type_special_room_dirt_tile = 0x1E3,
+  item_type_runeword_necro = 0x1E4,
+  item_type_staff_necro = 0x1E5,
+  item_type_any_unique = 0x1E6,
+  item_type_runeword_wizard_2 = 0x1E7,
+  item_type_staff_wizard_2 = 0x1E8,
+  item_type_bronzed_ore = 0x1E9,
+  item_type_bronzed_bar = 0x1EA,
+  item_type_cobalt_ore = 0x1EB,
+  item_type_cobalt_bar = 0x1EC,
+  item_type_cobalt_helm = 0x1ED,
+  item_type_cobalt_breastplate = 0x1EE,
+  item_type_cobalt_leggings = 0x1EF,
+  item_type_cobalt_boots = 0x1F0,
+  item_type_bronzed_ore_bulb = 0x1F1,
+  item_type_unique_light = 0x1F2,
+  item_type_unique_potion = 0x1F3,
+  item_type_unique_magic_boots = 0x1F4,
+  item_type_unique_arch_legs = 0x1F5,
+  item_type_unique_vitality_chest = 0x1F6,
+  item_type_crimson_ore = 0x1F7,
+  item_type_crimson_bar = 0x1F8,
+  item_type_vibrant_ore = 0x1F9,
+  item_type_vibrant_bar = 0x1FA,
+  item_type_crimson_helm = 0x1FB,
+  item_type_crimson_breastplate = 0x1FC,
+  item_type_crimson_leggings = 0x1FD,
+  item_type_crimson_boots = 0x1FE,
+  item_type_vibrant_ore_bulb = 0x1FF,
+  item_type_any_seeds = 0x200,
+  item_type_pasta = 0x201,
+  item_type_spaghetti = 0x202,
+  item_type_hearty_veggie_bowl = 0x203,
+  item_type_burrito = 0x204,
+  item_type_roasted_sunflower_seeds = 0x205,
+  item_type_corn_on_cob = 0x206,
+  item_type_summer_salad = 0x207,
+  item_type_mashed_potatoes = 0x208,
+  item_type_roasted_cauliflower = 0x209,
+  item_type_stewed_carrots = 0x20A,
+  item_type_sauerkraut = 0x20B,
+  item_type_corned_beef = 0x20C,
+  item_type_burger = 0x20D,
+  item_type_dungeon_veggie_bowl = 0x20E,
+  item_type_dungeon_cooked_meat = 0x20F,
+  item_type_dungeon_cooked_meat_chunk = 0x210,
+  item_type_magic_farming_book = 0x211,
+  item_type_blueprint_chicken_coop = 0x212,
+  item_type_chicken_coop_recipe = 0x213,
+  item_type_egg = 0x214,
+  item_type_pumpkin_currency = 0x215,
+  item_type_ancient_bat = 0x216,
+  item_type_ambient_spider = 0x217,
+  item_type_ambient_orange_cat = 0x218,
+  item_type_hat_mask = 0x219,
+  item_type_hat_horns = 0x21A,
+  item_type_ring_halloween = 0x21B,
+  item_type_halloween_brew = 0x21C,
+  item_type_halloween_legendary_brew = 0x21D,
+  item_type_ring_halloween_legendary = 0x21E,
+  item_type_demon_wings = 0x21F,
+  item_type_red_cloak = 0x220,
+  item_type_mech_poison_pack = 0x221,
+  item_type_ancient_holy_bracers = 0x222,
+  item_type_starter_sword2h = 0x223,
+  item_type_improved_sword2h = 0x224,
+  item_type_sword2h_physical = 0x225,
+  item_type_sword2h_magic = 0x226,
+  item_type_sword2h_fire = 0x227,
+  item_type_sword2h_cold = 0x228,
+  item_type_sword2h_lightning = 0x229,
+  item_type_sword2h_poison = 0x22A,
+  item_type_sword2h_good_physical = 0x22B,
+  item_type_sword2h_good_magic = 0x22C,
+  item_type_sword2h_good_fire = 0x22D,
+  item_type_sword2h_good_cold = 0x22E,
+  item_type_sword2h_good_lightning = 0x22F,
+  item_type_sword2h_good_poison = 0x230,
+  item_type_starter_mace2h = 0x231,
+  item_type_improved_mace2h = 0x232,
+  item_type_mace2h_physical = 0x233,
+  item_type_mace2h_magic = 0x234,
+  item_type_mace2h_fire = 0x235,
+  item_type_mace2h_cold = 0x236,
+  item_type_mace2h_lightning = 0x237,
+  item_type_mace2h_poison = 0x238,
+  item_type_mace2h_good_physical = 0x239,
+  item_type_mace2h_good_magic = 0x23A,
+  item_type_mace2h_good_fire = 0x23B,
+  item_type_mace2h_good_cold = 0x23C,
+  item_type_mace2h_good_lightning = 0x23D,
+  item_type_mace2h_good_poison = 0x23E,
+  item_type_angel_wings = 0x23F,
+  item_type_back_shield = 0x240,
+  item_type_bank_farm_bag = 0x241,
+  item_type_ancient_holy_tome = 0x242,
+  item_type_ancient_holy_shield = 0x243,
+  item_type_ancient_holy_gloves = 0x244,
+  item_type_ancient_holy_boots = 0x245,
+  item_type_ambient_turkey = 0x246,
+  item_type_cornucopia = 0x247,
+  item_type_ambient_undead_whelp = 0x248,
+  item_type_woven_horn = 0x249,
+  item_type_mysterious_egg = 0x24A,
+  item_type_dungeon_cornucopia = 0x24B,
+  item_type_fried_eggs = 0x24C,
+  item_type_roasted_garlic = 0x24D,
+  item_type_tomato_soup = 0x24E,
+  item_type_ambient_penguin = 0x24F,
+  item_type_ambient_polar_bear = 0x250,
+  item_type_ambient_reindeer = 0x251,
+  item_type_xmas_cloak = 0x252,
+  item_type_hat_santa = 0x253,
+  item_type_hat_elf = 0x254,
+  item_type_hat_festive_tophat = 0x255,
+  item_type_holiday_helm = 0x256,
+  item_type_holiday_breastplate = 0x257,
+  item_type_holiday_leggings = 0x258,
+  item_type_holiday_boots = 0x259,
+  item_type_runeword_holiday_helm = 0x25A,
+  item_type_runeword_holiday_chest = 0x25B,
+  item_type_runeword_holiday_legs = 0x25C,
+  item_type_runeword_holiday_boots = 0x25D,
+  item_type_rune_winter = 0x25E,
+  item_type_scroll_xmas = 0x25F,
+  item_type_xmas_present = 0x260,
+  item_type_scroll_time_space_inferno = 0x261,
+  item_type_bank_tab_5 = 0x262,
+  item_type_bank_tab_6 = 0x263,
+  item_type_jam = 0x264,
+  item_type_beef_stew = 0x265,
+  item_type_potion_great_heal = 0x266,
+  item_type_potion_superb_heal = 0x267,
+  item_type_potion_premium_heal = 0x268,
+  item_type_potion_heroic_heal = 0x269,
+  item_type_potion_mythic_heal = 0x26A,
+  item_type_potion_invulnerable = 0x26B,
+  item_type_breaded_mushrooms = 0x26C,
+  item_type_garlic_mushrooms = 0x26D,
+  item_type_spicy_mushrooms = 0x26E,
+  item_type_creamy_mushrooms = 0x26F,
+  item_type_blueprint_mushroom = 0x270,
+  item_type_garlic_mash = 0x271,
+  item_type_mashed_white = 0x272,
+  item_type_scroll_respec = 0x273,
+  item_type_holy_pickaxe = 0x274,
+  item_type_large_pickaxe = 0x275,
+  item_type_corruption_tile = 0x276,
+  item_type_blueprint_greenhouse = 0x277,
+  item_type_blueprint_planter_box = 0x278,
+  item_type_dungeon_hoe = 0x279,
+  item_type_dungeon_holy_pickaxe = 0x27A,
+  item_type_ash_ore = 0x27B,
+  item_type_ash_bar = 0x27C,
+  item_type_aqua_ore = 0x27D,
+  item_type_aqua_bar = 0x27E,
+  item_type_nether_ore = 0x27F,
+  item_type_nether_bar = 0x280,
+  item_type_sunrise_ore = 0x281,
+  item_type_sunrise_bar = 0x282,
+  item_type_ash_helm = 0x283,
+  item_type_ash_breastplate = 0x284,
+  item_type_ash_leggings = 0x285,
+  item_type_ash_boots = 0x286,
+  item_type_nether_helm = 0x287,
+  item_type_nether_breastplate = 0x288,
+  item_type_nether_leggings = 0x289,
+  item_type_nether_boots = 0x28A,
+  item_type_hat_cat_ears = 0x28B,
+  item_type_back_cat_tail = 0x28C,
+  item_type_ancient_frozen_shield = 0x28D,
+  item_type_ancient_translocate = 0x28E,
+  item_type_ancient_firestorm = 0x28F,
+  item_type_ancient_familiar = 0x290,
+  item_type_ancient_thunderstorm = 0x291,
+  item_type_ancient_plate_boots = 0x292,
+  item_type_ancient_plate_bracers = 0x293,
+  item_type_ancient_tower_shield = 0x294,
+  item_type_ancient_plate_chest = 0x295,
+  item_type_ancient_charm = 0x296,
+  item_type_blueprint_barn = 0x297,
+  item_type_milk = 0x298,
+  item_type_cheese = 0x299,
+  item_type_artisan_cheese = 0x29A,
+  item_type_potion_espresso = 0x29B,
+  item_type_potion_latte = 0x29C,
+  item_type_blueprint_beehive = 0x29D,
+  item_type_honey = 0x29E,
+  item_type_potion_honey_tea = 0x29F,
+  item_type_barn_upgrade = 0x2A0,
+  item_type_barn_recipe = 0x2A1,
+  item_type_compost_currency = 0x2A2,
+  item_type_ancient_poison_tome = 0x2A3,
+  item_type_ancient_leech = 0x2A4,
+  item_type_ancient_quakeboots = 0x2A5,
+  item_type_ancient_bloodlust = 0x2A6,
+  item_type_ancient_explosive = 0x2A7,
+  item_type_ancient_conductor = 0x2A8,
+  item_type_ancient_swarm = 0x2A9,
+  item_type_ancient_deep_freeze = 0x2AA,
+  item_type_runeword_crystal_slot = 0x2AB,
+  item_type_runeword_defender = 0x2AC,
+  item_type_runeword_chromatic = 0x2AD,
+  item_type_runeword_fortuitous = 0x2AE,
+  item_type_runeword_savage = 0x2AF,
+  item_type_runeword_sacred = 0x2B0,
+  item_type_story_dark_stone = 0x2B1,
+  item_type_story_fire_stone = 0x2B2,
+  item_type_plaque_normal = 0x2B3,
+  item_type_plaque_nightmare = 0x2B4,
+  item_type_plaque_hell = 0x2B5,
+  item_type_plaque_inferno = 0x2B6,
+  item_type_ambient_cool_duck = 0x2B7,
+  item_type_aqua_ore_bulb = 0x2B8,
+  item_type_sunrise_ore_bulb = 0x2B9,
+  item_type_blueprint_badlands_portal = 0x2BA,
+  item_type_badlands_basic = 0x2BB,
+  item_type_badlands_red = 0x2BC,
+  item_type_badlands_light = 0x2BD,
+  item_type_badlands_white = 0x2BE,
+  item_type_badlands_purple = 0x2BF,
+  item_type_badlands_brown = 0x2C0,
+  item_type_badlands_basic_green = 0x2C1,
+  item_type_badlands_light_green = 0x2C2,
+  item_type_badlands_bright_green = 0x2C3,
+  item_type_badlands_olive_green = 0x2C4,
+  item_type_badlands_green_sand = 0x2C5,
+  item_type_badlands_dark_gray = 0x2C6,
+  item_type_badlands_gray = 0x2C7,
+  item_type_badlands_slate = 0x2C8,
+  item_type_badlands_clay = 0x2C9,
+  item_type_badlands_metal = 0x2CA,
+  item_type_badlands_green_weave = 0x2CB,
+  item_type_badlands_dark_mini_brick = 0x2CC,
+  item_type_prickly_pear = 0x2CD,
+  item_type_quartz_normal = 0x2CE,
+  item_type_quartz_green = 0x2CF,
+  item_type_quartz_blue = 0x2D0,
+  item_type_quartz_purple = 0x2D1,
+  item_type_quartz_orange = 0x2D2,
+  item_type_bookcase = 0x2D3,
+  item_type_gem_green = 0x2D4,
+  item_type_gem_blue = 0x2D5,
+  item_type_gem_purple = 0x2D6,
+  item_type_gem_orange = 0x2D7,
+  item_type_enchant_book_green = 0x2D8,
+  item_type_enchant_book_blue = 0x2D9,
+  item_type_enchant_book_purple = 0x2DA,
+  item_type_enchant_book_orange = 0x2DB,
+  item_type_enchant_book_empty = 0x2DC,
+  item_type_blueprint_townhall = 0x2DD,
+  item_type_bank_upgrade = 0x2DE,
+  item_type_speed_helm = 0x2DF,
+  item_type_speed_breastplate = 0x2E0,
+  item_type_speed_leggings = 0x2E1,
+  item_type_speed_boots = 0x2E2,
+  item_type_speed_ring = 0x2E3,
+  item_type_exec_helm = 0x2E4,
+  item_type_exec_breastplate = 0x2E5,
+  item_type_exec_leggings = 0x2E6,
+  item_type_exec_boots = 0x2E7,
+  item_type_exec_ring = 0x2E8,
+  item_type_thorns_helm = 0x2E9,
+  item_type_thorns_breastplate = 0x2EA,
+  item_type_thorns_leggings = 0x2EB,
+  item_type_thorns_boots = 0x2EC,
+  item_type_thorns_ring = 0x2ED,
+  item_type_brawl_helm = 0x2EE,
+  item_type_brawl_breastplate = 0x2EF,
+  item_type_brawl_leggings = 0x2F0,
+  item_type_brawl_boots = 0x2F1,
+  item_type_brawl_ring = 0x2F2,
+  item_type_hps_helm = 0x2F3,
+  item_type_hps_breastplate = 0x2F4,
+  item_type_hps_leggings = 0x2F5,
+  item_type_hps_boots = 0x2F6,
+  item_type_hps_ring = 0x2F7,
+  item_type_mushroom_bl_red = 0x2F8,
+  item_type_mushroom_bl_orange = 0x2F9,
+  item_type_mushroom_bl_forest = 0x2FA,
+  item_type_mushroom_bl_sage = 0x2FB,
+  item_type_mushroom_bl_brown = 0x2FC,
+  item_type_mushroom_bl_darkpink = 0x2FD,
+  item_type_mushroom_bl_gray = 0x2FE,
+  item_type_mushroom_bl_black = 0x2FF,
+  item_type_ancient_unbind_key = 0x300,
+  item_type_scroll_fog = 0x301,
+  item_type_scroll_armor = 0x302,
+  item_type_scroll_compost = 0x303,
+  item_type_scroll_gold = 0x304,
+  item_type_scroll_rare_chest = 0x305,
+  item_type_scroll_speed = 0x306,
+  item_type_scroll_rarity = 0x307,
+  item_type_scroll_rainbow = 0x308,
+  item_type_unique_bl_helm_nightvision = 0x309,
+  item_type_unique_bl_helm_spiked = 0x30A,
+  item_type_unique_bl_helm_accuracy = 0x30B,
+  item_type_unique_bl_chest_agility = 0x30C,
+  item_type_unique_bl_chest_block_magic = 0x30D,
+  item_type_unique_bl_chest_mad_rage = 0x30E,
+  item_type_unique_bl_chest_minion_power = 0x30F,
+  item_type_unique_bl_chest_choice = 0x310,
+  item_type_unique_bl_chest_defiance = 0x311,
+  item_type_unique_bl_chest_demon_slayer = 0x312,
+  item_type_unique_bl_chest_rainbow_cloth = 0x313,
+  item_type_unique_bl_legs_skill = 0x314,
+  item_type_unique_bl_legs_concrete = 0x315,
+  item_type_unique_bl_legs_nimble = 0x316,
+  item_type_unique_bl_legs_dodge_magic = 0x317,
+  item_type_unique_bl_legs_healing = 0x318,
+  item_type_unique_bl_boots_burning = 0x319,
+  item_type_unique_bl_boots_bounce = 0x31A,
+  item_type_unique_bl_boots_frenzy = 0x31B,
+  item_type_unique_bl_boots_shit_kickers = 0x31C,
+  item_type_unique_bl_boots_haste = 0x31D,
+  item_type_unique_bl_endless_platform = 0x322,
+  item_type_unique_bl_id_book = 0x323,
+  item_type_scroll_to_shared_town = 0x324,
+  item_type_ring_bl_teleport = 0x325,
+  item_type_recipe_ring_bl_teleport = 0x326,
+  item_type_ring_bl_melee = 0x327,
+  item_type_recipe_ring_bl_melee = 0x328,
+  item_type_ring_bl_luck = 0x329,
+  item_type_recipe_ring_bl_luck = 0x32A,
+  item_type_ring_bl_shrine = 0x32B,
+  item_type_recipe_ring_bl_shrine = 0x32C,
+  item_type_runeword_speed_helm = 0x32D,
+  item_type_runeword_speed_chest = 0x32E,
+  item_type_runeword_speed_legs = 0x32F,
+  item_type_runeword_speed_boots = 0x330,
+  item_type_runeword_speed_ring = 0x331,
+  item_type_runeword_exec_helm = 0x332,
+  item_type_runeword_exec_chest = 0x333,
+  item_type_runeword_exec_legs = 0x334,
+  item_type_runeword_exec_boots = 0x335,
+  item_type_runeword_exec_ring = 0x336,
+  item_type_runeword_thorns_helm = 0x337,
+  item_type_runeword_thorns_chest = 0x338,
+  item_type_runeword_thorns_legs = 0x339,
+  item_type_runeword_thorns_boots = 0x33A,
+  item_type_runeword_thorns_ring = 0x33B,
+  item_type_runeword_brawl_helm = 0x33C,
+  item_type_runeword_brawl_chest = 0x33D,
+  item_type_runeword_brawl_legs = 0x33E,
+  item_type_runeword_brawl_boots = 0x33F,
+  item_type_runeword_brawl_ring = 0x340,
+  item_type_runeword_hps_helm = 0x341,
+  item_type_runeword_hps_chest = 0x342,
+  item_type_runeword_hps_legs = 0x343,
+  item_type_runeword_hps_boots = 0x344,
+  item_type_runeword_hps_ring = 0x345,
+  item_type_ring_bl_combination = 0x346,
+  item_type_runeword_ring_bl_combination = 0x347,
+  item_type_runeword_bl_bard = 0x348,
+  item_type_runeword_bl_cleric = 0x349,
+  item_type_runeword_bl_enchanter = 0x34A,
+  item_type_runeword_bl_necromancer = 0x34B,
+  item_type_runeword_bl_paladin = 0x34C,
+  item_type_runeword_bl_rogue = 0x34D,
+  item_type_runeword_bl_warrior = 0x34E,
+  item_type_runeword_bl_wizard = 0x34F,
+  item_type_sword_bl_bard_rune = 0x350,
+  item_type_wand_bl_cleric_rune = 0x351,
+  item_type_mace_shield_bl_cleric_rune = 0x352,
+  item_type_wand_bl_enchanter_rune = 0x353,
+  item_type_wand_bl_necromancer_rune = 0x354,
+  item_type_2h_sword_bl_paladin_rune = 0x355,
+  item_type_2h_mace_bl_paladin_rune = 0x356,
+  item_type_dual_dagger_bl_rogue = 0x357,
+  item_type_sword_shield_bl_warrior_rune = 0x358,
+  item_type_dual_sword_bl_warrior_rune = 0x359,
+  item_type_wand_bl_wizard_rune = 0x35A,
+  item_type_badlands_z1_dirt_room = 0x35B,
+  item_type_badlands_z2_dirt_room = 0x35C,
+  item_type_badlands_putrid_brick = 0x35D,
+  item_type_badlands_skull_block = 0x35E,
+  item_type_badlands_blood_dirt = 0x35F,
+  item_type_badlands_flesh_dirt = 0x360,
+  item_type_badlands_basic_red = 0x361,
+  item_type_badlands_dark_red = 0x362,
+  item_type_badlands_pink = 0x363,
+  item_type_badlands_sand_brick = 0x364,
+  item_type_badlands_cactus_block = 0x365,
+  item_type_rune_badlands = 0x366,
+  item_type_ambient_pug = 0x367,
+  item_type_beehive_recipe = 0x368,
+  item_type_halloween_red_button = 0x369,
+  item_type_ring_halloween_mythical = 0x36A,
+  item_type_halloween_mythical_brew = 0x36B,
+  item_type_ambient_plumpkin = 0x36C,
+  item_type_ambient_oreo = 0x36D,
+  item_type_ambient_kuku = 0x36E,
+  item_type_outfit_gordo = 0x36F,
+  item_type_outfit_aero = 0x370,
+  item_type_outfit_diablo = 0x371,
+  item_type_outfit_wanderer = 0x372,
+  item_type_outfit_guardian = 0x373,
+  item_type_outfit_sniper = 0x374,
+  item_type_outfit_galactus = 0x375,
+  item_type_outfit_scarlet_witch = 0x376,
+  item_type_outfit_hulk = 0x377,
+  item_type_harvest_maize = 0x378,
+  item_type_maize_seeds = 0x379,
+  item_type_dungeon_large_pickaxe = 0x37A,
+  item_type_scroll_map_small = 0x37B,
+  item_type_cupcake = 0x37C,
+  item_type_recipe_cupcake = 0x37D,
+  item_type_can_of_beans = 0x37E,
+  item_type_recipe_can_of_beans_pack = 0x37F,
+  item_type_lunch_bag_cow = 0x380,
+  item_type_apple_crisp_cow = 0x381,
+  item_type_scotch_nog_cow = 0x382,
+  item_type_cow_blood_cow = 0x383,
+  item_type_salt_shaker_cow = 0x384,
+  item_type_peanuts = 0x385,
+  item_type_peanut_butter = 0x386,
+  item_type_recipe_peanut_butter = 0x387,
+  item_type_pb_j = 0x388,
+  item_type_recipe_pb_j = 0x389,
+  item_type_hat_gentleman_cow = 0x38A,
+  item_type_ancient_hellgate_cow = 0x38B,
+  item_type_ancient_lute_of_loot_cow = 0x38C,
+  item_type_ancient_electric_cow = 0x38D,
+  item_type_ancient_anti_touching_cow = 0x38E,
+  item_type_ancient_swift_death_cow = 0x38F,
+  item_type_ancient_rexicography_cow = 0x390,
+  item_type_ancient_manipulator_cow = 0x391,
+  item_type_ancient_abra_skull_cow = 0x392,
+  item_type_ancient_healthconnector_cow = 0x393,
+  item_type_ancient_kitty_embig_cow = 0x394,
+  item_type_ancient_soule_rage_cow = 0x395,
+  item_type_ancient_wizard_med_cow = 0x396,
+  item_type_ancient_cowbell_cow = 0x397,
+  item_type_ancient_squirrel_cow = 0x398,
+  item_type_ancient_frag_twilight_cow = 0x399,
+  item_type_ancient_chrathic_idol_cow = 0x39A,
+  item_type_scroll_time_space_cow = 0x39B,
+  item_type_rune_cow = 0x39C,
+  item_type_ring_cow_oath_band = 0x39D,
+  item_type_runeword_ring_cow_oath_band = 0x39E,
+  item_type_cabbage_helm_cow = 0x39F,
+  item_type_cabbage_breastplate_cow = 0x3A0,
+  item_type_cabbage_leggings_cow = 0x3A1,
+  item_type_cabbage_boots_cow = 0x3A2,
+  item_type_cabbage_ring_cow = 0x3A3,
+  item_type_runeword_cabbage_helm_cow = 0x3A4,
+  item_type_runeword_cabbage_chest_cow = 0x3A5,
+  item_type_runeword_cabbage_legs_cow = 0x3A6,
+  item_type_runeword_cabbage_boots_cow = 0x3A7,
+  item_type_runeword_cabbage_ring_cow = 0x3A8,
+  item_type_ambient_sunday_cabbage = 0x3A9,
+  item_type_ambient_dastardly_duck_cow = 0x3AA,
+  item_type_ambient_demon_duck_cow = 0x3AB,
+  item_type_ambient_goose_cow = 0x3AC,
+  item_type_homestone_upgrade1 = 0x3AD,
+  item_type_homestone_upgrade2 = 0x3AE,
+  item_type_homestone_upgrade3 = 0x3AF,
+  item_type_homestone_upgrade4 = 0x3B0,
+  item_type_unique_cow_helm_kilner = 0x3B1,
+  item_type_unique_cow_helm_higgins = 0x3B2,
+  item_type_unique_cow_helm_druidsfez = 0x3B3,
+  item_type_unique_cow_helm_sleepy = 0x3B4,
+  item_type_unique_cow_helm_beef = 0x3B5,
+  item_type_unique_cow_helm_longxi_glue = 0x3B6,
+  item_type_unique_cow_chest_falling_leaf = 0x3B7,
+  item_type_unique_cow_chest_mollys = 0x3B8,
+  item_type_unique_cow_chest_muscle = 0x3B9,
+  item_type_unique_cow_chest_critankerous = 0x3BA,
+  item_type_unique_cow_chest_deckard_shirt = 0x3BB,
+  item_type_unique_cow_legs_moderns = 0x3BC,
+  item_type_unique_cow_legs_truck_tub = 0x3BD,
+  item_type_unique_cow_legs_owl_towl = 0x3BE,
+  item_type_unique_cow_legs_cod = 0x3BF,
+  item_type_unique_cow_legs_wood = 0x3C0,
+  item_type_unique_cow_boots_loafs = 0x3C1,
+  item_type_unique_cow_boots_bbwolf = 0x3C2,
+  item_type_unique_cow_boots_7_kitties = 0x3C3,
+  item_type_unique_cow_boots_bwana = 0x3C4,
+  item_type_unique_cow_boots_lead = 0x3C5,
+  item_type_loot_set_cow_a_helm = 0x3C6,
+  item_type_loot_set_cow_a_breastplate = 0x3C7,
+  item_type_loot_set_cow_leg_armor = 0x3C8,
+  item_type_loot_set_cow_boots = 0x3C9,
+  item_type_black_cloak_cow = 0x3CA,
+  item_type_purple_cloak_cow = 0x3CB,
+  item_type_potion_legendary_heal = 0x3CC,
+  item_type_bank_tab_7 = 0x3CD,
+  item_type_bank_tab_8 = 0x3CE,
+  item_type_bank_tab_9 = 0x3CF,
+  item_type_bank_tab_10 = 0x3D0,
+  item_type_scroll_map_krampus = 0x3D1,
+  item_type_scroll_map_krampus_ult = 0x3D2,
+  item_type_krampus_eye = 0x3D3,
+  item_type_runeword_krampus_bard = 0x3D4,
+  item_type_runeword_krampus_cleric = 0x3D5,
+  item_type_runeword_krampus_enchanter = 0x3D6,
+  item_type_runeword_krampus_necro = 0x3D7,
+  item_type_runeword_krampus_paladin = 0x3D8,
+  item_type_runeword_krampus_rogue = 0x3D9,
+  item_type_runeword_krampus_warrior = 0x3DA,
+  item_type_runeword_krampus_wizard = 0x3DB,
+  item_type_runeword_krampus_map = 0x3DC,
+  item_type_bar_crystal_ancient = 0x3DD,
+  item_type_tri_crystal_ancient = 0x3DE,
+  item_type_square_crystal_ancient = 0x3DF,
+  item_type_diamond_crystal_ancient = 0x3E0,
+  item_type_octagon_crystal_ancient = 0x3E1,
+  item_type_runeword_krampus_ult_map = 0x3E2,
+  item_type_xmas_cloak_green = 0x3E3,
+  item_type_outfit_snowperson = 0x3E4,
+  item_type_outfit_polar_bear = 0x3E5,
+  item_type_hat_santa_purple = 0x3E6,
+  item_type_scroll_map_samhain = 0x3E7,
+  item_type_scroll_map_samhain_ult = 0x3E8,
+  item_type_harvest_dirt_block = 0x3E9,
+  item_type_harvest_back_block = 0x3EA,
+  item_type_samhain_head = 0x3EB,
+  item_type_runeword_samhain_map = 0x3EC,
+  item_type_runeword_samhain_ult_map = 0x3ED,
+  item_type_runeword_hafermann_bard = 0x3EE,
+  item_type_runeword_hafermann_cleric = 0x3EF,
+  item_type_runeword_hafermann_enchanter = 0x3F0,
+  item_type_runeword_hafermann_necro = 0x3F1,
+  item_type_runeword_hafermann_paladin = 0x3F2,
+  item_type_runeword_hafermann_rogue = 0x3F3,
+  item_type_runeword_hafermann_warrior = 0x3F4,
+  item_type_runeword_hafermann_wizard = 0x3F5,
+  item_type_rune_halloween = 0x3F6,
+  item_type_scroll_map_hafermann = 0x3F7,
+  item_type_scroll_map_hafermann_ult = 0x3F8,
+  item_type_hafermann_hat = 0x3F9,
+  item_type_maize_bundle = 0x3FA,
+  item_type_maize_twine = 0x3FB,
+  item_type_rune_harvest = 0x3FC,
+  item_type_heroic_emblem = 0x3FD,
+  item_type_snowflake_currency = 0x3FE,
+  item_type_scroll_leave_shared_town = 0x3FF,
+  num_item_type_rows = 0x400,
+};
+
+/* 184 */
+enum missile_type_id
+{
+  missile_type_magic_spark = 0x0,
+  missile_type_magic_missile = 0x1,
+  missile_type_physical_bolt = 0x2,
+  missile_type_magic_bolt = 0x3,
+  missile_type_fire_bolt = 0x4,
+  missile_type_cold_bolt = 0x5,
+  missile_type_lightning_bolt = 0x6,
+  missile_type_poison_bolt = 0x7,
+  missile_type_physical_beam = 0x8,
+  missile_type_magic_beam = 0x9,
+  missile_type_fire_beam = 0xA,
+  missile_type_cold_beam = 0xB,
+  missile_type_lightning_beam = 0xC,
+  missile_type_poison_beam = 0xD,
+  missile_type_physical_arc = 0xE,
+  missile_type_magic_arc = 0xF,
+  missile_type_fire_arc = 0x10,
+  missile_type_cold_arc = 0x11,
+  missile_type_lightning_arc = 0x12,
+  missile_type_poison_arc = 0x13,
+  missile_type_imp_surface_bolt = 0x14,
+  missile_type_imp_fire_bolt = 0x15,
+  missile_type_imp_cold_bolt = 0x16,
+  missile_type_imp_lightning_bolt = 0x17,
+  missile_type_zombie_puke = 0x18,
+  missile_type_eye_spider = 0x19,
+  missile_type_eye_bomb = 0x1A,
+  missile_type_orc_explode = 0x1B,
+  missile_type_beholder_beam = 0x1C,
+  missile_type_beholder_bolt = 0x1D,
+  missile_type_beholder_direct = 0x1E,
+  missile_type_gelatenous_bolt = 0x1F,
+  missile_type_ice_cube_arc = 0x20,
+  missile_type_ice_cube_spawn = 0x21,
+  missile_type_cthulhu_aoe_bolt = 0x22,
+  missile_type_fat_ghoul_beam = 0x23,
+  missile_type_heartboss_eye_bolt = 0x24,
+  missile_type_heartboss_eye_spider = 0x25,
+  missile_type_winged_imp_beam = 0x26,
+  missile_type_boss3_bolt = 0x27,
+  missile_type_boss3_aoe_ball = 0x28,
+  missile_type_wisp_spwan = 0x29,
+  missile_type_heartboss_eye_dig = 0x2A,
+  missile_type_boss3_direct = 0x2B,
+  missile_type_scream = 0x2C,
+  missile_type_boss4_spider = 0x2D,
+  missile_type_boss4_beam = 0x2E,
+  missile_type_melee_bolt = 0x2F,
+  missile_type_necro_soul = 0x30,
+  missile_type_boss5_circle_bolt = 0x31,
+  missile_type_boss5_pod_beam = 0x32,
+  missile_type_eye_gel = 0x33,
+  missile_type_monster_arrow = 0x34,
+  missile_type_jelly_spawn = 0x35,
+  missile_type_miniboss_bomb = 0x36,
+  missile_type_badlands_boss_beam = 0x37,
+  missile_type_enchanter_lightning_proc = 0x38,
+  missile_type_melee_wave = 0x39,
+  missile_type_melee_fire_bolt = 0x3A,
+  missile_type_melee_cold_bolt = 0x3B,
+  missile_type_melee_poison_bolt = 0x3C,
+  missile_type_melee_lightning_bolt = 0x3D,
+  missile_type_melee_magic_bolt = 0x3E,
+  num_missile_type_rows = 0x3F,
+};
+
+/* 185 */
+enum monster_type_id
+{
+  num_monster_type_rows = 0x51,
+};
+
+/* 186 */
+enum monster_sprite_id
+{
+  monster_sprite_zombie = 0x0,
+  monster_sprite_surface_imp = 0x1,
+  monster_sprite_beholder_eye = 0x2,
+  monster_sprite_spider_walls = 0x3,
+  monster_sprite_gatekeeper = 0x4,
+  monster_sprite_invader_boss = 0x5,
+  monster_sprite_invader_boss_z = 0x6,
+  monster_sprite_invader_orc = 0x7,
+  monster_sprite_invader_skeleton = 0x8,
+  monster_sprite_gel_cube = 0x9,
+  monster_sprite_wraith = 0xA,
+  monster_sprite_ice_imp = 0xB,
+  monster_sprite_fire_spider = 0xC,
+  monster_sprite_dark_zombie = 0xD,
+  monster_sprite_skeleton = 0xE,
+  monster_sprite_fire_imp = 0xF,
+  monster_sprite_orc = 0x10,
+  monster_sprite_beholder = 0x11,
+  monster_sprite_ice_cube = 0x12,
+  monster_sprite_ice_cube_small = 0x13,
+  monster_sprite_cthulhu = 0x14,
+  monster_sprite_shadow = 0x15,
+  monster_sprite_fat_ghoul = 0x16,
+  monster_sprite_boss_heart = 0x17,
+  monster_sprite_boss_eye = 0x18,
+  monster_sprite_boss_spider = 0x19,
+  monster_sprite_winged_imp = 0x1A,
+  monster_sprite_bat = 0x1B,
+  monster_sprite_chewie = 0x1C,
+  monster_sprite_boss3 = 0x1D,
+  monster_sprite_wisp = 0x1E,
+  monster_sprite_mini_wisp = 0x1F,
+  monster_sprite_toxic_zombie = 0x20,
+  monster_sprite_thin_eye = 0x21,
+  monster_sprite_boss4 = 0x22,
+  monster_sprite_boss4_eye = 0x23,
+  monster_sprite_boss4_spider = 0x24,
+  monster_sprite_imp_rider = 0x25,
+  monster_sprite_imp_rider_solo = 0x26,
+  monster_sprite_skeleton_elite = 0x27,
+  monster_sprite_skeleton_mini = 0x28,
+  monster_sprite_boss5 = 0x29,
+  monster_sprite_boss5_eye = 0x2A,
+  monster_sprite_boss5_beampod = 0x2B,
+  monster_sprite_halloween = 0x2C,
+  monster_sprite_xmas_spirit = 0x2D,
+  monster_sprite_necro_pet = 0x2E,
+  monster_sprite_violet_eye = 0x2F,
+  monster_sprite_rat = 0x30,
+  monster_sprite_familiar = 0x31,
+  monster_sprite_phoenix = 0x32,
+  monster_sprite_octopus = 0x33,
+  monster_sprite_dig_worm = 0x34,
+  monster_sprite_skeleton_ogre_dw = 0x35,
+  monster_sprite_gel_cube_orange = 0x36,
+  monster_sprite_skeleton_ogre_arch = 0x37,
+  monster_sprite_zombie_ogre = 0x38,
+  monster_sprite_lobster_imp = 0x39,
+  monster_sprite_fire_demon = 0x3A,
+  monster_sprite_badlands_eye = 0x3B,
+  monster_sprite_revenant = 0x3C,
+  monster_sprite_jelly_large = 0x3D,
+  monster_sprite_megademon = 0x3E,
+  monster_sprite_jelly_medium = 0x3F,
+  monster_sprite_badlands_boss = 0x40,
+  monster_sprite_poison_demon = 0x41,
+  monster_sprite_krampus = 0x42,
+  monster_sprite_krampus_orb = 0x43,
+  monster_sprite_krampus_wisp = 0x44,
+  monster_sprite_blackwhite = 0x45,
+  monster_sprite_hafermann = 0x46,
+  monster_sprite_hafermann_imp = 0x47,
+  monster_sprite_hafermann_orb = 0x48,
+  num_monster_sprite_rows = 0x49,
+};
+
+/* 187 */
+enum object_type_id
+{
+  object_type_torch = 0x0,
+  object_type_ground_torch = 0x1,
+  object_type_wall_left_torch = 0x2,
+  object_type_wall_right_torch = 0x3,
+  object_type_town_torch = 0x4,
+  object_type_campfire = 0x5,
+  object_type_rock_1 = 0x6,
+  object_type_rock_2 = 0x7,
+  object_type_rock_3 = 0x8,
+  object_type_sapling = 0x9,
+  object_type_small_tree_1 = 0xA,
+  object_type_medium_tree_1 = 0xB,
+  object_type_cut_med_tree_top_1 = 0xC,
+  object_type_cut_med_tree_base_1 = 0xD,
+  object_type_tree_1 = 0xE,
+  object_type_cut_tree_top_1 = 0xF,
+  object_type_cut_tree_base_1 = 0x10,
+  object_type_unused_sapling = 0x11,
+  object_type_small_tree_2 = 0x12,
+  object_type_medium_tree_2 = 0x13,
+  object_type_cut_med_tree_top_2 = 0x14,
+  object_type_cut_med_tree_base_2 = 0x15,
+  object_type_tree_2 = 0x16,
+  object_type_cut_tree_top_2 = 0x17,
+  object_type_cut_tree_base_2 = 0x18,
+  object_type_bush_sapling = 0x19,
+  object_type_berry_bush = 0x1A,
+  object_type_empty_bush = 0x1B,
+  object_type_stick = 0x1C,
+  object_type_reed_grass = 0x1D,
+  object_type_forge = 0x1E,
+  object_type_anvil = 0x1F,
+  object_type_workbench = 0x20,
+  object_type_bed = 0x21,
+  object_type_homestone = 0x22,
+  object_type_platform = 0x23,
+  object_type_oven = 0x24,
+  object_type_blacksmith_anvil = 0x25,
+  object_type_blacksmith_forge = 0x26,
+  object_type_bank_light = 0x27,
+  object_type_bank_chandelier = 0x28,
+  object_type_wheat_sprout = 0x29,
+  object_type_wheat_grow = 0x2A,
+  object_type_wheat_harvest = 0x2B,
+  object_type_carrot_sprout = 0x2C,
+  object_type_ripe_carrot = 0x2D,
+  object_type_cabbage_sprout = 0x2E,
+  object_type_ripe_cabbage = 0x2F,
+  object_type_cauliflower_sprout = 0x30,
+  object_type_ripe_cauliflower = 0x31,
+  object_type_sunflower_sprout = 0x32,
+  object_type_sunflower_grow = 0x33,
+  object_type_sunflower_harvest = 0x34,
+  object_type_tomato_sprout = 0x35,
+  object_type_tomato_grow = 0x36,
+  object_type_tomato_flower = 0x37,
+  object_type_tomato_harvest = 0x38,
+  object_type_coffee_sprout = 0x39,
+  object_type_coffee_grow = 0x3A,
+  object_type_coffee_empty = 0x3B,
+  object_type_coffee_harvest = 0x3C,
+  object_type_potato_sprout = 0x3D,
+  object_type_ripe_potato = 0x3E,
+  object_type_corn_sprout = 0x3F,
+  object_type_corn_grow = 0x40,
+  object_type_corn_harvest = 0x41,
+  object_type_garlic_sprout = 0x42,
+  object_type_ripe_garlic = 0x43,
+  object_type_bean_sprout = 0x44,
+  object_type_bean_grow = 0x45,
+  object_type_bean_empty = 0x46,
+  object_type_bean_harvest = 0x47,
+  object_type_dirt_mound = 0x48,
+  object_type_fertile_mound = 0x49,
+  object_type_closed_chest = 0x4A,
+  object_type_opened_chest = 0x4B,
+  object_type_closed_rare_chest = 0x4C,
+  object_type_opened_rare_chest = 0x4D,
+  object_type_closed_door = 0x4E,
+  object_type_opened_door = 0x4F,
+  object_type_placed_closed_door = 0x50,
+  object_type_placed_opened_door = 0x51,
+  object_type_placed_closed_small_door = 0x52,
+  object_type_placed_opened_small_door = 0x53,
+  object_type_shrine = 0x54,
+  object_type_shrine_used = 0x55,
+  object_type_altar = 0x56,
+  object_type_altar_used = 0x57,
+  object_type_secret_portal_active = 0x58,
+  object_type_mushroom_brown = 0x59,
+  object_type_mushroom_yellow = 0x5A,
+  object_type_mushroom_green = 0x5B,
+  object_type_mushroom_purple = 0x5C,
+  object_type_mushroom_cyan = 0x5D,
+  object_type_mushroom_blue = 0x5E,
+  object_type_mushroom_white = 0x5F,
+  object_type_mushroom_black = 0x60,
+  object_type_crystal_vein_common = 0x61,
+  object_type_crystal_vein_uncommon = 0x62,
+  object_type_crystal_vein_rare = 0x63,
+  object_type_gold_pile_large = 0x64,
+  object_type_gold_pile_small = 0x65,
+  object_type_meat_spit = 0x66,
+  object_type_seed_bag = 0x67,
+  object_type_rune_stone_uncommon = 0x68,
+  object_type_rune_stone_common = 0x69,
+  object_type_runeword_chest_closed = 0x6A,
+  object_type_runeword_chest_opened = 0x6B,
+  object_type_mushroom_mound = 0x6C,
+  object_type_closed_vault = 0x6D,
+  object_type_opened_vault = 0x6E,
+  object_type_crystal_sprout = 0x6F,
+  object_type_crystal_grow = 0x70,
+  object_type_crystal_harvest_common = 0x71,
+  object_type_crystal_harvest_uncommon = 0x72,
+  object_type_crystal_harvest_rare = 0x73,
+  object_type_ore_sprout = 0x74,
+  object_type_ore_grow = 0x75,
+  object_type_ore_harvest_ochre = 0x76,
+  object_type_ore_harvest_nickel = 0x77,
+  object_type_ore_harvest_loadstone = 0x78,
+  object_type_ore_harvest_russet = 0x79,
+  object_type_money_tree_sprout = 0x7A,
+  object_type_money_tree_small = 0x7B,
+  object_type_money_tree_grown = 0x7C,
+  object_type_cut_money_tree_top = 0x7D,
+  object_type_cut_money_tree_base = 0x7E,
+  object_type_refrigerator = 0x7F,
+  object_type_composter = 0x80,
+  object_type_crystal_harvest_ultra = 0x81,
+  object_type_crystal_harvest_unique = 0x82,
+  object_type_twisted_tree = 0x83,
+  object_type_ore_harvest_bronzed = 0x84,
+  object_type_unique_light = 0x85,
+  object_type_ore_harvest_vibrant = 0x86,
+  object_type_chicken_nest = 0x87,
+  object_type_boss_door = 0x88,
+  object_type_pumpkin = 0x89,
+  object_type_carved_pumpkin = 0x8A,
+  object_type_jack_o_lantern = 0x8B,
+  object_type_halloween_door = 0x8C,
+  object_type_maize_sprout = 0x8D,
+  object_type_maize_grow = 0x8E,
+  object_type_maize_harvest = 0x8F,
+  object_type_harvest_door = 0x90,
+  object_type_maize_dead = 0x91,
+  object_type_christmas_tree = 0x92,
+  object_type_icicle_lights = 0x93,
+  object_type_christmas_lights = 0x94,
+  object_type_present_1 = 0x95,
+  object_type_present_2 = 0x96,
+  object_type_present_3 = 0x97,
+  object_type_greenhouse_mound = 0x98,
+  object_type_planterbox_mound = 0x99,
+  object_type_story_stand = 0x9A,
+  object_type_plaque_normal = 0x9B,
+  object_type_plaque_nightmare = 0x9C,
+  object_type_plaque_hell = 0x9D,
+  object_type_plaque_inferno = 0x9E,
+  object_type_ore_harvest_aqua = 0x9F,
+  object_type_ore_harvest_sunrise = 0xA0,
+  object_type_badlands_portal = 0xA1,
+  object_type_badlands_prickly_pear_bush = 0xA2,
+  object_type_badlands_empty_bush = 0xA3,
+  object_type_badlands_saguaro_1 = 0xA4,
+  object_type_badlands_saguaro_2 = 0xA5,
+  object_type_badlands_grass = 0xA6,
+  object_type_bookcase = 0xA7,
+  object_type_badlands_saguaro_3 = 0xA8,
+  object_type_mushroom_bl_red = 0xA9,
+  object_type_mushroom_bl_orange = 0xAA,
+  object_type_mushroom_bl_forest = 0xAB,
+  object_type_mushroom_bl_sage = 0xAC,
+  object_type_mushroom_bl_brown = 0xAD,
+  object_type_mushroom_bl_darkpink = 0xAE,
+  object_type_mushroom_bl_gray = 0xAF,
+  object_type_mushroom_bl_black = 0xB0,
+  object_type_badlands_demon_tree = 0xB1,
+  object_type_unique_platform = 0xB2,
+  object_type_dungeon_torch_red = 0xB3,
+  object_type_dungeon_torch_blue = 0xB4,
+  object_type_dungeon_torch_green = 0xB5,
+  object_type_dungeon_torch_purple = 0xB6,
+  num_object_type_rows = 0xB7,
+};
+
+/* 188 */
+enum quest_id
+{
+  quest_wand = 0x0,
+  quest_eat = 0x1,
+  quest_tools = 0x2,
+  quest_level_up = 0x3,
+  quest_instant_items = 0x4,
+  quest_forge = 0x5,
+  quest_farming = 0x6,
+  quest_survival = 0x7,
+  quest_gatekeeper = 0x8,
+  quest_homestone = 0x9,
+  quest_blueprint = 0xA,
+  quest_enter_dungeon = 0xB,
+  quest_crystal = 0xC,
+  quest_rune = 0xD,
+  quest_boss2 = 0xE,
+  quest_boss3 = 0xF,
+  quest_level_5 = 0x10,
+  quest_ancient_items = 0x11,
+  quest_level_10 = 0x12,
+  quest_level_15 = 0x13,
+  quest_level_20 = 0x14,
+  quest_sword = 0x15,
+  quest_dual = 0x16,
+  quest_boss4 = 0x17,
+  quest_two_weapons = 0x18,
+  quest_dungeon_wand = 0x19,
+  quest_dungeon_tools = 0x1A,
+  quest_dungeon_level_up = 0x1B,
+  quest_dungeon_instant_items = 0x1C,
+  quest_dungeon_ancient = 0x1D,
+  quest_dungeon_forge = 0x1E,
+  quest_dungeon_sword = 0x1F,
+  quest_dungeon_dual = 0x20,
+  quest_dungeon_two_weapons = 0x21,
+  quest_cooking = 0x22,
+  quest_harvest_cornucopia = 0x23,
+  quest_harvest_turkey_egg = 0x24,
+  quest_survival_seeds = 0x25,
+  quest_survival_meat = 0x26,
+  quest_survival_mushrooms = 0x27,
+  quest_boss5 = 0x28,
+  quest_nightmare = 0x29,
+  quest_hell = 0x2A,
+  quest_inferno = 0x2B,
+  quest_badlands_travel = 0x2C,
+  quest_badlands_boss = 0x2D,
+  quest_shared_town = 0x2E,
+  quest_level_50 = 0x2F,
+  quest_level_60 = 0x30,
+  quest_level_70 = 0x31,
+  quest_level_80 = 0x32,
+  quest_level_90 = 0x33,
+  quest_level_100 = 0x34,
+  quest_halloween = 0x35,
+  quest_blocks = 0x36,
+  quest_dungeon_blocks = 0x37,
+  num_quest_rows = 0x38,
+};
+
+/* 189 */
+enum story_id
+{
+  story_introduction = 0x0,
+  story_page_1 = 0x1,
+  story_page_2 = 0x2,
+  story_page_3 = 0x3,
+  story_page_4 = 0x4,
+  story_page_5 = 0x5,
+  story_page_6 = 0x6,
+  story_page_7 = 0x7,
+  story_page_8 = 0x8,
+  story_page_9 = 0x9,
+  story_page_10 = 0xA,
+  story_page_11 = 0xB,
+  story_page_12 = 0xC,
+  story_page_13 = 0xD,
+  num_story_rows = 0xE,
+};
+
+/* 190 */
+enum treasure_id
+{
+  treasure_surface = 0x0,
+  treasure_potions_0 = 0x1,
+  treasure_scrolls_0 = 0x2,
+  treasure_zone_0 = 0x3,
+  treasure_chest_0 = 0x4,
+  treasure_boss_0 = 0x5,
+  treasure_zone_1 = 0x6,
+  treasure_weapons = 0x7,
+  treasure_good_weapons = 0x8,
+  treasure_potions_1 = 0x9,
+  treasure_scrolls_1 = 0xA,
+  treasure_chest_1 = 0xB,
+  treasure_misc_1 = 0xC,
+  treasure_rare_1 = 0xD,
+  treasure_rings_1 = 0xE,
+  treasure_ancient_1 = 0xF,
+  treasure_boss_1 = 0x10,
+  treasure_zone_2 = 0x11,
+  treasure_chest_2 = 0x12,
+  treasure_misc_2 = 0x13,
+  treasure_potions_2 = 0x14,
+  treasure_scrolls_2 = 0x15,
+  treasure_rings_2 = 0x16,
+  treasure_zone_3 = 0x17,
+  treasure_chest_3 = 0x18,
+  treasure_misc_3 = 0x19,
+  treasure_potions_3 = 0x1A,
+  treasure_zone_4 = 0x1B,
+  treasure_chest_4 = 0x1C,
+  treasure_misc_4 = 0x1D,
+  treasure_potions_4 = 0x1E,
+  treasure_runes_1_2 = 0x1F,
+  treasure_common_runes_1_2 = 0x21,
+  treasure_common_runes_3_4 = 0x22,
+  treasure_uncommon_runes = 0x23,
+  treasure_rare_runes = 0x24,
+  treasure_very_rare_runes = 0x25,
+  treasure_extremely_rare_runes = 0x26,
+  treasure_never_seen_runes = 0x27,
+  treasure_rarest_runes = 0x28,
+  treasure_common_scrolls = 0x29,
+  treasure_uncommon_scrolls = 0x2A,
+  treasure_rare_scrolls = 0x2B,
+  treasure_common_rings = 0x2C,
+  treasure_uncommon_rings = 0x2D,
+  treasure_rare_rings = 0x2E,
+  treasure_zone_5 = 0x3F,
+  treasure_chest_5 = 0x40,
+  treasure_misc_5 = 0x41,
+  treasure_potions_5 = 0x42,
+  treasure_unused_ancient_uncommon = 0x44,
+  treasure_unused_ancient_common = 0x45,
+  treasure_rat = 0x47,
+  treasure_cosmetic_items = 0x48,
+  treasure_holiday = 0x49,
+  treasure_runeword_chest = 0x4A,
+  treasure_blboss_special_rune = 0x4B,
+  treasure_bl_scrolls = 0x4C,
+  treasure_bl_common_scrolls = 0x4D,
+  treasure_bl_uncommon_scrolls = 0x4E,
+  treasure_bl_rare_scrolls = 0x4F,
+  treasure_badlands = 0x50,
+  treasure_bl_chest = 0x51,
+  treasure_bl_rare = 0x52,
+  treasure_bl_misc = 0x53,
+  treasure_bl_rings = 0x54,
+  treasure_bl_common_rings = 0x55,
+  treasure_bl_uncommon_rings = 0x56,
+  treasure_bl_rare_rings = 0x57,
+  treasure_bl_cosmetic_items = 0x58,
+  treasure_krampus = 0x59,
+  treasure_krampus_runewords_1 = 0x5A,
+  treasure_krampus_runewords_2 = 0x5B,
+  treasure_ult_krampus = 0x5C,
+  treasure_ult_krampus_eye = 0x5D,
+  treasure_hafermann = 0x5E,
+  treasure_hafermann_runewords_1 = 0x5F,
+  treasure_hafermann_runewords_2 = 0x60,
+  treasure_ult_hafermann = 0x61,
+  treasure_ult_hafermann_hat = 0x62,
+  num_treasure_rows = 0x63,
+};
+
+/* 191 */
+enum runeword_id
+{
+  runeword_unique_bard_sword = 0x0,
+  runeword_unique_rogue_dual = 0x1,
+  runeword_unique_necro_scythe = 0x2,
+  runeword_unique_wizard_2_staff = 0x3,
+  runeword_holiday_helm = 0x4,
+  runeword_holiday_chest = 0x5,
+  runeword_holiday_legs = 0x6,
+  runeword_holiday_boots = 0x7,
+  runeword_defender = 0x8,
+  runeword_chromatic = 0x9,
+  runeword_fortuitous = 0xA,
+  runeword_savage = 0xB,
+  runeword_sacred = 0xC,
+  runeword_unique_music = 0xE,
+  runeword_unique_holy = 0xF,
+  runeword_unique_dark = 0x10,
+  runeword_unique_elements = 0x11,
+  runeword_unique_helm = 0x12,
+  runeword_unique_chest = 0x13,
+  runeword_unique_legs = 0x14,
+  runeword_unique_boots = 0x15,
+  runeword_unique_ring = 0x16,
+  runeword_cosmic_helm = 0x17,
+  runeword_cosmic_chest = 0x18,
+  runeword_cosmic_legs = 0x19,
+  runeword_cosmic_boots = 0x1A,
+  runeword_cosmic_ring = 0x1B,
+  runeword_weapon_crystal_slot = 0x1C,
+  runeword_speed_helm = 0x1D,
+  runeword_speed_breastplate = 0x1E,
+  runeword_speed_leggings = 0x1F,
+  runeword_speed_boots = 0x20,
+  runeword_speed_ring = 0x21,
+  runeword_exec_helm = 0x22,
+  runeword_exec_breastplate = 0x23,
+  runeword_exec_leggings = 0x24,
+  runeword_exec_boots = 0x25,
+  runeword_exec_ring = 0x26,
+  runeword_thorns_helm = 0x27,
+  runeword_thorns_breastplate = 0x28,
+  runeword_thorns_leggings = 0x29,
+  runeword_thorns_boots = 0x2A,
+  runeword_thorns_ring = 0x2B,
+  runeword_brawl_helm = 0x2C,
+  runeword_brawl_breastplate = 0x2D,
+  runeword_brawl_leggings = 0x2E,
+  runeword_brawl_boots = 0x2F,
+  runeword_brawl_ring = 0x30,
+  runeword_hps_helm = 0x31,
+  runeword_hps_breastplate = 0x32,
+  runeword_hps_leggings = 0x33,
+  runeword_hps_boots = 0x34,
+  runeword_hps_ring = 0x35,
+  runeword_ring_bl_combination = 0x36,
+  runeword_bard_runeword_weapon = 0x37,
+  runeword_cleric_runeword_weapon = 0x38,
+  runeword_enchanter_runeword_weapon = 0x39,
+  runeword_necromancer_runeword_weapon = 0x3A,
+  runeword_paladin_runeword_weapon = 0x3B,
+  runeword_rogue_runeword_weapon = 0x3C,
+  runeword_warrior_runeword_weapon = 0x3D,
+  runeword_wizard_runeword_weapon = 0x3E,
+  runeword_ring_cow_oath_band = 0x3F,
+  runeword_cabbage_helm = 0x40,
+  runeword_cabbage_chest = 0x41,
+  runeword_cabbage_legs = 0x42,
+  runeword_cabbage_boots = 0x43,
+  runeword_cabbage_ring = 0x44,
+  runeword_krampus_map = 0x45,
+  runeword_krampus_bard = 0x46,
+  runeword_krampus_cleric = 0x47,
+  runeword_krampus_enchanter = 0x48,
+  runeword_krampus_necro = 0x49,
+  runeword_krampus_paladin = 0x4A,
+  runeword_krampus_rogue = 0x4B,
+  runeword_krampus_warrior = 0x4C,
+  runeword_krampus_wizard = 0x4D,
+  runeword_krampus_ultra_map = 0x4E,
+  runeword_samhain_map = 0x4F,
+  runeword_samhain_ultra_map = 0x50,
+  runeword_hafermann_bard = 0x51,
+  runeword_hafermann_cleric = 0x52,
+  runeword_hafermann_enchanter = 0x53,
+  runeword_hafermann_necro = 0x54,
+  runeword_hafermann_paladin = 0x55,
+  runeword_hafermann_rogue = 0x56,
+  runeword_hafermann_warrior = 0x57,
+  runeword_hafermann_wizard = 0x58,
+  num_runeword_rows = 0x59,
+};
+
+/* 192 */
+enum recipe_id
+{
+  num_recipe_rows = 0x11C,
+};
+
+/* 193 */
+enum string_token_id
+{
+  string_token_game_title = 0x0,
+  string_token_game_server = 0x107A,
+  string_token_game_version = 0x1,
+  string_token_game_test_version = 0xCCA,
+  string_token_game_copyright = 0x2,
+  string_token_console_welcome = 0x3,
+  string_token_console_ready = 0x4,
+  string_token_console_prompt = 0x5,
+  string_token_console_error = 0x6,
+  string_token_console_error_param = 0x7,
+  string_token_beta_closed = 0x8,
+  string_token_beta_closed_thanks = 0x9,
+  string_token_account_upgrade = 0xF0C,
+  string_token_item_link_fatal = 0x1089,
+  string_token_mm_play = 0xA,
+  string_token_mm_coop = 0xF0B,
+  string_token_mm_news = 0xB,
+  string_token_mm_new_news = 0xC,
+  string_token_mm_community = 0xCA3,
+  string_token_mm_options = 0xD,
+  string_token_mm_exit = 0xE,
+  string_token_news_next = 0xF,
+  string_token_news_back = 0x10,
+  string_token_cs_new = 0x11,
+  string_token_cs_back = 0x12,
+  string_token_cs_title = 0x13,
+  string_token_cs_level = 0x14,
+  string_token_cs_dead = 0x15,
+  string_token_cs_game_style = 0x16,
+  string_token_cs_hardcore_error = 0x17,
+  string_token_cs_confirm = 0x744,
+  string_token_cs_version = 0x18,
+  string_token_cs_unusable = 0xFF1,
+  string_token_cs_player_1_taken = 0x10C1,
+  string_token_cs_test_copy = 0x108A,
+  string_token_ms_player_1 = 0xFC1,
+  string_token_ms_player_2 = 0xFC2,
+  string_token_ms_player_3 = 0xFC3,
+  string_token_ms_player_4 = 0xFC4,
+  string_token_ms_control_kbm = 0xFC5,
+  string_token_ms_control_controller = 0xFC6,
+  string_token_ms_input_type = 0xFC7,
+  string_token_ms_player_1_info_1 = 0xFEC,
+  string_token_ms_player_1_info_2 = 0xFED,
+  string_token_ms_player_start = 0xFEE,
+  string_token_multi_menu_player_1 = 0xFEF,
+  string_token_multi_menu_player_2 = 0xFF0,
+  string_token_multi_menu_next_player = 0x10C2,
+  string_token_cc_character_race = 0xCED,
+  string_token_cc_race_human = 0xCEE,
+  string_token_cc_race_human_desc = 0xCEF,
+  string_token_cc_race_ogre = 0xCF0,
+  string_token_cc_race_ogre_desc = 0xCF1,
+  string_token_cc_hair = 0x19,
+  string_token_cc_hair_color = 0x1A,
+  string_token_cc_head = 0x1B,
+  string_token_cc_eye_color = 0x1C,
+  string_token_cc_skin_color = 0x1D,
+  string_token_cc_head_overlay = 0x1E,
+  string_token_cc_sex = 0x1F,
+  string_token_cc_character_class = 0x20,
+  string_token_cc_random = 0x21,
+  string_token_cc_name = 0x22,
+  string_token_cc_name_error = 0x23,
+  string_token_cc_okay = 0x24,
+  string_token_cc_back = 0x25,
+  string_token_cc_game_style = 0x26,
+  string_token_cc_style_survival = 0x27,
+  string_token_cc_style_survival_desc = 0x28,
+  string_token_cc_style_creative = 0x29,
+  string_token_cc_style_creative_desc = 0x2A,
+  string_token_cc_style_hardcore_survival = 0x2B,
+  string_token_cc_style_hardcore_survival_desc = 0x2C,
+  string_token_cc_style_hardcore_survival_warning = 0x507,
+  string_token_cc_style_descent = 0x6D9,
+  string_token_cc_style_descent_desc = 0x6DA,
+  string_token_cc_style_hardcore_descent = 0x6DF,
+  string_token_cc_style_hardcore_descent_desc = 0x6E0,
+  string_token_cc_style_hardcore_descent_warning = 0x6E1,
+  string_token_cc_combat_style = 0x636,
+  string_token_cc_melee_none = 0x632,
+  string_token_cc_melee_sas = 0x633,
+  string_token_cc_melee_dual = 0x634,
+  string_token_cc_melee_any = 0x635,
+  string_token_cc_melee_mace = 0x63A,
+  string_token_cc_melee_two_handed = 0x78F,
+  string_token_cc_set_look = 0xCF4,
+  string_token_cc_set_name = 0xCF5,
+  string_token_cc_set_style = 0xCF6,
+  string_token_cc_set_town = 0xD26,
+  string_token_cc_town = 0xD1E,
+  string_token_cc_town_new = 0xD1F,
+  string_token_cc_town_use = 0xD20,
+  string_token_options_title = 0x2D,
+  string_token_options_mm_gfx = 0x6E2,
+  string_token_options_mm_sound = 0x6E3,
+  string_token_options_mm_gameplay = 0x6E4,
+  string_token_options_mm_controls = 0x6E5,
+  string_token_options_mm_layout = 0xEF4,
+  string_token_options_gfx_title = 0x6E6,
+  string_token_options_gfx_window = 0x6E7,
+  string_token_options_gfx_win_fullscreen = 0x2E,
+  string_token_options_gfx_win_windowed = 0x2F,
+  string_token_options_gfx_win_borderless = 0x30,
+  string_token_options_gfx_resolution = 0x31,
+  string_token_options_gfx_res_by = 0x32,
+  string_token_options_gfx_camera_distance = 0x7A4,
+  string_token_options_gfx_camera_hint = 0x7A5,
+  string_token_options_gfx_gamma = 0x34,
+  string_token_options_gfx_vsync = 0x6F2,
+  string_token_options_gfx_quality_lighting = 0x38,
+  string_token_options_gfx_lighting_best = 0x100B,
+  string_token_options_gfx_lighting_good = 0x100C,
+  string_token_options_gfx_lighting_fast = 0x100D,
+  string_token_options_gfx_weather = 0x6E8,
+  string_token_options_gfx_bloom = 0x106D,
+  string_token_options_gfx_video_next_run = 0x33,
+  string_token_options_snd_title = 0x6E9,
+  string_token_options_snd_music_volume = 0x35,
+  string_token_options_snd_combat_volume = 0x36,
+  string_token_options_snd_sound_volume = 0x37,
+  string_token_options_gm_title = 0x6EA,
+  string_token_options_gm_screen_shake = 0x39,
+  string_token_options_gm_show_helm = 0x3A,
+  string_token_options_gm_auto_jump = 0x3B,
+  string_token_options_gm_hp_bar = 0x6EB,
+  string_token_options_gm_map_mode = 0x6EC,
+  string_token_options_gm_map_three = 0x6ED,
+  string_token_options_gm_map_overlay = 0x6EE,
+  string_token_options_gm_map_center = 0x6EF,
+  string_token_options_gm_map_lowerleft = 0x6F0,
+  string_token_options_gm_map_transparency = 0xCC2,
+  string_token_options_gm_item_names = 0x6F1,
+  string_token_options_gm_pickup_seeds = 0x83B,
+  string_token_options_gm_directional_dig = 0xCC1,
+  string_token_ui_directional_dig_on = 0xCC8,
+  string_token_ui_directional_dig_off = 0xCC9,
+  string_token_options_gm_cloud_saves = 0xEF6,
+  string_token_options_gm_damage_numbers = 0xF03,
+  string_token_ui_damage_numbers_off = 0xF04,
+  string_token_ui_damage_numbers_small = 0xF05,
+  string_token_ui_damage_numbers_normal = 0xF06,
+  string_token_options_input_title = 0x7B1,
+  string_token_options_input_controller = 0x7B2,
+  string_token_options_key_move_title = 0x6F8,
+  string_token_options_key_move_left = 0x6F9,
+  string_token_options_key_move_right = 0x6FA,
+  string_token_options_key_move_crouch = 0x6FB,
+  string_token_options_key_move_jump = 0x6FC,
+  string_token_options_key_interact = 0x6FD,
+  string_token_options_key_recharge = 0x6FE,
+  string_token_options_key_sleep = 0x6FF,
+  string_token_options_key_shift = 0x700,
+  string_token_options_key_hotbar_title = 0x701,
+  string_token_options_key_hotbar_1 = 0x702,
+  string_token_options_key_hotbar_2 = 0x703,
+  string_token_options_key_hotbar_3 = 0x704,
+  string_token_options_key_hotbar_4 = 0x705,
+  string_token_options_key_hotbar_5 = 0x706,
+  string_token_options_key_hotbar_6 = 0x707,
+  string_token_options_key_hotbar_7 = 0x708,
+  string_token_options_key_hotbar_8 = 0x709,
+  string_token_options_key_hotbar_9 = 0x70A,
+  string_token_options_key_hotbar_10 = 0x70B,
+  string_token_options_key_hotbar_11 = 0x70C,
+  string_token_options_key_hotbar_12 = 0x70D,
+  string_token_options_key_ui_title = 0x70E,
+  string_token_options_key_minimap = 0x70F,
+  string_token_options_key_minimap_up = 0x710,
+  string_token_options_key_minimap_dn = 0x711,
+  string_token_options_key_inventory = 0x712,
+  string_token_options_key_crafting = 0x713,
+  string_token_options_key_survival = 0x714,
+  string_token_options_key_story_log = 0xC9E,
+  string_token_options_key_achievement_panel = 0xEEF,
+  string_token_options_key_directional_dig = 0xCC7,
+  string_token_options_key_quest_log = 0xEF7,
+  string_token_options_key_recall = 0x715,
+  string_token_options_key_enter = 0x716,
+  string_token_options_key_escape = 0x717,
+  string_token_options_key_unknown = 0x718,
+  string_token_options_key_press = 0x719,
+  string_token_options_key_press_help = 0x71A,
+  string_token_options_key_needed = 0x71B,
+  string_token_options_key_need_error = 0x71C,
+  string_token_options_on = 0x3C,
+  string_token_options_off = 0x3D,
+  string_token_options_back = 0x3E,
+  string_token_options_cancel = 0x3F,
+  string_token_options_save = 0x40,
+  string_token_community_discord = 0xCA4,
+  string_token_community_twitter = 0xCA5,
+  string_token_community_wiki = 0xCA6,
+  string_token_community_reddit = 0xCA7,
+  string_token_pausemenu_paused = 0x41,
+  string_token_pausemenu_resume = 0x42,
+  string_token_pausemenu_save = 0x43,
+  string_token_pausemenu_mainmenu = 0x44,
+  string_token_pausemenu_quit = 0x45,
+  string_token_deadmenu_title = 0x46,
+  string_token_deadmenu_subtitle = 0x47,
+  string_token_deadmenu_restart = 0x48,
+  string_token_deadmenu_random_restart = 0x510,
+  string_token_deadmenu_quit = 0x49,
+  string_token_deadmenu_hardcore_title = 0x4A,
+  string_token_deadmenu_hardcore = 0x4B,
+  string_token_townmenu_title = 0xDF1,
+  string_token_townmenu_restart = 0xDF2,
+  string_token_utilitymenu_inventory = 0xE8A,
+  string_token_utilitymenu_crafting = 0xE8B,
+  string_token_utilitymenu_quest = 0xE8C,
+  string_token_utilitymenu_new_quest = 0xE8D,
+  string_token_utilitymenu_levelup = 0xE8E,
+  string_token_utilitymenu_survival = 0xE8F,
+  string_token_utilitymenu_storylog = 0xE90,
+  string_token_utilitymenu_achievement = 0xEF2,
+  string_token_utilitymenu_map = 0xEC1,
+  string_token_utilitymenu_recall = 0xE91,
+  string_token_utilitymenu_save_game = 0xE93,
+  string_token_error_window_create = 0x4C,
+  string_token_error_d3d_obj_fail = 0x4D,
+  string_token_error_d3d_low_res = 0x4E,
+  string_token_error_d3d_device_fail = 0x4F,
+  string_token_error_d3d_shaders = 0x50,
+  string_token_error_d3d_vram = 0x51,
+  string_token_error_fmod_create = 0x52,
+  string_token_error_fmod_version = 0x53,
+  string_token_error_fmod_init = 0x54,
+  string_token_error_debug_log = 0x55,
+  string_token_error_bad_load = 0x56,
+  string_token_error_bad_save = 0x57,
+  string_token_error_steam_restart = 0x58,
+  string_token_error_steam_drm = 0x59,
+  string_token_error_steam_api = 0x5A,
+  string_token_error_steam_logged_in = 0x5B,
+  string_token_steam_status_active = 0x89F,
+  string_token_steam_status_inactive = 0x8A0,
+  string_token_intro_space = 0xC98,
+  string_token_creep_what_is_that = 0x5C,
+  string_token_creep_bad_feeling_1 = 0x5D,
+  string_token_creep_bad_feeling_2 = 0x5E,
+  string_token_creep_bad_feeling_3 = 0x5F,
+  string_token_creep_bad_feeling_4 = 0x60,
+  string_token_surface_invasion = 0x61,
+  string_token_invasion_taunt_1 = 0x62,
+  string_token_invasion_taunt_2 = 0x63,
+  string_token_invasion_taunt_3 = 0x64,
+  string_token_invasion_taunt_4 = 0x65,
+  string_token_surface_invasion_end = 0x66,
+  string_token_invader_count = 0x67,
+  string_token_ui_day = 0x6AD,
+  string_token_season_spring = 0x6A6,
+  string_token_season_summer = 0x6A7,
+  string_token_season_fall = 0x6A8,
+  string_token_season_winter = 0x6A9,
+  string_token_season_first_day = 0x6AA,
+  string_token_season_late = 0x6AB,
+  string_token_season_end = 0x6AC,
+  string_token_season_day = 0x6AE,
+  string_token_not_enough_mana = 0x68,
+  string_token_ui_press_r_to_recharge = 0x69,
+  string_token_too_hungry_to_rest = 0x6A,
+  string_token_all_rested = 0x6B,
+  string_token_cant_rest = 0x6C,
+  string_token_all_full = 0x6D,
+  string_token_debuff_hungry = 0x655,
+  string_token_no_quaff = 0x6E,
+  string_token_no_read = 0x6F,
+  string_token_auto_pickup = 0x70,
+  string_token_pickup_ok = 0x71,
+  string_token_shift_pickup_ok = 0x72,
+  string_token_pickup_ok_controller = 0x7AD,
+  string_token_shift_pickup_ok_controller = 0x7AE,
+  string_token_pickup_out_of_range = 0x73,
+  string_token_chop_ok = 0x74,
+  string_token_chop_out_of_range = 0x75,
+  string_token_chop_ok_controller = 0xE9C,
+  string_token_operate_ok = 0x76,
+  string_token_operate_ok_controller = 0xE95,
+  string_token_operate_out_of_range = 0x77,
+  string_token_harvest_rmb = 0x78,
+  string_token_harvest_controller = 0x7AF,
+  string_token_harvest_operate = 0x79,
+  string_token_harvest_controller_operate = 0xE94,
+  string_token_crystal_rmb = 0x666,
+  string_token_crystal_controller = 0x7B0,
+  string_token_crystal_operate = 0x667,
+  string_token_hoe_till = 0x7A,
+  string_token_ui_crops_ready = 0x7A6,
+  string_token_open_ok = 0x7B,
+  string_token_open_ok_controller = 0xE9D,
+  string_token_close_ok = 0x7C,
+  string_token_close_ok_controller = 0xE9E,
+  string_token_door_blocked = 0x7D,
+  string_token_chest_appear = 0x7E,
+  string_token_shrine_glow = 0x7F,
+  string_token_shrine_bad_glow = 0x80,
+  string_token_shrine_buff_exp = 0x81,
+  string_token_shrine_buff_intelligence = 0x82,
+  string_token_shrine_buff_blessing = 0x83,
+  string_token_shrine_buff_magic_find = 0x84,
+  string_token_shrine_buff_dexterity = 0x637,
+  string_token_item_rmb_eat = 0x85,
+  string_token_item_rmb_quaff = 0x86,
+  string_token_item_rmb_read = 0x87,
+  string_token_item_rmb_operate = 0x88,
+  string_token_item_controller_eat = 0x7B3,
+  string_token_item_controller_quaff = 0x7B4,
+  string_token_item_controller_read = 0x7B5,
+  string_token_item_controller_operate = 0x7B6,
+  string_token_item_place_error = 0x89,
+  string_token_item_read_operate = 0x668,
+  string_token_ancient_place_error = 0x589,
+  string_token_not_enough_space = 0x8A,
+  string_token_not_enough_bank_space = 0x8B,
+  string_token_not_enough_vault_space = 0xD30,
+  string_token_not_enough_currency = 0x8C,
+  string_token_items_dont_stack = 0x8D,
+  string_token_items_stack_no_fit = 0x8E,
+  string_token_items_stack_diff_slevel = 0x6BD,
+  string_token_item_operate_plant = 0x8F,
+  string_token_item_operate_plant_controller = 0xE9A,
+  string_token_item_operate_fertilizer = 0x90,
+  string_token_item_inv_controller_pickup = 0xEA9,
+  string_token_item_inv_controller_split_stack = 0xEAA,
+  string_token_item_inv_controller_buy = 0xEC0,
+  string_token_ui_inv_change_buttons = 0xEC3,
+  string_token_ui_ancient_bar = 0x58A,
+  string_token_item_slot_hands = 0x91,
+  string_token_item_slot_legs = 0x92,
+  string_token_item_slot_head = 0x93,
+  string_token_item_slot_chest = 0x94,
+  string_token_item_slot_ring = 0x95,
+  string_token_item_slot_feet = 0x96,
+  string_token_item_slot_hat = 0x97,
+  string_token_item_slot_ring2 = 0x98,
+  string_token_item_slot_pet = 0x513,
+  string_token_item_slot_class = 0x514,
+  string_token_item_slot_back = 0x739,
+  string_token_item_slot_outfit = 0xE5F,
+  string_token_item_level_req = 0xD27,
+  string_token_item_level_req_armor_error = 0xD28,
+  string_token_item_level_req_error = 0xD29,
+  string_token_item_cant_use_error = 0xD2A,
+  string_token_ui_trash = 0x99,
+  string_token_ui_close = 0x9A,
+  string_token_ui_controller_close = 0xE9B,
+  string_token_ui_stats_up = 0x515,
+  string_token_ui_stats_down = 0x516,
+  string_token_closet_unlock = 0x1055,
+  string_token_closet_hats = 0x1056,
+  string_token_closet_backs = 0x1057,
+  string_token_closet_pets = 0x1058,
+  string_token_closet_outfits = 0x1059,
+  string_token_closet_item_locked = 0x105E,
+  string_token_ui_inv_regular = 0x105A,
+  string_token_ui_inv_block = 0x105B,
+  string_token_ui_to_block = 0x105C,
+  string_token_ui_invmode_btn = 0x105F,
+  string_token_ui_invmode_block_lmb = 0x1060,
+  string_token_ui_invmode_block_shift_lmb = 0x1061,
+  string_token_ui_invmode_block_rmb = 0x1062,
+  string_token_ui_invmode_block_controller_a = 0x1063,
+  string_token_ui_invmode_block_shift_controller_a = 0x1064,
+  string_token_ui_invmode_block_controller_b = 0x1065,
+  string_token_ui_to_world = 0x10C9,
+  string_token_monster_level_difference = 0x50A,
+  string_token_monster_reduced_experience = 0x83F,
+  string_token_monster_reduced_damage = 0x83E,
+  string_token_monster_type_demon = 0x9B,
+  string_token_monster_type_undead = 0x9C,
+  string_token_monster_unique_minion = 0xE4D,
+  string_token_monster_zombie = 0x9D,
+  string_token_monster_imp = 0x9E,
+  string_token_monster_orc = 0x9F,
+  string_token_monster_eye = 0xA0,
+  string_token_monster_eye_spider = 0xA1,
+  string_token_monster_gatekeeper = 0xA2,
+  string_token_monster_invasion_boss = 0xA3,
+  string_token_monster_invasion_orc = 0xA4,
+  string_token_monster_invasion_skeleton = 0xA5,
+  string_token_monster_invasion_eye = 0xCA8,
+  string_token_monster_invasion_wraith = 0xCC6,
+  string_token_monster_gel_cube = 0xA6,
+  string_token_monster_ice_imp = 0xA7,
+  string_token_monster_fire_spider = 0xA8,
+  string_token_monster_dark_zombie = 0xA9,
+  string_token_boss_beholder = 0xAA,
+  string_token_monster_skeleton = 0xAB,
+  string_token_monster_shadow = 0xAC,
+  string_token_monster_fat_ghoul = 0xAD,
+  string_token_monster_cthulhu = 0xAE,
+  string_token_monster_boss2_heart = 0xAF,
+  string_token_monster_boss2_eye = 0xB0,
+  string_token_monster_boss2_spider = 0xB1,
+  string_token_monster_winged_imp = 0xB2,
+  string_token_monster_bat = 0xB3,
+  string_token_monster_wraith = 0xB4,
+  string_token_monster_chewie = 0xB5,
+  string_token_monster_boss3 = 0xB6,
+  string_token_monster_wisp = 0xB7,
+  string_token_monster_toxic_zombie = 0x505,
+  string_token_monster_thin_eye = 0x582,
+  string_token_monster_boss4 = 0x583,
+  string_token_monster_boss4_eye = 0x584,
+  string_token_monster_boss4_spider = 0x585,
+  string_token_monster_imp_rider = 0x50B,
+  string_token_monster_skeleton_wizard = 0x85B,
+  string_token_monster_skeleton_imp = 0x85C,
+  string_token_monster_boss5 = 0xADF,
+  string_token_monster_boss5_eye = 0xAE0,
+  string_token_monster_octopus = 0xCF7,
+  string_token_monster_dig_worm = 0xCF8,
+  string_token_monster_miniboss_fire = 0xE02,
+  string_token_monster_miniboss_poison = 0xE28,
+  string_token_monster_miniboss_heart = 0xE03,
+  string_token_badlands_heart_die_1 = 0xE29,
+  string_token_badlands_heart_die_2 = 0xE2A,
+  string_token_badlands_heart_die_3 = 0xE2B,
+  string_token_badlands_heart_die_4 = 0xE2C,
+  string_token_monster_lobster_imp = 0xE14,
+  string_token_monster_revenant = 0xE15,
+  string_token_monster_jelly_large = 0xE16,
+  string_token_monster_jelly_medium = 0xE17,
+  string_token_monster_badlands_eye = 0xE18,
+  string_token_monster_megademon = 0xE19,
+  string_token_monster_badlands_boss = 0xE27,
+  string_token_monster_halloween_dread = 0x72B,
+  string_token_monster_halloween_legend_dread = 0x737,
+  string_token_monster_halloween_mythical_dread = 0xE67,
+  string_token_halloween_pumpkin_time = 0x732,
+  string_token_halloween_escape = 0x734,
+  string_token_ui_dps = 0x733,
+  string_token_monster_holiday_spirit = 0x7D5,
+  string_token_monster_krampus = 0x1008,
+  string_token_monster_krampus_unholy = 0x1009,
+  string_token_monster_krampus_wisp = 0x101F,
+  string_token_monster_blackwhite = 0x106F,
+  string_token_monster_blackwhite_unholy = 0x1070,
+  string_token_monster_samhain = 0x1083,
+  string_token_monster_samhain_unholy = 0x1084,
+  string_token_monster_hafermann = 0x10AA,
+  string_token_monster_hafermann_unholy = 0x10AB,
+  string_token_monster_hafermann_imp = 0x10BF,
+  string_token_monster_hafermann_orb = 0x10C0,
+  string_token_monster_unique_hps = 0xB8,
+  string_token_monster_unique_armor = 0xB9,
+  string_token_monster_unique_crit = 0xBA,
+  string_token_monster_unique_regen = 0xBB,
+  string_token_monster_unique_fast = 0xBC,
+  string_token_monster_unique_fire_immune = 0xFE7,
+  string_token_monster_unique_cold_immune = 0xFE8,
+  string_token_monster_unique_lightning_immune = 0xFE9,
+  string_token_monster_unique_poison_immune = 0xFEA,
+  string_token_monster_unique_rainbow_hit = 0xFEB,
+  string_token_monster_necro_pet = 0xBD,
+  string_token_monster_violet_eye_pet = 0x563,
+  string_token_monster_rat = 0x65D,
+  string_token_monster_familiar = 0x682,
+  string_token_monster_phoenix = 0x8DA,
+  string_token_nightmare_buff_hps = 0x695,
+  string_token_nightmare_buff_attack = 0x696,
+  string_token_nightmare_buff_resist = 0x697,
+  string_token_nightmare_buff_crit = 0x698,
+  string_token_nightmare_buff_dodge = 0x699,
+  string_token_nightmare_buff_sight = 0x69A,
+  string_token_nightmare_buff_build = 0x69B,
+  string_token_nightmare_buff_speed = 0xFD2,
+  string_token_nightmare_buff_armored = 0xFD3,
+  string_token_nightmare_buff_fire_reduce = 0xFD4,
+  string_token_nightmare_buff_cold_reduce = 0xFD5,
+  string_token_nightmare_buff_lightning_reduce = 0xFD6,
+  string_token_nightmare_buff_poison_reduce = 0xFD7,
+  string_token_nightmare_buff_haste = 0xFD8,
+  string_token_object_cant_interact = 0xD2C,
+  string_token_object_cant_harvest = 0xD2D,
+  string_token_object_cant_mound = 0xD2E,
+  string_token_object_open_crafting = 0xEA5,
+  string_token_object_open_crafting_controller = 0xEA6,
+  string_token_object_torch = 0xBE,
+  string_token_object_unique_light = 0x6A5,
+  string_token_object_unselectable = 0xBF,
+  string_token_object_rock = 0xC0,
+  string_token_object_berry_bush = 0xC1,
+  string_token_object_bush = 0xC2,
+  string_token_object_young_tree = 0xC3,
+  string_token_object_tree = 0xC4,
+  string_token_object_money_tree = 0x5A3,
+  string_token_object_saguaro = 0xE4C,
+  string_token_object_wheat = 0xC5,
+  string_token_object_carrot = 0xC6,
+  string_token_object_cabbage = 0xC7,
+  string_token_object_cauliflower = 0xC8,
+  string_token_object_tomato = 0xC9,
+  string_token_object_sunflower = 0xCA,
+  string_token_object_coffee = 0xCB,
+  string_token_object_potato = 0xCC,
+  string_token_object_corn = 0xCD,
+  string_token_object_garlic = 0xCE,
+  string_token_object_black_beans = 0xCF,
+  string_token_object_maize = 0x793,
+  string_token_object_crystal_plant = 0x5A4,
+  string_token_object_ore_plant = 0x5A5,
+  string_token_object_dirt_mound = 0xD0,
+  string_token_object_fertile_mound = 0xD1,
+  string_token_object_gold_fertile_mound = 0x4FC,
+  string_token_object_oven = 0xD2,
+  string_token_object_forge = 0xD3,
+  string_token_object_chest = 0xD4,
+  string_token_object_rare_chest = 0xD5,
+  string_token_object_door = 0xD6,
+  string_token_object_small_door = 0xD7,
+  string_token_object_shrine = 0xD8,
+  string_token_object_altar = 0xD9,
+  string_token_object_secret_portal = 0xDA,
+  string_token_object_boss_door = 0x71E,
+  string_token_object_story_stand = 0xC9B,
+  string_token_object_badlands_portal = 0xCCD,
+  string_token_object_prickly_pear_bush = 0xCD9,
+  string_token_story_new_page = 0xC9C,
+  string_token_story_new_page_help = 0xC9D,
+  string_token_story_new_page_help_controller = 0x101B,
+  string_token_story_old_page = 0xCA1,
+  string_token_object_halloween_door = 0x71F,
+  string_token_object_harvest_door = 0x792,
+  string_token_object_unknown_mushroom = 0xDB,
+  string_token_object_mushroom = 0xDA1,
+  string_token_mushroom_brown = 0xDA2,
+  string_token_mushroom_yellow = 0xDA3,
+  string_token_mushroom_green = 0xDA4,
+  string_token_mushroom_purple = 0xDA5,
+  string_token_mushroom_cyan = 0xDA6,
+  string_token_mushroom_blue = 0xDA7,
+  string_token_mushroom_white = 0xDA8,
+  string_token_mushroom_black = 0xDA9,
+  string_token_mushroom_bl_red = 0xDAA,
+  string_token_mushroom_bl_orange = 0xDAB,
+  string_token_mushroom_bl_forest = 0xDAC,
+  string_token_mushroom_bl_sage = 0xDAD,
+  string_token_mushroom_bl_brown = 0xDAE,
+  string_token_mushroom_bl_darkpink = 0xDAF,
+  string_token_mushroom_bl_gray = 0xDB0,
+  string_token_mushroom_bl_black = 0xDB1,
+  string_token_mushroom_poison = 0xDB2,
+  string_token_mushroom_blindness = 0xDB3,
+  string_token_mushroom_confusion = 0xDB4,
+  string_token_mushroom_cure_all = 0xDB5,
+  string_token_mushroom_sustenance = 0xDB6,
+  string_token_mushroom_first_aid = 0xDB7,
+  string_token_mushroom_food = 0xDB8,
+  string_token_mushroom_snack = 0xDB9,
+  string_token_mushroom_light = 0xDBA,
+  string_token_mushroom_hps = 0xDBB,
+  string_token_mushroom_gliding = 0xDBC,
+  string_token_mushroom_magic_find = 0xDBD,
+  string_token_mushroom_burning = 0xDBE,
+  string_token_mushroom_greater_poison = 0xDBF,
+  string_token_mushroom_poison_resist = 0xDC0,
+  string_token_mushroom_fire_resist = 0xDC1,
+  string_token_mushroom_poison_resist_buff = 0xE40,
+  string_token_mushroom_fire_resist_buff = 0xE41,
+  string_token_item_breaded_mushrooms = 0x849,
+  string_token_item_garlic_mushrooms = 0x84A,
+  string_token_item_spicy_mushrooms = 0x84B,
+  string_token_item_desc_spicy_mushrooms = 0x84D,
+  string_token_item_creamy_mushrooms = 0x84C,
+  string_token_item_desc_creamy_mushrooms = 0x84E,
+  string_token_object_crystal_vein = 0xED,
+  string_token_object_gold_pile = 0xEE,
+  string_token_object_meat_spit = 0xEF,
+  string_token_object_seed_bag = 0xF0,
+  string_token_object_rune_stone = 0xF1,
+  string_token_object_runeword_chest = 0xF2,
+  string_token_recipe_new = 0xF3,
+  string_token_recipe_press_p = 0xF4,
+  string_token_recipe_press_controller = 0xE96,
+  string_token_recipe_created_by = 0xF5,
+  string_token_ui_format_colon = 0xF6,
+  string_token_recipe_unique = 0xF7,
+  string_token_recipe_crystals_needed = 0xF8,
+  string_token_recipe_compost_needed = 0x6B1,
+  string_token_recipe_already_known = 0xF9,
+  string_token_altar_combine = 0xFA,
+  string_token_altar_cancel = 0xFB,
+  string_token_not_enough_altar_space = 0xFC,
+  string_token_altar_error = 0xFD,
+  string_token_char_class_bard = 0xFE,
+  string_token_class_desc_bard = 0xFF,
+  string_token_class_buff_bard = 0x608,
+  string_token_char_class_cleric = 0x100,
+  string_token_class_desc_cleric = 0x101,
+  string_token_class_buff_cleric = 0x638,
+  string_token_cleric_smite = 0x639,
+  string_token_char_class_druid = 0x102,
+  string_token_class_desc_druid = 0x103,
+  string_token_char_class_enchanter = 0x104,
+  string_token_class_desc_enchanter = 0x105,
+  string_token_class_buff_enchanter = 0x684,
+  string_token_char_class_necro = 0x106,
+  string_token_class_desc_necro = 0x107,
+  string_token_class_buff_necro = 0x678,
+  string_token_char_class_rogue = 0x108,
+  string_token_class_buff_rogue = 0x605,
+  string_token_class_desc_rogue = 0x109,
+  string_token_char_class_paladin = 0x10A,
+  string_token_class_desc_paladin = 0x10B,
+  string_token_class_buff_paladin = 0x78E,
+  string_token_char_class_warrior = 0x10C,
+  string_token_class_desc_warrior = 0x10D,
+  string_token_class_buff_warrior = 0x62F,
+  string_token_char_class_wizard = 0x10E,
+  string_token_class_desc_wizard = 0x10F,
+  string_token_class_buff_wizard = 0x67F,
+  string_token_ui_char_class_locked = 0x5F6,
+  string_token_level_up = 0x110,
+  string_token_level_welcome = 0x111,
+  string_token_level_up_gain = 0x112,
+  string_token_level_up_points = 0x113,
+  string_token_level_up_accept = 0x114,
+  string_token_level_up_cancel = 0x115,
+  string_token_level_four_hunger = 0x57A,
+  string_token_level_five_die_drop = 0x116,
+  string_token_survival_rank_increase = 0x117,
+  string_token_survival_welcome = 0x118,
+  string_token_survival_skill = 0x119,
+  string_token_survival_rank = 0x11A,
+  string_token_survival_rank_required = 0x11B,
+  string_token_survival_rank_req_end = 0x11C,
+  string_token_survival_planting_error = 0x11D,
+  string_token_season_planting_error = 0x6B9,
+  string_token_ui_slevel = 0x6BA,
+  string_token_ui_ilevel = 0x6BB,
+  string_token_ui_feed_amount = 0x6BC,
+  string_token_stat_attack = 0x11E,
+  string_token_stat_armor = 0x11F,
+  string_token_stat_hit_points = 0x120,
+  string_token_stat_hit_point_regen = 0x526,
+  string_token_stat_mana = 0x121,
+  string_token_stat_vitality = 0x122,
+  string_token_stat_intelligence = 0x123,
+  string_token_stat_old_wisdom = 0x124,
+  string_token_stat_dexterity = 0x5D5,
+  string_token_stat_vigor = 0x5D6,
+  string_token_stat_speed = 0x125,
+  string_token_stat_critical_hit = 0x126,
+  string_token_stat_magic_crit = 0xE45,
+  string_token_stat_fire_crit = 0x9C1,
+  string_token_stat_cold_crit = 0x9C2,
+  string_token_stat_poison_crit = 0x9C3,
+  string_token_stat_lightning_crit = 0x9C4,
+  string_token_stat_critical_damage = 0x517,
+  string_token_stat_critical_hit_heal = 0x579,
+  string_token_stat_execute = 0x581,
+  string_token_stat_resist = 0x127,
+  string_token_stat_damage_type = 0x128,
+  string_token_stat_damage = 0x129,
+  string_token_stat_attack_rate = 0x12A,
+  string_token_ui_not_applicable = 0x527,
+  string_token_stat_attack_rate_mod = 0x51A,
+  string_token_stat_resist_title = 0x851,
+  string_token_stat_resist_fire = 0x518,
+  string_token_stat_resist_cold = 0x519,
+  string_token_stat_resist_lightning = 0x51B,
+  string_token_stat_resist_poison = 0x51C,
+  string_token_resist_rating_to_percent_start = 0x84F,
+  string_token_resist_rating_to_percent_end = 0x850,
+  string_token_stat_undead_vs_damage = 0x51D,
+  string_token_stat_demon_vs_damage = 0x51E,
+  string_token_stat_recharge_speed = 0x8AD,
+  string_token_stat_magic_percent = 0x607,
+  string_token_stat_fire_percent = 0x522,
+  string_token_stat_cold_percent = 0x523,
+  string_token_stat_lightning_percent = 0x524,
+  string_token_stat_poison_percent = 0x525,
+  string_token_stat_find_gold = 0x51F,
+  string_token_stat_magic_find = 0x520,
+  string_token_stat_percent_experience = 0x521,
+  string_token_stat_attack_hint = 0x12B,
+  string_token_stat_vitality_hint = 0x12C,
+  string_token_stat_intelligence_hint = 0x12D,
+  string_token_stat_old_wisdom_hint = 0x12E,
+  string_token_stat_dexterity_hint = 0x5D7,
+  string_token_stat_vigor_hint = 0x5D8,
+  string_token_stat_armor_percent = 0x12F,
+  string_token_stat_armor_percent_short = 0xFC8,
+  string_token_stat_armor_dmg_percent = 0x52D,
+  string_token_stat_hp_percent = 0x130,
+  string_token_stat_hp_steal = 0x131,
+  string_token_stat_hp_regen = 0x132,
+  string_token_stat_mana_percent = 0x133,
+  string_token_stat_mana_steal = 0x134,
+  string_token_stat_magic_find_percent = 0x135,
+  string_token_ui_magic_find_cap = 0x578,
+  string_token_stat_gold_find = 0x136,
+  string_token_stat_min_dmg_desc = 0x137,
+  string_token_stat_max_dmg_desc = 0x138,
+  string_token_stat_min_dmg = 0x1006,
+  string_token_stat_max_dmg = 0x1007,
+  string_token_stat_undead_percent = 0x139,
+  string_token_stat_demon_percent = 0x13A,
+  string_token_stat_gold = 0x13B,
+  string_token_stat_ancient_orbs = 0x85A,
+  string_token_stat_crystal_shards = 0x13C,
+  string_token_stat_compost = 0x6B0,
+  string_token_stat_quartz = 0xCF3,
+  string_token_stat_block = 0x5DA,
+  string_token_stat_dodge = 0x5F7,
+  string_token_stat_hp_percent_per_sec = 0x630,
+  string_token_stat_hp_per_sec = 0x631,
+  string_token_stat_armor_penetration = 0x8C5,
+  string_token_stat_ranged_damage_taken = 0xE3C,
+  string_token_stat_melee_damage_taken = 0xE3D,
+  string_token_stat_vit_to_dmg_desc = 0xFFE,
+  string_token_stat_int_to_dmg_desc = 0xFFF,
+  string_token_stat_dex_to_dmg_desc = 0x1000,
+  string_token_stat_vigor_to_dmg_desc = 0x1001,
+  string_token_stat_vit_to_dmg = 0x1002,
+  string_token_stat_int_to_dmg = 0x1003,
+  string_token_stat_dex_to_dmg = 0x1004,
+  string_token_stat_vigor_to_dmg = 0x1005,
+  string_token_stat_digestion_rating = 0x1040,
+  string_token_stat_stamina_rating = 0x1041,
+  string_token_ui_stat_enchanted = 0x10C5,
+  string_token_ui_ability_enchanted = 0x10C6,
+  string_token_attribute_boring = 0x13D,
+  string_token_attribute_haste = 0x13E,
+  string_token_attribute_large_pbaoe = 0x13F,
+  string_token_attribute_fire_immune = 0xE37,
+  string_token_trigger_hit_fire = 0x52E,
+  string_token_trigger_hit_poison = 0x52F,
+  string_token_trigger_hit_cold = 0x104E,
+  string_token_trigger_hit_lightning = 0x104F,
+  string_token_trigger_get_hit_poison = 0x530,
+  string_token_trigger_hit_vitality = 0x67B,
+  string_token_trigger_status_regen = 0xE35,
+  string_token_trigger_get_hit_speed = 0xE39,
+  string_token_trigger_hit_haste = 0xE3A,
+  string_token_trigger_kill_compost = 0xE3E,
+  string_token_ui_steal_damage_done = 0x140,
+  string_token_ui_regen_per_sec = 0x141,
+  string_token_ui_per_second = 0x142,
+  string_token_unique_flag_crit_resist = 0xE2F,
+  string_token_unique_flag_boss_dmg = 0xE30,
+  string_token_unique_flag_affliction_reduce = 0xE31,
+  string_token_unique_flag_minion_power = 0xE32,
+  string_token_unique_flag_spiked_helm = 0xE33,
+  string_token_unique_flag_speed_reduce = 0xE34,
+  string_token_unique_flag_burn_walk = 0xE38,
+  string_token_unique_flag_dodge_ranged = 0xE3B,
+  string_token_unique_flag_survival_exp = 0x104C,
+  string_token_ui_crystal_slot_line = 0x143,
+  string_token_ui_crystal_slot_tri = 0x144,
+  string_token_ui_crystal_slot_square = 0x145,
+  string_token_ui_crystal_slot_diamond = 0x146,
+  string_token_ui_crystal_slot_octagon = 0x586,
+  string_token_crystal_shape_error = 0x147,
+  string_token_crystal_not_identified = 0x148,
+  string_token_ui_rmb_remove_crystal = 0x149,
+  string_token_ui_controller_remove_crystal = 0xE99,
+  string_token_hotbar_btn_inv = 0x14A,
+  string_token_hotbar_btn_craft = 0x14B,
+  string_token_hotbar_btn_recall = 0x14C,
+  string_token_hotbar_recall_desc_1 = 0x14D,
+  string_token_hotbar_recall_desc_2 = 0x14E,
+  string_token_hotbar_recall_key_post = 0x5FE,
+  string_token_hotbar_recall_key_pre = 0x5FF,
+  string_token_hotbar_btn_esc = 0x14F,
+  string_token_hotbar_layer_active = 0xEA4,
+  string_token_hotbar_layer_front = 0xEA1,
+  string_token_hotbar_layer_mid = 0xEA2,
+  string_token_hotbar_layer_back = 0xEA3,
+  string_token_recall_no_homestone = 0x150,
+  string_token_recall_not_used = 0x151,
+  string_token_recall_return_invalid = 0x152,
+  string_token_recall_too_close = 0xCC3,
+  string_token_recall_timing = 0x153,
+  string_token_recall_timing_seconds = 0x154,
+  string_token_recall_in_action = 0x155,
+  string_token_damage_type_physical = 0x156,
+  string_token_damage_type_magic = 0x157,
+  string_token_damage_type_fire = 0x158,
+  string_token_damage_type_cold = 0x159,
+  string_token_damage_type_lightning = 0x15A,
+  string_token_damage_type_poison = 0x15B,
+  string_token_damage_type_rainbow = 0x15C,
+  string_token_item_quality_cursed = 0x15D,
+  string_token_item_quality_common = 0x15E,
+  string_token_item_quality_uncommon = 0x15F,
+  string_token_item_quality_rare = 0x160,
+  string_token_item_quality_ultra = 0x161,
+  string_token_item_quality_ancient = 0x162,
+  string_token_item_quality_unique = 0x163,
+  string_token_item_quality_set = 0x164,
+  string_token_item_quality_uncommon_set = 0x1052,
+  string_token_item_quality_rare_set = 0x1053,
+  string_token_item_quality_ultra_set = 0x1054,
+  string_token_item_quality_ancient_crystal = 0x103A,
+  string_token_item_quality_uncommon_unique = 0x1044,
+  string_token_item_quality_rare_unique = 0x1045,
+  string_token_item_quality_ultra_unique = 0x1046,
+  string_token_item_wand_quality_common = 0x165,
+  string_token_item_wand_quality_uncommon = 0x166,
+  string_token_item_wand_quality_rare = 0x167,
+  string_token_item_wand_quality_ultra = 0x168,
+  string_token_item_wand_quality_end = 0x169,
+  string_token_item_sword_quality_end = 0x66E,
+  string_token_item_dual_quality_end = 0x66F,
+  string_token_item_mace_quality_end = 0x670,
+  string_token_item_sword2h_quality_end = 0x770,
+  string_token_item_mace2h_quality_end = 0x771,
+  string_token_item_wand_noid_common = 0x16A,
+  string_token_item_wand_noid_uncommon = 0x16B,
+  string_token_item_wand_noid_rare = 0x16C,
+  string_token_item_wand_noid_ultra = 0x16D,
+  string_token_item_wand_noid_unique = 0x536,
+  string_token_item_wand_charges = 0x16E,
+  string_token_item_wand_recharge = 0x16F,
+  string_token_ui_recharging = 0x170,
+  string_token_item_sword_noid_common = 0x5C1,
+  string_token_item_sword_noid_uncommon = 0x5C2,
+  string_token_item_sword_noid_rare = 0x5C3,
+  string_token_item_sword_noid_ultra = 0x5C4,
+  string_token_item_sword_noid_unique = 0x5C5,
+  string_token_item_dual_noid_common = 0x5E9,
+  string_token_item_dual_noid_uncommon = 0x5EA,
+  string_token_item_dual_noid_rare = 0x5EB,
+  string_token_item_dual_noid_ultra = 0x5EC,
+  string_token_item_dual_noid_unique = 0x5ED,
+  string_token_item_mace_noid_common = 0x63B,
+  string_token_item_mace_noid_uncommon = 0x63C,
+  string_token_item_mace_noid_rare = 0x63D,
+  string_token_item_mace_noid_ultra = 0x63E,
+  string_token_item_mace_noid_unique = 0x63F,
+  string_token_item_sword2h_noid_common = 0x766,
+  string_token_item_sword2h_noid_uncommon = 0x767,
+  string_token_item_sword2h_noid_rare = 0x768,
+  string_token_item_sword2h_noid_ultra = 0x769,
+  string_token_item_sword2h_noid_unique = 0x76A,
+  string_token_item_mace2h_noid_common = 0x76B,
+  string_token_item_mace2h_noid_uncommon = 0x76C,
+  string_token_item_mace2h_noid_rare = 0x76D,
+  string_token_item_mace2h_noid_ultra = 0x76E,
+  string_token_item_mace2h_noid_unique = 0x76F,
+  string_token_item_weapon_error = 0xD7B,
+  string_token_item_character_bound = 0xD79,
+  string_token_item_char_bound_error = 0xD7A,
+  string_token_item_char_bound_drop_error = 0x10CA,
+  string_token_item_weapon_unusable_error = 0xE2E,
+  string_token_item_gold = 0x171,
+  string_token_item_quartz = 0xCF2,
+  string_token_item_pumpkin_currency = 0x720,
+  string_token_ui_pumpkin_currency = 0x727,
+  string_token_item_snowflake_currency = 0x10CB,
+  string_token_ui_snowflake_currency = 0x10CC,
+  string_token_item_heroic_emblem = 0x10C7,
+  string_token_item_champion_emblem = 0x10C8,
+  string_token_ui_plus = 0x538,
+  string_token_item_dirt_tile = 0x172,
+  string_token_item_cobblestone_tile = 0x173,
+  string_token_item_wood_tile = 0x174,
+  string_token_item_zone_1_fore_tile = 0x175,
+  string_token_item_zone_1_back_tile = 0x176,
+  string_token_item_thatched_tile = 0x177,
+  string_token_item_hbeam_tile = 0x178,
+  string_token_item_vbeam_tile = 0x179,
+  string_token_item_shaped_stone_tile = 0x17A,
+  string_token_item_dark_stone_tile = 0x17B,
+  string_token_item_zone_2_fore_tile = 0x17C,
+  string_token_item_zone_2_back_tile = 0x17D,
+  string_token_item_muddy_dirt_tile = 0x17E,
+  string_token_item_rough_stone_tile = 0x17F,
+  string_token_item_dark_gray_stone_tile = 0x180,
+  string_token_item_ice_tile = 0x181,
+  string_token_item_mauve_pebblestone_tile = 0x182,
+  string_token_item_slimy_dirt_tile = 0x183,
+  string_token_item_dark_cube_tile = 0x184,
+  string_token_item_sand_tile = 0x185,
+  string_token_item_dark_sand_tile = 0x186,
+  string_token_item_gold_brick_tile = 0x187,
+  string_token_item_window_tile = 0x188,
+  string_token_item_blue_roof_tile = 0x189,
+  string_token_item_brick_tile = 0x18A,
+  string_token_item_zone_3_fore_tile = 0x18B,
+  string_token_item_zone_3_back_tile = 0x18C,
+  string_token_item_red_cobblestone_tile = 0x18D,
+  string_token_item_brownstone_brick_tile = 0x18E,
+  string_token_item_metal_temple_tile = 0x18F,
+  string_token_item_shiny_gore_tile = 0x190,
+  string_token_item_soft_scatter_brick_tile = 0x191,
+  string_token_item_red_roof_tile = 0x192,
+  string_token_item_metal_cube_hole_tile = 0x193,
+  string_token_item_putrid_stone_tile = 0x194,
+  string_token_item_rusted_mini_tile = 0x195,
+  string_token_item_fleshsore_dirt_tile = 0x196,
+  string_token_item_slime_tile = 0x197,
+  string_token_item_zone_4_back_tile = 0x198,
+  string_token_item_bloody_dirt_tile = 0x199,
+  string_token_item_blood_light_tile = 0x512,
+  string_token_item_special_room_dirt_tile = 0x661,
+  string_token_item_corruption_tile = 0x89E,
+  string_token_item_story_dark_stone_tile = 0xC99,
+  string_token_item_story_fire_stone_tile = 0xC9A,
+  string_token_item_badlands_basic = 0xCDA,
+  string_token_item_badlands_red = 0xCDB,
+  string_token_item_badlands_light = 0xCDC,
+  string_token_item_badlands_white = 0xCDD,
+  string_token_item_badlands_purple = 0xCDE,
+  string_token_item_badlands_brown = 0xCDF,
+  string_token_item_badlands_basic_green = 0xCE0,
+  string_token_item_badlands_light_green = 0xCE1,
+  string_token_item_badlands_bright_green = 0xCE2,
+  string_token_item_badlands_olive_green = 0xCE3,
+  string_token_item_badlands_green_sand = 0xCE4,
+  string_token_item_badlands_dark_gray = 0xCE5,
+  string_token_item_badlands_gray = 0xCE6,
+  string_token_item_badlands_slate = 0xCE7,
+  string_token_item_badlands_clay = 0xCE8,
+  string_token_item_badlands_metal = 0xCE9,
+  string_token_item_badlands_green_weave = 0xCEA,
+  string_token_item_badlands_dark_mini_brick = 0xCEB,
+  string_token_item_badlands_z1_dirt_room = 0xE1C,
+  string_token_item_badlands_z2_dirt_room = 0xE1D,
+  string_token_item_badlands_putrid_brick = 0xE1E,
+  string_token_item_badlands_skull_block = 0xE1F,
+  string_token_item_badlands_blood_dirt = 0xE20,
+  string_token_item_badlands_flesh_dirt = 0xE21,
+  string_token_item_badlands_basic_red = 0xE22,
+  string_token_item_badlands_dark_red = 0xE23,
+  string_token_item_badlands_pink = 0xE24,
+  string_token_item_badlands_sand_brick = 0xE25,
+  string_token_item_badlands_cactus_block = 0xE26,
+  string_token_item_harvest_dirt_block = 0x108B,
+  string_token_item_harvest_back_block = 0x108C,
+  string_token_item_rock = 0x19A,
+  string_token_item_pickaxe = 0x19B,
+  string_token_item_pickaxe_desc = 0x71D,
+  string_token_item_pickaxe_controller_desc = 0xEF8,
+  string_token_item_copper_pickaxe = 0x19C,
+  string_token_item_mithril_pickaxe = 0x19D,
+  string_token_item_adamantine_pickaxe = 0x4FD,
+  string_token_item_adamantine_pickaxe_desc = 0x67C,
+  string_token_item_holy_pickaxe = 0x89A,
+  string_token_item_holy_pickaxe_desc = 0x89B,
+  string_token_item_large_pickaxe = 0x89C,
+  string_token_item_large_pickaxe_desc = 0x89D,
+  string_token_item_pulaski = 0x19E,
+  string_token_item_axe = 0x19F,
+  string_token_item_hoe = 0x1A0,
+  string_token_item_compost = 0x1A1,
+  string_token_ui_food_expires = 0x1A2,
+  string_token_ui_no_compost = 0x5B3,
+  string_token_ui_vault_timed = 0x596,
+  string_token_item_fertilizer = 0x1A3,
+  string_token_item_desc_fertilizer = 0x73E,
+  string_token_item_berry = 0x1A4,
+  string_token_item_berry_seeds = 0x1A5,
+  string_token_item_carrot = 0x1A6,
+  string_token_item_carrot_seeds = 0x1A7,
+  string_token_item_cabbage = 0x1A8,
+  string_token_item_cabbage_seeds = 0x1A9,
+  string_token_item_wheat = 0x1AA,
+  string_token_item_wheat_seeds = 0x1AB,
+  string_token_item_tomato = 0x1AC,
+  string_token_item_tomato_seeds = 0x1AD,
+  string_token_item_sunflower = 0x1AE,
+  string_token_item_sunflower_seeds = 0x1AF,
+  string_token_item_coffee_berries = 0x1B0,
+  string_token_item_roasted_coffee_beans = 0x1B1,
+  string_token_item_coffee_beans = 0x1B2,
+  string_token_item_potato = 0x1B3,
+  string_token_item_potato_seeds = 0x1B4,
+  string_token_item_corn = 0x1B5,
+  string_token_item_corn_seeds = 0x1B6,
+  string_token_item_black_beans = 0x1B7,
+  string_token_item_black_bean_seeds = 0x1B8,
+  string_token_item_garlic = 0x1B9,
+  string_token_item_garlic_seeds = 0x1BA,
+  string_token_item_cauliflower = 0x1BB,
+  string_token_item_cauliflower_seeds = 0x1BC,
+  string_token_ui_seeds_season = 0x6B2,
+  string_token_ui_seeds_spring = 0x6B3,
+  string_token_ui_seeds_summer = 0x6B4,
+  string_token_ui_seeds_autumn = 0x6B5,
+  string_token_ui_seeds_winter = 0x6B8,
+  string_token_ui_seeds_comma = 0x6B7,
+  string_token_ui_seeds_and = 0x6B6,
+  string_token_ui_perennial_left = 0x5B4,
+  string_token_ui_seeds_days = 0x7A7,
+  string_token_ui_seeds_not_enough_days = 0x7A8,
+  string_token_item_bar_crystal_bulb = 0x5A6,
+  string_token_item_tri_crystal_bulb = 0x5A7,
+  string_token_item_square_crystal_bulb = 0x5A8,
+  string_token_item_diamond_crystal_bulb = 0x5A9,
+  string_token_item_octagon_crystal_bulb = 0x5AA,
+  string_token_item_nickel_ore_bulb = 0x5AB,
+  string_token_item_lodestone_ore_bulb = 0x5AC,
+  string_token_item_ochre_ore_bulb = 0x5AD,
+  string_token_item_russet_ore_bulb = 0x5AE,
+  string_token_item_bronzed_ore_bulb = 0x68D,
+  string_token_item_vibrant_ore_bulb = 0x6A0,
+  string_token_item_aqua_ore_bulb = 0xCC4,
+  string_token_item_sunrise_ore_bulb = 0xCC5,
+  string_token_item_money_tree_bulb = 0x5AF,
+  string_token_item_perfect_wheat = 0x4EF,
+  string_token_item_perfect_berry = 0x4F0,
+  string_token_item_perfect_carrot = 0x4F1,
+  string_token_item_perfect_cabbage = 0x4F2,
+  string_token_item_perfect_tomato = 0x4F3,
+  string_token_item_perfect_sunflower = 0x4F4,
+  string_token_item_perfect_coffee_berries = 0x4F5,
+  string_token_item_perfect_potato = 0x4F6,
+  string_token_item_perfect_corn = 0x4F7,
+  string_token_item_perfect_black_beans = 0x4F8,
+  string_token_item_perfect_garlic = 0x4F9,
+  string_token_item_perfect_cauliflower = 0x4FA,
+  string_token_item_gold_fertilizer = 0x4FB,
+  string_token_item_bread = 0x1BD,
+  string_token_item_bread_desc = 0x1BE,
+  string_token_item_veggie_bowl = 0x1BF,
+  string_token_item_stewed_carrots = 0x6D5,
+  string_token_item_sauerkraut = 0x6D6,
+  string_token_item_energy_bar = 0x1C0,
+  string_token_item_energy_bar_desc = 0x1C1,
+  string_token_item_berry_pie = 0x1C2,
+  string_token_item_berry_pie_desc = 0x1C3,
+  string_token_item_pot_pie = 0x1C4,
+  string_token_item_pot_pie_desc = 0x1C5,
+  string_token_item_chili = 0x1C6,
+  string_token_item_chili_desc = 0x1C7,
+  string_token_item_pasta = 0x6BE,
+  string_token_item_spaghetti = 0x6BF,
+  string_token_item_spaghetti_desc = 0x6C0,
+  string_token_item_tomato_soup = 0x7A9,
+  string_token_item_hearty_veggie_bowl = 0x6C1,
+  string_token_item_hearty_veggie_bowl_desc = 0x6C2,
+  string_token_item_burrito = 0x6C3,
+  string_token_item_burrito_desc = 0x856,
+  string_token_item_roasted_sunflower_seeds = 0x6C4,
+  string_token_item_corn_on_cob = 0x6C5,
+  string_token_item_summer_salad = 0x6C6,
+  string_token_item_summer_salad_desc = 0x857,
+  string_token_item_mashed_potatoes = 0x6C7,
+  string_token_item_roasted_garlic = 0x7AA,
+  string_token_item_roasted_cauliflower = 0x6C8,
+  string_token_item_raw_meat = 0x1C8,
+  string_token_item_cooked_meat = 0x1C9,
+  string_token_item_corned_beef = 0x6D7,
+  string_token_item_raw_meat_chunk = 0x65F,
+  string_token_item_cooked_meat_chunk = 0x660,
+  string_token_item_burger = 0x6D8,
+  string_token_item_egg = 0x6F7,
+  string_token_item_fried_eggs = 0x7AB,
+  string_token_item_jam = 0x83C,
+  string_token_item_beef_stew = 0x83D,
+  string_token_item_garlic_mash = 0x854,
+  string_token_item_garlic_mash_desc = 0x858,
+  string_token_item_mashed_white = 0x855,
+  string_token_item_mashed_white_desc = 0x859,
+  string_token_item_milk = 0xB40,
+  string_token_item_cheese = 0xB41,
+  string_token_item_artisan_cheese = 0xB42,
+  string_token_item_artisan_cheese_desc = 0xC86,
+  string_token_item_honey = 0xB4A,
+  string_token_item_prickly_pear = 0xCEC,
+  string_token_item_cornucopia = 0x791,
+  string_token_item_desc_cornucopia = 0x7A2,
+  string_token_item_desc_dungeon_cornucopia = 0x7A3,
+  string_token_item_woven_horn = 0x79C,
+  string_token_item_mysterious_egg = 0x79D,
+  string_token_item_mysterious_egg_desc = 0x10BE,
+  string_token_item_special_rank_desc = 0x79F,
+  string_token_item_special_no_gold = 0x7A0,
+  string_token_string_token_special_cost = 0x7A1,
+  string_token_item_harvest_maize = 0xE87,
+  string_token_item_maize_seeds = 0xE88,
+  string_token_item_maize_twine = 0x10BA,
+  string_token_item_maize_twine_desc = 0x10BB,
+  string_token_item_maize_bundle = 0x10BC,
+  string_token_item_desc_dungeon_veggie_bowl = 0x6DB,
+  string_token_item_desc_dungeon_meat = 0x6DC,
+  string_token_item_desc_dungeon_meat_chunk = 0x6DD,
+  string_token_item_cupcake = 0xF0D,
+  string_token_item_desc_cupcake = 0xF0E,
+  string_token_recipe_cupcake = 0xF0F,
+  string_token_item_desc_recipe_cupcake = 0xF10,
+  string_token_item_can_of_beans = 0xF11,
+  string_token_recipe_can_of_beans_pack = 0xF12,
+  string_token_item_desc_can_of_beans = 0xF13,
+  string_token_item_desc_recipe_can_of_beans_pack = 0xF14,
+  string_token_item_lunch_bag_cow = 0xF15,
+  string_token_item_desc_lunch_bag_cow = 0xF16,
+  string_token_item_apple_crisp_cow = 0xF17,
+  string_token_item_desc_apple_crisp_cow = 0xF18,
+  string_token_item_scotch_nog_cow = 0xF19,
+  string_token_item_desc_scotch_nog_cow = 0xF1A,
+  string_token_item_cow_blood_cow = 0xF1B,
+  string_token_item_desc_cow_blood_cow = 0xF1C,
+  string_token_item_salt_shaker_cow = 0xF1D,
+  string_token_item_desc_salt_shaker_cow = 0xF1E,
+  string_token_item_peanuts = 0xF1F,
+  string_token_item_desc_peanuts = 0xF20,
+  string_token_item_peanut_butter = 0xF21,
+  string_token_recipe_peanut_butter = 0xF22,
+  string_token_item_desc_peanut_butter = 0xF23,
+  string_token_item_desc_recipe_peanut_butter = 0xF24,
+  string_token_item_pb_j = 0xF25,
+  string_token_item_desc_pb_j = 0xF26,
+  string_token_recipe_pb_j = 0xF27,
+  string_token_item_desc_recipe_pb_j = 0xF28,
+  string_token_item_sapling = 0x1CA,
+  string_token_item_stick = 0x1CB,
+  string_token_item_platform = 0x1CC,
+  string_token_item_torch = 0x1CD,
+  string_token_item_door = 0x1CE,
+  string_token_item_small_door = 0x1CF,
+  string_token_item_plaque_normal = 0xCAB,
+  string_token_item_plaque_nightmare = 0xCAC,
+  string_token_item_plaque_hell = 0xCAD,
+  string_token_item_plaque_inferno = 0xCAE,
+  string_token_item_plaque_desc = 0xCAF,
+  string_token_item_campfire = 0x1D0,
+  string_token_item_reed = 0x1D1,
+  string_token_item_coal = 0x1D2,
+  string_token_item_iron_ore = 0x1D3,
+  string_token_item_iron_bar = 0x1D4,
+  string_token_item_copper_ore = 0x1D5,
+  string_token_item_copper_bar = 0x1D6,
+  string_token_item_mithril_ore = 0x1D7,
+  string_token_item_mithril_bar = 0x1D8,
+  string_token_item_rubium_ore = 0x1D9,
+  string_token_item_rubium_bar = 0x1DA,
+  string_token_item_nickel_ore = 0x1DB,
+  string_token_item_nickel_bar = 0x1DC,
+  string_token_item_gold_ore = 0x1DD,
+  string_token_item_gold_bar = 0x1DE,
+  string_token_item_lodestone_ore = 0x1DF,
+  string_token_item_lodestone_bar = 0x1E0,
+  string_token_item_adamantine_ore = 0x1E1,
+  string_token_item_adamantine_bar = 0x1E2,
+  string_token_item_ochre_ore = 0x1E3,
+  string_token_item_ochre_bar = 0x1E4,
+  string_token_item_verdant_ore = 0x58C,
+  string_token_item_verdant_bar = 0x58D,
+  string_token_item_russet_ore = 0x58E,
+  string_token_item_russet_bar = 0x58F,
+  string_token_item_bronzed_ore = 0x685,
+  string_token_item_bronzed_bar = 0x686,
+  string_token_item_cobalt_ore = 0x687,
+  string_token_item_cobalt_bar = 0x688,
+  string_token_item_crimson_ore = 0x69C,
+  string_token_item_crimson_bar = 0x69D,
+  string_token_item_vibrant_ore = 0x69E,
+  string_token_item_vibrant_bar = 0x69F,
+  string_token_item_ash_ore = 0xACA,
+  string_token_item_ash_bar = 0xACB,
+  string_token_item_aqua_ore = 0xACC,
+  string_token_item_aqua_bar = 0xACD,
+  string_token_item_nether_ore = 0xACE,
+  string_token_item_nether_bar = 0xACF,
+  string_token_item_sunrise_ore = 0xAD0,
+  string_token_item_sunrise_bar = 0xAD1,
+  string_token_item_forge = 0x1E5,
+  string_token_item_anvil = 0x1E6,
+  string_token_item_workbench = 0x1E7,
+  string_token_item_bed = 0x1E8,
+  string_token_item_vault = 0x594,
+  string_token_item_vault_desc = 0x595,
+  string_token_item_homestone = 0x1E9,
+  string_token_homestone_buff = 0xCAA,
+  string_token_item_refrigerator = 0x5B1,
+  string_token_ui_fridge_food_only = 0x5E0,
+  string_token_item_composter = 0x5B2,
+  string_token_item_bookcase = 0xCF9,
+  string_token_item_enchant_book_empty = 0xD06,
+  string_token_item_enchant_book_green = 0xCFA,
+  string_token_enchant_book_green_desc = 0xCFB,
+  string_token_item_enchant_book_blue = 0xCFC,
+  string_token_enchant_book_blue_desc = 0xCFD,
+  string_token_item_enchant_book_purple = 0xCFE,
+  string_token_enchant_book_purple_desc = 0xCFF,
+  string_token_item_enchant_book_orange = 0xD00,
+  string_token_enchant_book_orange_desc = 0xD01,
+  string_token_item_gem_green = 0xD02,
+  string_token_item_gem_blue = 0xD03,
+  string_token_item_gem_purple = 0xD04,
+  string_token_item_gem_orange = 0xD05,
+  string_token_item_iron_helm = 0x1EA,
+  string_token_item_iron_breastplate = 0x1EB,
+  string_token_item_iron_leggings = 0x1EC,
+  string_token_item_iron_boots = 0x1ED,
+  string_token_item_copper_helm = 0x1EE,
+  string_token_item_copper_breastplate = 0x1EF,
+  string_token_item_copper_leggings = 0x1F0,
+  string_token_item_copper_boots = 0x1F1,
+  string_token_item_mithril_helm = 0x1F2,
+  string_token_item_mithril_breastplate = 0x1F3,
+  string_token_item_mithril_leggings = 0x1F4,
+  string_token_item_mithril_boots = 0x1F5,
+  string_token_item_rubium_helm = 0x1F6,
+  string_token_item_rubium_breastplate = 0x1F7,
+  string_token_item_rubium_leggings = 0x1F8,
+  string_token_item_rubium_boots = 0x1F9,
+  string_token_item_gold_helm = 0x1FA,
+  string_token_item_gold_breastplate = 0x1FB,
+  string_token_item_gold_leggings = 0x1FC,
+  string_token_item_gold_boots = 0x1FD,
+  string_token_item_adamantine_helm = 0x1FE,
+  string_token_item_adamantine_bp = 0x1FF,
+  string_token_item_adamantine_legs = 0x200,
+  string_token_item_adamantine_boots = 0x201,
+  string_token_item_verdant_helm = 0x590,
+  string_token_item_verdant_breastplate = 0x591,
+  string_token_item_verdant_leggings = 0x592,
+  string_token_item_verdant_boots = 0x593,
+  string_token_item_cobalt_helm = 0x689,
+  string_token_item_cobalt_breastplate = 0x68A,
+  string_token_item_cobalt_leggings = 0x68B,
+  string_token_item_cobalt_boots = 0x68C,
+  string_token_item_crimson_helm = 0x6A1,
+  string_token_item_crimson_breastplate = 0x6A2,
+  string_token_item_crimson_leggings = 0x6A3,
+  string_token_item_crimson_boots = 0x6A4,
+  string_token_item_ash_helm = 0xAD2,
+  string_token_item_ash_breastplate = 0xAD3,
+  string_token_item_ash_leggings = 0xAD4,
+  string_token_item_ash_boots = 0xAD5,
+  string_token_item_nether_helm = 0xAD6,
+  string_token_item_nether_breastplate = 0xAD7,
+  string_token_item_nether_leggings = 0xAD8,
+  string_token_item_nether_boots = 0xAD9,
+  string_token_item_hat_none = 0x202,
+  string_token_item_hat_bandana = 0x203,
+  string_token_item_hat_wings = 0x204,
+  string_token_item_hat_plague_dr = 0x205,
+  string_token_item_hat_pirate_red = 0x206,
+  string_token_item_hat_pirate_green = 0x207,
+  string_token_item_hat_straw = 0x208,
+  string_token_item_hat_sombrero = 0x209,
+  string_token_item_hat_military_beret = 0x20A,
+  string_token_item_hat_top_hat = 0x20B,
+  string_token_item_hat_police_trooper = 0x20C,
+  string_token_item_hat_winter = 0x20D,
+  string_token_item_hat_cowboy = 0x20E,
+  string_token_item_hat_fez = 0x20F,
+  string_token_item_hat_wizard = 0x210,
+  string_token_item_hat_mouse_ears = 0x211,
+  string_token_item_hat_crown = 0x212,
+  string_token_item_hat_mask = 0x728,
+  string_token_item_hat_horns = 0x729,
+  string_token_item_hat_santa = 0x7C5,
+  string_token_item_hat_santa_purple = 0x103D,
+  string_token_item_hat_elf = 0x7C6,
+  string_token_item_hat_festive_tophat = 0x7C7,
+  string_token_item_hat_cat_ears = 0xADD,
+  string_token_item_hat_gentleman_cow = 0xF29,
+  string_token_item_hat_gentleman_desc = 0xF2A,
+  string_token_item_hat_description = 0x72A,
+  string_token_item_back_description = 0x73A,
+  string_token_item_outfit_description = 0xE60,
+  string_token_item_demon_wings = 0x73B,
+  string_token_item_red_cloak = 0x73C,
+  string_token_item_mech_poison_pack = 0x73D,
+  string_token_item_angel_wings = 0x772,
+  string_token_item_back_shield = 0x773,
+  string_token_item_xmas_cloak = 0x7C8,
+  string_token_item_xmas_cloak_green = 0x103C,
+  string_token_item_back_cat_tail = 0xADE,
+  string_token_item_black_cloak_cow = 0xF2B,
+  string_token_item_black_cloak_cow_desc = 0xF2C,
+  string_token_item_purple_cloak_cow = 0xF2D,
+  string_token_item_purple_cloak_cow_desc = 0xF2E,
+  string_token_item_wand_magic_spark = 0x213,
+  string_token_item_wand_magic_missile = 0x214,
+  string_token_item_wand_physical = 0x215,
+  string_token_item_wand_magic = 0x216,
+  string_token_item_wand_fire = 0x217,
+  string_token_item_wand_cold = 0x218,
+  string_token_item_wand_lightning = 0x219,
+  string_token_item_wand_poison = 0x21A,
+  string_token_item_wand_rainbow = 0xE4B,
+  string_token_wand_prefix_missile = 0x21B,
+  string_token_wand_prefix_beam = 0x21C,
+  string_token_wand_prefix_multi_shot = 0x21D,
+  string_token_wand_prefix_bounce = 0x21E,
+  string_token_wand_prefix_arcing = 0x21F,
+  string_token_wand_prefix_piercing = 0x220,
+  string_token_wand_prefix_shotgun = 0x221,
+  string_token_wand_prefix_spray = 0x577,
+  string_token_melee_prefix_stun = 0x669,
+  string_token_melee_stun_desc = 0x672,
+  string_token_melee_prefix_bleed = 0x66A,
+  string_token_melee_bleed_desc = 0x673,
+  string_token_melee_prefix_cleave = 0x66B,
+  string_token_melee_cleave_desc = 0x674,
+  string_token_melee_prefix_knockback = 0x66C,
+  string_token_melee_knockback_desc = 0x675,
+  string_token_melee_prefix_projectile = 0x66D,
+  string_token_melee_projectile_desc = 0x676,
+  string_token_melee_prefix_carnage = 0xEF9,
+  string_token_melee_carnage_desc = 0xEFA,
+  string_token_ui_bleed = 0x671,
+  string_token_item_starter_sword = 0x5B6,
+  string_token_item_short_sword = 0x5B7,
+  string_token_item_sword_physical = 0x5B5,
+  string_token_item_sword_magic = 0x5BC,
+  string_token_item_sword_fire = 0x5BD,
+  string_token_item_sword_cold = 0x5BE,
+  string_token_item_sword_lightning = 0x5BF,
+  string_token_item_sword_poison = 0x5C0,
+  string_token_item_starter_dual = 0x5EE,
+  string_token_item_improved_dual = 0x5EF,
+  string_token_item_dual_physical = 0x5F0,
+  string_token_item_dual_magic = 0x5F1,
+  string_token_item_dual_fire = 0x5F2,
+  string_token_item_dual_cold = 0x5F3,
+  string_token_item_dual_lightning = 0x5F4,
+  string_token_item_dual_poison = 0x5F5,
+  string_token_item_starter_mace = 0x640,
+  string_token_item_improved_mace = 0x641,
+  string_token_item_mace_physical = 0x642,
+  string_token_item_mace_magic = 0x643,
+  string_token_item_mace_fire = 0x644,
+  string_token_item_mace_cold = 0x645,
+  string_token_item_mace_lightning = 0x646,
+  string_token_item_mace_poison = 0x647,
+  string_token_item_starter_sword2h = 0x74C,
+  string_token_item_improved_sword2h = 0x74D,
+  string_token_item_sword2h_physical = 0x74E,
+  string_token_item_sword2h_magic = 0x74F,
+  string_token_item_sword2h_fire = 0x750,
+  string_token_item_sword2h_cold = 0x751,
+  string_token_item_sword2h_lightning = 0x752,
+  string_token_item_sword2h_poison = 0x753,
+  string_token_item_starter_mace2h = 0x754,
+  string_token_item_improved_mace2h = 0x755,
+  string_token_item_mace2h_physical = 0x756,
+  string_token_item_mace2h_magic = 0x757,
+  string_token_item_mace2h_fire = 0x758,
+  string_token_item_mace2h_cold = 0x759,
+  string_token_item_mace2h_lightning = 0x75A,
+  string_token_item_mace2h_poison = 0x75B,
+  string_token_item_pot_tutorial = 0x222,
+  string_token_pot_desc_tutorial = 0x223,
+  string_token_item_pot_coffee = 0x226,
+  string_token_pot_desc_coffee = 0x227,
+  string_token_coffee_debuff_desc = 0xCA9,
+  string_token_coffee_error = 0xB43,
+  string_token_item_pot_espresso = 0xB44,
+  string_token_pot_desc_espresso = 0xB45,
+  string_token_item_pot_latte = 0xB46,
+  string_token_pot_desc_latte = 0xB47,
+  string_token_item_pot_cure_poison = 0x228,
+  string_token_pot_desc_cure_poison = 0x229,
+  string_token_item_pot_minor_heal = 0x224,
+  string_token_item_pot_lesser_heal = 0x22A,
+  string_token_item_pot_healing = 0x22C,
+  string_token_item_pot_major_heal = 0x587,
+  string_token_item_pot_great_heal = 0x840,
+  string_token_item_pot_superb_heal = 0x841,
+  string_token_item_pot_premium_heal = 0x842,
+  string_token_item_pot_heroic_heal = 0x843,
+  string_token_item_pot_mythic_heal = 0x844,
+  string_token_item_pot_legendary_heal = 0xFE6,
+  string_token_heal_potion_desc_gain = 0x845,
+  string_token_heal_potion_desc_hps = 0x846,
+  string_token_item_pot_invulnerable = 0x847,
+  string_token_pot_desc_invulnerable = 0x848,
+  string_token_item_pot_honey_tea = 0xB4B,
+  string_token_pot_desc_honey_tea = 0xB4C,
+  string_token_item_scroll_regen = 0x22E,
+  string_token_scroll_desc_regen = 0x22F,
+  string_token_item_scroll_blessing = 0x230,
+  string_token_scroll_desc_blessing = 0x231,
+  string_token_item_scroll_sustain = 0x232,
+  string_token_scroll_desc_sustain = 0x233,
+  string_token_item_scroll_stamina = 0x234,
+  string_token_scroll_desc_stamina = 0x235,
+  string_token_item_scroll_identify = 0x236,
+  string_token_scroll_desc_identify = 0x237,
+  string_token_item_unidentified = 0x238,
+  string_token_unique_unidentified = 0x58B,
+  string_token_item_parchment = 0x239,
+  string_token_item_scroll_magic_mapping = 0x23A,
+  string_token_scroll_desc_magic_mapping = 0x23B,
+  string_token_ui_magic_map_message = 0x23C,
+  string_token_ui_automap_key = 0x23D,
+  string_token_ui_map_scroll = 0xEC2,
+  string_token_item_scroll_light = 0x23E,
+  string_token_scroll_desc_light = 0x23F,
+  string_token_item_scroll_destruction = 0x240,
+  string_token_scroll_desc_destruction = 0x241,
+  string_token_ui_destruction_boom = 0x242,
+  string_token_item_scroll_acquirement = 0x243,
+  string_token_scroll_desc_acquirement = 0x244,
+  string_token_item_scroll_death = 0x245,
+  string_token_scroll_desc_death = 0x246,
+  string_token_ui_death_message = 0x247,
+  string_token_item_scroll_cleanse = 0x248,
+  string_token_scroll_desc_cleanse = 0x249,
+  string_token_ui_teleport_fail = 0x24A,
+  string_token_item_scroll_room_location = 0x24B,
+  string_token_scroll_desc_room_location = 0x24C,
+  string_token_room_location_success = 0x24D,
+  string_token_room_location_fail = 0x677,
+  string_token_item_scroll_portal_location = 0x24E,
+  string_token_scroll_desc_portal_location = 0x24F,
+  string_token_portal_location_success = 0x250,
+  string_token_portal_location_multi_success = 0x50F,
+  string_token_portal_location_fail = 0x251,
+  string_token_item_scroll_fog = 0xDC2,
+  string_token_scroll_desc_fog = 0xDC3,
+  string_token_item_scroll_armor = 0xDC4,
+  string_token_scroll_desc_armor = 0xDC5,
+  string_token_item_scroll_compost = 0xDC6,
+  string_token_scroll_desc_compost = 0xDC7,
+  string_token_item_scroll_gold = 0xDC8,
+  string_token_scroll_desc_gold = 0xDC9,
+  string_token_item_scroll_rare_chest = 0xDCA,
+  string_token_scroll_desc_rare_chest = 0xDCB,
+  string_token_item_scroll_speed = 0xDCC,
+  string_token_scroll_desc_speed = 0xDCD,
+  string_token_item_scroll_rarity = 0xDCE,
+  string_token_scroll_desc_rarity = 0xDCF,
+  string_token_item_scroll_rainbow = 0xDD0,
+  string_token_scroll_desc_rainbow = 0xDD1,
+  string_token_item_scroll_xmas = 0x7D6,
+  string_token_scroll_desc_xmas = 0x7D7,
+  string_token_holiday_spirit_intro = 0x7D8,
+  string_token_item_xmas_present = 0x7D9,
+  string_token_item_desc_xmas_present = 0x7DA,
+  string_token_item_ring_aoe = 0x252,
+  string_token_ring_desc_aoe = 0x253,
+  string_token_recipe_ring_aoe = 0x254,
+  string_token_item_ring_lifetap = 0x255,
+  string_token_ring_desc_lifetap = 0x256,
+  string_token_recipe_ring_lifetap = 0x257,
+  string_token_item_ring_defense = 0x258,
+  string_token_ring_desc_defense = 0x259,
+  string_token_recipe_ring_defense = 0x25A,
+  string_token_item_ring_infrared = 0x25B,
+  string_token_ring_desc_infrared = 0x25C,
+  string_token_recipe_ring_infrared = 0x25D,
+  string_token_item_ring_crit_prot = 0x25E,
+  string_token_ring_desc_crit_prot = 0x25F,
+  string_token_recipe_ring_crit_prot = 0x260,
+  string_token_item_ring_high_jump = 0x261,
+  string_token_ring_desc_high_jump = 0x262,
+  string_token_recipe_ring_high_jump = 0x263,
+  string_token_item_ring_triple_jump = 0x264,
+  string_token_ring_desc_triple_jump = 0x265,
+  string_token_recipe_ring_triple_jump = 0x266,
+  string_token_item_ring_slow_digestion = 0x267,
+  string_token_ring_desc_slow_digestion = 0x268,
+  string_token_recipe_ring_slow_digest = 0x269,
+  string_token_item_ring_feather_fall = 0x26A,
+  string_token_ring_desc_feather_fall = 0x26B,
+  string_token_recipe_ring_feather_fall = 0x26C,
+  string_token_ui_feather_fall = 0x26D,
+  string_token_item_ring_resistance = 0x26E,
+  string_token_ring_desc_resistance = 0x26F,
+  string_token_recipe_ring_resistance = 0x270,
+  string_token_item_ring_steady_feet = 0x271,
+  string_token_ring_desc_steady_feet = 0x272,
+  string_token_recipe_ring_steady_feet = 0x273,
+  string_token_item_ring_digging = 0x274,
+  string_token_ring_desc_digging = 0x275,
+  string_token_recipe_ring_digging = 0x276,
+  string_token_item_ring_light = 0x277,
+  string_token_ring_desc_light = 0x278,
+  string_token_recipe_ring_light = 0x279,
+  string_token_item_ring_bl_teleport = 0xDF3,
+  string_token_ring_desc_bl_teleport = 0xDF4,
+  string_token_recipe_ring_bl_teleport = 0xDF5,
+  string_token_item_ring_bl_melee = 0xDF6,
+  string_token_ring_desc_bl_melee = 0xDF7,
+  string_token_recipe_ring_bl_melee = 0xDF8,
+  string_token_item_ring_bl_luck = 0xDF9,
+  string_token_ring_desc_bl_luck = 0xDFA,
+  string_token_recipe_ring_bl_luck = 0xDFB,
+  string_token_item_ring_bl_shrine = 0xDFC,
+  string_token_ring_desc_bl_shrine = 0xDFD,
+  string_token_recipe_ring_bl_shrine = 0xDFE,
+  string_token_item_ring_halloween = 0x72D,
+  string_token_ring_desc_halloween = 0x72E,
+  string_token_item_ring_halloween_legend = 0x738,
+  string_token_item_ring_halloween_mythical = 0xE68,
+  string_token_item_halloween_brew = 0x72F,
+  string_token_item_desc_halloween_brew = 0x730,
+  string_token_item_halloween_legend_brew = 0x735,
+  string_token_item_desc_halloween_legend_brew = 0x736,
+  string_token_item_halloween_mythical_brew = 0xE69,
+  string_token_item_desc_halloween_mythical_brew = 0xE6A,
+  string_token_ui_halloween_brew_error = 0x731,
+  string_token_item_halloween_red_button = 0xE65,
+  string_token_item_desc_halloween_red_button = 0xE66,
+  string_token_item_desc_halloween_red_button_dead = 0x100A,
+  string_token_item_crystal_noid_common = 0x27A,
+  string_token_item_crystal_noid_uncommon = 0x27B,
+  string_token_item_crystal_noid_rare = 0x27C,
+  string_token_item_crystal_noid_ultra = 0x27D,
+  string_token_item_crystal_noid_unique = 0x537,
+  string_token_item_crystal_common = 0x27E,
+  string_token_item_crystal_uncommon = 0x27F,
+  string_token_crystal_slot_empty = 0x280,
+  string_token_item_crystal_operate = 0x281,
+  string_token_item_crystal_controller_operate_pre = 0xE97,
+  string_token_item_crystal_controller_operate_post = 0xE98,
+  string_token_item_crystal_shards = 0x282,
+  string_token_ancient_set_rank = 0x283,
+  string_token_ancient_current = 0x284,
+  string_token_ancient_current_post = 0x860,
+  string_token_ancient_rank = 0x285,
+  string_token_ancient_cooldown = 0x286,
+  string_token_ancient_seconds = 0x287,
+  string_token_ancient_rank_cost = 0x288,
+  string_token_ancient_rank_and = 0x289,
+  string_token_ancient_rank_no_gold = 0x28A,
+  string_token_ancient_rank_no_orbs = 0x8AF,
+  string_token_ancient_rank_no_both = 0x8B0,
+  string_token_ancient_rank_increase = 0x28B,
+  string_token_ancient_rank_increase_controller = 0xEA7,
+  string_token_ancient_tree_open = 0x928,
+  string_token_ancient_use_in_hotbar = 0x28C,
+  string_token_ancient_reset = 0x85D,
+  string_token_ancient_mouse_wheel = 0x85E,
+  string_token_ancient_controller_scroll = 0xEF5,
+  string_token_ancient_current_rank = 0x929,
+  string_token_ancient_next_rank = 0x85F,
+  string_token_ancient_tree_max_rank = 0x92B,
+  string_token_ancient_tree_purchase = 0x92A,
+  string_token_ancient_tree_need_base = 0x9C5,
+  string_token_ancient_tree_level_needed = 0x9C6,
+  string_token_ancient_tree_preq_needed = 0x9C7,
+  string_token_ancient_classes = 0x9D0,
+  string_token_ui_ancient_inv_error = 0xEF3,
+  string_token_ancient_unlocked = 0xF07,
+  string_token_ancient_unlocked_desc = 0xF08,
+  string_token_ancient_vault_locked = 0xF09,
+  string_token_item_ancient_cloak = 0xBDE,
+  string_token_ancient_desc_cloak = 0xBDF,
+  string_token_ancient_desc_cloak_0 = 0xBE0,
+  string_token_ancient_desc_cloak_1 = 0xBE1,
+  string_token_ancient_desc_cloak_2 = 0xBE2,
+  string_token_ancient_desc_cloak_3 = 0xBE3,
+  string_token_ancient_desc_cloak_4 = 0xBE4,
+  string_token_ui_deep_wounds = 0x5C8,
+  string_token_item_ancient_boots = 0xBE5,
+  string_token_ancient_desc_boots = 0xBE6,
+  string_token_ancient_desc_boots_0 = 0xBE7,
+  string_token_ancient_desc_boots_1 = 0xBE8,
+  string_token_ancient_desc_boots_2 = 0xBE9,
+  string_token_ancient_desc_boots_3 = 0xBEA,
+  string_token_ancient_desc_boots_4 = 0xBEB,
+  string_token_ancient_desc_boots_5 = 0xBEC,
+  string_token_ancient_desc_boots_6 = 0xBED,
+  string_token_ancient_desc_boots_7 = 0xBEE,
+  string_token_ancient_desc_boots_8 = 0xBEF,
+  string_token_item_ancient_dagger = 0xBF0,
+  string_token_ancient_desc_dagger = 0xBF1,
+  string_token_ancient_desc_dagger_0 = 0xBF2,
+  string_token_ancient_desc_dagger_1 = 0xBF3,
+  string_token_ancient_desc_dagger_2 = 0xBF4,
+  string_token_ancient_desc_dagger_3 = 0xBF5,
+  string_token_ancient_desc_dagger_4 = 0xBF6,
+  string_token_ancient_desc_dagger_5 = 0xBF7,
+  string_token_ancient_desc_dagger_6 = 0xBF8,
+  string_token_ancient_desc_dagger_7 = 0xBF9,
+  string_token_ancient_desc_dagger_8 = 0xBFA,
+  string_token_item_ancient_flask = 0xBFB,
+  string_token_ancient_desc_flask = 0xBFC,
+  string_token_ancient_desc_flask_0 = 0xBFD,
+  string_token_ancient_desc_flask_1 = 0xBFE,
+  string_token_ancient_desc_flask_2 = 0xBFF,
+  string_token_ancient_desc_flask_3 = 0xC00,
+  string_token_ancient_desc_flask_4 = 0xC01,
+  string_token_ancient_desc_flask_5 = 0xC02,
+  string_token_ancient_desc_flask_6 = 0xC03,
+  string_token_ancient_desc_flask_7 = 0xC04,
+  string_token_ancient_desc_flask_8 = 0xC05,
+  string_token_item_ancient_cowl = 0xC06,
+  string_token_ancient_desc_cowl = 0xC07,
+  string_token_ancient_desc_cowl_0 = 0xC08,
+  string_token_ancient_desc_cowl_1 = 0xC09,
+  string_token_ancient_desc_cowl_2 = 0xC0A,
+  string_token_ancient_desc_cowl_3 = 0xC0B,
+  string_token_ancient_desc_cowl_4 = 0xC0C,
+  string_token_ancient_desc_cowl_5 = 0xC0D,
+  string_token_ancient_desc_cowl_6 = 0xC0E,
+  string_token_ancient_desc_cowl_7 = 0xC0F,
+  string_token_ancient_desc_cowl_8 = 0xC10,
+  string_token_item_ancient_seal = 0xBAF,
+  string_token_ancient_desc_seal = 0xBB0,
+  string_token_ancient_desc_seal_0 = 0xBB1,
+  string_token_ancient_desc_seal_1 = 0xBB2,
+  string_token_ancient_desc_seal_2 = 0xBB3,
+  string_token_ancient_desc_seal_3 = 0xBB4,
+  string_token_ancient_desc_seal_4 = 0xBB5,
+  string_token_ancient_desc_seal_5 = 0xBB6,
+  string_token_ancient_desc_seal_6 = 0xBB7,
+  string_token_ancient_desc_seal_7 = 0xBB8,
+  string_token_ancient_desc_seal_8 = 0xBB9,
+  string_token_item_ancient_kite_shield = 0xBBA,
+  string_token_ancient_desc_kite_shield = 0xBBB,
+  string_token_ancient_desc_kite_shield_0 = 0xBBC,
+  string_token_ancient_desc_kite_shield_1 = 0xBBD,
+  string_token_ancient_desc_kite_shield_2 = 0xBBE,
+  string_token_ancient_desc_kite_shield_3 = 0xBBF,
+  string_token_ancient_desc_kite_shield_4 = 0xBC0,
+  string_token_ancient_desc_kite_shield_5 = 0xBC1,
+  string_token_ancient_desc_kite_shield_6 = 0xBC2,
+  string_token_ancient_desc_kite_shield_7 = 0xBC3,
+  string_token_ancient_desc_kite_shield_8 = 0xBC4,
+  string_token_item_ancient_circlet = 0xBC5,
+  string_token_ancient_desc_circlet = 0xBC6,
+  string_token_ancient_desc_circlet_0 = 0xBC7,
+  string_token_ancient_desc_circlet_1 = 0xBC8,
+  string_token_ancient_desc_circlet_2 = 0xBC9,
+  string_token_ancient_desc_circlet_3 = 0xBCA,
+  string_token_ancient_desc_circlet_4 = 0xBCB,
+  string_token_item_ancient_holy_vial = 0xBCC,
+  string_token_ancient_desc_holy_vial = 0xBCD,
+  string_token_ancient_desc_holy_vial_0 = 0xBCE,
+  string_token_ancient_desc_holy_vial_1 = 0xBCF,
+  string_token_ancient_desc_holy_vial_2 = 0xBD0,
+  string_token_ancient_desc_holy_vial_3 = 0xBD1,
+  string_token_ancient_desc_holy_vial_4 = 0xBD2,
+  string_token_item_ancient_endless_elixir = 0xBD3,
+  string_token_ancient_desc_endless_elixir = 0xBD4,
+  string_token_ancient_desc_endless_elixir_0 = 0xBD5,
+  string_token_ancient_desc_endless_elixir_1 = 0xBD6,
+  string_token_ancient_desc_endless_elixir_2 = 0xBD7,
+  string_token_ancient_desc_endless_elixir_3 = 0xBD8,
+  string_token_ancient_desc_endless_elixir_4 = 0xBD9,
+  string_token_ancient_desc_endless_elixir_5 = 0xBDA,
+  string_token_ancient_desc_endless_elixir_6 = 0xBDB,
+  string_token_ancient_desc_endless_elixir_7 = 0xBDC,
+  string_token_ancient_desc_endless_elixir_8 = 0xBDD,
+  string_token_item_ancient_ukulele = 0xB4D,
+  string_token_ancient_desc_ukulele = 0xB4E,
+  string_token_ancient_desc_ukulele_0 = 0xB4F,
+  string_token_ancient_desc_ukulele_1 = 0xB50,
+  string_token_ancient_desc_ukulele_2 = 0xB51,
+  string_token_ancient_desc_ukulele_3 = 0xB52,
+  string_token_ancient_desc_ukulele_4 = 0xB53,
+  string_token_ancient_desc_ukulele_5 = 0xB54,
+  string_token_ancient_desc_ukulele_6 = 0xB55,
+  string_token_ancient_desc_ukulele_7 = 0xB56,
+  string_token_ancient_desc_ukulele_8 = 0xB57,
+  string_token_item_ancient_drum = 0xB58,
+  string_token_ancient_desc_drum = 0xB59,
+  string_token_ancient_desc_drum_0 = 0xB5A,
+  string_token_ancient_desc_drum_1 = 0xB5B,
+  string_token_ancient_desc_drum_2 = 0xB5C,
+  string_token_ancient_desc_drum_3 = 0xB5D,
+  string_token_ancient_desc_drum_4 = 0xB5E,
+  string_token_item_ancient_flute = 0xB5F,
+  string_token_ancient_desc_flute = 0xB60,
+  string_token_ancient_desc_flute_0 = 0xB61,
+  string_token_ancient_desc_flute_1 = 0xB62,
+  string_token_ancient_desc_flute_2 = 0xB63,
+  string_token_ancient_desc_flute_3 = 0xB64,
+  string_token_ancient_desc_flute_4 = 0xB65,
+  string_token_ancient_desc_flute_5 = 0xB66,
+  string_token_ancient_desc_flute_6 = 0xB67,
+  string_token_ancient_desc_flute_7 = 0xB68,
+  string_token_ancient_desc_flute_8 = 0xB69,
+  string_token_item_ancient_base = 0xB6A,
+  string_token_ancient_desc_base = 0xB6B,
+  string_token_ancient_desc_base_0 = 0xB6C,
+  string_token_ancient_desc_base_1 = 0xB6D,
+  string_token_ancient_desc_base_2 = 0xB6E,
+  string_token_ancient_desc_base_3 = 0xB6F,
+  string_token_ancient_desc_base_4 = 0xB70,
+  string_token_ancient_desc_base_5 = 0xB71,
+  string_token_ancient_desc_base_6 = 0xB72,
+  string_token_ancient_desc_base_7 = 0xB73,
+  string_token_ancient_desc_base_8 = 0xB74,
+  string_token_item_ancient_mic = 0xB75,
+  string_token_ancient_desc_mic = 0xB76,
+  string_token_ancient_desc_mic_0 = 0xB77,
+  string_token_ancient_desc_mic_1 = 0xB78,
+  string_token_ancient_desc_mic_2 = 0xB79,
+  string_token_ancient_desc_mic_3 = 0xB7A,
+  string_token_ancient_desc_mic_4 = 0xB7B,
+  string_token_ancient_desc_mic_5 = 0xB7C,
+  string_token_ancient_desc_mic_6 = 0xB7D,
+  string_token_ancient_desc_mic_7 = 0xB7E,
+  string_token_ancient_desc_mic_8 = 0xB7F,
+  string_token_item_ancient_frozen_shield = 0xAE5,
+  string_token_ancient_desc_frozen_shield = 0xAE6,
+  string_token_ancient_desc_frozen_shield_0 = 0xAE7,
+  string_token_ancient_desc_frozen_shield_1 = 0xAE8,
+  string_token_ancient_desc_frozen_shield_2 = 0xAE9,
+  string_token_ancient_desc_frozen_shield_3 = 0xAEA,
+  string_token_ancient_desc_frozen_shield_4 = 0xAEB,
+  string_token_ancient_desc_frozen_shield_5 = 0xAEC,
+  string_token_ancient_desc_frozen_shield_6 = 0xAED,
+  string_token_ancient_desc_frozen_shield_7 = 0xAEE,
+  string_token_ancient_desc_frozen_shield_8 = 0xAEF,
+  string_token_item_ancient_translocate = 0xAF0,
+  string_token_ancient_desc_translocate = 0xAF1,
+  string_token_ancient_desc_translocate_0 = 0xAF2,
+  string_token_ancient_desc_translocate_1 = 0xAF3,
+  string_token_ancient_desc_translocate_2 = 0xAF4,
+  string_token_ancient_desc_translocate_3 = 0xAF5,
+  string_token_ancient_desc_translocate_4 = 0xAF6,
+  string_token_item_ancient_firestorm = 0xAF7,
+  string_token_ancient_desc_firestorm = 0xAF8,
+  string_token_ancient_desc_firestorm_0 = 0xAF9,
+  string_token_ancient_desc_firestorm_1 = 0xAFA,
+  string_token_ancient_desc_firestorm_2 = 0xAFB,
+  string_token_ancient_desc_firestorm_3 = 0xAFC,
+  string_token_ancient_desc_firestorm_4 = 0xAFD,
+  string_token_ancient_desc_firestorm_5 = 0xAFE,
+  string_token_ancient_desc_firestorm_6 = 0xAFF,
+  string_token_ancient_desc_firestorm_7 = 0xB00,
+  string_token_ancient_desc_firestorm_8 = 0xB01,
+  string_token_item_ancient_familiar = 0xB02,
+  string_token_ancient_desc_familiar = 0xB03,
+  string_token_ancient_desc_familiar_0 = 0xB04,
+  string_token_ancient_desc_familiar_1 = 0xB05,
+  string_token_ancient_desc_familiar_2 = 0xB06,
+  string_token_ancient_desc_familiar_3 = 0xB07,
+  string_token_ancient_desc_familiar_4 = 0xB08,
+  string_token_item_ancient_thunderstorm = 0xB09,
+  string_token_ancient_desc_thunderstorm = 0xB0A,
+  string_token_ancient_desc_thunderstorm_0 = 0xB0B,
+  string_token_ancient_desc_thunderstorm_1 = 0xB0C,
+  string_token_ancient_desc_thunderstorm_2 = 0xB0D,
+  string_token_ancient_desc_thunderstorm_3 = 0xB0E,
+  string_token_ancient_desc_thunderstorm_4 = 0xB0F,
+  string_token_ancient_desc_thunderstorm_5 = 0xB10,
+  string_token_ancient_desc_thunderstorm_6 = 0xB11,
+  string_token_ancient_desc_thunderstorm_7 = 0xB12,
+  string_token_ancient_desc_thunderstorm_8 = 0xB13,
+  string_token_item_t_ancient_frozen_shield = 0x907,
+  string_token_t_ancient_desc_frozen_shield = 0x908,
+  string_token_t_ancient_frozen_shield_base_0 = 0x92C,
+  string_token_t_ancient_frozen_shield_base_1 = 0x909,
+  string_token_t_ancient_frozen_shield_base_2 = 0x90A,
+  string_token_t_ancient_frozen_shield_base_3 = 0x90B,
+  string_token_t_ancient_frozen_shield_base_4 = 0x90C,
+  string_token_t_ancient_frozen_shield_base_5 = 0x90D,
+  string_token_t_ancient_frozen_shield_base_6 = 0x90E,
+  string_token_t_ancient_frozen_shield_cold_dmg_1 = 0x90F,
+  string_token_t_ancient_frozen_shield_cold_dmg_2 = 0x910,
+  string_token_t_ancient_frozen_shield_cold_dmg_3 = 0x911,
+  string_token_t_ancient_frozen_shield_cold_dmg_4 = 0x912,
+  string_token_t_ancient_frozen_shield_vigor_add_1 = 0x913,
+  string_token_t_ancient_frozen_shield_vigor_add_2 = 0x914,
+  string_token_t_ancient_frozen_shield_vigor_add_3 = 0x915,
+  string_token_t_ancient_frozen_shield_vigor_add_4 = 0x916,
+  string_token_t_ancient_frozen_shield_vigor_buff_1 = 0x917,
+  string_token_t_ancient_frozen_shield_vigor_buff_2 = 0x918,
+  string_token_t_ancient_frozen_shield_vigor_buff_3 = 0x919,
+  string_token_t_ancient_frozen_shield_vigor_buff_4 = 0x91A,
+  string_token_t_ancient_frozen_shield_crit_recharge_1 = 0x91B,
+  string_token_t_ancient_frozen_shield_crit_recharge_2 = 0x91C,
+  string_token_t_ancient_frozen_shield_recharge_1 = 0x91D,
+  string_token_t_ancient_frozen_shield_recharge_2 = 0x91E,
+  string_token_t_ancient_frozen_shield_thunder_1 = 0x91F,
+  string_token_t_ancient_frozen_shield_thunder_2 = 0x920,
+  string_token_t_ancient_frozen_shield_autostorm_1 = 0x921,
+  string_token_t_ancient_frozen_shield_autostorm_2 = 0x922,
+  string_token_t_ancient_frozen_shield_autostorm_3 = 0x923,
+  string_token_t_ancient_frozen_shield_autostorm_4 = 0x924,
+  string_token_t_ancient_frozen_shield_minion_1 = 0x925,
+  string_token_t_ancient_frozen_shield_minion_2 = 0x926,
+  string_token_t_ancient_frozen_shield_familiar_1 = 0x92D,
+  string_token_t_ancient_frozen_shield_familiar_2 = 0x92E,
+  string_token_t_ancient_frozen_shield_familiar_3 = 0x92F,
+  string_token_t_ancient_frozen_shield_familiar_4 = 0x930,
+  string_token_item_t_ancient_translocate = 0x8FD,
+  string_token_t_ancient_desc_translocate = 0x8FE,
+  string_token_t_ancient_translocate_base_0 = 0x957,
+  string_token_t_ancient_translocate_base_1 = 0x958,
+  string_token_t_ancient_translocate_base_2 = 0x959,
+  string_token_t_ancient_translocate_base_3 = 0x95A,
+  string_token_t_ancient_translocate_base_4 = 0x95B,
+  string_token_t_ancient_translocate_resist_buff_1 = 0x95C,
+  string_token_t_ancient_translocate_resist_buff_2 = 0x95D,
+  string_token_t_ancient_translocate_resist_buff_3 = 0x95E,
+  string_token_t_ancient_translocate_resist_buff_4 = 0x95F,
+  string_token_t_ancient_translocate_resist_buff_5 = 0x960,
+  string_token_t_ancient_translocate_resist_buff_6 = 0x961,
+  string_token_t_ancient_translocate_resist_buff_7 = 0x962,
+  string_token_t_ancient_translocate_resist_buff_8 = 0x963,
+  string_token_t_ancient_translocate_minion_dmg_1 = 0x964,
+  string_token_t_ancient_translocate_minion_dmg_2 = 0x965,
+  string_token_t_ancient_translocate_minion_dmg_3 = 0x966,
+  string_token_t_ancient_translocate_minion_dmg_4 = 0x967,
+  string_token_t_ancient_translocate_phoenix_1 = 0x968,
+  string_token_t_ancient_translocate_thunderstorm_1 = 0x969,
+  string_token_t_ancient_translocate_thunderstorm_2 = 0x96A,
+  string_token_t_ancient_translocate_thunderstorm_3 = 0x96B,
+  string_token_t_ancient_translocate_thunderstorm_4 = 0x96C,
+  string_token_t_ancient_translocate_thunderstorm_5 = 0x96D,
+  string_token_t_ancient_translocate_heal_1 = 0x96E,
+  string_token_t_ancient_translocate_heal_2 = 0x96F,
+  string_token_t_ancient_translocate_heal_3 = 0x970,
+  string_token_t_ancient_translocate_heal_4 = 0x971,
+  string_token_t_ancient_translocate_push_1 = 0x972,
+  string_token_t_ancient_translocate_fire_start_1 = 0x9C8,
+  string_token_t_ancient_translocate_fire_start_2 = 0x9C9,
+  string_token_t_ancient_translocate_fire_start_3 = 0x9CA,
+  string_token_t_ancient_translocate_fire_start_4 = 0x9CB,
+  string_token_t_ancient_translocate_fire_end_1 = 0x9CC,
+  string_token_t_ancient_translocate_fire_end_2 = 0x9CD,
+  string_token_t_ancient_translocate_fire_end_3 = 0x9CE,
+  string_token_t_ancient_translocate_fire_end_4 = 0x9CF,
+  string_token_t_ancient_translocate_buffext_1 = 0x977,
+  string_token_t_ancient_translocate_buffext_2 = 0x978,
+  string_token_t_ancient_translocate_buffext_3 = 0x979,
+  string_token_t_ancient_translocate_buffext_4 = 0x97A,
+  string_token_translocate_error = 0x2F9,
+  string_token_item_t_ancient_firestorm = 0x8C6,
+  string_token_t_ancient_desc_firestorm = 0x8C7,
+  string_token_t_ancient_firestorm_base_0 = 0x97B,
+  string_token_t_ancient_firestorm_base_1 = 0x97C,
+  string_token_t_ancient_firestorm_base_2 = 0x97D,
+  string_token_t_ancient_firestorm_base_3 = 0x97E,
+  string_token_t_ancient_firestorm_base_4 = 0x97F,
+  string_token_t_ancient_firestorm_base_5 = 0x980,
+  string_token_t_ancient_firestorm_base_6 = 0x981,
+  string_token_t_ancient_firestorm_base_7 = 0x982,
+  string_token_t_ancient_firestorm_cooldown_1 = 0x983,
+  string_token_t_ancient_firestorm_cooldown_2 = 0x984,
+  string_token_t_ancient_firestorm_cooldown_3 = 0x985,
+  string_token_t_ancient_firestorm_fire_crit_1 = 0x986,
+  string_token_t_ancient_firestorm_fire_crit_2 = 0x987,
+  string_token_t_ancient_firestorm_fire_crit_3 = 0x988,
+  string_token_t_ancient_firestorm_fire_crit_4 = 0x989,
+  string_token_t_ancient_firestorm_burn_1 = 0x98A,
+  string_token_t_ancient_firestorm_burn_2 = 0x98B,
+  string_token_t_ancient_firestorm_burn_3 = 0x98C,
+  string_token_t_ancient_firestorm_burn_4 = 0x98D,
+  string_token_t_ancient_firestorm_lightning_crit_1 = 0x98E,
+  string_token_t_ancient_firestorm_lightning_crit_2 = 0x98F,
+  string_token_t_ancient_firestorm_lightning_crit_3 = 0x990,
+  string_token_t_ancient_firestorm_lightning_crit_4 = 0x991,
+  string_token_t_ancient_firestorm_crit_cast_1 = 0xAC6,
+  string_token_t_ancient_firestorm_crit_cast_2 = 0xAC7,
+  string_token_t_ancient_firestorm_crit_cast_3 = 0xAC8,
+  string_token_t_ancient_firestorm_crit_cast_4 = 0xAC9,
+  string_token_t_ancient_firestorm_lightning_buff_1 = 0x994,
+  string_token_t_ancient_firestorm_lightning_buff_2 = 0x995,
+  string_token_t_ancient_firestorm_range_1 = 0x996,
+  string_token_t_ancient_firestorm_range_2 = 0x997,
+  string_token_t_ancient_firestorm_damage_1 = 0x998,
+  string_token_t_ancient_firestorm_damage_2 = 0x999,
+  string_token_t_ancient_firestorm_damage_3 = 0x99A,
+  string_token_t_ancient_firestorm_damage_4 = 0x99B,
+  string_token_t_ancient_firestorm_passive_1 = 0x99C,
+  string_token_t_ancient_firestorm_passive_2 = 0x99D,
+  string_token_item_t_ancient_familiar = 0x8BB,
+  string_token_t_ancient_desc_familiar = 0x8BC,
+  string_token_t_ancient_familiar_base_0 = 0x931,
+  string_token_t_ancient_familiar_base_1 = 0x932,
+  string_token_t_ancient_familiar_base_2 = 0x933,
+  string_token_t_ancient_familiar_base_3 = 0x934,
+  string_token_t_ancient_familiar_base_4 = 0x935,
+  string_token_t_ancient_familiar_armor_break_1 = 0x937,
+  string_token_t_ancient_familiar_armor_break_2 = 0x938,
+  string_token_t_ancient_familiar_armor_break_3 = 0x939,
+  string_token_t_ancient_familiar_armor_break_4 = 0x93A,
+  string_token_t_ancient_familiar_heal_1 = 0x93B,
+  string_token_t_ancient_familiar_heal_2 = 0x93C,
+  string_token_t_ancient_familiar_heal_3 = 0x93D,
+  string_token_t_ancient_familiar_heal_4 = 0x93E,
+  string_token_t_ancient_familiar_fire_1 = 0x93F,
+  string_token_t_ancient_familiar_fire_2 = 0x940,
+  string_token_t_ancient_familiar_fire_3 = 0x941,
+  string_token_t_ancient_familiar_fire_4 = 0x942,
+  string_token_t_ancient_familiar_fire_5 = 0x943,
+  string_token_t_ancient_familiar_lightning_1 = 0x944,
+  string_token_t_ancient_familiar_lightning_2 = 0x945,
+  string_token_t_ancient_familiar_lightning_3 = 0x946,
+  string_token_t_ancient_familiar_lightning_4 = 0x947,
+  string_token_t_ancient_familiar_lightning_5 = 0x948,
+  string_token_t_ancient_familiar_recharge_1 = 0x949,
+  string_token_t_ancient_familiar_recharge_2 = 0x94A,
+  string_token_t_ancient_familiar_recharge_3 = 0x94B,
+  string_token_t_ancient_familiar_recharge_4 = 0x94C,
+  string_token_t_ancient_familiar_recharge_5 = 0x94D,
+  string_token_t_ancient_familiar_phoenix_1 = 0x94E,
+  string_token_t_ancient_familiar_phoenix_2 = 0x94F,
+  string_token_t_ancient_familiar_phoenix_3 = 0x950,
+  string_token_t_ancient_familiar_phoenix_4 = 0x951,
+  string_token_t_ancient_familiar_phoenix_res_1 = 0x952,
+  string_token_t_ancient_familiar_autothunder_1 = 0x953,
+  string_token_t_ancient_familiar_autothunder_2 = 0x954,
+  string_token_t_ancient_familiar_autofire_1 = 0x955,
+  string_token_t_ancient_familiar_autofire_2 = 0x956,
+  string_token_item_t_ancient_thunderstorm = 0x8D0,
+  string_token_t_ancient_desc_thunderstorm = 0x8D1,
+  string_token_t_ancient_thunderstorm_base_0 = 0x99E,
+  string_token_t_ancient_thunderstorm_base_1 = 0x99F,
+  string_token_t_ancient_thunderstorm_base_2 = 0x9A0,
+  string_token_t_ancient_thunderstorm_base_3 = 0x9A1,
+  string_token_t_ancient_thunderstorm_base_4 = 0x9A2,
+  string_token_t_ancient_thunderstorm_base_5 = 0x9A3,
+  string_token_t_ancient_thunderstorm_base_6 = 0x9A4,
+  string_token_t_ancient_thunderstorm_base_7 = 0x9A5,
+  string_token_t_ancient_thunderstorm_bolts_1 = 0x9A6,
+  string_token_t_ancient_thunderstorm_bolts_2 = 0x9A7,
+  string_token_t_ancient_thunderstorm_bolts_3 = 0x9A8,
+  string_token_t_ancient_thunderstorm_bolts_4 = 0x9A9,
+  string_token_t_ancient_thunderstorm_weapdmg_1 = 0x9AA,
+  string_token_t_ancient_thunderstorm_weapdmg_2 = 0x9AB,
+  string_token_t_ancient_thunderstorm_weapdmg_3 = 0x9AC,
+  string_token_t_ancient_thunderstorm_weapdmg_4 = 0x9AD,
+  string_token_t_ancient_thunderstorm_length_1 = 0x9AE,
+  string_token_t_ancient_thunderstorm_length_2 = 0x9AF,
+  string_token_t_ancient_thunderstorm_piercing_1 = 0x9B0,
+  string_token_t_ancient_thunderstorm_buff_1 = 0x9B1,
+  string_token_t_ancient_thunderstorm_buff_2 = 0x9B2,
+  string_token_t_ancient_thunderstorm_buff_3 = 0x9B3,
+  string_token_t_ancient_thunderstorm_buff_4 = 0x9B4,
+  string_token_t_ancient_thunderstorm_resist_1 = 0x9B5,
+  string_token_t_ancient_thunderstorm_resist_2 = 0x9B6,
+  string_token_t_ancient_thunderstorm_resist_3 = 0x9B7,
+  string_token_t_ancient_thunderstorm_resist_4 = 0x9B8,
+  string_token_t_ancient_thunderstorm_dmg_burn_1 = 0x9B9,
+  string_token_t_ancient_thunderstorm_dmg_burn_2 = 0x9BA,
+  string_token_t_ancient_thunderstorm_dmg_cold_1 = 0x9BB,
+  string_token_t_ancient_thunderstorm_dmg_cold_2 = 0x9BC,
+  string_token_t_ancient_thunderstorm_heal_1 = 0x9BD,
+  string_token_t_ancient_thunderstorm_heal_2 = 0x9BE,
+  string_token_t_ancient_thunderstorm_heal_3 = 0x9BF,
+  string_token_t_ancient_thunderstorm_heal_4 = 0x9C0,
+  string_token_item_ancient_jade_skull = 0xC45,
+  string_token_ancient_desc_jade_skull = 0xC46,
+  string_token_ancient_desc_jade_skull_0 = 0xC47,
+  string_token_ancient_desc_jade_skull_1 = 0xC48,
+  string_token_ancient_desc_jade_skull_2 = 0xC49,
+  string_token_ancient_desc_jade_skull_3 = 0xC4A,
+  string_token_ancient_desc_jade_skull_4 = 0xC4B,
+  string_token_item_ancient_amulet = 0xC4C,
+  string_token_ancient_desc_amulet = 0xC4D,
+  string_token_ancient_desc_amulet_0 = 0xC4E,
+  string_token_ancient_desc_amulet_1 = 0xC4F,
+  string_token_ancient_desc_amulet_2 = 0xC50,
+  string_token_ancient_desc_amulet_3 = 0xC51,
+  string_token_ancient_desc_amulet_4 = 0xC52,
+  string_token_ancient_desc_amulet_5 = 0xC53,
+  string_token_ancient_desc_amulet_6 = 0xC54,
+  string_token_ancient_desc_amulet_7 = 0xC55,
+  string_token_ancient_desc_amulet_8 = 0xC56,
+  string_token_item_ancient_wisp = 0xC57,
+  string_token_ancient_desc_wisp = 0xC58,
+  string_token_ancient_desc_wisp_0 = 0xC59,
+  string_token_ancient_desc_wisp_1 = 0xC5A,
+  string_token_ancient_desc_wisp_2 = 0xC5B,
+  string_token_ancient_desc_wisp_3 = 0xC5C,
+  string_token_ancient_desc_wisp_4 = 0xC5D,
+  string_token_item_ancient_brain = 0xC5E,
+  string_token_ancient_desc_brain = 0xC5F,
+  string_token_ancient_desc_brain_0 = 0xC60,
+  string_token_ancient_desc_brain_1 = 0xC61,
+  string_token_ancient_desc_brain_2 = 0xC62,
+  string_token_ancient_desc_brain_3 = 0xC63,
+  string_token_ancient_desc_brain_4 = 0xC64,
+  string_token_ancient_desc_brain_5 = 0xC65,
+  string_token_ancient_desc_brain_6 = 0xC66,
+  string_token_ancient_desc_brain_7 = 0xC67,
+  string_token_ancient_desc_brain_8 = 0xC68,
+  string_token_item_ancient_prism = 0xC69,
+  string_token_ancient_desc_prism = 0xC6A,
+  string_token_ancient_desc_prism_0 = 0xC6B,
+  string_token_ancient_desc_prism_1 = 0xC6C,
+  string_token_ancient_desc_prism_2 = 0xC6D,
+  string_token_ancient_desc_prism_3 = 0xC6E,
+  string_token_ancient_desc_prism_4 = 0xC6F,
+  string_token_ancient_desc_prism_5 = 0xC70,
+  string_token_ancient_desc_prism_6 = 0xC71,
+  string_token_ancient_desc_prism_7 = 0xC72,
+  string_token_ancient_desc_prism_8 = 0xC73,
+  string_token_item_ancient_ice_skull = 0xC16,
+  string_token_ancient_desc_ice_skull = 0xC17,
+  string_token_ancient_desc_ice_skull_0 = 0xC18,
+  string_token_ancient_desc_ice_skull_1 = 0xC19,
+  string_token_ancient_desc_ice_skull_2 = 0xC1A,
+  string_token_ancient_desc_ice_skull_3 = 0xC1B,
+  string_token_ancient_desc_ice_skull_4 = 0xC1C,
+  string_token_pet_max = 0x31E,
+  string_token_item_ancient_scythe = 0xC1D,
+  string_token_ancient_desc_scythe = 0xC1E,
+  string_token_ancient_desc_scythe_0 = 0xC1F,
+  string_token_ancient_desc_scythe_1 = 0xC20,
+  string_token_ancient_desc_scythe_2 = 0xC21,
+  string_token_ancient_desc_scythe_3 = 0xC22,
+  string_token_ancient_desc_scythe_4 = 0xC23,
+  string_token_ancient_desc_scythe_5 = 0xC24,
+  string_token_ancient_desc_scythe_6 = 0xC25,
+  string_token_ancient_desc_scythe_7 = 0xC26,
+  string_token_ancient_desc_scythe_8 = 0xC27,
+  string_token_item_ancient_bone = 0xC28,
+  string_token_ancient_desc_bone = 0xC29,
+  string_token_ancient_desc_bone_0 = 0xC2A,
+  string_token_ancient_desc_bone_1 = 0xC2B,
+  string_token_ancient_desc_bone_2 = 0xC2C,
+  string_token_ancient_desc_bone_3 = 0xC2D,
+  string_token_ancient_desc_bone_4 = 0xC2E,
+  string_token_ancient_desc_bone_5 = 0xC2F,
+  string_token_ancient_desc_bone_6 = 0xC30,
+  string_token_ancient_desc_bone_7 = 0xC31,
+  string_token_ancient_desc_bone_8 = 0xC32,
+  string_token_item_ancient_black_heart = 0xC33,
+  string_token_ancient_desc_black_heart = 0xC34,
+  string_token_ancient_desc_black_heart_0 = 0xC35,
+  string_token_ancient_desc_black_heart_1 = 0xC36,
+  string_token_ancient_desc_black_heart_2 = 0xC37,
+  string_token_ancient_desc_black_heart_3 = 0xC38,
+  string_token_ancient_desc_black_heart_4 = 0xC39,
+  string_token_item_ancient_soul_jar = 0xC3A,
+  string_token_ancient_desc_soul_jar = 0xC3B,
+  string_token_ancient_desc_soul_jar_0 = 0xC3C,
+  string_token_ancient_desc_soul_jar_1 = 0xC3D,
+  string_token_ancient_desc_soul_jar_2 = 0xC3E,
+  string_token_ancient_desc_soul_jar_3 = 0xC3F,
+  string_token_ancient_desc_soul_jar_4 = 0xC40,
+  string_token_ancient_desc_soul_jar_5 = 0xC41,
+  string_token_ancient_desc_soul_jar_6 = 0xC42,
+  string_token_ancient_desc_soul_jar_7 = 0xC43,
+  string_token_ancient_desc_soul_jar_8 = 0xC44,
+  string_token_item_t_ancient_plate_boots = 0x60D,
+  string_token_t_ancient_desc_plate_boots = 0x891,
+  string_token_t_ancient_plate_boots_base_0 = 0x9DC,
+  string_token_t_ancient_plate_boots_base_1 = 0x9DD,
+  string_token_t_ancient_plate_boots_base_2 = 0x9DE,
+  string_token_t_ancient_plate_boots_base_3 = 0x9DF,
+  string_token_t_ancient_plate_boots_base_4 = 0x9E0,
+  string_token_t_ancient_plate_boots_armbrk_1 = 0x9E1,
+  string_token_t_ancient_plate_boots_armbrk_2 = 0x9E2,
+  string_token_t_ancient_plate_boots_armbrk_3 = 0x9E3,
+  string_token_t_ancient_plate_boots_armbrk_4 = 0x9E4,
+  string_token_t_ancient_plate_boots_armbrk_5 = 0x9E5,
+  string_token_t_ancient_plate_boots_armbrk_6 = 0x9E6,
+  string_token_t_ancient_plate_boots_heal_1 = 0x9E7,
+  string_token_t_ancient_plate_boots_heal_2 = 0x9E8,
+  string_token_t_ancient_plate_boots_heal_3 = 0x9E9,
+  string_token_t_ancient_plate_boots_heal_4 = 0x9EA,
+  string_token_t_ancient_plate_boots_shield_1 = 0x9EB,
+  string_token_t_ancient_plate_boots_shield_2 = 0x9EC,
+  string_token_t_ancient_plate_boots_shield_3 = 0x9ED,
+  string_token_t_ancient_plate_boots_shield_4 = 0x9EE,
+  string_token_t_ancient_plate_boots_shield_5 = 0x9EF,
+  string_token_t_ancient_plate_boots_shield_6 = 0x9F0,
+  string_token_t_ancient_plate_boots_stun_1 = 0x9F2,
+  string_token_t_ancient_plate_boots_stun_2 = 0x9F3,
+  string_token_t_ancient_plate_boots_dmg_1 = 0x9F4,
+  string_token_t_ancient_plate_boots_dmg_2 = 0x9F5,
+  string_token_t_ancient_plate_boots_dmg_3 = 0x9F6,
+  string_token_t_ancient_plate_boots_dmg_4 = 0x9F7,
+  string_token_t_ancient_plate_boots_bleed_1 = 0x9F8,
+  string_token_t_ancient_plate_boots_bleed_2 = 0x9F9,
+  string_token_t_ancient_plate_boots_riposte_1 = 0x9FA,
+  string_token_t_ancient_plate_boots_riposte_2 = 0x9FB,
+  string_token_t_ancient_plate_boots_riposte_3 = 0x9FC,
+  string_token_t_ancient_plate_boots_riposte_4 = 0x9FD,
+  string_token_t_ancient_plate_boots_riposte_5 = 0x9FE,
+  string_token_t_ancient_plate_boots_riposte_6 = 0x9FF,
+  string_token_t_ancient_plate_boots_speed_1 = 0xA00,
+  string_token_t_ancient_plate_boots_speed_2 = 0xA01,
+  string_token_t_ancient_plate_boots_speed_3 = 0xA02,
+  string_token_t_ancient_plate_boots_speed_4 = 0xA03,
+  string_token_t_ancient_plate_boots_speed_5 = 0xA04,
+  string_token_t_ancient_plate_boots_speed_6 = 0xA05,
+  string_token_t_ancient_plate_boots_dodge_1 = 0xA06,
+  string_token_t_ancient_plate_boots_dodge_2 = 0xA07,
+  string_token_t_ancient_plate_boots_dodge_3 = 0xA08,
+  string_token_t_ancient_plate_boots_dodge_4 = 0xA09,
+  string_token_t_ancient_plate_boots_dodge_5 = 0xA0A,
+  string_token_t_ancient_plate_boots_dodge_6 = 0xA0B,
+  string_token_dash_error = 0x72C,
+  string_token_item_t_ancient_plate_bracers = 0x613,
+  string_token_t_ancient_desc_plate_bracers = 0x87F,
+  string_token_t_ancient_plate_bracers_base_0 = 0xA67,
+  string_token_t_ancient_plate_bracers_base_1 = 0xA68,
+  string_token_t_ancient_plate_bracers_base_2 = 0xA69,
+  string_token_t_ancient_plate_bracers_base_3 = 0xA6A,
+  string_token_t_ancient_plate_bracers_base_4 = 0xA6B,
+  string_token_t_ancient_plate_bracers_base_5 = 0xA6C,
+  string_token_t_ancient_plate_bracers_base_6 = 0xA6D,
+  string_token_t_ancient_plate_bracers_crit_1 = 0xA6E,
+  string_token_t_ancient_plate_bracers_crit_2 = 0xA6F,
+  string_token_t_ancient_plate_bracers_crit_3 = 0xA70,
+  string_token_t_ancient_plate_bracers_crit_4 = 0xA71,
+  string_token_t_ancient_plate_bracers_crit_5 = 0xA72,
+  string_token_t_ancient_plate_bracers_crit_6 = 0xA73,
+  string_token_t_ancient_plate_bracers_vit_1 = 0xA74,
+  string_token_t_ancient_plate_bracers_vit_2 = 0xA75,
+  string_token_t_ancient_plate_bracers_vit_3 = 0xA76,
+  string_token_t_ancient_plate_bracers_vit_4 = 0xA77,
+  string_token_t_ancient_plate_bracers_vit_5 = 0xA78,
+  string_token_t_ancient_plate_bracers_atk_1 = 0xA79,
+  string_token_t_ancient_plate_bracers_atk_2 = 0xA7A,
+  string_token_t_ancient_plate_bracers_atk_3 = 0xA7B,
+  string_token_t_ancient_plate_bracers_atk_4 = 0xA7C,
+  string_token_t_ancient_plate_bracers_dex_1 = 0xA7D,
+  string_token_t_ancient_plate_bracers_dex_2 = 0xA7E,
+  string_token_t_ancient_plate_bracers_dex_3 = 0xA7F,
+  string_token_t_ancient_plate_bracers_dex_4 = 0xA80,
+  string_token_t_ancient_plate_bracers_dex_5 = 0xA81,
+  string_token_t_ancient_plate_bracers_triple_1 = 0xA82,
+  string_token_t_ancient_plate_bracers_triple_2 = 0xA83,
+  string_token_t_ancient_plate_bracers_triple_3 = 0xA84,
+  string_token_t_ancient_plate_bracers_triple_4 = 0xA85,
+  string_token_t_ancient_plate_bracers_heal_1 = 0xA86,
+  string_token_t_ancient_plate_bracers_heal_2 = 0xA87,
+  string_token_t_ancient_plate_bracers_heal_3 = 0xA88,
+  string_token_t_ancient_plate_bracers_heal_4 = 0xA89,
+  string_token_t_ancient_plate_bracers_heal_5 = 0xA8A,
+  string_token_t_ancient_plate_bracers_heal_6 = 0xA8B,
+  string_token_t_ancient_plate_bracers_healthdmg_1 = 0xA8C,
+  string_token_t_ancient_plate_bracers_healthdmg_2 = 0xA8D,
+  string_token_t_ancient_plate_bracers_healthdmg_3 = 0xA8E,
+  string_token_t_ancient_plate_bracers_healthdmg_4 = 0xA8F,
+  string_token_t_ancient_plate_bracers_healthdmg_5 = 0xA90,
+  string_token_t_ancient_plate_bracers_healthdmg_6 = 0xA91,
+  string_token_t_ancient_plate_bracers_execute_1 = 0xA92,
+  string_token_t_ancient_plate_bracers_execute_2 = 0xA93,
+  string_token_t_ancient_plate_bracers_execute_3 = 0xA94,
+  string_token_t_ancient_plate_bracers_execute_4 = 0xA95,
+  string_token_t_ancient_plate_bracers_whirl_1 = 0xA96,
+  string_token_t_ancient_plate_bracers_whirl_2 = 0xA97,
+  string_token_t_ancient_plate_bracers_whirl_3 = 0xA98,
+  string_token_t_ancient_plate_bracers_whirl_4 = 0xA99,
+  string_token_t_ancient_desc_plate_bracers_0 = 0x880,
+  string_token_t_ancient_desc_plate_bracers_1 = 0x881,
+  string_token_t_ancient_desc_plate_bracers_2 = 0x882,
+  string_token_t_ancient_desc_plate_bracers_3 = 0x883,
+  string_token_t_ancient_desc_plate_bracers_4 = 0x884,
+  string_token_t_ancient_desc_plate_bracers_5 = 0x885,
+  string_token_t_ancient_desc_plate_bracers_6 = 0x886,
+  string_token_t_ancient_desc_plate_bracers_7 = 0x887,
+  string_token_item_t_ancient_tower_shield = 0x619,
+  string_token_t_ancient_desc_tower_shield = 0x61A,
+  string_token_t_ancient_tower_shield_base_0 = 0xA3B,
+  string_token_t_ancient_tower_shield_base_1 = 0xA3C,
+  string_token_t_ancient_tower_shield_base_2 = 0xA3D,
+  string_token_t_ancient_tower_shield_base_3 = 0xA3E,
+  string_token_t_ancient_tower_shield_base_4 = 0xA3F,
+  string_token_t_ancient_tower_shield_base_5 = 0xA40,
+  string_token_t_ancient_tower_shield_db_buff_1 = 0xA41,
+  string_token_t_ancient_tower_shield_db_buff_2 = 0xA42,
+  string_token_t_ancient_tower_shield_db_buff_3 = 0xA43,
+  string_token_t_ancient_tower_shield_db_buff_4 = 0xA44,
+  string_token_t_ancient_tower_shield_db_buff_5 = 0xA45,
+  string_token_t_ancient_tower_shield_db_buff_6 = 0xA46,
+  string_token_t_ancient_tower_shield_regen_1 = 0xA47,
+  string_token_t_ancient_tower_shield_regen_2 = 0xA48,
+  string_token_t_ancient_tower_shield_crouch_1 = 0xA4D,
+  string_token_t_ancient_tower_shield_dmg_1 = 0xA4E,
+  string_token_t_ancient_tower_shield_dmg_2 = 0xA4F,
+  string_token_t_ancient_tower_shield_reflect_1 = 0xA50,
+  string_token_t_ancient_tower_shield_reflect_2 = 0xA51,
+  string_token_t_ancient_tower_shield_reflect_3 = 0xA52,
+  string_token_t_ancient_tower_shield_reflect_4 = 0xA53,
+  string_token_t_ancient_tower_shield_reflect_5 = 0xA54,
+  string_token_t_ancient_tower_shield_dex_1 = 0xA55,
+  string_token_t_ancient_tower_shield_dex_2 = 0xA56,
+  string_token_t_ancient_tower_shield_dex_3 = 0xA57,
+  string_token_t_ancient_tower_shield_dex_4 = 0xA58,
+  string_token_t_ancient_tower_shield_dex_5 = 0xA59,
+  string_token_t_ancient_tower_shield_vit_1 = 0xA5A,
+  string_token_t_ancient_tower_shield_vit_2 = 0xA5B,
+  string_token_t_ancient_tower_shield_vit_3 = 0xA5C,
+  string_token_t_ancient_tower_shield_vit_4 = 0xA5D,
+  string_token_t_ancient_tower_shield_vit_5 = 0xA5E,
+  string_token_t_ancient_tower_shield_vitdmg_1 = 0xA5F,
+  string_token_t_ancient_tower_shield_vitdmg_2 = 0xA60,
+  string_token_t_ancient_tower_shield_vitdmg_3 = 0xA61,
+  string_token_t_ancient_tower_shield_vitdmg_4 = 0xA62,
+  string_token_t_ancient_tower_shield_blockdmg_1 = 0xA63,
+  string_token_t_ancient_tower_shield_blockdmg_2 = 0xA64,
+  string_token_t_ancient_tower_shield_blockdmg_3 = 0xA65,
+  string_token_t_ancient_tower_shield_blockdmg_4 = 0xA66,
+  string_token_t_ancient_desc_tower_shield_0 = 0x61B,
+  string_token_t_ancient_desc_tower_shield_1 = 0x61C,
+  string_token_t_ancient_desc_tower_shield_2 = 0x61D,
+  string_token_t_ancient_desc_tower_shield_3 = 0x61E,
+  string_token_item_t_ancient_plate_chest = 0x61F,
+  string_token_t_ancient_desc_plate_chest = 0x620,
+  string_token_t_ancient_plate_chest_base_0 = 0xA0C,
+  string_token_t_ancient_plate_chest_base_1 = 0xA0D,
+  string_token_t_ancient_plate_chest_base_2 = 0xA0E,
+  string_token_t_ancient_plate_chest_base_3 = 0xA0F,
+  string_token_t_ancient_plate_chest_base_4 = 0xA10,
+  string_token_t_ancient_plate_chest_base_5 = 0xA11,
+  string_token_t_ancient_plate_chest_block_buff_1 = 0xA12,
+  string_token_t_ancient_plate_chest_block_buff_2 = 0xA13,
+  string_token_t_ancient_plate_chest_block_buff_3 = 0xA14,
+  string_token_t_ancient_plate_chest_block_buff_4 = 0xA15,
+  string_token_t_ancient_plate_chest_block_buff_5 = 0xA16,
+  string_token_t_ancient_plate_chest_dex_buff_1 = 0xA17,
+  string_token_t_ancient_plate_chest_dex_buff_2 = 0xA18,
+  string_token_t_ancient_plate_chest_dex_buff_3 = 0xA19,
+  string_token_t_ancient_plate_chest_dex_buff_4 = 0xA1A,
+  string_token_t_ancient_plate_chest_dex_buff_5 = 0xA1B,
+  string_token_t_ancient_plate_chest_crit_next_1 = 0xA1C,
+  string_token_t_ancient_plate_chest_crit_next_2 = 0xA1D,
+  string_token_t_ancient_plate_chest_crit_next_3 = 0xA1E,
+  string_token_t_ancient_plate_chest_crit_next_4 = 0xA1F,
+  string_token_t_ancient_plate_chest_crit_next_5 = 0xA20,
+  string_token_t_ancient_plate_chest_crit_heal_1 = 0xA21,
+  string_token_t_ancient_plate_chest_crit_heal_2 = 0xA22,
+  string_token_t_ancient_plate_chest_crit_heal_3 = 0xA23,
+  string_token_t_ancient_plate_chest_crit_heal_4 = 0xA24,
+  string_token_t_ancient_plate_chest_crit_heal_5 = 0xA25,
+  string_token_t_ancient_plate_chest_defense_1 = 0xA26,
+  string_token_t_ancient_plate_chest_missiles_1 = 0xA27,
+  string_token_t_ancient_plate_chest_missiles_2 = 0xA28,
+  string_token_t_ancient_plate_chest_missiles_3 = 0xA29,
+  string_token_t_ancient_plate_chest_missiles_4 = 0xA2A,
+  string_token_t_ancient_plate_chest_block_proc_1 = 0xA2B,
+  string_token_t_ancient_plate_chest_block_proc_2 = 0xA2C,
+  string_token_t_ancient_plate_chest_block_proc_3 = 0xA2D,
+  string_token_t_ancient_plate_chest_block_proc_4 = 0xA2E,
+  string_token_t_ancient_plate_chest_block_proc_5 = 0xA2F,
+  string_token_t_ancient_plate_chest_block_proc_6 = 0xA30,
+  string_token_t_ancient_plate_chest_melee_1 = 0xA31,
+  string_token_t_ancient_plate_chest_melee_2 = 0xA32,
+  string_token_t_ancient_plate_chest_melee_3 = 0xA33,
+  string_token_t_ancient_plate_chest_melee_4 = 0xA34,
+  string_token_t_ancient_plate_chest_melee_5 = 0xA35,
+  string_token_t_ancient_plate_chest_melee_6 = 0xA36,
+  string_token_t_ancient_plate_chest_dmg_1 = 0xA37,
+  string_token_t_ancient_plate_chest_dmg_2 = 0xA38,
+  string_token_t_ancient_plate_chest_dmg_3 = 0xA39,
+  string_token_t_ancient_plate_chest_dmg_4 = 0xA3A,
+  string_token_ui_reflect = 0x653,
+  string_token_item_t_ancient_charm = 0x64D,
+  string_token_t_ancient_desc_charm = 0x888,
+  string_token_t_ancient_charm_base_0 = 0xA9A,
+  string_token_t_ancient_charm_base_1 = 0xA9B,
+  string_token_t_ancient_charm_base_2 = 0xA9C,
+  string_token_t_ancient_charm_base_3 = 0xA9D,
+  string_token_t_ancient_charm_base_4 = 0xA9E,
+  string_token_t_ancient_charm_base_5 = 0xA9F,
+  string_token_t_ancient_charm_base_6 = 0xAA0,
+  string_token_t_ancient_charm_crit_hps_1 = 0xAA1,
+  string_token_t_ancient_charm_crit_hps_2 = 0xAA2,
+  string_token_t_ancient_charm_crit_hps_3 = 0xAA3,
+  string_token_t_ancient_charm_crit_hps_4 = 0xAA4,
+  string_token_t_ancient_charm_execute_hps_1 = 0xAA5,
+  string_token_t_ancient_charm_execute_hps_2 = 0xAA6,
+  string_token_t_ancient_charm_extra_attack_1 = 0xAA7,
+  string_token_t_ancient_charm_reflect_1 = 0xAAC,
+  string_token_t_ancient_charm_reflect_2 = 0xAAD,
+  string_token_t_ancient_charm_reflect_3 = 0xAAE,
+  string_token_t_ancient_charm_reflect_4 = 0xAAF,
+  string_token_t_ancient_charm_reflect_5 = 0xAB0,
+  string_token_t_ancient_charm_range_1 = 0xAB1,
+  string_token_t_ancient_charm_range_2 = 0xAB2,
+  string_token_t_ancient_charm_atk_speed_1 = 0xAB3,
+  string_token_t_ancient_charm_atk_speed_2 = 0xAB4,
+  string_token_t_ancient_charm_atk_speed_3 = 0xAB5,
+  string_token_t_ancient_charm_atk_speed_4 = 0xAB6,
+  string_token_t_ancient_charm_atk_speed_5 = 0xAB7,
+  string_token_t_ancient_charm_armor_1 = 0xAB8,
+  string_token_t_ancient_charm_armor_2 = 0xAB9,
+  string_token_t_ancient_charm_armor_3 = 0xABA,
+  string_token_t_ancient_charm_armor_4 = 0xABB,
+  string_token_t_ancient_charm_execute_heal_1 = 0xABC,
+  string_token_t_ancient_charm_execute_heal_2 = 0xABD,
+  string_token_t_ancient_charm_execute_heal_3 = 0xABE,
+  string_token_t_ancient_charm_execute_heal_4 = 0xABF,
+  string_token_t_ancient_charm_block_1 = 0xAC0,
+  string_token_t_ancient_charm_block_2 = 0xAC1,
+  string_token_t_ancient_charm_block_3 = 0xAC2,
+  string_token_t_ancient_charm_block_4 = 0xAC3,
+  string_token_t_ancient_charm_block_5 = 0xAC4,
+  string_token_item_ancient_plate_boots = 0xB14,
+  string_token_ancient_desc_plate_boots = 0xB15,
+  string_token_ancient_desc_plate_boots_0 = 0xB16,
+  string_token_ancient_desc_plate_boots_1 = 0xB17,
+  string_token_ancient_desc_plate_boots_2 = 0xB18,
+  string_token_ancient_desc_plate_boots_3 = 0xB19,
+  string_token_ancient_desc_plate_boots_4 = 0xB1A,
+  string_token_item_ancient_plate_bracers = 0xB1B,
+  string_token_ancient_desc_plate_bracers = 0xB1C,
+  string_token_ancient_desc_plate_bracers_0 = 0xB1D,
+  string_token_ancient_desc_plate_bracers_1 = 0xB1E,
+  string_token_ancient_desc_plate_bracers_2 = 0xB1F,
+  string_token_ancient_desc_plate_bracers_3 = 0xB20,
+  string_token_ancient_desc_plate_bracers_4 = 0xB21,
+  string_token_item_ancient_tower_shield = 0xB22,
+  string_token_ancient_desc_tower_shield = 0xB23,
+  string_token_ancient_desc_tower_shield_0 = 0xB24,
+  string_token_ancient_desc_tower_shield_1 = 0xB25,
+  string_token_ancient_desc_tower_shield_2 = 0xB26,
+  string_token_ancient_desc_tower_shield_3 = 0xB27,
+  string_token_ancient_desc_tower_shield_4 = 0xB28,
+  string_token_item_ancient_plate_chest = 0xB29,
+  string_token_ancient_desc_plate_chest = 0xB2A,
+  string_token_ancient_desc_plate_chest_0 = 0xB2B,
+  string_token_ancient_desc_plate_chest_1 = 0xB2C,
+  string_token_ancient_desc_plate_chest_2 = 0xB2D,
+  string_token_ancient_desc_plate_chest_3 = 0xB2E,
+  string_token_ancient_desc_plate_chest_4 = 0xB2F,
+  string_token_ancient_desc_plate_chest_5 = 0xB30,
+  string_token_ancient_desc_plate_chest_6 = 0xB31,
+  string_token_ancient_desc_plate_chest_7 = 0xB32,
+  string_token_ancient_desc_plate_chest_8 = 0xB33,
+  string_token_item_ancient_charm = 0xB34,
+  string_token_ancient_desc_charm = 0xB35,
+  string_token_ancient_desc_charm_0 = 0xB36,
+  string_token_ancient_desc_charm_1 = 0xB37,
+  string_token_ancient_desc_charm_2 = 0xB38,
+  string_token_ancient_desc_charm_3 = 0xB39,
+  string_token_ancient_desc_charm_4 = 0xB3A,
+  string_token_ancient_desc_charm_5 = 0xB3B,
+  string_token_ancient_desc_charm_6 = 0xB3C,
+  string_token_ancient_desc_charm_7 = 0xB3D,
+  string_token_ancient_desc_charm_8 = 0xB3E,
+  string_token_whirlwind_melee_only = 0xF0A,
+  string_token_item_ancient_holy_bracers = 0xB80,
+  string_token_ancient_desc_holy_bracers = 0xB81,
+  string_token_ancient_desc_holy_bracers_0 = 0xB82,
+  string_token_ancient_desc_holy_bracers_1 = 0xB83,
+  string_token_ancient_desc_holy_bracers_2 = 0xB84,
+  string_token_ancient_desc_holy_bracers_3 = 0xB85,
+  string_token_ancient_desc_holy_bracers_4 = 0xB86,
+  string_token_ancient_desc_holy_bracers_5 = 0xB87,
+  string_token_ancient_desc_holy_bracers_6 = 0xB88,
+  string_token_ancient_desc_holy_bracers_7 = 0xB89,
+  string_token_ancient_desc_holy_bracers_8 = 0xB8A,
+  string_token_item_ancient_holy_tome = 0xB8B,
+  string_token_ancient_desc_holy_tome = 0xB8C,
+  string_token_ancient_desc_holy_tome_0 = 0xB8D,
+  string_token_ancient_desc_holy_tome_1 = 0xB8E,
+  string_token_ancient_desc_holy_tome_2 = 0xB8F,
+  string_token_ancient_desc_holy_tome_3 = 0xB90,
+  string_token_ancient_desc_holy_tome_4 = 0xB91,
+  string_token_ancient_desc_holy_tome_5 = 0xB92,
+  string_token_ancient_desc_holy_tome_6 = 0xB93,
+  string_token_ancient_desc_holy_tome_7 = 0xB94,
+  string_token_ancient_desc_holy_tome_8 = 0xB95,
+  string_token_item_ancient_holy_shield = 0xB96,
+  string_token_ancient_desc_holy_shield = 0xB97,
+  string_token_ancient_desc_holy_shield_0 = 0xB98,
+  string_token_ancient_desc_holy_shield_1 = 0xB99,
+  string_token_ancient_desc_holy_shield_2 = 0xB9A,
+  string_token_ancient_desc_holy_shield_3 = 0xB9B,
+  string_token_ancient_desc_holy_shield_4 = 0xB9C,
+  string_token_item_ancient_holy_gloves = 0xB9D,
+  string_token_ancient_desc_holy_gloves = 0xB9E,
+  string_token_ancient_desc_holy_gloves_0 = 0xB9F,
+  string_token_ancient_desc_holy_gloves_1 = 0xBA0,
+  string_token_ancient_desc_holy_gloves_2 = 0xBA1,
+  string_token_ancient_desc_holy_gloves_3 = 0xBA2,
+  string_token_ancient_desc_holy_gloves_4 = 0xBA3,
+  string_token_ancient_desc_holy_gloves_5 = 0xBA4,
+  string_token_ancient_desc_holy_gloves_6 = 0xBA5,
+  string_token_ancient_desc_holy_gloves_7 = 0xBA6,
+  string_token_ancient_desc_holy_gloves_8 = 0xBA7,
+  string_token_item_ancient_holy_boots = 0xBA8,
+  string_token_ancient_desc_holy_boots = 0xBA9,
+  string_token_ancient_desc_holy_boots_0 = 0xBAA,
+  string_token_ancient_desc_holy_boots_1 = 0xBAB,
+  string_token_ancient_desc_holy_boots_2 = 0xBAC,
+  string_token_ancient_desc_holy_boots_3 = 0xBAD,
+  string_token_ancient_desc_holy_boots_4 = 0xBAE,
+  string_token_item_ancient_goblet = 0x539,
+  string_token_ancient_desc_goblet = 0x53A,
+  string_token_item_ancient_tabard = 0x625,
+  string_token_ancient_desc_tabard = 0x626,
+  string_token_item_ancient_ice_heart = 0x32B,
+  string_token_ancient_desc_ice_heart = 0x32C,
+  string_token_item_ancient_deadly_nimble = 0x5C9,
+  string_token_ancient_desc_deadly_nimble = 0x5CA,
+  string_token_item_ancient_lifeforce = 0x5CB,
+  string_token_ancient_desc_lifeforce = 0x5CC,
+  string_token_item_ancient_reverse_fate = 0x5CD,
+  string_token_ancient_desc_reverse_fate = 0x5CE,
+  string_token_item_ancient_cauterize = 0x5CF,
+  string_token_ancient_desc_cauterize = 0x5D0,
+  string_token_item_ancient_fire_tome = 0x2ED,
+  string_token_ancient_desc_fire_tome = 0x2EE,
+  string_token_item_ancient_harp = 0x2CF,
+  string_token_ancient_desc_harp = 0x2D0,
+  string_token_item_ancient_phial = 0x557,
+  string_token_ancient_desc_phial = 0x558,
+  string_token_item_ancient_shield = 0x2A5,
+  string_token_ancient_desc_shield = 0x2A6,
+  string_token_item_ancient_poison_tome = 0xC76,
+  string_token_ancient_desc_poison_tome = 0xC77,
+  string_token_item_ancient_leech = 0xC78,
+  string_token_ancient_desc_leech = 0xC79,
+  string_token_item_ancient_quakeboots = 0xC7A,
+  string_token_ancient_desc_quakeboots = 0xC7B,
+  string_token_item_ancient_bloodlust = 0xC7C,
+  string_token_ancient_desc_bloodlust = 0xC7D,
+  string_token_item_ancient_explosive = 0xC7E,
+  string_token_ancient_desc_explosive = 0xC7F,
+  string_token_item_ancient_conductor = 0xC80,
+  string_token_ancient_desc_conductor = 0xC81,
+  string_token_item_ancient_swarm = 0xC82,
+  string_token_ancient_desc_swarm = 0xC83,
+  string_token_item_ancient_deep_freeze = 0xC84,
+  string_token_ancient_desc_deep_freeze = 0xC85,
+  string_token_item_ancient_bat = 0x722,
+  string_token_ancient_desc_bat = 0x723,
+  string_token_item_ancient_unbind_key = 0xD9F,
+  string_token_ancient_unbind_key_desc = 0xDA0,
+  string_token_item_ancient_hellgate_cow = 0xF2F,
+  string_token_ancient_desc_hellgate_cow = 0xF30,
+  string_token_item_ancient_lute_of_loot_cow = 0xF31,
+  string_token_ancient_desc_lute_of_loot_cow = 0xF32,
+  string_token_item_ancient_electric_cow = 0xF33,
+  string_token_ancient_desc_electric_cow = 0xF34,
+  string_token_item_ancient_anti_touching_cow = 0xF35,
+  string_token_ancient_desc_anti_touching_cow = 0xF36,
+  string_token_item_ancient_swift_death_cow = 0xF37,
+  string_token_ancient_desc_swift_death_cow = 0xF38,
+  string_token_item_ancient_rexicography_cow = 0xF39,
+  string_token_ancient_desc_rexicography_cow = 0xF3A,
+  string_token_item_ancient_manipulator_cow = 0xF3B,
+  string_token_ancient_desc_manipulator_cow = 0xF3C,
+  string_token_item_ancient_abra_skull_cow = 0xF3D,
+  string_token_ancient_desc_abra_skull_cow = 0xF3E,
+  string_token_item_ancient_healthconnector_cow = 0xF3F,
+  string_token_ancient_desc_healthconnector_cow = 0xF40,
+  string_token_item_ancient_kitty_embig_cow = 0xF41,
+  string_token_ancient_desc_kitty_embig_cow = 0xF42,
+  string_token_item_ancient_soule_rage_cow = 0xF43,
+  string_token_ancient_desc_soule_rage_cow = 0xF44,
+  string_token_item_ancient_wizard_med_cow = 0xF45,
+  string_token_ancient_desc_wizard_med_cow = 0xF46,
+  string_token_item_ancient_cowbell_cow = 0xF47,
+  string_token_ancient_desc_cowbell_cow = 0xF48,
+  string_token_item_ancient_squirrel_cow = 0xF49,
+  string_token_ancient_desc_squirrel_cow = 0xF4A,
+  string_token_item_ancient_frag_twilight_cow = 0xF4B,
+  string_token_ancient_desc_frag_twilight_cow = 0xF4C,
+  string_token_item_ancient_chrathic_idol_cow = 0xF4D,
+  string_token_ancient_desc_chrathic_idol_cow = 0xF4E,
+  string_token_item_blueprint_planter_box = 0x9D4,
+  string_token_item_blueprint_chef = 0x331,
+  string_token_item_chef_recipe = 0x332,
+  string_token_item_chef_recipe_desc = 0x333,
+  string_token_item_blueprint_banker = 0x334,
+  string_token_item_banker_recipe = 0x335,
+  string_token_item_banker_recipe_desc = 0x336,
+  string_token_item_blueprint_wizard = 0x337,
+  string_token_item_blueprint_hats = 0x338,
+  string_token_item_blueprint_pet_shop = 0x339,
+  string_token_item_blueprint_graveyard = 0x65A,
+  string_token_item_desc_bank_grave_bag = 0x65B,
+  string_token_item_bank_grave_bag = 0x65C,
+  string_token_item_desc_bank_farm_bag = 0x774,
+  string_token_item_bank_farm_bag = 0x775,
+  string_token_item_blueprint_chicken_coop = 0x6F3,
+  string_token_item_chicken_coop_recipe = 0x6F4,
+  string_token_item_coop_recipe_desc = 0x6F5,
+  string_token_item_blueprint_mushroom = 0x852,
+  string_token_item_blueprint_greenhouse = 0x9D1,
+  string_token_item_blueprint_barn = 0xB3F,
+  string_token_item_barn_recipe = 0xC74,
+  string_token_item_barn_recipe_desc = 0xC75,
+  string_token_item_blueprint_beehive = 0xB49,
+  string_token_item_beehive_recipe = 0xE42,
+  string_token_item_beehive_recipe_desc = 0xE43,
+  string_token_item_blueprint_badlands = 0xCD0,
+  string_token_item_blueprint_townhall = 0xD1B,
+  string_token_item_time_space_normal = 0x33A,
+  string_token_time_space_normal_desc = 0x33B,
+  string_token_item_time_space_nightmare = 0x33C,
+  string_token_time_space_nightmare_desc = 0x33D,
+  string_token_nightmare_debuff = 0x6AF,
+  string_token_item_time_space_hell = 0x33E,
+  string_token_time_space_hell_desc = 0x33F,
+  string_token_hell_debuff = 0x7DB,
+  string_token_item_time_space_inferno = 0x7DC,
+  string_token_time_space_inferno_desc = 0x7DD,
+  string_token_inferno_debuff = 0x7DE,
+  string_token_ult_map_debuff = 0x1019,
+  string_token_time_space_book_surface = 0x340,
+  string_token_time_space_new = 0x341,
+  string_token_time_space_caution = 0x342,
+  string_token_item_map_small = 0xEFB,
+  string_token_item_map_small_desc = 0xEFC,
+  string_token_map_level_range_start = 0xEFD,
+  string_token_map_level_range_to = 0xF02,
+  string_token_map_debuff_resist_50 = 0xEFE,
+  string_token_map_debuff_resist_100 = 0xEFF,
+  string_token_map_debuff_resist_150 = 0xF00,
+  string_token_map_debuff_resist_200 = 0x1018,
+  string_token_map_reward = 0xF01,
+  string_token_map_no_badlands_error = 0xFC9,
+  string_token_map_status_title = 0xFCA,
+  string_token_map_time_remaining = 0xFCB,
+  string_token_map_total_points = 0xFCC,
+  string_token_map_success = 0xFCD,
+  string_token_map_failed = 0xFCE,
+  string_token_map_boss_prefix = 0xFCF,
+  string_token_map_complete = 0x1066,
+  string_token_map_success_boss_msg_1 = 0xFD0,
+  string_token_map_success_boss_msg_2 = 0x100F,
+  string_token_map_success_boss_msg_3 = 0x1010,
+  string_token_map_success_boss_msg_4 = 0x1011,
+  string_token_map_boss_door_closed = 0xFD1,
+  string_token_item_map_krampus = 0x1012,
+  string_token_item_map_krampus_desc = 0x1013,
+  string_token_item_map_krampus_ult = 0x1014,
+  string_token_item_map_krampus_ult_desc = 0x1015,
+  string_token_runeword_krampus_map_desc = 0x1038,
+  string_token_runeword_krampus_ult_map_desc = 0x103B,
+  string_token_map_krampus_prefix = 0x1016,
+  string_token_map_krampus_ult_prefix = 0x1017,
+  string_token_map_krampus_door_closed = 0x101A,
+  string_token_map_krampus_status_title = 0x101C,
+  string_token_map_krampus_success = 0x101D,
+  string_token_map_krampus_success_msg = 0x101E,
+  string_token_map_krampus_complete = 0x1067,
+  string_token_map_krampus_ult_complete = 0x1068,
+  string_token_map_royal_court_his_ult_prefix = 0x106E,
+  string_token_map_royal_court_her_ult_prefix = 0x1074,
+  string_token_map_royal_court_his_door_closed = 0x1071,
+  string_token_map_royal_court_her_door_closed = 0x1072,
+  string_token_map_royal_court_their_door_closed = 0x1073,
+  string_token_map_royal_court_his_success = 0x1075,
+  string_token_map_royal_court_her_success = 0x1076,
+  string_token_map_royal_court_their_success = 0x1077,
+  string_token_map_royal_court_complete = 0x1078,
+  string_token_map_royal_court_status_title = 0x1079,
+  string_token_item_map_samhain = 0x1085,
+  string_token_item_map_samhain_desc = 0x1086,
+  string_token_item_map_samhain_ult = 0x1087,
+  string_token_item_map_samhain_ult_desc = 0x1088,
+  string_token_runeword_samhain_map_desc = 0x10A8,
+  string_token_runeword_samhain_ult_map_desc = 0x10A9,
+  string_token_map_samhain_prefix = 0x107B,
+  string_token_map_samhain_ult_prefix = 0x107C,
+  string_token_map_samhain_door_closed = 0x107D,
+  string_token_map_samhain_status_title = 0x107E,
+  string_token_map_samhain_success = 0x107F,
+  string_token_map_samhain_success_msg = 0x1080,
+  string_token_map_samhain_complete = 0x1081,
+  string_token_map_samhain_ult_complete = 0x1082,
+  string_token_item_map_hafermann = 0x10AC,
+  string_token_item_map_hafermann_desc = 0x10AD,
+  string_token_item_map_hafermann_ult = 0x10AE,
+  string_token_item_map_hafermann_ult_desc = 0x10AF,
+  string_token_map_hafermann_prefix = 0x10B0,
+  string_token_map_hafermann_ult_prefix = 0x10B1,
+  string_token_map_hafermann_door_closed = 0x10B2,
+  string_token_map_hafermann_status_title = 0x10B3,
+  string_token_map_hafermann_success = 0x10B4,
+  string_token_map_hafermann_success_msg = 0x10B5,
+  string_token_map_hafermann_complete = 0x10B6,
+  string_token_map_hafermann_ult_complete = 0x10B7,
+  string_token_item_time_space_cow = 0xF4F,
+  string_token_time_space_cow_desc = 0xF50,
+  string_token_item_scroll_respec = 0x861,
+  string_token_item_scroll_respec_desc = 0x862,
+  string_token_respec_done = 0x863,
+  string_token_respec_leveling_pts = 0x8AE,
+  string_token_item_scroll_to_shared_town = 0xDEF,
+  string_token_item_scroll_to_shared_town_desc = 0xDF0,
+  string_token_item_scroll_leave_shared_town = 0x10CD,
+  string_token_item_scroll_leave_shared_town_desc = 0x10CE,
+  string_token_multiplayer_error = 0x10C3,
+  string_token_item_rune_ala = 0x343,
+  string_token_item_rune_zed = 0x344,
+  string_token_item_rune_mol = 0x345,
+  string_token_item_rune_del = 0x346,
+  string_token_item_rune_mue = 0x34B,
+  string_token_item_rune_zigh = 0x34C,
+  string_token_item_rune_omni = 0x34D,
+  string_token_item_rune_pi = 0x34E,
+  string_token_item_rune_sig = 0x34F,
+  string_token_item_rune_roe = 0x350,
+  string_token_item_rune_om = 0x351,
+  string_token_item_rune_winter = 0x7D4,
+  string_token_item_rune_badlands = 0xE2D,
+  string_token_item_rune_cow = 0xF51,
+  string_token_item_rune_halloween = 0x10A7,
+  string_token_item_rune_harvest = 0x10BD,
+  string_token_item_krampus_eye = 0x1039,
+  string_token_krampus_eye_desc = 0x1051,
+  string_token_item_samhain_head = 0x108D,
+  string_token_samhain_head_desc = 0x108E,
+  string_token_item_hafermann_hat = 0x10B8,
+  string_token_hafermann_hat_desc = 0x10B9,
+  string_token_item_boss_pack_1 = 0x352,
+  string_token_boss_pack_1_desc = 0x353,
+  string_token_item_boss_pack_2 = 0x354,
+  string_token_boss_pack_2_desc = 0x355,
+  string_token_item_runeword_recipe = 0x356,
+  string_token_item_runeword_upgrade = 0x357,
+  string_token_runeword_upgrade_desc = 0x358,
+  string_token_item_staff_bard = 0x359,
+  string_token_runeword_bard_desc = 0x35A,
+  string_token_item_staff_cleric = 0x35B,
+  string_token_runeword_cleric_desc = 0x35C,
+  string_token_item_staff_wizard = 0x35D,
+  string_token_runeword_wizard_desc = 0x35E,
+  string_token_item_staff_necro = 0x679,
+  string_token_runeword_necro_desc = 0x67A,
+  string_token_item_staff_wizard_2 = 0x680,
+  string_token_runeword_wizard_2_desc = 0x681,
+  string_token_improved_absorb = 0x683,
+  string_token_item_staff_rogue = 0x35F,
+  string_token_runeword_rogue_desc = 0x360,
+  string_token_item_sword_bard = 0x609,
+  string_token_runeword_sword_bard_desc = 0x60A,
+  string_token_item_dual_rogue = 0x60B,
+  string_token_runeword_dual_rogue_desc = 0x60C,
+  string_token_item_crystal_slot = 0xC87,
+  string_token_runeword_crystal_slot = 0xC88,
+  string_token_item_runeword_defender = 0xC8E,
+  string_token_runeword_defender_desc = 0xC8F,
+  string_token_item_runeword_chromatic = 0xC90,
+  string_token_runeword_chromatic_desc = 0xC91,
+  string_token_item_runeword_fortuitous = 0xC92,
+  string_token_runeword_fortuitous_desc = 0xC93,
+  string_token_item_runeword_savage = 0xC94,
+  string_token_runeword_savage_desc = 0xC95,
+  string_token_item_runeword_sacred = 0xC96,
+  string_token_runeword_sacred_desc = 0xC97,
+  string_token_item_runeword_bl_bard = 0xE04,
+  string_token_runeword_bl_bard_desc = 0xE05,
+  string_token_bard_flags_fast_song = 0xE44,
+  string_token_item_runeword_bl_cleric = 0xE06,
+  string_token_runeword_bl_cleric_desc = 0xE07,
+  string_token_cleric_flags_double_smite = 0xE46,
+  string_token_item_runeword_bl_enchanter = 0xE08,
+  string_token_runeword_bl_enchanter_desc = 0xE09,
+  string_token_enchanter_flags_large_aoe = 0xE47,
+  string_token_trigger_flag_lightning_explode = 0xE48,
+  string_token_item_runeword_bl_necromancer = 0xE0A,
+  string_token_runeword_bl_necromancer_desc = 0xE0B,
+  string_token_necromancer_flags_minion_dmg_20 = 0xE49,
+  string_token_necromancer_flags_large_scythe = 0xE4A,
+  string_token_item_runeword_bl_paladin = 0xE0C,
+  string_token_runeword_bl_paladin_desc = 0xE0D,
+  string_token_paladin_flags_purified_burn = 0xE79,
+  string_token_paladin_flags_atone_aoe = 0xE7A,
+  string_token_paladin_flags_pull_aoe = 0xE7B,
+  string_token_paladin_flags_atk_spd = 0xE7C,
+  string_token_item_runeword_bl_rogue = 0xE0E,
+  string_token_runeword_bl_rogue_desc = 0xE0F,
+  string_token_rogue_flags_deep_wounds = 0xE7D,
+  string_token_rogue_flags_crit_bleed = 0xE7E,
+  string_token_rogue_flags_half_execute = 0xE7F,
+  string_token_item_runeword_bl_warrior = 0xE10,
+  string_token_runeword_bl_warrior_desc = 0xE11,
+  string_token_warrior_flags_whirl_exempt = 0xE80,
+  string_token_warrior_flags_reflect_inc = 0xE81,
+  string_token_warrior_flags_dash_debuff = 0xE82,
+  string_token_item_runeword_bl_wizard = 0xE12,
+  string_token_runeword_bl_wizard_desc = 0xE13,
+  string_token_wizard_flags_fast_recharge = 0xE83,
+  string_token_wizard_flags_fire_dmg_lightning = 0xE84,
+  string_token_wizard_flags_lightning_dmg_fire = 0xE85,
+  string_token_item_aspire_helm = 0x361,
+  string_token_runeword_aspire_helm_desc = 0x362,
+  string_token_item_aspire_breastplate = 0x363,
+  string_token_runeword_aspire_chest_desc = 0x364,
+  string_token_item_aspire_leggings = 0x365,
+  string_token_runeword_aspire_legs_desc = 0x366,
+  string_token_item_aspire_boots = 0x367,
+  string_token_runeword_aspire_boots_desc = 0x368,
+  string_token_item_aspire_ring = 0x369,
+  string_token_aspire_ring_desc = 0x36A,
+  string_token_runeword_aspire_ring_desc = 0x36B,
+  string_token_aspire_set_desc_2 = 0x36C,
+  string_token_aspire_set_desc_4 = 0x36D,
+  string_token_aspire_set_desc_5 = 0x36E,
+  string_token_item_cosmic_helm = 0x36F,
+  string_token_runeword_cosmic_helm_desc = 0x370,
+  string_token_item_cosmic_breastplate = 0x371,
+  string_token_runeword_cosmic_chest_desc = 0x372,
+  string_token_item_cosmic_leggings = 0x373,
+  string_token_runeword_cosmic_legs_desc = 0x374,
+  string_token_item_cosmic_boots = 0x375,
+  string_token_runeword_cosmic_boots_desc = 0x376,
+  string_token_item_cosmic_ring = 0x377,
+  string_token_cosmic_ring_desc = 0x378,
+  string_token_runeword_cosmic_ring_desc = 0x379,
+  string_token_cosmic_set_desc_2 = 0x37A,
+  string_token_cosmic_set_desc_5 = 0x37B,
+  string_token_item_holiday_helm = 0x7CA,
+  string_token_item_holiday_breastplate = 0x7CB,
+  string_token_item_holiday_leggings = 0x7CC,
+  string_token_item_holiday_boots = 0x7CD,
+  string_token_runeword_holiday_helm_desc = 0x7D0,
+  string_token_runeword_holiday_chest_desc = 0x7D1,
+  string_token_runeword_holiday_legs_desc = 0x7D2,
+  string_token_runeword_holiday_boots_desc = 0x7D3,
+  string_token_holiday_set_desc_2 = 0x7CE,
+  string_token_holiday_set_desc_3 = 0x7CF,
+  string_token_holiday_set_desc_4 = 0x100E,
+  string_token_item_speed_helm = 0xD33,
+  string_token_runeword_speed_helm_desc = 0xD34,
+  string_token_item_speed_breastplate = 0xD35,
+  string_token_runeword_speed_chest_desc = 0xD36,
+  string_token_item_speed_leggings = 0xD37,
+  string_token_runeword_speed_legs_desc = 0xD38,
+  string_token_item_speed_boots = 0xD39,
+  string_token_runeword_speed_boots_desc = 0xD3A,
+  string_token_item_speed_ring = 0xD3B,
+  string_token_speed_ring_desc = 0xD3C,
+  string_token_runeword_speed_ring_desc = 0xD3D,
+  string_token_speed_set_desc_2 = 0xD3E,
+  string_token_speed_set_desc_4 = 0xD3F,
+  string_token_speed_set_desc_5 = 0xD40,
+  string_token_item_exec_helm = 0xD41,
+  string_token_runeword_exec_helm_desc = 0xD42,
+  string_token_item_exec_breastplate = 0xD43,
+  string_token_runeword_exec_chest_desc = 0xD44,
+  string_token_item_exec_leggings = 0xD45,
+  string_token_runeword_exec_legs_desc = 0xD46,
+  string_token_item_exec_boots = 0xD47,
+  string_token_runeword_exec_boots_desc = 0xD48,
+  string_token_item_exec_ring = 0xD49,
+  string_token_exec_ring_desc = 0xD4A,
+  string_token_runeword_exec_ring_desc = 0xD4B,
+  string_token_exec_set_desc_2 = 0xD4C,
+  string_token_exec_set_desc_4 = 0xD4D,
+  string_token_exec_set_desc_5 = 0xD4E,
+  string_token_item_thorns_helm = 0xD4F,
+  string_token_runeword_thorns_helm_desc = 0xD50,
+  string_token_item_thorns_breastplate = 0xD51,
+  string_token_runeword_thorns_chest_desc = 0xD52,
+  string_token_item_thorns_leggings = 0xD53,
+  string_token_runeword_thorns_legs_desc = 0xD54,
+  string_token_item_thorns_boots = 0xD55,
+  string_token_runeword_thorns_boots_desc = 0xD56,
+  string_token_item_thorns_ring = 0xD57,
+  string_token_thorns_ring_desc = 0xD58,
+  string_token_runeword_thorns_ring_desc = 0xD59,
+  string_token_thorns_set_desc_2 = 0xD5A,
+  string_token_thorns_set_desc_4 = 0xD5B,
+  string_token_thorns_set_desc_5 = 0xD5C,
+  string_token_item_brawl_helm = 0xD5D,
+  string_token_runeword_brawl_helm_desc = 0xD5E,
+  string_token_item_brawl_breastplate = 0xD5F,
+  string_token_runeword_brawl_chest_desc = 0xD60,
+  string_token_item_brawl_leggings = 0xD61,
+  string_token_runeword_brawl_legs_desc = 0xD62,
+  string_token_item_brawl_boots = 0xD63,
+  string_token_runeword_brawl_boots_desc = 0xD64,
+  string_token_item_brawl_ring = 0xD65,
+  string_token_brawl_ring_desc = 0xD66,
+  string_token_runeword_brawl_ring_desc = 0xD67,
+  string_token_brawl_set_desc_2 = 0xD68,
+  string_token_brawl_set_desc_4 = 0xD69,
+  string_token_brawl_set_desc_5 = 0xD6A,
+  string_token_item_hps_helm = 0xD6B,
+  string_token_runeword_hps_helm_desc = 0xD6C,
+  string_token_item_hps_breastplate = 0xD6D,
+  string_token_runeword_hps_chest_desc = 0xD6E,
+  string_token_item_hps_leggings = 0xD6F,
+  string_token_runeword_hps_legs_desc = 0xD70,
+  string_token_item_hps_boots = 0xD71,
+  string_token_runeword_hps_boots_desc = 0xD72,
+  string_token_item_hps_ring = 0xD73,
+  string_token_hps_ring_desc = 0xD74,
+  string_token_runeword_hps_ring_desc = 0xD75,
+  string_token_hps_set_desc_2 = 0xD76,
+  string_token_hps_set_desc_4 = 0xD77,
+  string_token_hps_set_desc_5 = 0xD78,
+  string_token_item_ring_bl_combination = 0xDFF,
+  string_token_runeword_ring_bl_combination_desc = 0xE00,
+  string_token_combination_ring_desc = 0xF52,
+  string_token_runeword_ring_cow_oath_band = 0xF53,
+  string_token_oath_cow_ring_desc = 0xF54,
+  string_token_item_ring_cow_oath_band = 0xF55,
+  string_token_item_cabbage_helm_cow = 0xF56,
+  string_token_item_cabbage_breastplate_cow = 0xF57,
+  string_token_item_cabbage_breastplate_desc = 0xF58,
+  string_token_item_cabbage_leggings_cow = 0xF59,
+  string_token_item_cabbage_leggings_desc = 0xF5A,
+  string_token_item_cabbage_boots_cow = 0xF5B,
+  string_token_item_cabbage_boots_desc = 0xF5C,
+  string_token_item_cabbage_ring_cow = 0xF5D,
+  string_token_cabbage_ring_desc_cow = 0xF5E,
+  string_token_runeword_cabbage_helm_cow_desc = 0xF5F,
+  string_token_runeword_cabbage_chest_cow_desc = 0xF60,
+  string_token_runeword_cabbage_legs_cow_desc = 0xF61,
+  string_token_runeword_cabbage_boots_cow_desc = 0xF62,
+  string_token_runeword_cabbage_ring_cow_desc = 0xF63,
+  string_token_cabbage_set_2 = 0xF64,
+  string_token_cabbage_set_4 = 0xF65,
+  string_token_cabbage_set_5 = 0xF66,
+  string_token_cabbage_set_6 = 0xF67,
+  string_token_item_loot_set_cow_a_helm = 0xF68,
+  string_token_loot_set_desc_cow_a_helm = 0xF69,
+  string_token_item_loot_set_cow_a_breastplate = 0xF6A,
+  string_token_loot_set_desc_cow_a_breastplate = 0xF6B,
+  string_token_item_loot_set_cow_leg_armor = 0xF6C,
+  string_token_loot_set_desc_cow_leg_armor = 0xF6D,
+  string_token_item_loot_set_cow_boots = 0xF6E,
+  string_token_loot_set_desc_cow_boots = 0xF6F,
+  string_token_loot_set_2 = 0xF70,
+  string_token_loot_set_3 = 0xF71,
+  string_token_loot_set_4 = 0xF72,
+  string_token_item_unique_berzerker = 0x50C,
+  string_token_unique_berzerker_desc = 0x50E,
+  string_token_item_unique_swiftness = 0x50D,
+  string_token_item_unique_light_helm = 0x56A,
+  string_token_item_unique_regen_helm = 0x56B,
+  string_token_item_unique_deadly_helm = 0x56C,
+  string_token_item_unique_armor_chest = 0x56D,
+  string_token_item_unique_regen_chest = 0x56E,
+  string_token_item_unique_jump_legs = 0x56F,
+  string_token_item_unique_exp_legs = 0x570,
+  string_token_item_unique_regen_legs = 0x571,
+  string_token_item_unique_steady_boots = 0x572,
+  string_token_item_unique_regen_boots = 0x573,
+  string_token_item_unique_haste_boots = 0x574,
+  string_token_regen_set_desc_2 = 0x575,
+  string_token_regen_set_desc_4 = 0x576,
+  string_token_item_unique_lightning_chest = 0x57B,
+  string_token_item_unique_treasure_chest = 0x57C,
+  string_token_item_unique_ice_helm = 0x57D,
+  string_token_item_unique_poison_legs = 0x57E,
+  string_token_item_unique_vigor_legs = 0x57F,
+  string_token_item_unique_fire_boots = 0x580,
+  string_token_item_unique_magic_boots = 0x690,
+  string_token_item_unique_arch_legs = 0x691,
+  string_token_archeology = 0x694,
+  string_token_item_unique_vitality_chest = 0x692,
+  string_token_extra_vitality = 0x693,
+  string_token_mooderer_set_2 = 0xF73,
+  string_token_mooderer_set_3 = 0xF74,
+  string_token_mooderer_set_4 = 0xF75,
+  string_token_item_unique_leveler = 0x2C3,
+  string_token_unique_desc_leveler = 0x2C4,
+  string_token_item_unique_light = 0x67D,
+  string_token_unique_desc_light = 0x67E,
+  string_token_item_unique_potion = 0x68E,
+  string_token_unique_desc_potion = 0x68F,
+  string_token_loading_crystal_unique = 0x104D,
+  string_token_crystal_unique_error = 0x1050,
+  string_token_unique_crystal_ruby_core = 0x528,
+  string_token_unique_crystal_firestone = 0x529,
+  string_token_unique_crystal_divine_shine = 0x52A,
+  string_token_unique_crystal_pestilence = 0x52B,
+  string_token_unique_crystal_rainbow_rock = 0x52C,
+  string_token_unique_crystal_icicle = 0x1047,
+  string_token_unique_crystal_pure_magic = 0x1048,
+  string_token_unique_crystal_lightning_rock = 0x1049,
+  string_token_unique_crystal_finding_stone = 0x104A,
+  string_token_unique_crystal_wisdom_jewel = 0x104B,
+  string_token_unique_crystal_jared_stone = 0xF76,
+  string_token_unique_crystal_jared_stone_desc = 0xF77,
+  string_token_unique_crystal_whispering_jade = 0xF78,
+  string_token_unique_crystal_whispering_jade_desc = 0xF79,
+  string_token_unique_crystal_chat_gem = 0xF7A,
+  string_token_unique_crystal_chat_gem_desc = 0xF7B,
+  string_token_unique_crystal_lara_shard = 0xF7C,
+  string_token_unique_crystal_lara_shard_desc = 0xF7D,
+  string_token_unique_crystal_rune_of_one = 0xF7E,
+  string_token_unique_crystal_rune_of_one_desc = 0xF7F,
+  string_token_unique_crystal_rakanishu = 0xF80,
+  string_token_unique_crystal_rakanishu_desc = 0xF81,
+  string_token_unique_crystal_tare_flower = 0xF82,
+  string_token_unique_crystal_tare_flower_desc = 0xF83,
+  string_token_unique_crystal_pink_saffaih = 0xF84,
+  string_token_unique_crystal_pink_saffaih_desc = 0xF85,
+  string_token_unique_crystal_master_deck = 0xF86,
+  string_token_unique_crystal_master_deck_desc = 0xF87,
+  string_token_unique_crystal_gem_cursed = 0xF88,
+  string_token_unique_crystal_gem_cursed_desc = 0xF89,
+  string_token_item_unique_bl_helm_nightvision = 0xDD2,
+  string_token_item_unique_bl_helm_spiked = 0xDD3,
+  string_token_item_unique_bl_helm_accuracy = 0xDD4,
+  string_token_item_unique_bl_chest_agility = 0xDD5,
+  string_token_item_unique_bl_chest_block_magic = 0xDD6,
+  string_token_item_unique_bl_chest_mad_rage = 0xDD7,
+  string_token_item_unique_bl_chest_minion_power = 0xDD8,
+  string_token_item_unique_bl_chest_choice = 0xDD9,
+  string_token_item_unique_bl_chest_defiance = 0xDDA,
+  string_token_item_unique_bl_chest_demon_slayer = 0xDDB,
+  string_token_item_unique_bl_chest_rainbow_cloth = 0xDDC,
+  string_token_item_unique_bl_legs_skill = 0xDDD,
+  string_token_item_unique_bl_legs_concrete = 0xDDE,
+  string_token_item_unique_bl_legs_nimble = 0xDDF,
+  string_token_item_unique_bl_legs_dodge_magic = 0xDE0,
+  string_token_item_unique_bl_legs_healing = 0xDE1,
+  string_token_item_unique_bl_boots_burning = 0xDE2,
+  string_token_item_unique_bl_boots_bounce = 0xDE3,
+  string_token_item_unique_bl_boots_frenzy = 0xDE4,
+  string_token_item_unique_bl_boots_shit_kickers = 0xDE5,
+  string_token_item_unique_bl_boots_haste = 0xDE6,
+  string_token_item_unique_bl_ring_teleport = 0xDE7,
+  string_token_item_unique_bl_ring_melee = 0xDE8,
+  string_token_item_unique_bl_ring_luck = 0xDE9,
+  string_token_item_unique_bl_ring_shrine = 0xDEA,
+  string_token_item_unique_bl_endless_platform = 0xDEB,
+  string_token_item_unique_bl_id_book = 0xDEC,
+  string_token_unique_desc_bl_endless_platform = 0xDED,
+  string_token_unique_desc_bl_id_book = 0xDEE,
+  string_token_item_unique_cow_helm_kilner = 0xF8A,
+  string_token_unique_desc_cow_helm_kilner = 0xF8B,
+  string_token_item_unique_cow_helm_higgins = 0xF8C,
+  string_token_unique_desc_cow_helm_higgins = 0xF8D,
+  string_token_item_unique_cow_helm_druidsfez = 0xF8E,
+  string_token_unique_desc_cow_helm_druidsfez = 0xF8F,
+  string_token_item_unique_cow_sleepy = 0xF90,
+  string_token_unique_desc_cow_sleepy = 0xF91,
+  string_token_item_unique_cow_beef = 0xF92,
+  string_token_unique_desc_cow_beef = 0xF93,
+  string_token_item_unique_cow_chest_falling_leaf = 0xF94,
+  string_token_unique_desc_cow_chest_falling_leaf = 0xF95,
+  string_token_item_unique_cow_chest_mollys = 0xF96,
+  string_token_unique_desc_cow_chest_mollys = 0xF97,
+  string_token_item_unique_cow_chest_muscle = 0xF98,
+  string_token_unique_desc_cow_chest_mucles = 0xF99,
+  string_token_item_unique_cow_legs_moderns = 0xF9A,
+  string_token_unique_desc_cow_legs_moderns = 0xF9B,
+  string_token_item_unique_cow_legs_truck_tub = 0xF9C,
+  string_token_unique_desc_cow_legs_truck_tub = 0xF9D,
+  string_token_item_unique_cow_legs_owl_towl = 0xF9E,
+  string_token_unique_desc_cow_legs_owl_towl = 0xF9F,
+  string_token_item_unique_cow_leg_cod = 0xFA0,
+  string_token_unique_desc_cow_legs_cod = 0xFA1,
+  string_token_item_unique_cow_boots_loafs = 0xFA2,
+  string_token_unique_desc_cow_boots_loafs = 0xFA3,
+  string_token_item_unique_cow_boots_bbwolf = 0xFA4,
+  string_token_unique_desc_cow_boots_bbwolf = 0xFA5,
+  string_token_item_unique_cow_helm_longxi_glue = 0xFA6,
+  string_token_unique_desc_cow_helm_longxi_glue = 0xFA7,
+  string_token_item_unique_cow_chest_critankerous = 0xFA8,
+  string_token_unique_desc_cow_chest_critankerous = 0xFA9,
+  string_token_item_unique_cow_chest_deckard_shirt = 0xFAA,
+  string_token_unique_desc_cow_chest_deckard_shirt = 0xFAB,
+  string_token_item_unique_cow_boots_7_kitties = 0xFAC,
+  string_token_unique_desc_cow_boots_7_kitties = 0xFAD,
+  string_token_item_unique_cow_boots_bwana = 0xFAE,
+  string_token_unique_desc_cow_boots_bwana = 0xFAF,
+  string_token_item_unique_cow_leg_wood = 0xFB0,
+  string_token_unique_desc_cow_legs_wood = 0xFB1,
+  string_token_item_unique_cow_boots_lead = 0xFB2,
+  string_token_unique_desc_cow_boots_lead = 0xFB3,
+  string_token_item_krampus_bard_crystal = 0x1020,
+  string_token_item_krampus_cleric_crystal = 0x1021,
+  string_token_item_krampus_enchanter_crystal = 0x1022,
+  string_token_item_krampus_necro_crystal = 0x1023,
+  string_token_item_krampus_paladin_crystal = 0x1024,
+  string_token_item_krampus_rogue_crystal = 0x1025,
+  string_token_item_krampus_warrior_crystal = 0x1026,
+  string_token_item_krampus_wizard_crystal = 0x1027,
+  string_token_item_krampus_bard_crystal_desc = 0x1028,
+  string_token_item_krampus_cleric_crystal_desc = 0x1029,
+  string_token_item_krampus_enchanter_crystal_desc = 0x102A,
+  string_token_item_krampus_necro_crystal_desc = 0x102B,
+  string_token_item_krampus_paladin_crystal_desc = 0x102C,
+  string_token_item_krampus_rogue_crystal_desc = 0x102D,
+  string_token_item_krampus_warrior_crystal_desc = 0x102E,
+  string_token_item_krampus_wizard_crystal_desc = 0x102F,
+  string_token_runeword_krampus_bard_desc = 0x1030,
+  string_token_runeword_krampus_cleric_desc = 0x1031,
+  string_token_runeword_krampus_enchanter_desc = 0x1032,
+  string_token_runeword_krampus_necro_desc = 0x1033,
+  string_token_runeword_krampus_paladin_desc = 0x1034,
+  string_token_runeword_krampus_rogue_desc = 0x1035,
+  string_token_runeword_krampus_warrior_desc = 0x1036,
+  string_token_runeword_krampus_wizard_desc = 0x1037,
+  string_token_item_hafermann_bard_crystal = 0x108F,
+  string_token_item_hafermann_cleric_crystal = 0x1090,
+  string_token_item_hafermann_enchanter_crystal = 0x1091,
+  string_token_item_hafermann_necro_crystal = 0x1092,
+  string_token_item_hafermann_paladin_crystal = 0x1093,
+  string_token_item_hafermann_rogue_crystal = 0x1094,
+  string_token_item_hafermann_warrior_crystal = 0x1095,
+  string_token_item_hafermann_wizard_crystal = 0x1096,
+  string_token_item_hafermann_bard_crystal_desc = 0x1097,
+  string_token_item_hafermann_cleric_crystal_desc = 0x1098,
+  string_token_item_hafermann_enchanter_crystal_desc = 0x1099,
+  string_token_item_hafermann_necro_crystal_desc = 0x109A,
+  string_token_item_hafermann_paladin_crystal_desc = 0x109B,
+  string_token_item_hafermann_rogue_crystal_desc = 0x109C,
+  string_token_item_hafermann_warrior_crystal_desc = 0x109D,
+  string_token_item_hafermann_wizard_crystal_desc = 0x109E,
+  string_token_runeword_hafermann_bard_desc = 0x109F,
+  string_token_runeword_hafermann_cleric_desc = 0x10A0,
+  string_token_runeword_hafermann_enchanter_desc = 0x10A1,
+  string_token_runeword_hafermann_necro_desc = 0x10A2,
+  string_token_runeword_hafermann_paladin_desc = 0x10A3,
+  string_token_runeword_hafermann_rogue_desc = 0x10A4,
+  string_token_runeword_hafermann_warrior_desc = 0x10A5,
+  string_token_runeword_hafermann_wizard_desc = 0x10A6,
+  string_token_item_ambient_black_wolf = 0x37C,
+  string_token_item_ambient_dark_wolf = 0x37D,
+  string_token_item_ambient_light_wolf = 0x37E,
+  string_token_item_ambient_white_wolf = 0x37F,
+  string_token_item_ambient_black_cat = 0x380,
+  string_token_item_ambient_white_cat = 0x381,
+  string_token_item_ambient_cc_uni = 0x382,
+  string_token_item_ambient_dark_uni = 0x383,
+  string_token_item_ambient_rainbow_uni = 0x384,
+  string_token_item_ambient_chicken = 0x385,
+  string_token_item_ambient_spider = 0x724,
+  string_token_item_ambient_orange_cat = 0x725,
+  string_token_item_ambient_turkey = 0x790,
+  string_token_item_ambient_undead_whelp = 0x794,
+  string_token_item_ambient_polar_bear = 0x7C2,
+  string_token_item_ambient_penguin = 0x7C3,
+  string_token_item_ambient_reindeer = 0x7C4,
+  string_token_item_ambient_cool_duck = 0xCC0,
+  string_token_item_ambient_pug = 0xE3F,
+  string_token_item_ambient_plumpkin = 0xE6C,
+  string_token_item_ambient_oreo = 0xE6D,
+  string_token_item_ambient_kuku = 0xE6E,
+  string_token_item_ambient_Sunday_cabbage = 0xFB4,
+  string_token_ambient_sunday_desc = 0xFB5,
+  string_token_item_ambient_dastardly_duck_cow = 0xFB6,
+  string_token_item_ambient_demon_duck_cow = 0xFB7,
+  string_token_item_ambient_goose_cow = 0xFB8,
+  string_token_ambient_desc = 0x726,
+  string_token_item_outfit_gordo = 0xE6F,
+  string_token_item_outfit_aero = 0xE70,
+  string_token_item_outfit_diablo = 0xE71,
+  string_token_item_outfit_wanderer = 0xE72,
+  string_token_item_outfit_guardian = 0xE73,
+  string_token_item_outfit_sniper = 0xE74,
+  string_token_item_outfit_galactus = 0xE75,
+  string_token_item_outfit_scarlet_witch = 0xE76,
+  string_token_item_outfit_hulk = 0xE77,
+  string_token_item_outfit_snowperson = 0x103E,
+  string_token_item_outfit_polar_bear = 0x103F,
+  string_token_outfit_desc = 0xE78,
+  string_token_cursed = 0x386,
+  string_token_prefix_attack = 0x387,
+  string_token_prefix_vitality = 0x388,
+  string_token_prefix_intelligence = 0x389,
+  string_token_prefix_old_wisdom = 0x38A,
+  string_token_prefix_dexterity = 0x5D1,
+  string_token_prefix_vigor = 0x5D2,
+  string_token_prefix_speed = 0x38B,
+  string_token_prefix_armor = 0x38C,
+  string_token_prefix_armor_scaled = 0x38D,
+  string_token_prefix_armor_percent = 0x38E,
+  string_token_prefix_crit = 0x38F,
+  string_token_prefix_min_damage = 0x390,
+  string_token_prefix_max_damage = 0x391,
+  string_token_prefix_demon = 0x392,
+  string_token_prefix_undead = 0x393,
+  string_token_prefix_recharge_speed = 0x8AB,
+  string_token_prefix_resist_fire = 0x394,
+  string_token_prefix_resist_cold = 0x395,
+  string_token_prefix_resist_lightning = 0x396,
+  string_token_prefix_resist_poison = 0x397,
+  string_token_prefix_magic_find = 0x398,
+  string_token_prefix_mana = 0x399,
+  string_token_prefix_mana_scaled = 0x39A,
+  string_token_prefix_mana_percent = 0x39B,
+  string_token_prefix_hp = 0x39C,
+  string_token_prefix_hp_scaled = 0x39D,
+  string_token_prefix_ancient_rank = 0x39E,
+  string_token_prefix_ancient_desc = 0x39F,
+  string_token_prefix_weapon_rank = 0x3A0,
+  string_token_prefix_weapon_desc = 0x3A1,
+  string_token_prefix_fire_percent = 0x532,
+  string_token_prefix_cold_percent = 0x533,
+  string_token_prefix_lightning_percent = 0x534,
+  string_token_prefix_poison_percent = 0x535,
+  string_token_prefix_magic_percent = 0x606,
+  string_token_prefix_digestion_rating = 0x1042,
+  string_token_prefix_stamina_rating = 0x1043,
+  string_token_suffix_of = 0x3A2,
+  string_token_suffix_attack = 0x3A3,
+  string_token_suffix_vitality = 0x3A4,
+  string_token_suffix_intelligence = 0x3A5,
+  string_token_suffix_old_wisdom = 0x3A6,
+  string_token_suffix_dexterity = 0x5D3,
+  string_token_suffix_vigor = 0x5D4,
+  string_token_suffix_speed = 0x3A7,
+  string_token_suffix_crit = 0x3A8,
+  string_token_suffix_min_damage = 0x3A9,
+  string_token_suffix_max_damage = 0x3AA,
+  string_token_suffix_demon = 0x3AB,
+  string_token_suffix_undead = 0x3AC,
+  string_token_suffix_recharge_speed = 0x8AC,
+  string_token_suffix_magic_find = 0x3AD,
+  string_token_suffix_boring = 0x3AE,
+  string_token_suffix_atk_speed = 0x3AF,
+  string_token_suffix_gold_find = 0x3B0,
+  string_token_suffix_hp_steal = 0x3B1,
+  string_token_suffix_mana_steal = 0x3B2,
+  string_token_suffix_hp_regen = 0x3B3,
+  string_token_suffix_exp_percent = 0x531,
+  string_token_suffix_proc = 0x3B4,
+  string_token_suffix_vit_to_dmg = 0xFFA,
+  string_token_suffix_int_to_dmg = 0xFFB,
+  string_token_suffix_dex_to_dmg = 0xFFC,
+  string_token_suffix_vigor_to_dmg = 0xFFD,
+  string_token_affix_scaled = 0x3B5,
+  string_token_affix_scaled_of = 0x3B6,
+  string_token_rare_prefix_blood = 0x3B7,
+  string_token_rare_prefix_chaos = 0x3B8,
+  string_token_rare_prefix_dire = 0x3B9,
+  string_token_rare_prefix_grim = 0x3BA,
+  string_token_rare_prefix_dark = 0x3BB,
+  string_token_rare_prefix_glowing = 0x3BC,
+  string_token_rare_prefix_skull = 0x3BD,
+  string_token_rare_prefix_dread = 0x3BE,
+  string_token_rare_prefix_pain = 0x3BF,
+  string_token_rare_prefix_death = 0x3C0,
+  string_token_rare_suffix_stone = 0x3C1,
+  string_token_rare_suffix_rock = 0x3C2,
+  string_token_rare_suffix_gem = 0x3C3,
+  string_token_rare_suffix_mineral = 0x3C4,
+  string_token_rare_suffix_glass = 0x3C5,
+  string_token_rare_suffix_jewel = 0xFF3,
+  string_token_rare_wand_suffix_rod = 0x3C6,
+  string_token_rare_wand_suffix_wand = 0x3C7,
+  string_token_rare_wand_suffix_branch = 0x3C8,
+  string_token_rare_wand_suffix_stake = 0x3C9,
+  string_token_rare_wand_suffix_cane = 0x3CA,
+  string_token_rare_wand_suffix_dowel = 0xFF4,
+  string_token_rare_sword_suffix_broadsword = 0x5DB,
+  string_token_rare_sword_suffix_blade = 0x5DC,
+  string_token_rare_sword_suffix_longsword = 0x5DD,
+  string_token_rare_sword_suffix_saber = 0x5DE,
+  string_token_rare_sword_suffix_warblade = 0x5DF,
+  string_token_rare_sword_suffix_falchion = 0xFF5,
+  string_token_rare_dual_suffix_daggers = 0x600,
+  string_token_rare_dual_suffix_shortswords = 0x601,
+  string_token_rare_dual_suffix_sabers = 0x602,
+  string_token_rare_dual_suffix_warblades = 0x603,
+  string_token_rare_dual_suffix_blades = 0x604,
+  string_token_rare_dual_suffix_shredders = 0xFF6,
+  string_token_rare_mace_suffix_cudgel = 0x648,
+  string_token_rare_mace_suffix_morning_star = 0x649,
+  string_token_rare_mace_suffix_greatclub = 0x64A,
+  string_token_rare_mace_suffix_scepter = 0x64B,
+  string_token_rare_mace_suffix_gavel = 0x64C,
+  string_token_rare_mace_suffix_truncheon = 0xFF7,
+  string_token_rare_sword2h_suffix_greatsword = 0x75C,
+  string_token_rare_sword2h_suffix_claymore = 0x75D,
+  string_token_rare_sword2h_suffix_greatblade = 0x75E,
+  string_token_rare_sword2h_suffix_broadsword = 0x75F,
+  string_token_rare_sword2h_suffix_longsword = 0x760,
+  string_token_rare_sword2h_suffix_flamberge = 0xFF8,
+  string_token_rare_mace2h_suffix_maul = 0x761,
+  string_token_rare_mace2h_suffix_greatmace = 0x762,
+  string_token_rare_mace2h_suffix_hammer = 0x763,
+  string_token_rare_mace2h_suffix_warmaul = 0x764,
+  string_token_rare_mace2h_suffix_warmace = 0x765,
+  string_token_rare_mace2h_suffix_sledgehammer = 0xFF9,
+  string_token_ultra_prefix_ward = 0x3CB,
+  string_token_ultra_prefix_desc_ward = 0x3CC,
+  string_token_ultra_prefix_shielding = 0x3CD,
+  string_token_ultra_prefix_desc_shielding = 0x3CE,
+  string_token_ultra_prefix_execute = 0x3CF,
+  string_token_ultra_prefix_desc_execute = 0x3D0,
+  string_token_ultra_prefix_finder = 0x3D1,
+  string_token_ultra_prefix_desc_finder = 0x3D2,
+  string_token_ultra_prefix_godly = 0x3D3,
+  string_token_ultra_prefix_desc_godly = 0x3D4,
+  string_token_wand_prefix_heavy = 0x3D5,
+  string_token_wand_prefix_desc_heavy = 0x3D6,
+  string_token_sword_prefix_desc_heavy = 0xADA,
+  string_token_wand_prefix_light = 0x3D7,
+  string_token_wand_prefix_desc_light = 0x3D8,
+  string_token_sword_prefix_desc_light = 0xADB,
+  string_token_wand_prefix_brutal = 0x3D9,
+  string_token_wand_prefix_desc_brutal = 0x3DA,
+  string_token_sword_prefix_desc_brutal = 0xADC,
+  string_token_wand_prefix_efficient = 0x3DB,
+  string_token_wand_prefix_desc_efficient = 0x3DC,
+  string_token_wand_prefix_devour = 0x3DD,
+  string_token_wand_prefix_desc_devour = 0x3DE,
+  string_token_wand_prefix_death_strike = 0x3DF,
+  string_token_wand_prefix_desc_death_strike = 0x3E0,
+  string_token_wand_prefix_amplify = 0x3E1,
+  string_token_wand_prefix_desc_amplify = 0x3E2,
+  string_token_wand_prefix_growth = 0x3E3,
+  string_token_wand_prefix_desc_growth = 0x3E4,
+  string_token_runeword_prefix_defender = 0xC89,
+  string_token_runeword_prefix_chromatic = 0xC8A,
+  string_token_runeword_prefix_fortuitous = 0xC8B,
+  string_token_runeword_prefix_savage = 0xC8C,
+  string_token_runeword_prefix_sacred = 0xC8D,
+  string_token_enchant_armor_1 = 0xD07,
+  string_token_enchant_armor_2 = 0xD08,
+  string_token_enchant_armor_3 = 0xD09,
+  string_token_enchant_armor_4 = 0xD0A,
+  string_token_enchant_damage_1 = 0xD0B,
+  string_token_enchant_damage_2 = 0xD0C,
+  string_token_enchant_damage_3 = 0xD0D,
+  string_token_enchant_damage_4 = 0xD0E,
+  string_token_enchant_attack_power_1 = 0xD0F,
+  string_token_enchant_attack_power_2 = 0xD10,
+  string_token_enchant_attack_power_3 = 0xD11,
+  string_token_enchant_attack_power_4 = 0xD12,
+  string_token_enchant_vigor_1 = 0xD13,
+  string_token_enchant_vigor_2 = 0xD14,
+  string_token_enchant_vigor_3 = 0xD15,
+  string_token_enchant_vigor_4 = 0xD16,
+  string_token_enchant_int_1 = 0xD8D,
+  string_token_enchant_int_2 = 0xD8E,
+  string_token_enchant_int_3 = 0xD8F,
+  string_token_enchant_int_4 = 0xD90,
+  string_token_enchant_dex_1 = 0xD91,
+  string_token_enchant_dex_2 = 0xD92,
+  string_token_enchant_dex_3 = 0xD93,
+  string_token_enchant_dex_4 = 0xD94,
+  string_token_enchant_vitality_1 = 0xE4F,
+  string_token_enchant_vitality_2 = 0xE50,
+  string_token_enchant_vitality_3 = 0xE51,
+  string_token_enchant_vitality_4 = 0xE52,
+  string_token_enchant_speed_1 = 0xE53,
+  string_token_enchant_speed_2 = 0xE54,
+  string_token_enchant_speed_3 = 0xE55,
+  string_token_enchant_speed_4 = 0xE56,
+  string_token_enchant_critical_hit_1 = 0xE57,
+  string_token_enchant_critical_hit_2 = 0xE58,
+  string_token_enchant_critical_hit_3 = 0xE59,
+  string_token_enchant_critical_hit_4 = 0xE5A,
+  string_token_enchant_special_feather_fall = 0xE5B,
+  string_token_enchant_special_critical_damage = 0xE5C,
+  string_token_enchant_special_attack_rate = 0xE5D,
+  string_token_enchant_special_execute = 0xE5E,
+  string_token_enchant_error_already = 0xD19,
+  string_token_enchant_error_ilevel_min = 0xD8C,
+  string_token_enchant_error_ilevel_max = 0xD17,
+  string_token_enchant_remaining_start = 0xD18,
+  string_token_buff_blessing = 0x3E5,
+  string_token_buff_sustain = 0x3E6,
+  string_token_debuff_curse = 0x3E7,
+  string_token_buff_regen = 0x3E8,
+  string_token_buff_stamina = 0x3E9,
+  string_token_buff_in_shadows = 0x3EA,
+  string_token_status_poisoned = 0x3EB,
+  string_token_status_frozen = 0x3EC,
+  string_token_status_on_fire = 0x3ED,
+  string_token_status_charged = 0x3EE,
+  string_token_status_stunned = 0x3EF,
+  string_token_status_blind = 0x3F0,
+  string_token_status_confused = 0x3F1,
+  string_token_ui_dodge = 0x3F2,
+  string_token_ui_block = 0x5D9,
+  string_token_ui_immune = 0x3F3,
+  string_token_ui_armor_absorb = 0x10C4,
+  string_token_ui_word_key = 0xEBD,
+  string_token_ui_word_button = 0xEBE,
+  string_token_quest_wand_title = 0x3F4,
+  string_token_quest_wand_text = 0x3F5,
+  string_token_quest_wand_objective_1 = 0x3F6,
+  string_token_quest_wand_objective_1_c = 0xEAF,
+  string_token_quest_wand_objective_2 = 0x3F7,
+  string_token_quest_wand_objective_2_c = 0xEAE,
+  string_token_quest_sword_title = 0x5B8,
+  string_token_quest_sword_text = 0x5B9,
+  string_token_quest_sword_objective_1 = 0x5BA,
+  string_token_quest_sword_objective_1_c = 0xEB0,
+  string_token_quest_sword_objective_2 = 0x5BB,
+  string_token_quest_sword_objective_2_c = 0xEB1,
+  string_token_quest_dual_title = 0x5E5,
+  string_token_quest_dual_text = 0x5E6,
+  string_token_quest_dual_objective_1 = 0x5E7,
+  string_token_quest_dual_objective_1_c = 0xEB2,
+  string_token_quest_dual_objective_2 = 0x5E8,
+  string_token_quest_dual_objective_2_c = 0xEB3,
+  string_token_quest_two_weapons_title = 0x62B,
+  string_token_quest_two_weapons_text = 0x62C,
+  string_token_quest_two_weapons_obj_1 = 0x62D,
+  string_token_quest_two_weapons_obj_1_c = 0xEB4,
+  string_token_quest_two_weapons_obj_2 = 0x62E,
+  string_token_quest_two_weapons_obj_2_c = 0xEB5,
+  string_token_quest_eat_title = 0x3F8,
+  string_token_quest_eat_text = 0x3F9,
+  string_token_quest_eat_objective_1 = 0x3FA,
+  string_token_quest_eat_objective_2 = 0x3FB,
+  string_token_quest_eat_objective_2_c = 0xEB6,
+  string_token_quest_eat_invalid = 0x3FC,
+  string_token_quest_tools_title = 0x3FD,
+  string_token_quest_tools_text = 0x3FE,
+  string_token_quest_tools_objective_1 = 0x3FF,
+  string_token_quest_tools_objective_2 = 0x400,
+  string_token_quest_level_up_title = 0x401,
+  string_token_quest_level_up_text = 0x402,
+  string_token_quest_level_up_obj_1 = 0x403,
+  string_token_quest_level_up_obj_1_c = 0xEB9,
+  string_token_quest_instant_title = 0x404,
+  string_token_quest_instant_text = 0x405,
+  string_token_quest_instant_obj_1 = 0x406,
+  string_token_quest_instant_obj_1_c = 0xEB7,
+  string_token_quest_instant_obj_2 = 0x407,
+  string_token_quest_ancient_title = 0x408,
+  string_token_quest_ancient_text = 0x409,
+  string_token_quest_ancient_obj_1 = 0x40A,
+  string_token_quest_ancient_complete = 0x40B,
+  string_token_quest_cooking_title = 0x73F,
+  string_token_quest_cooking_text = 0x740,
+  string_token_quest_cooking_obj_1 = 0x741,
+  string_token_quest_cooking_obj_2 = 0x742,
+  string_token_quest_cooking_complete = 0x743,
+  string_token_quest_blocks_title = 0x1069,
+  string_token_quest_blocks_text = 0x106A,
+  string_token_quest_blocks_objective_1 = 0x106B,
+  string_token_quest_blocks_objective_2 = 0x106C,
+  string_token_quest_forge_title = 0x40C,
+  string_token_quest_forge_text = 0x40D,
+  string_token_quest_forge_objective_1 = 0x40E,
+  string_token_quest_forge_objective_2 = 0x40F,
+  string_token_quest_forge_objective_3 = 0x410,
+  string_token_quest_farming_title = 0x411,
+  string_token_quest_farming_text = 0x412,
+  string_token_quest_farming_objective_1 = 0x413,
+  string_token_quest_farming_objective_2 = 0x9D5,
+  string_token_quest_farming_objective_3 = 0x414,
+  string_token_quest_survival_title = 0x415,
+  string_token_quest_survival_text = 0x416,
+  string_token_quest_survival_objective_1 = 0x417,
+  string_token_quest_survival_objective_1_c = 0xEBA,
+  string_token_quest_survival_complete = 0x74B,
+  string_token_quest_gatekeeper_title = 0x418,
+  string_token_quest_gatekeeper_text = 0x419,
+  string_token_quest_gatekeeper_obj_1 = 0x41A,
+  string_token_quest_gatekeeper_obj_2 = 0x41B,
+  string_token_quest_gatekeeper_obj_3 = 0x41C,
+  string_token_quest_homestone_title = 0x41D,
+  string_token_quest_homestone_text = 0x41E,
+  string_token_quest_homestone_obj_1 = 0x41F,
+  string_token_quest_homestone_obj_2 = 0x420,
+  string_token_quest_homestone_obj_2_c = 0xEBB,
+  string_token_quest_homestone_obj_3 = 0x421,
+  string_token_quest_homestone_obj_3_c = 0xEBC,
+  string_token_quest_shared_town_title = 0xD21,
+  string_token_quest_shared_town_text = 0xD22,
+  string_token_quest_shared_town_obj_1 = 0xD23,
+  string_token_quest_shared_town_obj_2 = 0xD24,
+  string_token_quest_shared_town_obj_3 = 0xD25,
+  string_token_quest_dungeon_title = 0x422,
+  string_token_quest_dungeon_text = 0x423,
+  string_token_quest_dungeon_obj_1 = 0x424,
+  string_token_quest_dungeon_obj_2 = 0x425,
+  string_token_quest_blueprint_title = 0x426,
+  string_token_quest_blueprint_text = 0x427,
+  string_token_quest_blueprint_obj_1 = 0x428,
+  string_token_quest_crystal_title = 0x429,
+  string_token_quest_crystal_text = 0x42A,
+  string_token_quest_crystal_objective_1 = 0x42B,
+  string_token_quest_crystal_objective_2 = 0x42C,
+  string_token_quest_rune_title = 0x42D,
+  string_token_quest_rune_text = 0x42E,
+  string_token_quest_rune_objective_1 = 0x42F,
+  string_token_quest_boss2_title = 0x430,
+  string_token_quest_boss2_text = 0x431,
+  string_token_quest_boss2_objective_1 = 0x432,
+  string_token_quest_boss2_objective_2 = 0x433,
+  string_token_quest_boss3_title = 0x434,
+  string_token_quest_boss3_text = 0x435,
+  string_token_quest_boss3_objective_1 = 0x436,
+  string_token_quest_boss3_objective_2 = 0x437,
+  string_token_quest_boss4_title = 0x5E1,
+  string_token_quest_boss4_text = 0x5E2,
+  string_token_quest_boss4_objective_1 = 0x5E3,
+  string_token_quest_boss4_objective_2 = 0x5E4,
+  string_token_quest_boss5_title = 0xAE1,
+  string_token_quest_boss5_text = 0xAE2,
+  string_token_quest_boss5_objective_1 = 0xAE3,
+  string_token_quest_boss5_objective_2 = 0xAE4,
+  string_token_quest_boss5_complete = 0xCB0,
+  string_token_quest_badlands_travel_title = 0xCD1,
+  string_token_quest_badlands_travel_text = 0xCD2,
+  string_token_quest_badlands_travel_obj_1 = 0xCD3,
+  string_token_quest_badlands_travel_obj_2 = 0xCD4,
+  string_token_quest_badlands_boss_title = 0xCD5,
+  string_token_quest_badlands_boss_text = 0xCD6,
+  string_token_quest_badlands_boss_obj_1 = 0xCD7,
+  string_token_quest_badlands_boss_obj_2 = 0xCD8,
+  string_token_quest_nightmare_title = 0xCB1,
+  string_token_quest_nightmare_text = 0xCB2,
+  string_token_quest_nightmare_obj_1 = 0xCB3,
+  string_token_quest_nightmare_obj_2 = 0xCB4,
+  string_token_quest_nightmare_complete = 0xCB5,
+  string_token_quest_hell_title = 0xCB6,
+  string_token_quest_hell_text = 0xCB7,
+  string_token_quest_hell_obj_1 = 0xCB8,
+  string_token_quest_hell_obj_2 = 0xCB9,
+  string_token_quest_hell_complete = 0xCBA,
+  string_token_quest_inferno_title = 0xCBB,
+  string_token_quest_inferno_text = 0xCBC,
+  string_token_quest_inferno_obj_1 = 0xCBD,
+  string_token_quest_inferno_obj_2 = 0xCBE,
+  string_token_quest_inferno_complete = 0xCBF,
+  string_token_quest_harvest_cornucopia = 0x795,
+  string_token_quest_cornucopia_text = 0x796,
+  string_token_quest_cornucopia_obj_1 = 0x797,
+  string_token_quest_cornucopia_obj_2 = 0x798,
+  string_token_quest_harvest_turkey_egg = 0x799,
+  string_token_quest_turkey_egg_text = 0x79A,
+  string_token_quest_turkey_egg_obj_1 = 0x79B,
+  string_token_quest_harvest_item_msg = 0xE86,
+  string_token_quest_halloween_title = 0xE61,
+  string_token_quest_halloween_text = 0xE62,
+  string_token_quest_halloween_obj_1 = 0xE63,
+  string_token_quest_halloween_item = 0xE6B,
+  string_token_quest_level_5_title = 0x438,
+  string_token_quest_level_5_complete = 0x439,
+  string_token_quest_level_10_title = 0x43A,
+  string_token_quest_level_10_complete = 0x43B,
+  string_token_quest_level_15_title = 0x43C,
+  string_token_quest_level_15_complete = 0x43D,
+  string_token_quest_level_20_title = 0x43E,
+  string_token_quest_level_20_complete = 0x43F,
+  string_token_quest_level_50_title = 0xD95,
+  string_token_quest_level_50_complete = 0xD96,
+  string_token_quest_level_60_title = 0xD97,
+  string_token_quest_level_60_complete = 0xD98,
+  string_token_quest_level_70_title = 0xD99,
+  string_token_quest_level_70_complete = 0xD9A,
+  string_token_quest_level_80_title = 0xD9B,
+  string_token_quest_level_80_complete = 0xD9C,
+  string_token_quest_level_90_title = 0xD9D,
+  string_token_quest_level_90_complete = 0xD9E,
+  string_token_quest_level_100_title = 0xE1A,
+  string_token_quest_level_100_complete = 0xE1B,
+  string_token_quest_survival_seeds_title = 0x7B7,
+  string_token_quest_survival_seeds_text = 0x7B8,
+  string_token_quest_survival_seeds_obj_1 = 0x7B9,
+  string_token_quest_survival_seeds_obj_2 = 0x7BA,
+  string_token_quest_survival_meat_title = 0x7BB,
+  string_token_quest_survival_meat_text = 0x7BC,
+  string_token_quest_survival_meat_obj_1 = 0x7BD,
+  string_token_quest_survival_meat_obj_2 = 0x7BE,
+  string_token_quest_survival_mushroom_title = 0x7BF,
+  string_token_quest_survival_mushroom_text = 0x7C0,
+  string_token_quest_survival_mush_obj_1 = 0x7C1,
+  string_token_quest_complete = 0x440,
+  string_token_quest_reward = 0x441,
+  string_token_quest_btn_ok = 0x442,
+  string_token_quest_btn_complete = 0x443,
+  string_token_quest_btn_cancel = 0x444,
+  string_token_quest_objectives_complete = 0x445,
+  string_token_quest_controller_notify = 0xE89,
+  string_token_achievement_complete = 0xEC6,
+  string_token_achievement_kill_vile = 0xEC7,
+  string_token_achievement_kill_vile_desc = 0xEDB,
+  string_token_achievement_unique = 0xEC8,
+  string_token_achievement_unique_desc = 0xEDC,
+  string_token_achievement_bling = 0xEC9,
+  string_token_achievement_bling_desc = 0xEDD,
+  string_token_achievement_princess = 0xECA,
+  string_token_achievement_princess_desc = 0xEDE,
+  string_token_achievement_cable = 0xECB,
+  string_token_achievement_cable_desc = 0xEDF,
+  string_token_achievement_reset = 0xECC,
+  string_token_achievement_reset_desc = 0xEE0,
+  string_token_achievement_hat = 0xECD,
+  string_token_achievement_hat_desc = 0xEE1,
+  string_token_achievement_hoarders = 0xECE,
+  string_token_achievement_hoarders_desc = 0xEE2,
+  string_token_achievement_handle_it = 0xECF,
+  string_token_achievement_handle_it_desc = 0xEE3,
+  string_token_achievement_slimes = 0xED0,
+  string_token_achievement_slimes_desc = 0xEE4,
+  string_token_achievement_bottom = 0xED1,
+  string_token_achievement_bottom_desc = 0xEE5,
+  string_token_achievement_berries = 0xED2,
+  string_token_achievement_berries_desc = 0xEE6,
+  string_token_achievement_portal = 0xED3,
+  string_token_achievement_portal_desc = 0xEE7,
+  string_token_achievement_digging = 0xED4,
+  string_token_achievement_digging_desc = 0xEE8,
+  string_token_achievement_enlightenment = 0xED5,
+  string_token_achievement_enlightenment_desc = 0xEE9,
+  string_token_achievement_well_read = 0xED6,
+  string_token_achievement_well_read_desc = 0xEEA,
+  string_token_achievement_food = 0xED7,
+  string_token_achievement_food_desc = 0xEEB,
+  string_token_achievement_blood_rain = 0xED8,
+  string_token_achievement_blood_rain_desc = 0xEEC,
+  string_token_achievement_moo = 0xED9,
+  string_token_achievement_moo_desc = 0xEED,
+  string_token_achievement_sharing = 0xEDA,
+  string_token_achievement_sharing_desc = 0xEEE,
+  string_token_vendor_title_seeds = 0x446,
+  string_token_vendor_seeds_description = 0x447,
+  string_token_vendor_title_banker = 0x448,
+  string_token_vendor_banker_desc = 0x449,
+  string_token_vendor_bank_transfer = 0x44A,
+  string_token_vendor_bank_transfer_controller = 0xEAB,
+  string_token_vendor_title_wizard = 0x44B,
+  string_token_vendor_wizard_desc = 0x44C,
+  string_token_vendor_title_hat = 0x44D,
+  string_token_vendor_hat_desc = 0x44E,
+  string_token_vendor_title_pet_shop = 0x44F,
+  string_token_vendor_pet_shop_desc = 0x450,
+  string_token_vendor_title_runeword = 0xC12,
+  string_token_vendor_runeword_desc = 0xC13,
+  string_token_vendor_title_weapon_runeword = 0xCCE,
+  string_token_vendor_weapon_runeword_desc = 0xCCF,
+  string_token_npc_cow = 0x451,
+  string_token_npc_collector = 0x656,
+  string_token_npc_collector_find = 0x657,
+  string_token_npc_collector_intro = 0x65E,
+  string_token_npc_collector_nothing = 0x658,
+  string_token_npc_collector_cant_afford = 0x659,
+  string_token_npc_chicken = 0x6F6,
+  string_token_vendor_halloween = 0x721,
+  string_token_npc_harvest_turkey = 0x79E,
+  string_token_npc_holiday = 0x7C9,
+  string_token_npc_morris = 0x853,
+  string_token_npc_gnome = 0x9D2,
+  string_token_npc_scarecrow = 0x9D3,
+  string_token_npc_beehive = 0xB48,
+  string_token_npc_msogre = 0xC11,
+  string_token_npc_badlands_elf = 0xCCB,
+  string_token_npc_badlands_ogre = 0xCCC,
+  string_token_npc_mayor = 0xD1A,
+  string_token_npc_cant_interact = 0xD2B,
+  string_token_npc_vault = 0xD2F,
+  string_token_npc_jack_o_lantern = 0xE64,
+  string_token_ui_vault_ancient_page = 0x105D,
+  string_token_ui_vendor_each = 0x452,
+  string_token_ui_vendor_page = 0x453,
+  string_token_ui_vendor_of = 0x454,
+  string_token_ui_vendor_change_page_controller = 0xEAD,
+  string_token_ui_vendor_sell = 0x455,
+  string_token_ui_vendor_sell_controller_pre = 0xEAC,
+  string_token_ui_vendor_sell_controller_post = 0xEBF,
+  string_token_ui_vendor_sell_zero = 0x456,
+  string_token_ui_vendor_cant_sell = 0xAC5,
+  string_token_ui_vendor_sell_equip = 0x457,
+  string_token_ui_vendor_rmb = 0x458,
+  string_token_ui_vendor_controller_b = 0x7AC,
+  string_token_ui_vendor_out_of_range = 0x459,
+  string_token_ui_vendor_pickup = 0x654,
+  string_token_ui_vendor_pickup_controller = 0xEA8,
+  string_token_ui_vendor_buyback = 0x45A,
+  string_token_ui_vendor_merchant = 0x45B,
+  string_token_ui_vendor_buyback_error = 0x45C,
+  string_token_ui_vendor_buyback_title = 0x45D,
+  string_token_ui_vendor_stack_price = 0x45E,
+  string_token_ui_vendor_free = 0x511,
+  string_token_ui_crafting_all = 0x45F,
+  string_token_ui_crafting_tools = 0x460,
+  string_token_ui_crafting_materials = 0x461,
+  string_token_ui_crafting_magic = 0x462,
+  string_token_ui_crafting_armor = 0x463,
+  string_token_ui_crafting_food = 0x464,
+  string_token_ui_crafting_farming = 0x5B0,
+  string_token_ui_crafting_fixture = 0x465,
+  string_token_ui_crafting_apparatus = 0x466,
+  string_token_ui_crafting_blueprints = 0x467,
+  string_token_ui_crafting_blocks = 0x468,
+  string_token_ui_crafting_runes = 0x469,
+  string_token_ui_crafting_category_change = 0xE9F,
+  string_token_ui_crafting_category = 0xEA0,
+  string_token_ui_story_log_title = 0xC9F,
+  string_token_ui_story_log_page = 0xCA0,
+  string_token_ui_story_page_unknown = 0xCA2,
+  string_token_ui_achievement_panel_title = 0xEF0,
+  string_token_ui_achievement_points = 0xEF1,
+  string_token_ui_town_new = 0xD1C,
+  string_token_ui_town_exists = 0xD1D,
+  string_token_ui_town_nothing = 0xE01,
+  string_token_ui_town_overwrite = 0xE4E,
+  string_token_monster_prefix_dire = 0x46A,
+  string_token_monster_prefix_gloom = 0x46B,
+  string_token_monster_prefix_mold = 0x46C,
+  string_token_monster_prefix_blight = 0x46D,
+  string_token_monster_prefix_rot = 0x46E,
+  string_token_monster_prefix_dread = 0x46F,
+  string_token_monster_prefix_bile = 0x470,
+  string_token_monster_prefix_flesh = 0x471,
+  string_token_monster_prefix_gore = 0x472,
+  string_token_monster_prefix_spine = 0xFD9,
+  string_token_monster_prefix_soul = 0xFDA,
+  string_token_monster_prefix_blood = 0xFDB,
+  string_token_monster_prefix_wrath = 0xFE2,
+  string_token_monster_prefix_vile = 0xFE3,
+  string_token_monster_suffix_skull = 0x473,
+  string_token_monster_suffix_heart = 0x474,
+  string_token_monster_suffix_mind = 0x475,
+  string_token_monster_suffix_eater = 0x476,
+  string_token_monster_suffix_wound = 0x477,
+  string_token_monster_suffix_collector = 0x478,
+  string_token_monster_suffix_weaver = 0x479,
+  string_token_monster_suffix_soul = 0x47A,
+  string_token_monster_suffix_eyes = 0x47B,
+  string_token_monster_suffix_head = 0xFDC,
+  string_token_monster_suffix_maw = 0xFDD,
+  string_token_monster_suffix_blister = 0xFDE,
+  string_token_monster_suffix_sludge = 0xFE4,
+  string_token_monster_suffix_pus = 0xFE5,
+  string_token_monster_ending_flayer = 0x47C,
+  string_token_monster_ending_destroyer = 0x47D,
+  string_token_monster_ending_mad = 0x47E,
+  string_token_monster_ending_unholy = 0x47F,
+  string_token_monster_ending_bloody = 0x480,
+  string_token_monster_ending_twisted = 0x481,
+  string_token_monster_ending_tainted = 0xFDF,
+  string_token_monster_ending_slayer = 0xFE0,
+  string_token_monster_ending_grim = 0xFE1,
+  string_token_monster_inv_prefix = 0x482,
+  string_token_monster_inv_suffix_foul = 0x483,
+  string_token_monster_inv_suffix_chaos = 0x484,
+  string_token_monster_inv_suffix_grief = 0x485,
+  string_token_monster_inv_suffix_mind = 0x486,
+  string_token_monster_inv_ending_killer = 0x487,
+  string_token_monster_inv_ending_crawler = 0x488,
+  string_token_monster_inv_ending_maggot = 0x489,
+  string_token_monster_inv_ending_puss = 0x48A,
+  string_token_reveal_group_intro = 0x48B,
+  string_token_reveal_group_1 = 0x48C,
+  string_token_reveal_group_2 = 0x48D,
+  string_token_reveal_group_3 = 0x48E,
+  string_token_reveal_group_5 = 0x48F,
+  string_token_reveal_group_6 = 0x490,
+  string_token_reveal_group_7 = 0x491,
+  string_token_reveal_group_8 = 0x492,
+  string_token_reveal_group_9 = 0x493,
+  string_token_reveal_group_runes = 0x494,
+  string_token_reveal_group_boss = 0x495,
+  string_token_reveal_group_blueprint = 0x496,
+  string_token_reveal_group_meat = 0x497,
+  string_token_tip_title = 0x498,
+  string_token_tip_01 = 0x499,
+  string_token_tip_02 = 0x49A,
+  string_token_tip_03 = 0x49B,
+  string_token_tip_04 = 0x49C,
+  string_token_tip_05 = 0x49D,
+  string_token_tip_06 = 0x49E,
+  string_token_tip_07 = 0x49F,
+  string_token_tip_08 = 0x4A0,
+  string_token_tip_09 = 0x4A1,
+  string_token_end_of_demo = 0x4A2,
+  string_token_end_of_nightmare_demo = 0x4A3,
+  string_token_end_of_hell_demo = 0x4A4,
+  string_token_ui_crafting_create = 0x4A5,
+  string_token_ui_crafting_stack_create = 0x4A6,
+  string_token_ui_crafting_create_controller = 0xEC4,
+  string_token_ui_crafting_stack_create_controller = 0xEC5,
+  string_token_item_bank_tab = 0x4A7,
+  string_token_item_bank_tab_desc = 0x4A8,
+  string_token_bank_expand_success = 0xFF2,
+  string_token_item_magic_farming = 0x6DE,
+  string_token_item_barn_upgrade = 0xC14,
+  string_token_barn_upgrade_desc = 0xC15,
+  string_token_item_bank_upgrade = 0xD31,
+  string_token_bank_upgrade_desc = 0xD32,
+  string_token_item_homestone_upgrade1 = 0xFB9,
+  string_token_homestone_upgrade1_desc = 0xFBA,
+  string_token_item_homestone_upgrade2 = 0xFBB,
+  string_token_homestone_upgrade2_desc = 0xFBC,
+  string_token_item_homestone_upgrade3 = 0xFBD,
+  string_token_homestone_upgrade3_desc = 0xFBE,
+  string_token_item_homestone_upgrade4 = 0xFBF,
+  string_token_homestone_upgrade4_desc = 0xFC0,
+  string_token_survival_points_remaining = 0x4A9,
+  string_token_survival_known = 0x4AA,
+  string_token_survival_page_farming_cooking = 0x4AB,
+  string_token_survival_page_seeds_forage = 0x4AC,
+  string_token_survival_page_tools_mining = 0x4AD,
+  string_token_survival_page_alchemy_scrolls = 0x4AE,
+  string_token_survival_page_livestock = 0x864,
+  string_token_survival_farm_fertilizer = 0x4AF,
+  string_token_survival_farm_fertilizer_desc = 0x4B0,
+  string_token_survival_farm_magic_ore = 0x4B1,
+  string_token_survival_farm_magic_ore_desc = 0x4B2,
+  string_token_survival_farm_magic_crystals = 0x7F7,
+  string_token_survival_farm_magic_crystals_desc = 0x7F8,
+  string_token_survival_farm_gold_tree = 0x7F9,
+  string_token_survival_farm_gold_tree_desc = 0x7FA,
+  string_token_survival_farm_composter = 0x4B5,
+  string_token_survival_farm_composter_desc = 0x4B6,
+  string_token_survival_farm_wtime_25 = 0x4BD,
+  string_token_survival_farm_wtime_25_desc = 0x4BE,
+  string_token_survival_farm_wtime_50 = 0x4BF,
+  string_token_survival_farm_wtime_50_desc = 0x4C0,
+  string_token_survival_crops_extra_bloom = 0x4C1,
+  string_token_survival_crops_extra_bloom_desc = 0x4C2,
+  string_token_survival_crops_harvest = 0x4C7,
+  string_token_survival_crops_harvest_desc = 0x4C8,
+  string_token_survival_crops_dbl_stack = 0x4C9,
+  string_token_survival_crops_dbl_stack_desc = 0x4CA,
+  string_token_survival_crops_harvest_seed = 0x7FF,
+  string_token_survival_crops_harvest_seed_desc = 0x800,
+  string_token_survival_crops_harvest_exp = 0x801,
+  string_token_survival_crops_harvest_exp_desc = 0x802,
+  string_token_survival_seeds_stack_size = 0x662,
+  string_token_survival_seeds_stack_size_desc = 0x663,
+  string_token_survival_seeds_extra_plant = 0x803,
+  string_token_survival_seeds_extra_plant_desc = 0x804,
+  string_token_survival_seeds_compost = 0x805,
+  string_token_survival_seeds_compost_desc = 0x806,
+  string_token_survival_seeds_exp = 0x807,
+  string_token_survival_seeds_exp_desc = 0x808,
+  string_token_survival_seeds_extra_seeds = 0x9DA,
+  string_token_survival_seeds_extra_seeds_desc = 0x9DB,
+  string_token_survival_meat_recipes = 0x809,
+  string_token_survival_meat_recipes_desc = 0x80A,
+  string_token_survival_meat_stack_size = 0x80B,
+  string_token_survival_meat_stack_size_desc = 0x80C,
+  string_token_survival_meat_feed_bonus = 0x80D,
+  string_token_survival_meat_feed_bonus_desc = 0x80E,
+  string_token_survival_meat_compost = 0x80F,
+  string_token_survival_meat_compost_desc = 0x810,
+  string_token_survival_mushroom_recipes = 0x811,
+  string_token_survival_mushroom_recipes_desc = 0x812,
+  string_token_survival_mushroom_harvest = 0x813,
+  string_token_survival_mushroom_harvest_desc = 0x814,
+  string_token_survival_mushroom_stack_size = 0x815,
+  string_token_survival_mushroom_stack_size_desc = 0x816,
+  string_token_survival_mushroom_feed = 0x817,
+  string_token_survival_mushroom_feed_desc = 0x818,
+  string_token_survival_mushroom_debuff = 0x819,
+  string_token_survival_mushroom_debuff_desc = 0x81A,
+  string_token_survival_cooking_spring = 0x6C9,
+  string_token_survival_cooking_spring_desc = 0x6CA,
+  string_token_survival_cooking_adv_spring = 0x6CB,
+  string_token_survival_cooking_adv_spring_desc = 0x6CC,
+  string_token_survival_cooking_summer = 0x6CD,
+  string_token_survival_cooking_summer_desc = 0x6CE,
+  string_token_survival_cooking_adv_summer = 0x6CF,
+  string_token_survival_cooking_adv_summer_desc = 0x6D0,
+  string_token_survival_cooking_autumn = 0x6D1,
+  string_token_survival_cooking_autumn_desc = 0x6D2,
+  string_token_survival_cooking_adv_autumn = 0x6D3,
+  string_token_survival_cooking_adv_autumn_desc = 0x6D4,
+  string_token_survival_cooking_buff_extend = 0x7F1,
+  string_token_survival_cooking_buff_extend_desc = 0x7F2,
+  string_token_survival_cooking_buff_resist_25 = 0x7F3,
+  string_token_survival_cooking_buff_resist_25_desc = 0x7F4,
+  string_token_survival_cooking_buff_resist_50 = 0x7F5,
+  string_token_survival_cooking_buff_resist_50_desc = 0x7F6,
+  string_token_survival_planter_box = 0x9D8,
+  string_token_survival_planter_box_desc = 0x9D9,
+  string_token_survival_refrigerator = 0x4EB,
+  string_token_survival_refrigerator_desc = 0x4EC,
+  string_token_survival_mushroom_station = 0x7FB,
+  string_token_survival_mushroom_station_desc = 0x7FC,
+  string_token_survival_mushroom_badlands = 0x10DA,
+  string_token_survival_mushroom_badlands_desc = 0x10DB,
+  string_token_survival_greenhouse = 0x7FD,
+  string_token_survival_greenhouse_desc = 0x7FE,
+  string_token_survival_health_potions = 0x5C6,
+  string_token_survival_health_potions_desc = 0x5C7,
+  string_token_survival_health_nightmare = 0x81B,
+  string_token_survival_health_nightmare_desc = 0x81C,
+  string_token_survival_health_hell = 0x81D,
+  string_token_survival_health_hell_desc = 0x81E,
+  string_token_survival_health_inferno = 0x81F,
+  string_token_survival_health_inferno_desc = 0x820,
+  string_token_survival_invulnerable = 0x821,
+  string_token_survival_invulnerable_desc = 0x822,
+  string_token_survival_health_potion_stack = 0x664,
+  string_token_survival_health_potion_stack_desc = 0x665,
+  string_token_survival_health_bonus_10 = 0x823,
+  string_token_survival_health_bonus_10_desc = 0x824,
+  string_token_survival_health_bonus_25 = 0x825,
+  string_token_survival_health_bonus_25_desc = 0x826,
+  string_token_survival_health_hotbar = 0x827,
+  string_token_survival_health_hotbar_desc = 0x828,
+  string_token_survival_scrolls_stack_size = 0x829,
+  string_token_survival_scrolls_stack_size_desc = 0x82A,
+  string_token_survival_scrolls_duration_25 = 0x82B,
+  string_token_survival_scrolls_duration_25_desc = 0x82C,
+  string_token_survival_scrolls_duration_50 = 0x82D,
+  string_token_survival_scrolls_duration_50_desc = 0x82E,
+  string_token_survival_scrolls_stats_25 = 0x82F,
+  string_token_survival_scrolls_stats_25_desc = 0x830,
+  string_token_survival_scrolls_death = 0x831,
+  string_token_survival_scrolls_death_desc = 0x832,
+  string_token_survival_coffee_stack_size = 0x833,
+  string_token_survival_coffee_stack_size_desc = 0x834,
+  string_token_survival_coffee_buff = 0x835,
+  string_token_survival_coffee_buff_desc = 0x836,
+  string_token_survival_coffee_espresso = 0x837,
+  string_token_survival_coffee_espresso_desc = 0x838,
+  string_token_survival_coffee_bonus_25 = 0x839,
+  string_token_survival_coffee_bonus_25_desc = 0x83A,
+  string_token_survival_tools_copper_pick = 0x4DB,
+  string_token_survival_tools_copper_pick_desc = 0x4DC,
+  string_token_survival_tools_mithril_pick = 0x4DD,
+  string_token_survival_tools_mithril_pick_desc = 0x4DE,
+  string_token_survival_tools_adamantine_pick = 0x4ED,
+  string_token_survival_tools_adamantine_pick_desc = 0x4EE,
+  string_token_survival_tools_holy_pick = 0x7DF,
+  string_token_survival_tools_holy_pick_desc = 0x7E0,
+  string_token_survival_tools_large_pick = 0x7E1,
+  string_token_survival_tools_large_pick_desc = 0x7E2,
+  string_token_survival_till_hoe = 0x9D6,
+  string_token_survival_till_hoe_desc = 0x9D7,
+  string_token_survival_till_pulaski = 0x4CB,
+  string_token_survival_till_pulaski_desc = 0x4CC,
+  string_token_survival_till_extra_wood = 0x7E3,
+  string_token_survival_till_extra_wood_desc = 0x7E4,
+  string_token_survival_till_hoe_speed = 0x7E5,
+  string_token_survival_till_hoe_speed_desc = 0x7E6,
+  string_token_survival_mining_speed_25 = 0x7E7,
+  string_token_survival_mining_speed_25_desc = 0x7E8,
+  string_token_survival_mining_speed_50 = 0x7E9,
+  string_token_survival_mining_speed_50_desc = 0x7EA,
+  string_token_survival_mining_exp_25 = 0x7EB,
+  string_token_survival_mining_exp_25_desc = 0x7EC,
+  string_token_survival_mining_exp_50 = 0x7ED,
+  string_token_survival_mining_exp_50_desc = 0x7EE,
+  string_token_survival_mine_dbl_bars = 0x4DF,
+  string_token_survival_mine_dbl_bars_desc = 0x4E0,
+  string_token_survival_mine_dbl_ore = 0x4E1,
+  string_token_survival_mine_dbl_ore_desc = 0x4E2,
+  string_token_survival_mine_extra_ore_10 = 0x4FE,
+  string_token_survival_mine_extra_ore_10_desc = 0x4FF,
+  string_token_survival_mine_extra_ore_20 = 0x500,
+  string_token_survival_mine_extra_ore_20_desc = 0x501,
+  string_token_survival_mine_extra_ore_30 = 0x502,
+  string_token_survival_mine_extra_ore_30_desc = 0x503,
+  string_token_survival_mine_fdn_extra = 0x504,
+  string_token_survival_mine_ore_magnent = 0x7EF,
+  string_token_survival_mine_ore_magnent_desc = 0x7F0,
+  string_token_survival_mining_low_stamina = 0x10CF,
+  string_token_survival_mining_low_stamina_desc = 0x10D0,
+  string_token_survival_mining_pickup = 0x10D1,
+  string_token_survival_mining_pickup_desc = 0x10D2,
+  string_token_survival_mining_extra_quartz = 0x10D3,
+  string_token_survival_mining_extra_quartz_desc = 0x10D4,
+  string_token_ui_double_quartz = 0x10D5,
+  string_token_survival_fish_rod = 0x4E3,
+  string_token_survival_fish_rod_desc = 0x4E4,
+  string_token_survival_wip = 0x4E5,
+  string_token_survival_points_reset = 0x4E6,
+  string_token_survival_alchemy_table = 0x4E7,
+  string_token_survival_alchemy_table_desc = 0x4E8,
+  string_token_survival_alchemy_imp_hp = 0x4E9,
+  string_token_survival_alchemy_imp_hp_desc = 0x4EA,
+  string_token_survival_livestock_coop = 0x865,
+  string_token_survival_livestock_coop_desc = 0x866,
+  string_token_survival_livestock_egg_recipes = 0x867,
+  string_token_survival_livestock_egg_recipes_desc = 0x868,
+  string_token_survival_livestock_double_eggs = 0x869,
+  string_token_survival_livestock_double_eggs_desc = 0x86A,
+  string_token_survival_livestock_two_coops = 0x86B,
+  string_token_survival_livestock_two_coops_desc = 0x86C,
+  string_token_survival_livestock_extra_food = 0x86D,
+  string_token_survival_livestock_extra_food_desc = 0x86E,
+  string_token_survival_livestock_barn = 0x86F,
+  string_token_survival_livestock_barn_desc = 0x870,
+  string_token_survival_livestock_double_milk = 0x871,
+  string_token_survival_livestock_double_milk_desc = 0x872,
+  string_token_survival_livestock_cheese = 0x873,
+  string_token_survival_livestock_cheese_desc = 0x874,
+  string_token_survival_livestock_adv_cheese = 0x875,
+  string_token_survival_livestock_adv_cheese_desc = 0x876,
+  string_token_survival_livestock_beehive = 0x877,
+  string_token_survival_livestock_beehive_desc = 0x878,
+  string_token_survival_livestock_honey = 0x879,
+  string_token_survival_livestock_honey_desc = 0x87A,
+  string_token_survival_livestock_extra_honey = 0x87B,
+  string_token_survival_livestock_extra_honey_desc = 0x87C,
+  string_token_survival_livestock_extra_hive = 0x87D,
+  string_token_survival_livestock_extra_hive_desc = 0x87E,
+  string_token_survival_livestock_milk_stack = 0x10D6,
+  string_token_survival_livestock_milk_stack_desc = 0x10D7,
+  string_token_survival_livestock_honey_stack = 0x10D8,
+  string_token_survival_livestock_honey_stack_desc = 0x10D9,
+  string_token_start_tips_1a = 0x506,
+  string_token_start_tips_1b = 0x508,
+  string_token_start_tips_2a = 0x509,
+};
+

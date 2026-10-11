@@ -1,0 +1,25 @@
+# the original game (your own copy; see README) and everything derived from it
+/game
+/ida/
+/dump/
+/Video/
+*.i64
+*.id0
+*.id1
+*.id2
+*.nam
+*.til
+/IDA_ILB_Extraced.c
+/draft/ILB_raw*.c
+/draft/ILB_try.c
+/draft/*.err
+/draft/build/
+
+# build output, and settings a run from this folder leaves behind
+/native_appdata/
+*.o
+*.obj
+/build/
+/server/target/
+__pycache__/
+*.log

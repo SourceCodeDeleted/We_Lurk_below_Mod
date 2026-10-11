@@ -1,0 +1,12 @@
+[package]
+name = "ilb-lobby"
+version = "0.1.0"
+edition = "2021"
+description = "Lobby and relay server for two-player games of the It Lurks Below rebuild"
+
+# No dependencies on purpose: the standard library is enough for a few hundred connections, and a server
+# that is exposed to the internet is easier to trust when all of its code is in this folder.
+[dependencies]
+
+[profile.release]
+overflow-checks = true

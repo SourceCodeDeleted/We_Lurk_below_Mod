@@ -1,0 +1,310 @@
+{
+ "game_globals": [
+  {
+   "offset": 0,
+   "address": 6353840,
+   "kind": "byte",
+   "uses": 20,
+   "functions": 10,
+   "name": null
+  },
+  {
+   "offset": 4,
+   "address": 6353844,
+   "kind": "dword",
+   "uses": 11,
+   "functions": 6,
+   "name": null
+  },
+  {
+   "offset": 8,
+   "address": 6353848,
+   "kind": "unk",
+   "uses": 1,
+   "functions": 1,
+   "name": null
+  },
+  {
+   "offset": 16,
+   "address": 6353856,
+   "kind": "dword",
+   "uses": 1,
+   "functions": 1,
+   "name": null
+  },
+  {
+   "offset": 20,
+   "address": 6353860,
+   "kind": "dword",
+   "uses": 3123,
+   "functions": 927,
+   "name": "client"
+  },
+  {
+   "offset": 24,
+   "address": 6353864,
+   "kind": "dword",
+   "uses": 13,
+   "functions": 8,
+   "name": null
+  },
+  {
+   "offset": 8232,
+   "address": 6362072,
+   "kind": "dword",
+   "uses": 9,
+   "functions": 5,
+   "name": null
+  },
+  {
+   "offset": 8248,
+   "address": 6362088,
+   "kind": "dword",
+   "uses": 33,
+   "functions": 20,
+   "name": null
+  },
+  {
+   "offset": 8252,
+   "address": 6362092,
+   "kind": "dword",
+   "uses": 51,
+   "functions": 23,
+   "name": null
+  },
+  {
+   "offset": 8256,
+   "address": 6362096,
+   "kind": "dword",
+   "uses": 14,
+   "functions": 11,
+   "name": null
+  },
+  {
+   "offset": 8260,
+   "address": 6362100,
+   "kind": "dword",
+   "uses": 143,
+   "functions": 130,
+   "name": null
+  },
+  {
+   "offset": 8264,
+   "address": 6362104,
+   "kind": "dword",
+   "uses": 234,
+   "functions": 71,
+   "name": null
+  },
+  {
+   "offset": 8268,
+   "address": 6362108,
+   "kind": "dword",
+   "uses": 108,
+   "functions": 48,
+   "name": null
+  },
+  {
+   "offset": 8272,
+   "address": 6362112,
+   "kind": "dword",
+   "uses": 9,
+   "functions": 4,
+   "name": null
+  },
+  {
+   "offset": 8284,
+   "address": 6362124,
+   "kind": "dword",
+   "uses": 7,
+   "functions": 7,
+   "name": null
+  },
+  {
+   "offset": 8296,
+   "address": 6362136,
+   "kind": "byte",
+   "uses": 6,
+   "functions": 3,
+   "name": null
+  },
+  {
+   "offset": 8297,
+   "address": 6362137,
+   "kind": "word",
+   "uses": 17,
+   "functions": 11,
+   "name": null
+  },
+  {
+   "offset": 8299,
+   "address": 6362139,
+   "kind": "byte",
+   "uses": 6,
+   "functions": 5,
+   "name": null
+  },
+  {
+   "offset": 8300,
+   "address": 6362140,
+   "kind": "dword",
+   "uses": 16,
+   "functions": 3,
+   "name": null
+  },
+  {
+   "offset": 8304,
+   "address": 6362144,
+   "kind": "dword",
+   "uses": 17,
+   "functions": 10,
+   "name": null
+  },
+  {
+   "offset": 8308,
+   "address": 6362148,
+   "kind": "dword",
+   "uses": 24,
+   "functions": 13,
+   "name": null
+  },
+  {
+   "offset": 8312,
+   "address": 6362152,
+   "kind": "byte",
+   "uses": 16,
+   "functions": 10,
+   "name": null
+  },
+  {
+   "offset": 8313,
+   "address": 6362153,
+   "kind": "xmmword",
+   "uses": 254,
+   "functions": 66,
+   "name": "uses_shared_town"
+  },
+  {
+   "offset": 8329,
+   "address": 6362169,
+   "kind": "unk",
+   "uses": 1,
+   "functions": 1,
+   "name": null
+  },
+  {
+   "offset": 8332,
+   "address": 6362172,
+   "kind": "flt",
+   "uses": 148,
+   "functions": 42,
+   "name": null
+  },
+  {
+   "offset": 8336,
+   "address": 6362176,
+   "kind": "unk",
+   "uses": 5,
+   "functions": 2,
+   "name": null
+  },
+  {
+   "offset": 8340,
+   "address": 6362180,
+   "kind": "flt",
+   "uses": 5,
+   "functions": 2,
+   "name": null
+  },
+  {
+   "offset": 8344,
+   "address": 6362184,
+   "kind": "dword",
+   "uses": 1027,
+   "functions": 76,
+   "name": null
+  },
+  {
+   "offset": 8348,
+   "address": 6362188,
+   "kind": "flt",
+   "uses": 326,
+   "functions": 78,
+   "name": null
+  }
+ ],
+ "client_data": [
+  {
+   "offset": 4,
+   "type": "_DWORD",
+   "uses": 843,
+   "name": "client_id"
+  },
+  {
+   "offset": 8,
+   "type": "_DWORD",
+   "uses": 1,
+   "name": null
+  },
+  {
+   "offset": 12,
+   "type": "_DWORD",
+   "uses": 49,
+   "name": "game_state"
+  },
+  {
+   "offset": 16,
+   "type": "_DWORD",
+   "uses": 2,
+   "name": null
+  },
+  {
+   "offset": 20,
+   "type": "_DWORD",
+   "uses": 3,
+   "name": null
+  },
+  {
+   "offset": 24,
+   "type": "_DWORD",
+   "uses": 49,
+   "name": null
+  },
+  {
+   "offset": 28,
+   "type": "_BYTE",
+   "uses": 3,
+   "name": null
+  },
+  {
+   "offset": 29,
+   "type": "_BYTE",
+   "uses": 3,
+   "name": null
+  },
+  {
+   "offset": 30,
+   "type": "_BYTE",
+   "uses": 6,
+   "name": null
+  },
+  {
+   "offset": 32,
+   "type": "_DWORD",
+   "uses": 80,
+   "name": null
+  },
+  {
+   "offset": 36,
+   "type": "_BYTE",
+   "uses": 4,
+   "name": null
+  },
+  {
+   "offset": 44,
+   "type": "_DWORD",
+   "uses": 1,
+   "name": null
+  }
+ ]
+}

@@ -1,0 +1,22 @@
+{
+ "comment": "C runtime / compiler support symbols the draft may leave undefined (tools/draft_symbols.py). The j_ and sub_ entries are IDA's names for runtime-library code after 0x582B00.",
+ "symbols": [
+  "fltused",
+  "sqrt",
+  "strlen",
+  "wcslen",
+  "strcat",
+  "strcpy",
+  "wcscpy",
+  "wcscmp",
+  "atan2",
+  "alldiv",
+  "chkstk",
+  "memcpy",
+  "memset",
+  "report_rangecheckfailure",
+  "j___ftol2_sse_excpt_0",
+  "j_j_free",
+  "sub_582D30"
+ ]
+}

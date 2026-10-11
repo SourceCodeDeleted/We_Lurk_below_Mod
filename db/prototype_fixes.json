@@ -1,0 +1,11 @@
+{
+ "comment": "Prototypes given to IDA by hand because the decompiler's own guess loses arguments. Applied by tools/ida/add_functions.py before it decompiles. Callers must be re-decompiled afterwards.",
+ "prototypes": {
+  "0044EE70": "void __usercall hit_wall_dust(unsigned int world_id@<ecx>, vector2d *position@<edx>, vector2d *direction);",
+  "00416E60": "char __usercall blueprint_char_place@<al>(int blueprint_type@<ecx>, int x, int y, char code, int layer);"
+ },
+ "why": {
+  "0044EE70": "ecx, edx, then one stack argument that the CALLER removes (add esp,4 after every call), so it is not __fastcall; with __fastcall three of the five call sites lost the third argument. Parameter list matches the assert signature void hit_wall_dust(unsigned int, vector2d *, vector2d *); the parameter names are guesses.",
+  "00416E60": "The building type arrives in ecx (blueprint_fill_arrays loads ecx from [ebp-4] before each of its four calls) next to four stack arguments; IDA's __cdecl guess dropped it, so the '@' template character (the building's resident NPC) switched on garbage and no resident was ever placed. The function name and parameter names are guesses (no assert string names it)."
+ }
+}

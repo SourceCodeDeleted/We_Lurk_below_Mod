@@ -1,0 +1,512 @@
+{
+ "00401000": {
+  "name": "assert_exists",
+  "file": "ec_assert.cpp",
+  "why": "body matches its own signature string; safestring_compare and safestring_copy are inlined"
+ },
+ "00401220": {
+  "name": "assert_failed",
+  "file": "ec_assert.cpp",
+  "why": "the assert handler; name chosen, the original name is not in the binary"
+ },
+ "00581B40": {
+  "name": "main",
+  "file": "main.cpp",
+  "why": "SDL_main, called from SDL's WinMain wrapper at 0x583AE0; gdi_init, debug_log_start and set_app_mode are inlined in it"
+ },
+ "00583AE0": {
+  "name": "SDL_main_getcmdline",
+  "file": null,
+  "why": "SDL2main's WinMain helper (library code)"
+ },
+ "00401440": {
+  "name": "config_set_default_keys",
+  "file": "ec_config.cpp",
+  "why": "writes the 50 default key codes into the config struct; name chosen"
+ },
+ "00401700": {
+  "name": "config_set_value",
+  "file": "ec_config.cpp",
+  "why": "switch over the 81 setting indices; name chosen"
+ },
+ "004022F0": {
+  "name": "config_load",
+  "file": "ec_config.cpp",
+  "why": "sets defaults, loads ilb_config.txt, upgrades old versions; appdata_file_load is inlined; name chosen"
+ },
+ "004026A0": {
+  "name": "config_file_add_bool_line",
+  "file": "ec_config.cpp",
+  "why": "builds 'name 0/1' and calls config_file_add_line; name chosen"
+ },
+ "00402710": {
+  "name": "config_save",
+  "file": "ec_config.cpp",
+  "why": "writes all 81 settings; init/free_config_file_memory and appdata_file_text_save inlined; name chosen"
+ },
+ "00405C40": {
+  "name": "appdata_set_filename",
+  "file": "ec_fileio.cpp",
+  "why": "builds the %LOCALAPPDATA% save path; name chosen"
+ },
+ "004050B0": {
+  "name": "lzw_decompress",
+  "file": "ec_fileio.cpp",
+  "why": "the decompressor; lzw_table_add is the callee inlined in it; name chosen"
+ },
+ "00404F70": {
+  "name": "lzw_table_reset",
+  "file": "ec_fileio.cpp",
+  "why": "name chosen"
+ },
+ "00405030": {
+  "name": "lzw_output_code",
+  "file": "ec_fileio.cpp",
+  "why": "name chosen"
+ },
+ "00405080": {
+  "name": "lzw_first_char",
+  "file": "ec_fileio.cpp",
+  "why": "name chosen"
+ },
+ "00407250": {
+  "name": "matrix_multiply",
+  "file": "ec_matrix.cpp",
+  "why": "4x4 product, result = third argument * second; name chosen"
+ },
+ "00407650": {
+  "name": "matrix_inverse",
+  "file": "ec_matrix.cpp",
+  "why": "cofactor inverse; name chosen"
+ },
+ "00407C10": {
+  "name": "matrix_unproject",
+  "file": "ec_matrix.cpp",
+  "why": "screen position to world through inverse( view * projection ) and the view port; name chosen"
+ },
+ "00406CD0": {
+  "name": "channels_update",
+  "file": "ec_fmod.cpp",
+  "why": "FMOD update, frees finished channels, counts active ones; name chosen"
+ },
+ "005817D0": {
+  "name": "main_client_start",
+  "file": "main.cpp",
+  "why": "client start-up called from main; fmod_sound_engine_init is inlined in it; name chosen"
+ },
+ "00581280": {
+  "name": "main_process_event",
+  "file": "main.cpp",
+  "why": "SDL event dispatch called from main's loop; name chosen"
+ },
+ "00402FC0": {
+  "name": "controller_reset",
+  "file": "ec_controller.cpp",
+  "why": "logs the attached pad and clears the four controller states; debug_log_add_char_str is inlined; name chosen"
+ },
+ "00403200": {
+  "name": "controller_start",
+  "file": "ec_controller.cpp",
+  "why": "controller_set_gamepad + controller_reset + the two prompt glyph strings; name chosen"
+ },
+ "00403B10": {
+  "name": "get_ps_smallfont_char",
+  "file": "ec_controller.cpp",
+  "why": "own signature; get_xbox_smallfont_char inlined"
+ },
+ "00403C60": {
+  "name": "get_ps_special_char",
+  "file": "ec_controller.cpp",
+  "why": "own signature; get_xbox_special_char inlined"
+ },
+ "0040AAB0": {
+  "name": "gge_gs3_init",
+  "file": "gge_gs3.cpp",
+  "why": "own signature in its asserts; only reached through the module table at 0x5D42A0"
+ },
+ "0040AB40": {
+  "name": "gge_gs3_free",
+  "file": "gge_gs3.cpp",
+  "why": "own signature in its asserts; only reached through the module table at 0x5D42A0"
+ },
+ "0040AF60": {
+  "name": "gs3_put_pixel",
+  "file": "gge_gs3.cpp",
+  "why": "clipped pixel writer used by gge_gs3_decompress_into_buffer; name chosen"
+ },
+ "0040A950": {
+  "name": "d3d_error",
+  "file": null,
+  "why": "logs 'DirectX 11 error.' with function, file and line when an HRESULT is non-zero; name chosen, owning file unknown"
+ },
+ "0040FF60": {
+  "name": "gge_mat_plain_shader_filename",
+  "file": "gge_mat_plain.cpp",
+  "why": "entry 0 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040FF70": {
+  "name": "gge_mat_plain_shader_created",
+  "file": "gge_mat_plain.cpp",
+  "why": "entry 0 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040FFC0": {
+  "name": "gge_mat_plain_shader_free",
+  "file": "gge_mat_plain.cpp",
+  "why": "entry 0 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040FFF0": {
+  "name": "gge_mat_plain_set_globals",
+  "file": "gge_mat_plain.cpp",
+  "why": "entry 0 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "004100B0": {
+  "name": "gge_mat_plain_vertex_size",
+  "file": "gge_mat_plain.cpp",
+  "why": "entry 0 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "004100C0": {
+  "name": "gge_mat_plain_copy_vertices",
+  "file": "gge_mat_plain.cpp",
+  "why": "entry 0 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040F660": {
+  "name": "gge_mat_block_shader_filename",
+  "file": "gge_mat_block.cpp",
+  "why": "entry 1 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040F670": {
+  "name": "gge_mat_block_shader_created",
+  "file": "gge_mat_block.cpp",
+  "why": "entry 1 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040F6C0": {
+  "name": "gge_mat_block_shader_free",
+  "file": "gge_mat_block.cpp",
+  "why": "entry 1 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040F6E0": {
+  "name": "gge_mat_block_set_globals",
+  "file": "gge_mat_block.cpp",
+  "why": "entry 1 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040F070": {
+  "name": "gge_mat_block_vertex_size",
+  "file": "gge_mat_block.cpp",
+  "why": "entry 1 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040F080": {
+  "name": "gge_mat_block_copy_vertices",
+  "file": "gge_mat_block.cpp",
+  "why": "entry 1 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040FCC0": {
+  "name": "gge_mat_overlay_shader_filename",
+  "file": "gge_mat_overlay.cpp",
+  "why": "entry 2 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040FCD0": {
+  "name": "gge_mat_overlay_shader_created",
+  "file": "gge_mat_overlay.cpp",
+  "why": "entry 2 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040FD20": {
+  "name": "gge_mat_overlay_shader_free",
+  "file": "gge_mat_overlay.cpp",
+  "why": "entry 2 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040FD40": {
+  "name": "gge_mat_overlay_set_globals",
+  "file": "gge_mat_overlay.cpp",
+  "why": "entry 2 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040F2B0": {
+  "name": "gge_mat_overlay_vertex_size",
+  "file": "gge_mat_overlay.cpp",
+  "why": "entry 2 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040F900": {
+  "name": "gge_mat_overlay_copy_vertices",
+  "file": "gge_mat_overlay.cpp",
+  "why": "entry 2 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "004101A0": {
+  "name": "gge_mat_sprite_shader_filename",
+  "file": "gge_mat_sprite.cpp",
+  "why": "entry 3 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "004101B0": {
+  "name": "gge_mat_sprite_shader_created",
+  "file": "gge_mat_sprite.cpp",
+  "why": "entry 3 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "00410200": {
+  "name": "gge_mat_sprite_shader_free",
+  "file": "gge_mat_sprite.cpp",
+  "why": "entry 3 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "00410220": {
+  "name": "gge_mat_sprite_set_globals",
+  "file": "gge_mat_sprite.cpp",
+  "why": "entry 3 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040EF20": {
+  "name": "gge_mat_alpha_sprite_shader_filename",
+  "file": "gge_mat_alpha_sprite.cpp",
+  "why": "entry 4 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040EF30": {
+  "name": "gge_mat_alpha_sprite_shader_created",
+  "file": "gge_mat_alpha_sprite.cpp",
+  "why": "entry 4 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040EF80": {
+  "name": "gge_mat_alpha_sprite_shader_free",
+  "file": "gge_mat_alpha_sprite.cpp",
+  "why": "entry 4 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040EFA0": {
+  "name": "gge_mat_alpha_sprite_set_globals",
+  "file": "gge_mat_alpha_sprite.cpp",
+  "why": "entry 4 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040FE10": {
+  "name": "gge_mat_parallax_shader_filename",
+  "file": "gge_mat_parallax.cpp",
+  "why": "entry 5 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040FE20": {
+  "name": "gge_mat_parallax_shader_created",
+  "file": "gge_mat_parallax.cpp",
+  "why": "entry 5 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040FE70": {
+  "name": "gge_mat_parallax_shader_free",
+  "file": "gge_mat_parallax.cpp",
+  "why": "entry 5 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040FE90": {
+  "name": "gge_mat_parallax_set_globals",
+  "file": "gge_mat_parallax.cpp",
+  "why": "entry 5 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "00410440": {
+  "name": "gge_mat_ui_shader_filename",
+  "file": "gge_mat_ui.cpp",
+  "why": "entry 6 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "00410450": {
+  "name": "gge_mat_ui_shader_created",
+  "file": "gge_mat_ui.cpp",
+  "why": "entry 6 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "004104A0": {
+  "name": "gge_mat_ui_shader_free",
+  "file": "gge_mat_ui.cpp",
+  "why": "entry 6 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "004104C0": {
+  "name": "gge_mat_ui_set_globals",
+  "file": "gge_mat_ui.cpp",
+  "why": "entry 6 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040F430": {
+  "name": "gge_mat_alpha_ui_shader_filename",
+  "file": "gge_mat_alpha_ui.cpp",
+  "why": "entry 7 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040F440": {
+  "name": "gge_mat_alpha_ui_shader_created",
+  "file": "gge_mat_alpha_ui.cpp",
+  "why": "entry 7 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040F490": {
+  "name": "gge_mat_alpha_ui_shader_free",
+  "file": "gge_mat_alpha_ui.cpp",
+  "why": "entry 7 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040F4B0": {
+  "name": "gge_mat_alpha_ui_set_globals",
+  "file": "gge_mat_alpha_ui.cpp",
+  "why": "entry 7 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040F570": {
+  "name": "gge_mat_alpha_ui_vertex_size",
+  "file": "gge_mat_alpha_ui.cpp",
+  "why": "entry 7 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040F580": {
+  "name": "gge_mat_alpha_ui_copy_vertices",
+  "file": "gge_mat_alpha_ui.cpp",
+  "why": "entry 7 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040F160": {
+  "name": "gge_mat_alpha_sprite_ui_shader_filename",
+  "file": "gge_mat_alpha_sprite_ui.cpp",
+  "why": "entry 8 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040F170": {
+  "name": "gge_mat_alpha_sprite_ui_shader_created",
+  "file": "gge_mat_alpha_sprite_ui.cpp",
+  "why": "entry 8 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040F1C0": {
+  "name": "gge_mat_alpha_sprite_ui_shader_free",
+  "file": "gge_mat_alpha_sprite_ui.cpp",
+  "why": "entry 8 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040F1E0": {
+  "name": "gge_mat_alpha_sprite_ui_set_globals",
+  "file": "gge_mat_alpha_sprite_ui.cpp",
+  "why": "entry 8 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040F2C0": {
+  "name": "gge_mat_alpha_sprite_ui_copy_vertices",
+  "file": "gge_mat_alpha_sprite_ui.cpp",
+  "why": "entry 8 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "004102F0": {
+  "name": "gge_mat_title_ui_shader_filename",
+  "file": "gge_mat_title_ui.cpp",
+  "why": "entry 9 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "00410300": {
+  "name": "gge_mat_title_ui_shader_created",
+  "file": "gge_mat_title_ui.cpp",
+  "why": "entry 9 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "00410350": {
+  "name": "gge_mat_title_ui_shader_free",
+  "file": "gge_mat_title_ui.cpp",
+  "why": "entry 9 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "00410370": {
+  "name": "gge_mat_title_ui_set_globals",
+  "file": "gge_mat_title_ui.cpp",
+  "why": "entry 9 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "00410590": {
+  "name": "gge_mat_ui_linear_shader_filename",
+  "file": "gge_mat_ui_linear.cpp",
+  "why": "entry 10 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "004105A0": {
+  "name": "gge_mat_ui_linear_shader_created",
+  "file": "gge_mat_ui_linear.cpp",
+  "why": "entry 10 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "004105F0": {
+  "name": "gge_mat_ui_linear_shader_free",
+  "file": "gge_mat_ui_linear.cpp",
+  "why": "entry 10 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "00410610": {
+  "name": "gge_mat_ui_linear_set_globals",
+  "file": "gge_mat_ui_linear.cpp",
+  "why": "entry 10 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040FB50": {
+  "name": "gge_mat_map_shader_filename",
+  "file": "gge_mat_map.cpp",
+  "why": "entry 11 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040FB60": {
+  "name": "gge_mat_map_shader_created",
+  "file": "gge_mat_map.cpp",
+  "why": "entry 11 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040FBB0": {
+  "name": "gge_mat_map_shader_free",
+  "file": "gge_mat_map.cpp",
+  "why": "entry 11 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040FBD0": {
+  "name": "gge_mat_map_set_globals",
+  "file": "gge_mat_map.cpp",
+  "why": "entry 11 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040FA00": {
+  "name": "gge_mat_blur_shader_filename",
+  "file": "gge_mat_blur.cpp",
+  "why": "entry 12 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040FA10": {
+  "name": "gge_mat_blur_shader_created",
+  "file": "gge_mat_blur.cpp",
+  "why": "entry 12 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040FA60": {
+  "name": "gge_mat_blur_shader_free",
+  "file": "gge_mat_blur.cpp",
+  "why": "entry 12 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040FA80": {
+  "name": "gge_mat_blur_set_globals",
+  "file": "gge_mat_blur.cpp",
+  "why": "entry 12 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040F7B0": {
+  "name": "gge_mat_bloom_blend_shader_filename",
+  "file": "gge_mat_bloom_blend.cpp",
+  "why": "entry 13 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040F7C0": {
+  "name": "gge_mat_bloom_blend_shader_created",
+  "file": "gge_mat_bloom_blend.cpp",
+  "why": "entry 13 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040F810": {
+  "name": "gge_mat_bloom_blend_shader_free",
+  "file": "gge_mat_bloom_blend.cpp",
+  "why": "entry 13 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "0040F830": {
+  "name": "gge_mat_bloom_blend_set_globals",
+  "file": "gge_mat_bloom_blend.cpp",
+  "why": "entry 13 of material_type_tbl (0x5D42C8); identical functions are shared between types by the linker, this is the first type using it; suffix chosen except copy_vertices"
+ },
+ "004106E0": {
+  "name": "copy_indices",
+  "file": "gge_models.cpp",
+  "why": "maps an index buffer and copies words into it; name chosen"
+ },
+ "0040D960": {
+  "name": "sub_40D960",
+  "file": "gge_main.cpp",
+  "why": "enumerates display modes through DXGI (not reconstructed yet); file by content"
+ },
+ "0040C260": {
+  "name": "create_device_resources",
+  "file": "gge_main.cpp",
+  "why": "own signature (assert device_ok); create_device_and_swapchain inlined"
+ },
+ "0040C710": {
+  "name": "gge_shutdown",
+  "file": "gge_main.cpp",
+  "why": "frees the graphics modules in reverse and releases the device objects; name chosen"
+ },
+ "0040C810": {
+  "name": "set_render_target_and_clear",
+  "file": "gge_main.cpp",
+  "why": "targets and clears the back buffer; name chosen after set_render_target_texture_and_clear"
+ },
+ "0040C5D0": {
+  "name": "free_render_to_texture_resources",
+  "file": "gge_main.cpp",
+  "why": "hosts inlined gge_texture_memory_rendering_surface_remove; name chosen"
+ },
+ "00411B20": {
+  "name": "gge_render_layers",
+  "file": "gge_textures.cpp",
+  "why": "sorts materials into layers and renders them; name chosen"
+ },
+ "004118F0": {
+  "name": "sort_into_rendering_layers",
+  "file": "gge_textures.cpp",
+  "why": "own signature in its assert"
+ },
+ "004126C0": {
+  "name": "gge_view_set_ports",
+  "file": "gge_view.cpp",
+  "why": "sets the window and view rectangles; name and file chosen"
+ }
+}

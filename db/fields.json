@@ -1,0 +1,834 @@
+[
+ {
+  "base": "ambient",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "dword",
+  "votes": 7,
+  "total": 7,
+  "others": [],
+  "example": "004149F0: ambient->unit_type == unit_type_ambient  <=  *(_DWORD *)(a1 + 2080) != 6"
+ },
+ {
+  "base": "armor",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "dword",
+  "votes": 2,
+  "total": 2,
+  "others": [],
+  "example": "00482C20: armor->unit_type == unit_type_item  <=  a1[520] != 3"
+ },
+ {
+  "base": "ccd",
+  "field": "in_world",
+  "offset": 1,
+  "type": "byte",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "00491F30: ccd->in_world == false  <=  v10[1] != 0"
+ },
+ {
+  "base": "client",
+  "field": "client_id",
+  "offset": 4,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "00467820: game_globals.client->client_id < max_clients  <=  *(_DWORD *)(v17 + 4) >= 4u"
+ },
+ {
+  "base": "crystal",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "dword",
+  "votes": 2,
+  "total": 2,
+  "others": [],
+  "example": "00482E30: crystal->unit_type == unit_type_item  <=  a1[520] != 3"
+ },
+ {
+  "base": "dirt_mound",
+  "field": "unit_class",
+  "offset": 2084,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "004D6800: dirt_mound->unit_class == object_type_dirt_mound  <=  v2[521] != 72"
+ },
+ {
+  "base": "dirt_mound",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "004D6800: dirt_mound->unit_type == unit_type_object  <=  v2[520] != 4"
+ },
+ {
+  "base": "dload",
+  "field": "farback_tile",
+  "offset": 8,
+  "type": "word",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "00445F40: dload->farback_tile < num_rlg_tiles  <=  v1[4] >= 0x96u"
+ },
+ {
+  "base": "dual",
+  "field": "unit_class",
+  "offset": 2084,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "00482230: dual->unit_class == item_type_dual_rogue  <=  a1[521] != 454"
+ },
+ {
+  "base": "dual",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "00482230: dual->unit_type == unit_type_item  <=  a1[520] != 3"
+ },
+ {
+  "base": "header",
+  "field": "num_units",
+  "offset": 8,
+  "type": "dword",
+  "votes": 2,
+  "total": 3,
+  "others": [
+   [
+    20,
+    "dword",
+    1
+   ]
+  ],
+  "example": "00533CD0: header->num_units == total_units  <=  *(_DWORD *)(v6 + 8) != v3"
+ },
+ {
+  "base": "icd",
+  "field": "crystal_ancient_affix_id",
+  "offset": 280,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "00482E30: icd->crystal_ancient_affix_id == invalid_id  <=  a1[768] != -1"
+ },
+ {
+  "base": "icd",
+  "field": "in_world",
+  "offset": 1,
+  "type": "byte",
+  "votes": 8,
+  "total": 8,
+  "others": [],
+  "example": "00437040: icd->in_world  <=  *(_BYTE *)(a1 + 2793) == 0"
+ },
+ {
+  "base": "icd",
+  "field": "num_crystal_slots",
+  "offset": 136,
+  "type": "int",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "0047D010: icd->num_crystal_slots > 0  <=  *(int *)(a1 + 2928) <= 0"
+ },
+ {
+  "base": "icd",
+  "field": "slot_shape",
+  "offset": 72,
+  "type": "int",
+  "votes": 1,
+  "total": 2,
+  "others": [
+   [
+    72,
+    "dword",
+    1
+   ]
+  ],
+  "example": "0047D010: icd->slot_shape > crystal_shape_none  <=  *(int *)(a1 + 2864) <= 0"
+ },
+ {
+  "base": "inv_item",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "00556160: inv_item->unit_type == unit_type_item  <=  v5[520] != 3"
+ },
+ {
+  "base": "item",
+  "field": "stats",
+  "offset": 2368,
+  "type": "dword",
+  "votes": 1,
+  "total": 2,
+  "others": [
+   [
+    2368,
+    "int",
+    1
+   ]
+  ],
+  "example": "0047F170: item->stats.rank >= 0  <=  (int)a1[592] < 0"
+ },
+ {
+  "base": "item",
+  "field": "unit_class",
+  "offset": 2084,
+  "type": "dword",
+  "votes": 8,
+  "total": 9,
+  "others": [
+   [
+    2084,
+    "int",
+    1
+   ]
+  ],
+  "example": "00474BE0: item->unit_class == item_type_gold  <=  *(_DWORD *)(a1 + 2084) != 0"
+ },
+ {
+  "base": "item",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "dword",
+  "votes": 116,
+  "total": 163,
+  "others": [
+   [
+    2080,
+    "int",
+    47
+   ]
+  ],
+  "example": "0046A9B0: item->unit_type == unit_type_item  <=  a1[520] != 3"
+ },
+ {
+  "base": "item_to_enchant",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "0047D7C0: item_to_enchant->unit_type == unit_type_item  <=  v6[520] != 3"
+ },
+ {
+  "base": "item_to_stack",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "dword",
+  "votes": 3,
+  "total": 5,
+  "others": [
+   [
+    2080,
+    "int",
+    2
+   ]
+  ],
+  "example": "0047AB40: item_to_stack->unit_type == unit_type_item  <=  a1[520] != 3"
+ },
+ {
+  "base": "item_to_stack_icd",
+  "field": "stack_count",
+  "offset": 12,
+  "type": "int",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "0047BA00: item_to_stack_icd->stack_count > 1  <=  v4[701] <= 1"
+ },
+ {
+  "base": "jelly_a",
+  "field": "unit_class",
+  "offset": 2084,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "004B8C50: jelly_a->unit_class == monster_type_jelly_medium  <=  *(_DWORD *)(a1 + 2084) != 68"
+ },
+ {
+  "base": "jelly_a",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "004B8C50: jelly_a->unit_type == unit_type_monster  <=  *(_DWORD *)(a1 + 2080) != 1"
+ },
+ {
+  "base": "look",
+  "field": "hair_color",
+  "offset": 4,
+  "type": "int",
+  "votes": 3,
+  "total": 3,
+  "others": [],
+  "example": "00510E80: look->hair_color >= 0  <=  a2[1] < 0"
+ },
+ {
+  "base": "mcd",
+  "field": "flags",
+  "offset": 0,
+  "type": "int",
+  "votes": 2,
+  "total": 2,
+  "others": [],
+  "example": "004AD610: mcd->flags & monster_flags_boss  <=  *(int *)(a1 + 2792) >= 0"
+ },
+ {
+  "base": "mcd",
+  "field": "hp_bar_black",
+  "offset": 160,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "004A32A0: mcd->hp_bar_black == invalid_id  <=  *(_DWORD *)(a1 + 2952) != -1"
+ },
+ {
+  "base": "mcd",
+  "field": "is_beam",
+  "offset": 28,
+  "type": "byte",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "004AD890: mcd->is_beam  <=  v13[28] == 0"
+ },
+ {
+  "base": "mcd",
+  "field": "target_id",
+  "offset": 76,
+  "type": "dword",
+  "votes": 5,
+  "total": 5,
+  "others": [],
+  "example": "004A84B0: mcd->target_id == invalid_id  <=  *(_DWORD *)(a1 + 2868) != -1"
+ },
+ {
+  "base": "melee",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "00482230: melee->unit_type == unit_type_item  <=  a1[520] != 3"
+ },
+ {
+  "base": "minion",
+  "field": "unit_class",
+  "offset": 2084,
+  "type": "dword",
+  "votes": 3,
+  "total": 3,
+  "others": [],
+  "example": "0049BF00: minion->unit_class == monster_type_boss5_eye  <=  *(_DWORD *)(a1 + 2084) != 51"
+ },
+ {
+  "base": "minion",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "dword",
+  "votes": 3,
+  "total": 3,
+  "others": [],
+  "example": "0049BF00: minion->unit_type == unit_type_monster  <=  *(_DWORD *)(a1 + 2080) != 1"
+ },
+ {
+  "base": "missile",
+  "field": "unit_class",
+  "offset": 2084,
+  "type": "dword",
+  "votes": 2,
+  "total": 2,
+  "others": [],
+  "example": "00498990: missile->unit_class == missile_type_boss3_direct  <=  *(_DWORD *)(a1 + 2084) != 43"
+ },
+ {
+  "base": "missile",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "dword",
+  "votes": 4,
+  "total": 4,
+  "others": [],
+  "example": "00496000: missile->unit_type == unit_type_missile  <=  *(_DWORD *)(a1 + 2080) != 2"
+ },
+ {
+  "base": "monster",
+  "field": "anim",
+  "offset": 2096,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "004C2340: monster->anim  <=  *(_DWORD *)(a2 + 2096) == 0"
+ },
+ {
+  "base": "monster",
+  "field": "stats",
+  "offset": 2404,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "004A7200: monster->stats.status_flags & status_flag_yanked  <=  (*(_DWORD *)(a1 + 2404) & 0x800) == 0"
+ },
+ {
+  "base": "monster",
+  "field": "unit_class",
+  "offset": 2084,
+  "type": "dword",
+  "votes": 36,
+  "total": 36,
+  "others": [],
+  "example": "0049B0D0: monster->unit_class == monster_type_boss3  <=  v2[521] != 28"
+ },
+ {
+  "base": "monster",
+  "field": "unit_mode",
+  "offset": 2088,
+  "type": "dword",
+  "votes": 16,
+  "total": 16,
+  "others": [],
+  "example": "004A82E0: monster->unit_mode == monster_mode_idle  <=  *(_DWORD *)(a1 + 2088) != 0"
+ },
+ {
+  "base": "monster",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "dword",
+  "votes": 133,
+  "total": 137,
+  "others": [
+   [
+    2080,
+    "int",
+    4
+   ]
+  ],
+  "example": "00417EA0: monster->unit_type == unit_type_monster  <=  a1[520] != 1"
+ },
+ {
+  "base": "ncd",
+  "field": "is_vendor",
+  "offset": 52,
+  "type": "byte",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "004CB270: ncd->is_vendor  <=  v5[2844] == 0"
+ },
+ {
+  "base": "ncd",
+  "field": "particle_id",
+  "offset": 136,
+  "type": "dword",
+  "votes": 3,
+  "total": 3,
+  "others": [],
+  "example": "004C9310: ncd->particle_id != invalid_id  <=  *(_DWORD *)(a1 + 2928) == -1"
+ },
+ {
+  "base": "npc",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "dword",
+  "votes": 27,
+  "total": 27,
+  "others": [],
+  "example": "0043DD30: npc->unit_type == unit_type_npc  <=  *(_DWORD *)(a1 + 2080) != 5"
+ },
+ {
+  "base": "object",
+  "field": "unit_class",
+  "offset": 2084,
+  "type": "dword",
+  "votes": 6,
+  "total": 6,
+  "others": [],
+  "example": "004D2150: object->unit_class == object_type_closed_chest  <=  *(_DWORD *)(a1 + 2084) != 74"
+ },
+ {
+  "base": "object",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "dword",
+  "votes": 53,
+  "total": 54,
+  "others": [
+   [
+    2080,
+    "int",
+    1
+   ]
+  ],
+  "example": "0043A1F0: object->unit_type == unit_type_object  <=  a2[520] != 4"
+ },
+ {
+  "base": "ocd",
+  "field": "object_flags",
+  "offset": 0,
+  "type": "byte",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "004CEA90: ocd->object_flags & object_flag_timber  <=  (*(_BYTE *)(a1 + 2792) & 4) == 0"
+ },
+ {
+  "base": "on_item",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "int",
+  "votes": 3,
+  "total": 6,
+  "others": [
+   [
+    2080,
+    "dword",
+    3
+   ]
+  ],
+  "example": "0047AB40: on_item->unit_type == unit_type_item  <=  v4[520] != 3"
+ },
+ {
+  "base": "on_item_icd",
+  "field": "max_stack",
+  "offset": 104,
+  "type": "int",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "0047BA00: total_size <= on_item_icd->max_stack  <=  v7 > v6[724]"
+ },
+ {
+  "base": "original_icd",
+  "field": "stack_count",
+  "offset": 12,
+  "type": "int",
+  "votes": 2,
+  "total": 2,
+  "others": [],
+  "example": "0047ADF0: original_icd->stack_count > 1  <=  v2[701] <= 1"
+ },
+ {
+  "base": "original_item",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "int",
+  "votes": 2,
+  "total": 2,
+  "others": [],
+  "example": "0047ADF0: original_item->unit_type == unit_type_item  <=  v2[520] != 3"
+ },
+ {
+  "base": "pcd",
+  "field": "animation_mode",
+  "offset": 276,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "004F0770: pcd->animation_mode == player_anim_mode_attack  <=  *(_DWORD *)(a1 + 3068) != 5"
+ },
+ {
+  "base": "pcd",
+  "field": "homestone_return_set",
+  "offset": 356,
+  "type": "byte",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "00504C10: pcd->homestone_return_set  <=  *(_BYTE *)(this + 3148) == 0"
+ },
+ {
+  "base": "pcd",
+  "field": "hotbar_selection",
+  "offset": 392,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "004E4410: pcd->hotbar_selection < num_hotbar_slots  <=  *(_DWORD *)(a1 + 3184) >= 6u"
+ },
+ {
+  "base": "pcd",
+  "field": "max_mana",
+  "offset": 152,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "005082A0: mana <= pcd->max_mana  <=  v14 > a2[736]"
+ },
+ {
+  "base": "pcd",
+  "field": "mouse_item_from_location",
+  "offset": 692,
+  "type": "int",
+  "votes": 56,
+  "total": 56,
+  "others": [],
+  "example": "00514AF0: pcd->mouse_item_from_location == mouse_item_from_equipment  <=  a1[871] != 2"
+ },
+ {
+  "base": "pcd",
+  "field": "mouse_item_stack_mode",
+  "offset": 684,
+  "type": "int",
+  "votes": 14,
+  "total": 14,
+  "others": [],
+  "example": "0051AEB0: pcd->mouse_item_stack_mode == stack_mode_none  <=  a1[869] != 0"
+ },
+ {
+  "base": "pcd",
+  "field": "num_banking_slots",
+  "offset": 2144,
+  "type": "int",
+  "votes": 17,
+  "total": 18,
+  "others": [
+   [
+    2144,
+    "dword",
+    1
+   ]
+  ],
+  "example": "00514450: bank_slot >= 0 && bank_slot < pcd->num_banking_slots  <=  a2 < 0 || a2 >= a1[1234]"
+ },
+ {
+  "base": "pcd",
+  "field": "recharge_bar_black_id",
+  "offset": 180,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "004EE600: pcd->recharge_bar_black_id == invalid_id  <=  *(_DWORD *)(v2 + 2972) != -1"
+ },
+ {
+  "base": "pcd",
+  "field": "recharge_count",
+  "offset": 160,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "004EF6B0: pcd->recharge_count == 0  <=  *(_DWORD *)(a1 + 2952) != 0"
+ },
+ {
+  "base": "player",
+  "field": "model_id",
+  "offset": 2092,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "0050E5F0: player->model_id != invalid_id  <=  *(_DWORD *)(a1 + 2092) == -1"
+ },
+ {
+  "base": "player",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "dword",
+  "votes": 30,
+  "total": 35,
+  "others": [
+   [
+    2080,
+    "int",
+    5
+   ]
+  ],
+  "example": "0047DCE0: player->unit_type == unit_type_player  <=  *(_DWORD *)(a2 + 2080) != 0"
+ },
+ {
+  "base": "player",
+  "field": "world_id",
+  "offset": 2616,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "004BCB60: player->world_id == world_secret  <=  *(_DWORD *)(a1 + 2616) != 1"
+ },
+ {
+  "base": "pod",
+  "field": "unit_class",
+  "offset": 2084,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "004A4980: pod->unit_class == monster_type_boss5_beampod  <=  a1[521] != 52"
+ },
+ {
+  "base": "pod",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "004A4980: pod->unit_type == unit_type_monster  <=  a1[520] != 1"
+ },
+ {
+  "base": "position",
+  "field": "y",
+  "offset": 4,
+  "type": "float",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "004E0D50: position->y > 0.0f  <=  *(float *)(a1 + 4) <= 0.0"
+ },
+ {
+  "base": "room",
+  "field": "height",
+  "offset": 20,
+  "type": "int",
+  "votes": 3,
+  "total": 3,
+  "others": [],
+  "example": "0052BEB0: room->height == rlg_wide_room_height  <=  a1[5] != 32"
+ },
+ {
+  "base": "room",
+  "field": "room_type",
+  "offset": 24,
+  "type": "int",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "0052C5B0: room->room_type == room_type_main_secret_portal  <=  a1[6] != 16"
+ },
+ {
+  "base": "room",
+  "field": "width",
+  "offset": 16,
+  "type": "int",
+  "votes": 3,
+  "total": 3,
+  "others": [],
+  "example": "0052BEB0: room->width == rlg_wide_room_width  <=  a1[4] != 64"
+ },
+ {
+  "base": "source",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "004A7050: source->unit_type == unit_type_player  <=  *(_DWORD *)(a2 + 2080) != 0"
+ },
+ {
+  "base": "source_player",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "004A3610: source_player->unit_type == unit_type_player  <=  *(_DWORD *)(a2 + 2080) != 0"
+ },
+ {
+  "base": "staff",
+  "field": "unit_class",
+  "offset": 2084,
+  "type": "dword",
+  "votes": 4,
+  "total": 4,
+  "others": [],
+  "example": "00481900: staff->unit_class == item_type_staff_rogue  <=  a1[521] != 171"
+ },
+ {
+  "base": "staff",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "dword",
+  "votes": 4,
+  "total": 4,
+  "others": [],
+  "example": "00481900: staff->unit_type == unit_type_item  <=  a1[520] != 3"
+ },
+ {
+  "base": "u",
+  "field": "collision_shape",
+  "offset": 2660,
+  "type": "dword",
+  "votes": 4,
+  "total": 4,
+  "others": [],
+  "example": "0042ED10: u->collision_shape == unit_collision_shape_rectangle  <=  *(_DWORD *)(a1 + 2660) != 1"
+ },
+ {
+  "base": "u",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "dword",
+  "votes": 147,
+  "total": 149,
+  "others": [
+   [
+    2080,
+    "int",
+    2
+   ]
+  ],
+  "example": "0041E000: u->unit_type == unit_type_player  <=  *(_DWORD *)(a1 + 2080) != 0"
+ },
+ {
+  "base": "unknown_item",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "00475AC0: unknown_item->unit_type == unit_type_item  <=  v5[520] != 3"
+ },
+ {
+  "base": "wand",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "dword",
+  "votes": 1,
+  "total": 1,
+  "others": [],
+  "example": "00481900: wand->unit_type == unit_type_item  <=  a1[520] != 3"
+ },
+ {
+  "base": "weapon",
+  "field": "unit_type",
+  "offset": 2080,
+  "type": "dword",
+  "votes": 5,
+  "total": 5,
+  "others": [],
+  "example": "00482230: weapon->unit_type == unit_type_item  <=  a1[520] != 3"
+ }
+]

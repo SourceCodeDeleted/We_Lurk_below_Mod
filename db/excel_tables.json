@@ -1,0 +1,2982 @@
+[
+ {
+  "table": "sounds",
+  "txt": "xls\\sounds.txt",
+  "gbe": "xls\\sounds.gbe",
+  "descriptor": 6111456,
+  "columns_va": 6062168,
+  "definitions_global": 6334804,
+  "count_global": 6336860,
+  "record_size": 336,
+  "struct": "sound_definition_data",
+  "columns": [
+   {
+    "column": "sound",
+    "type": "name",
+    "type_id": 1,
+    "offset": 0,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "is_music",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 68,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "is_combat",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 69,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "loops",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 70,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "volume_mod",
+    "type": "float",
+    "type_id": 4,
+    "offset": 72,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "num_alts",
+    "type": "int",
+    "type_id": 3,
+    "offset": 76,
+    "arg": 1,
+    "link": 0
+   },
+   {
+    "column": "filename1",
+    "type": "name",
+    "type_id": 1,
+    "offset": 80,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "filename2",
+    "type": "name",
+    "type_id": 1,
+    "offset": 144,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "filename3",
+    "type": "name",
+    "type_id": 1,
+    "offset": 208,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "filename4",
+    "type": "name",
+    "type_id": 1,
+    "offset": 272,
+    "arg": 0,
+    "link": 0
+   }
+  ]
+ },
+ {
+  "table": "strings",
+  "txt": "xls\\strings.txt",
+  "gbe": "xls\\strings.gbe",
+  "descriptor": 6111736,
+  "columns_va": 6062968,
+  "definitions_global": 6340968,
+  "count_global": 6340964,
+  "record_size": 2116,
+  "struct": "string_definition_data",
+  "columns": [
+   {
+    "column": "string_token",
+    "type": "name",
+    "type_id": 1,
+    "offset": 0,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "string",
+    "type": "safestring",
+    "type_id": 0,
+    "offset": 64,
+    "arg": 0,
+    "link": 0
+   }
+  ]
+ },
+ {
+  "table": "achievement",
+  "txt": "xls\\achievement.txt",
+  "gbe": "xls\\achievement.gbe",
+  "descriptor": 6112584,
+  "columns_va": 6064744,
+  "definitions_global": 6340980,
+  "count_global": 6340976,
+  "record_size": 80,
+  "struct": "achievement_definition_data",
+  "columns": [
+   {
+    "column": "achievement",
+    "type": "name",
+    "type_id": 1,
+    "offset": 0,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "name_string",
+    "type": "link",
+    "type_id": 8,
+    "offset": 68,
+    "arg": 2116,
+    "link": 6340968,
+    "link_table": "strings"
+   },
+   {
+    "column": "desc_string",
+    "type": "link",
+    "type_id": 8,
+    "offset": 72,
+    "arg": 2116,
+    "link": 6340968,
+    "link_table": "strings"
+   },
+   {
+    "column": "points",
+    "type": "int",
+    "type_id": 3,
+    "offset": 76,
+    "arg": 0,
+    "link": 0
+   }
+  ]
+ },
+ {
+  "table": "ambient",
+  "txt": "xls\\ambient.txt",
+  "gbe": "xls\\ambient.gbe",
+  "descriptor": 6113456,
+  "columns_va": 6065064,
+  "definitions_global": 6340984,
+  "count_global": 6340988,
+  "record_size": 1096,
+  "struct": "ambient_definition_data",
+  "columns": [
+   {
+    "column": "code_name",
+    "type": "name",
+    "type_id": 1,
+    "offset": 0,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "is_flying",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 1092,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "sprite_filename",
+    "type": "name",
+    "type_id": 1,
+    "offset": 68,
+    "arg": 0,
+    "link": 0
+   }
+  ]
+ },
+ {
+  "table": "character_classes",
+  "txt": "xls\\character_classes.txt",
+  "gbe": "xls\\character_classes.gbe",
+  "descriptor": 6155736,
+  "columns_va": 6073576,
+  "definitions_global": 6343492,
+  "count_global": 6350996,
+  "record_size": 100,
+  "struct": "character_class_definition_data",
+  "columns": [
+   {
+    "column": "object_type",
+    "type": "name",
+    "type_id": 1,
+    "offset": 0,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "char_class_string",
+    "type": "link",
+    "type_id": 8,
+    "offset": 64,
+    "arg": 2116,
+    "link": 6340968,
+    "link_table": "strings"
+   },
+   {
+    "column": "char_class_desc",
+    "type": "link",
+    "type_id": 8,
+    "offset": 68,
+    "arg": 2116,
+    "link": 6340968,
+    "link_table": "strings"
+   },
+   {
+    "column": "is_locked",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 72,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "weapon_flags",
+    "type": "int",
+    "type_id": 3,
+    "offset": 76,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "uses_int",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 73,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "ancient_1",
+    "type": "link",
+    "type_id": 8,
+    "offset": 80,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "ancient_5",
+    "type": "link",
+    "type_id": 8,
+    "offset": 84,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "ancient_10",
+    "type": "link",
+    "type_id": 8,
+    "offset": 88,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "ancient_15",
+    "type": "link",
+    "type_id": 8,
+    "offset": 92,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "ancient_20",
+    "type": "link",
+    "type_id": 8,
+    "offset": 96,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   }
+  ]
+ },
+ {
+  "table": "damage_types",
+  "txt": "xls\\damage_types.txt",
+  "gbe": "xls\\damage_types.gbe",
+  "descriptor": 6156008,
+  "columns_va": 6074456,
+  "definitions_global": 6353796,
+  "count_global": 6353800,
+  "record_size": 64,
+  "struct": "damage_type_definition_data",
+  "columns": [
+   {
+    "column": "damage_type",
+    "type": "name",
+    "type_id": 1,
+    "offset": 0,
+    "arg": 0,
+    "link": 0
+   }
+  ]
+ },
+ {
+  "table": "tiles",
+  "txt": "xls\\tiles.txt",
+  "gbe": "xls\\tiles.gbe",
+  "descriptor": 6156176,
+  "columns_va": 6074536,
+  "definitions_global": 6353812,
+  "count_global": 6353808,
+  "record_size": 152,
+  "struct": "tile_definition_data",
+  "columns": [
+   {
+    "column": "rlg_tile",
+    "type": "name",
+    "type_id": 1,
+    "offset": 0,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "HP",
+    "type": "int",
+    "type_id": 3,
+    "offset": 68,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "item",
+    "type": "link",
+    "type_id": 8,
+    "offset": 72,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "dig_sound",
+    "type": "link",
+    "type_id": 8,
+    "offset": 64,
+    "arg": 336,
+    "link": 6334804,
+    "link_table": "sounds"
+   },
+   {
+    "column": "creep_kill",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 77,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "paladin_replace",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 78,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "dirt_overlay",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 76,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "blocks_ambient",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 79,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "is_stone",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 80,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "is_dirt",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 81,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "is_ore",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 82,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "dig_prop",
+    "type": "link",
+    "type_id": 8,
+    "offset": 88,
+    "arg": 132,
+    "link": 6353820,
+    "link_table": "props"
+   },
+   {
+    "column": "dirt_zone",
+    "type": "int",
+    "type_id": 3,
+    "offset": 92,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "dirt_red",
+    "type": "int",
+    "type_id": 3,
+    "offset": 96,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "dirt_green",
+    "type": "int",
+    "type_id": 3,
+    "offset": 100,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "dirt_blue",
+    "type": "int",
+    "type_id": 3,
+    "offset": 104,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "light",
+    "type": "int",
+    "type_id": 3,
+    "offset": 84,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "texture_top",
+    "type": "link",
+    "type_id": 8,
+    "offset": 112,
+    "arg": 72,
+    "link": 6353816,
+    "link_table": "block_textures"
+   },
+   {
+    "column": "texture_front",
+    "type": "link",
+    "type_id": 8,
+    "offset": 116,
+    "arg": 72,
+    "link": 6353816,
+    "link_table": "block_textures"
+   },
+   {
+    "column": "texture_side",
+    "type": "link",
+    "type_id": 8,
+    "offset": 120,
+    "arg": 72,
+    "link": 6353816,
+    "link_table": "block_textures"
+   },
+   {
+    "column": "texture_bottom",
+    "type": "link",
+    "type_id": 8,
+    "offset": 124,
+    "arg": 72,
+    "link": 6353816,
+    "link_table": "block_textures"
+   },
+   {
+    "column": "map_red",
+    "type": "int",
+    "type_id": 3,
+    "offset": 128,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "map_green",
+    "type": "int",
+    "type_id": 3,
+    "offset": 132,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "map_blue",
+    "type": "int",
+    "type_id": 3,
+    "offset": 136,
+    "arg": 0,
+    "link": 0
+   }
+  ]
+ },
+ {
+  "table": "block_textures",
+  "txt": "xls\\block_textures.txt",
+  "gbe": "xls\\block_textures.gbe",
+  "descriptor": 6157104,
+  "columns_va": 6076464,
+  "definitions_global": 6353816,
+  "count_global": 6353824,
+  "record_size": 72,
+  "struct": "block_texture_definition_data",
+  "columns": [
+   {
+    "column": "block_texture",
+    "type": "name",
+    "type_id": 1,
+    "offset": 0,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "alternates",
+    "type": "int",
+    "type_id": 3,
+    "offset": 64,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "tech",
+    "type": "int",
+    "type_id": 3,
+    "offset": 68,
+    "arg": 1,
+    "link": 0
+   }
+  ]
+ },
+ {
+  "table": "props",
+  "txt": "xls\\props.txt",
+  "gbe": "xls\\props.gbe",
+  "descriptor": 6157272,
+  "columns_va": 6076704,
+  "definitions_global": 6353820,
+  "count_global": 6353828,
+  "record_size": 132,
+  "struct": "prop_definition_data",
+  "columns": [
+   {
+    "column": "prop_type",
+    "type": "name",
+    "type_id": 1,
+    "offset": 0,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "pixel_x",
+    "type": "int",
+    "type_id": 3,
+    "offset": 64,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "pixel_y",
+    "type": "int",
+    "type_id": 3,
+    "offset": 68,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "pixel_width",
+    "type": "int",
+    "type_id": 3,
+    "offset": 72,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "pixel_height",
+    "type": "int",
+    "type_id": 3,
+    "offset": 76,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "world_z",
+    "type": "float",
+    "type_id": 4,
+    "offset": 88,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "can_flip",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 92,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "dig_item",
+    "type": "link",
+    "type_id": 8,
+    "offset": 112,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "map_red",
+    "type": "int",
+    "type_id": 3,
+    "offset": 116,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "map_green",
+    "type": "int",
+    "type_id": 3,
+    "offset": 120,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "map_blue",
+    "type": "int",
+    "type_id": 3,
+    "offset": 124,
+    "arg": 0,
+    "link": 0
+   }
+  ]
+ },
+ {
+  "table": "emitters",
+  "txt": "xls\\emitters.txt",
+  "gbe": "xls\\emitters.gbe",
+  "descriptor": 6157792,
+  "columns_va": 6077584,
+  "definitions_global": 6353836,
+  "count_global": 6353832,
+  "record_size": 72,
+  "struct": "emitter_definition_data",
+  "columns": [
+   {
+    "column": "emitter_type",
+    "type": "name",
+    "type_id": 1,
+    "offset": 0,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "rate",
+    "type": "int",
+    "type_id": 3,
+    "offset": 64,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "attach_unit",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 68,
+    "arg": 0,
+    "link": 0
+   }
+  ]
+ },
+ {
+  "table": "equipment_slots",
+  "txt": "xls\\equipment_slots.txt",
+  "gbe": "xls\\equipment_slots.gbe",
+  "descriptor": 6159360,
+  "columns_va": 6077824,
+  "definitions_global": 6362196,
+  "count_global": 6362192,
+  "record_size": 72,
+  "struct": "equipment_slot_definition_data",
+  "columns": [
+   {
+    "column": "Equipment_Slot",
+    "type": "name",
+    "type_id": 1,
+    "offset": 0,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "display_string",
+    "type": "link",
+    "type_id": 8,
+    "offset": 64,
+    "arg": 2116,
+    "link": 6340968,
+    "link_table": "strings"
+   },
+   {
+    "column": "has_stats",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 68,
+    "arg": 0,
+    "link": 0
+   }
+  ]
+ },
+ {
+  "table": "items",
+  "txt": "xls\\items.txt",
+  "gbe": "xls\\items.gbe",
+  "descriptor": 6159584,
+  "columns_va": 6078064,
+  "definitions_global": 6362204,
+  "count_global": 6362200,
+  "record_size": 256,
+  "struct": "item_definition_data",
+  "columns": [
+   {
+    "column": "item_type",
+    "type": "name",
+    "type_id": 1,
+    "offset": 0,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "display_string",
+    "type": "link",
+    "type_id": 8,
+    "offset": 64,
+    "arg": 2116,
+    "link": 6340968,
+    "link_table": "strings"
+   },
+   {
+    "column": "desc_string",
+    "type": "link",
+    "type_id": 8,
+    "offset": 68,
+    "arg": 2116,
+    "link": 6340968,
+    "link_table": "strings"
+   },
+   {
+    "column": "descent_drop",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 92,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "show_ilevel",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 93,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "show_desc",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 94,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "char_bound",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 95,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "Slot",
+    "type": "link",
+    "type_id": 8,
+    "offset": 96,
+    "arg": 72,
+    "link": 6362196,
+    "link_table": "equipment_slots"
+   },
+   {
+    "column": "icon",
+    "type": "int",
+    "type_id": 3,
+    "offset": 100,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "rightarm_index",
+    "type": "int",
+    "type_id": 3,
+    "offset": 104,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "handed",
+    "type": "int",
+    "type_id": 3,
+    "offset": 108,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "weapon_type",
+    "type": "int",
+    "type_id": 3,
+    "offset": 112,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "is_pick",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 116,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "block_class",
+    "type": "link",
+    "type_id": 8,
+    "offset": 172,
+    "arg": 152,
+    "link": 6353812,
+    "link_table": "tiles"
+   },
+   {
+    "column": "is_axe",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 117,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "is_hoe",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 118,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "is_consumable",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 188,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "is_crop",
+    "type": "int",
+    "type_id": 3,
+    "offset": 160,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "season_flags",
+    "type": "int",
+    "type_id": 3,
+    "offset": 168,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "feed",
+    "type": "int",
+    "type_id": 3,
+    "offset": 192,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "slevel_req",
+    "type": "int",
+    "type_id": 3,
+    "offset": 196,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "object_class",
+    "type": "link",
+    "type_id": 8,
+    "offset": 176,
+    "arg": 220,
+    "link": 6362244,
+    "link_table": "objects"
+   },
+   {
+    "column": "potion_type",
+    "type": "int",
+    "type_id": 3,
+    "offset": 120,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "is_scroll",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 124,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "is_mushroom",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 125,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "crystal_shape",
+    "type": "int",
+    "type_id": 3,
+    "offset": 212,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "can_enchant",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 167,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "is_ancient",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 126,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "ancient_rarity",
+    "type": "int",
+    "type_id": 3,
+    "offset": 128,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "ancient_ranks",
+    "type": "int",
+    "type_id": 3,
+    "offset": 132,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "ancient_version",
+    "type": "int",
+    "type_id": 3,
+    "offset": 136,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "unique_rarity",
+    "type": "int",
+    "type_id": 3,
+    "offset": 140,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "region",
+    "type": "int",
+    "type_id": 3,
+    "offset": 144,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "is_special",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 166,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "is_blueprint",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 148,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "is_runeword",
+    "type": "int",
+    "type_id": 3,
+    "offset": 152,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "is_ambient",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 156,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "is_ore",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 164,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "is_metal_bar",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 165,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "operate_class",
+    "type": "link",
+    "type_id": 8,
+    "offset": 180,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "extra_percent",
+    "type": "int",
+    "type_id": 3,
+    "offset": 184,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "stack_count",
+    "type": "int",
+    "type_id": 3,
+    "offset": 200,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "auto_pickup",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 204,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "slot_shape",
+    "type": "int",
+    "type_id": 3,
+    "offset": 208,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "damage_type",
+    "type": "link",
+    "type_id": 8,
+    "offset": 216,
+    "arg": 64,
+    "link": 6353796,
+    "link_table": "damage_types"
+   },
+   {
+    "column": "min_damage",
+    "type": "int",
+    "type_id": 3,
+    "offset": 220,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "max_damage",
+    "type": "int",
+    "type_id": 3,
+    "offset": 224,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "atk_rate",
+    "type": "int",
+    "type_id": 3,
+    "offset": 228,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "emblem_cost",
+    "type": "int",
+    "type_id": 3,
+    "offset": 236,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "compost_cost",
+    "type": "int",
+    "type_id": 3,
+    "offset": 240,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "gold_cost",
+    "type": "int",
+    "type_id": 3,
+    "offset": 244,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "sell_percent",
+    "type": "int",
+    "type_id": 3,
+    "offset": 248,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "can_trash",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 252,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "use_sound",
+    "type": "link",
+    "type_id": 8,
+    "offset": 72,
+    "arg": 336,
+    "link": 6334804,
+    "link_table": "sounds"
+   },
+   {
+    "column": "inv_sound",
+    "type": "link",
+    "type_id": 8,
+    "offset": 76,
+    "arg": 336,
+    "link": 6334804,
+    "link_table": "sounds"
+   },
+   {
+    "column": "gfx_offset",
+    "type": "int",
+    "type_id": 3,
+    "offset": 80,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "weapon_end_x",
+    "type": "float",
+    "type_id": 4,
+    "offset": 84,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "weapon_end_y",
+    "type": "float",
+    "type_id": 4,
+    "offset": 88,
+    "arg": 0,
+    "link": 0
+   }
+  ]
+ },
+ {
+  "table": "missiles",
+  "txt": "xls\\missiles.txt",
+  "gbe": "xls\\missiles.gbe",
+  "descriptor": 6160288,
+  "columns_va": 6082704,
+  "definitions_global": 6362212,
+  "count_global": 6362208,
+  "record_size": 112,
+  "struct": "missile_definition_data",
+  "columns": [
+   {
+    "column": "missile_type",
+    "type": "name",
+    "type_id": 1,
+    "offset": 0,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "velocity",
+    "type": "float",
+    "type_id": 4,
+    "offset": 64,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "collision_radius",
+    "type": "float",
+    "type_id": 4,
+    "offset": 68,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "drawn_diameter",
+    "type": "float",
+    "type_id": 4,
+    "offset": 72,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "red",
+    "type": "int",
+    "type_id": 3,
+    "offset": 80,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "green",
+    "type": "int",
+    "type_id": 3,
+    "offset": 84,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "blue",
+    "type": "int",
+    "type_id": 3,
+    "offset": 88,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "emitter",
+    "type": "link",
+    "type_id": 8,
+    "offset": 92,
+    "arg": 72,
+    "link": 6353836,
+    "link_table": "emitters"
+   },
+   {
+    "column": "inaccurate",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 96,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "hits_units",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 97,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "gravity",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 98,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "is_beam",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 99,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "damage_type",
+    "type": "link",
+    "type_id": 8,
+    "offset": 100,
+    "arg": 64,
+    "link": 6353796,
+    "link_table": "damage_types"
+   },
+   {
+    "column": "texture_index",
+    "type": "int",
+    "type_id": 3,
+    "offset": 104,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "texture_rotate",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 108,
+    "arg": 0,
+    "link": 0
+   }
+  ]
+ },
+ {
+  "table": "monsters",
+  "txt": "xls\\monsters.txt",
+  "gbe": "xls\\monsters.gbe",
+  "descriptor": 6160800,
+  "columns_va": 6084544,
+  "definitions_global": 6362232,
+  "count_global": 6362224,
+  "record_size": 204,
+  "struct": "monster_definition_data",
+  "columns": [
+   {
+    "column": "code_name",
+    "type": "name",
+    "type_id": 1,
+    "offset": 0,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "display_string",
+    "type": "link",
+    "type_id": 8,
+    "offset": 64,
+    "arg": 2116,
+    "link": 6340968,
+    "link_table": "strings"
+   },
+   {
+    "column": "ultra_string",
+    "type": "link",
+    "type_id": 8,
+    "offset": 68,
+    "arg": 2116,
+    "link": 6340968,
+    "link_table": "strings"
+   },
+   {
+    "column": "title",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 76,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "can_deactivate",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 77,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "is_demon",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 94,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "is_undead",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 95,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "can_be_unique",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 93,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "ultra_100",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 92,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "HP",
+    "type": "int",
+    "type_id": 3,
+    "offset": 100,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "ultra_HP",
+    "type": "int",
+    "type_id": 3,
+    "offset": 104,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "regen_per_sec",
+    "type": "int",
+    "type_id": 3,
+    "offset": 108,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "world_width",
+    "type": "float",
+    "type_id": 4,
+    "offset": 112,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "world_height",
+    "type": "float",
+    "type_id": 4,
+    "offset": 116,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "damage_type",
+    "type": "link",
+    "type_id": 8,
+    "offset": 120,
+    "arg": 64,
+    "link": 6353796,
+    "link_table": "damage_types"
+   },
+   {
+    "column": "min_damage",
+    "type": "int",
+    "type_id": 3,
+    "offset": 124,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "max_damage",
+    "type": "int",
+    "type_id": 3,
+    "offset": 128,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "atk_rate",
+    "type": "int",
+    "type_id": 3,
+    "offset": 132,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "atk_range",
+    "type": "float",
+    "type_id": 4,
+    "offset": 136,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "ranged_atk",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 140,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "fast_atk_anim",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 141,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "idle_sound",
+    "type": "link",
+    "type_id": 8,
+    "offset": 84,
+    "arg": 336,
+    "link": 6334804,
+    "link_table": "sounds"
+   },
+   {
+    "column": "attack_sound",
+    "type": "link",
+    "type_id": 8,
+    "offset": 88,
+    "arg": 336,
+    "link": 6334804,
+    "link_table": "sounds"
+   },
+   {
+    "column": "speed",
+    "type": "float",
+    "type_id": 4,
+    "offset": 144,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "jump_speed",
+    "type": "float",
+    "type_id": 4,
+    "offset": 148,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "flies",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 96,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "fly_bob",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 97,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "waller",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 98,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "gives_exp",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 99,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "surface_respawn",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 180,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "zone",
+    "type": "int",
+    "type_id": 3,
+    "offset": 176,
+    "arg": 4294967295,
+    "link": 0
+   },
+   {
+    "column": "nightmare",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 181,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "badlands_zone",
+    "type": "int",
+    "type_id": 3,
+    "offset": 184,
+    "arg": 4294967295,
+    "link": 0
+   },
+   {
+    "column": "drop_rate",
+    "type": "int",
+    "type_id": 3,
+    "offset": 192,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "gold_drop",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 188,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "survival_drop",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 189,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "sprite_sheet",
+    "type": "link",
+    "type_id": 8,
+    "offset": 80,
+    "arg": 3160,
+    "link": 6362240,
+    "link_table": "monster_sprites"
+   },
+   {
+    "column": "anim_speed",
+    "type": "float",
+    "type_id": 4,
+    "offset": 152,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "has_wand",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 156,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "rotate_x",
+    "type": "float",
+    "type_id": 4,
+    "offset": 160,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "rotate_y",
+    "type": "float",
+    "type_id": 4,
+    "offset": 164,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "wand_end_x",
+    "type": "float",
+    "type_id": 4,
+    "offset": 168,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "wand_end_y",
+    "type": "float",
+    "type_id": 4,
+    "offset": 172,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "treasure",
+    "type": "link",
+    "type_id": 8,
+    "offset": 196,
+    "arg": 124,
+    "link": 6362280,
+    "link_table": "treasure"
+   }
+  ]
+ },
+ {
+  "table": "monster_scaling",
+  "txt": "xls\\monster_scaling.txt",
+  "gbe": "xls\\monster_scaling.gbe",
+  "descriptor": 6161344,
+  "columns_va": 6083904,
+  "definitions_global": 6362220,
+  "count_global": 6362228,
+  "record_size": 40,
+  "struct": "monster_scaling_definition_data",
+  "columns": [
+   {
+    "column": "level",
+    "type": "int",
+    "type_id": 3,
+    "offset": 0,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "monster_hp_scale",
+    "type": "float",
+    "type_id": 4,
+    "offset": 4,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "monster_dmg_scale",
+    "type": "float",
+    "type_id": 4,
+    "offset": 8,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "armor",
+    "type": "int",
+    "type_id": 3,
+    "offset": 12,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "monster_hp_creative",
+    "type": "float",
+    "type_id": 4,
+    "offset": 16,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "monster_dmg_creative",
+    "type": "float",
+    "type_id": 4,
+    "offset": 20,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "expected_plr_armor",
+    "type": "int",
+    "type_id": 3,
+    "offset": 24,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "xp_per_mob",
+    "type": "int64",
+    "type_id": 10,
+    "offset": 32,
+    "arg": 0,
+    "link": 0
+   }
+  ]
+ },
+ {
+  "table": "monster_sprites",
+  "txt": "xls\\monster_sprites.txt",
+  "gbe": "xls\\monster_sprites.gbe",
+  "descriptor": 6162960,
+  "columns_va": 6088064,
+  "definitions_global": 6362240,
+  "count_global": 6362236,
+  "record_size": 3160,
+  "struct": "monster_sprite_definition_data",
+  "columns": [
+   {
+    "column": "monster_sprite_sheet",
+    "type": "name",
+    "type_id": 1,
+    "offset": 0,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "active",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 64,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "filename",
+    "type": "name",
+    "type_id": 1,
+    "offset": 65,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "height",
+    "type": "int",
+    "type_id": 3,
+    "offset": 3156,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "palette_file",
+    "type": "name",
+    "type_id": 1,
+    "offset": 1089,
+    "arg": 0,
+    "link": 0
+   }
+  ]
+ },
+ {
+  "table": "objects",
+  "txt": "xls\\objects.txt",
+  "gbe": "xls\\objects.gbe",
+  "descriptor": 6167072,
+  "columns_va": 6088464,
+  "definitions_global": 6362244,
+  "count_global": 6362248,
+  "record_size": 220,
+  "struct": "object_definition_data",
+  "columns": [
+   {
+    "column": "object_type",
+    "type": "name",
+    "type_id": 1,
+    "offset": 0,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "display_string",
+    "type": "link",
+    "type_id": 8,
+    "offset": 64,
+    "arg": 2116,
+    "link": 6340968,
+    "link_table": "strings"
+   },
+   {
+    "column": "can_deactivate",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 72,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "is_chopable",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 73,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "can_select",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 74,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "can_operate",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 75,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "can_pickup",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 76,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "open_crafting",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 79,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "interact_item",
+    "type": "link",
+    "type_id": 8,
+    "offset": 84,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "interact_quantity",
+    "type": "int",
+    "type_id": 3,
+    "offset": 80,
+    "arg": 1,
+    "link": 0
+   },
+   {
+    "column": "extra_percent",
+    "type": "int",
+    "type_id": 3,
+    "offset": 88,
+    "arg": 1,
+    "link": 0
+   },
+   {
+    "column": "replace",
+    "type": "link",
+    "type_id": 8,
+    "offset": 92,
+    "arg": 220,
+    "link": 6362244,
+    "link_table": "objects"
+   },
+   {
+    "column": "shift_pickup",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 77,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "pickup_item",
+    "type": "link",
+    "type_id": 8,
+    "offset": 96,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "place_ground",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 104,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "check_nearby",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 105,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "season_flags",
+    "type": "int",
+    "type_id": 3,
+    "offset": 120,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "season_item",
+    "type": "link",
+    "type_id": 8,
+    "offset": 124,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "growth_rate",
+    "type": "int",
+    "type_id": 3,
+    "offset": 108,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "rot_rate",
+    "type": "int",
+    "type_id": 3,
+    "offset": 112,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "perennial",
+    "type": "int",
+    "type_id": 3,
+    "offset": 116,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "new_world_item",
+    "type": "link",
+    "type_id": 8,
+    "offset": 100,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "hit_points",
+    "type": "int",
+    "type_id": 3,
+    "offset": 128,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "light_flicker",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 132,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "light_radius",
+    "type": "float",
+    "type_id": 4,
+    "offset": 136,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "light_red",
+    "type": "int",
+    "type_id": 3,
+    "offset": 140,
+    "arg": 255,
+    "link": 0
+   },
+   {
+    "column": "light_green",
+    "type": "int",
+    "type_id": 3,
+    "offset": 144,
+    "arg": 255,
+    "link": 0
+   },
+   {
+    "column": "light_blue",
+    "type": "int",
+    "type_id": 3,
+    "offset": 148,
+    "arg": 255,
+    "link": 0
+   },
+   {
+    "column": "world_width",
+    "type": "float",
+    "type_id": 4,
+    "offset": 156,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "world_height",
+    "type": "float",
+    "type_id": 4,
+    "offset": 160,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "world_depth",
+    "type": "float",
+    "type_id": 4,
+    "offset": 164,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "is_tall_object",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 78,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "animates",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 168,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "pixel_x",
+    "type": "int",
+    "type_id": 3,
+    "offset": 172,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "pixel_y",
+    "type": "int",
+    "type_id": 3,
+    "offset": 176,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "pixel_width",
+    "type": "int",
+    "type_id": 3,
+    "offset": 180,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "pixel_height",
+    "type": "int",
+    "type_id": 3,
+    "offset": 184,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "wrld_width_var",
+    "type": "float",
+    "type_id": 4,
+    "offset": 196,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "wrld_height_var",
+    "type": "float",
+    "type_id": 4,
+    "offset": 200,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "use_sound",
+    "type": "link",
+    "type_id": 8,
+    "offset": 68,
+    "arg": 336,
+    "link": 6334804,
+    "link_table": "sounds"
+   }
+  ]
+ },
+ {
+  "table": "levels",
+  "txt": "xls\\levels.txt",
+  "gbe": "xls\\levels.gbe",
+  "descriptor": 6220960,
+  "columns_va": 6091664,
+  "definitions_global": 6362256,
+  "count_global": 6362252,
+  "record_size": 32,
+  "struct": "level_definition_data",
+  "columns": [
+   {
+    "column": "level",
+    "type": "int",
+    "type_id": 3,
+    "offset": 0,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "hit_points",
+    "type": "int",
+    "type_id": 3,
+    "offset": 4,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "exp_needed",
+    "type": "int64",
+    "type_id": 10,
+    "offset": 8,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "death_cost",
+    "type": "int",
+    "type_id": 3,
+    "offset": 16,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "stomach",
+    "type": "int",
+    "type_id": 3,
+    "offset": 20,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "survival_exp_needed",
+    "type": "int",
+    "type_id": 3,
+    "offset": 24,
+    "arg": 0,
+    "link": 0
+   }
+  ]
+ },
+ {
+  "table": "quests",
+  "txt": "xls\\quests.txt",
+  "gbe": "xls\\quests.gbe",
+  "descriptor": 6221128,
+  "columns_va": 6092144,
+  "definitions_global": 6362260,
+  "count_global": 6362264,
+  "record_size": 132,
+  "struct": "quest_definition_data",
+  "columns": [
+   {
+    "column": "quest",
+    "type": "name",
+    "type_id": 1,
+    "offset": 0,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "hidden",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 64,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "title",
+    "type": "link",
+    "type_id": 8,
+    "offset": 68,
+    "arg": 2116,
+    "link": 6340968,
+    "link_table": "strings"
+   },
+   {
+    "column": "text",
+    "type": "link",
+    "type_id": 8,
+    "offset": 72,
+    "arg": 2116,
+    "link": 6340968,
+    "link_table": "strings"
+   },
+   {
+    "column": "num_objectives",
+    "type": "int",
+    "type_id": 3,
+    "offset": 76,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "obj_text_1",
+    "type": "link",
+    "type_id": 8,
+    "offset": 80,
+    "arg": 2116,
+    "link": 6340968,
+    "link_table": "strings"
+   },
+   {
+    "column": "obj_text_1c",
+    "type": "link",
+    "type_id": 8,
+    "offset": 92,
+    "arg": 2116,
+    "link": 6340968,
+    "link_table": "strings"
+   },
+   {
+    "column": "obj_1_multi",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 104,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "obj_text_2",
+    "type": "link",
+    "type_id": 8,
+    "offset": 84,
+    "arg": 2116,
+    "link": 6340968,
+    "link_table": "strings"
+   },
+   {
+    "column": "obj_text_2c",
+    "type": "link",
+    "type_id": 8,
+    "offset": 96,
+    "arg": 2116,
+    "link": 6340968,
+    "link_table": "strings"
+   },
+   {
+    "column": "obj_2_multi",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 105,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "obj_text_3",
+    "type": "link",
+    "type_id": 8,
+    "offset": 88,
+    "arg": 2116,
+    "link": 6340968,
+    "link_table": "strings"
+   },
+   {
+    "column": "obj_text_3c",
+    "type": "link",
+    "type_id": 8,
+    "offset": 100,
+    "arg": 2116,
+    "link": 6340968,
+    "link_table": "strings"
+   },
+   {
+    "column": "obj_3_multi",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 106,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "complete_text",
+    "type": "link",
+    "type_id": 8,
+    "offset": 108,
+    "arg": 2116,
+    "link": 6340968,
+    "link_table": "strings"
+   },
+   {
+    "column": "reward",
+    "type": "link",
+    "type_id": 8,
+    "offset": 112,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "reward_stack_size",
+    "type": "int",
+    "type_id": 3,
+    "offset": 116,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "experience",
+    "type": "int",
+    "type_id": 3,
+    "offset": 120,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "survival_exp",
+    "type": "int",
+    "type_id": 3,
+    "offset": 124,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "next_quest",
+    "type": "link",
+    "type_id": 8,
+    "offset": 128,
+    "arg": 132,
+    "link": 6362260,
+    "link_table": "quests"
+   }
+  ]
+ },
+ {
+  "table": "story",
+  "txt": "xls\\story.txt",
+  "gbe": "xls\\story.gbe",
+  "descriptor": 6323552,
+  "columns_va": 6093744,
+  "definitions_global": 6362268,
+  "count_global": 6362272,
+  "record_size": 9288,
+  "struct": "story_definition_data",
+  "columns": [
+   {
+    "column": "story_type",
+    "type": "name",
+    "type_id": 1,
+    "offset": 0,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "text_filename",
+    "type": "name",
+    "type_id": 1,
+    "offset": 68,
+    "arg": 0,
+    "link": 0
+   }
+  ]
+ },
+ {
+  "table": "treasure",
+  "txt": "xls\\treasure.txt",
+  "gbe": "xls\\treasure.gbe",
+  "descriptor": 6323720,
+  "columns_va": 6093904,
+  "definitions_global": 6362280,
+  "count_global": 6362276,
+  "record_size": 124,
+  "struct": "treasure_definition_data",
+  "columns": [
+   {
+    "column": "treasure_table",
+    "type": "name",
+    "type_id": 1,
+    "offset": 0,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "weight_0",
+    "type": "int",
+    "type_id": 3,
+    "offset": 64,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "item_0",
+    "type": "link",
+    "type_id": 8,
+    "offset": 68,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "table_0",
+    "type": "link",
+    "type_id": 8,
+    "offset": 72,
+    "arg": 124,
+    "link": 6362280,
+    "link_table": "treasure"
+   },
+   {
+    "column": "weight_1",
+    "type": "int",
+    "type_id": 3,
+    "offset": 76,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "item_1",
+    "type": "link",
+    "type_id": 8,
+    "offset": 80,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "table_1",
+    "type": "link",
+    "type_id": 8,
+    "offset": 84,
+    "arg": 124,
+    "link": 6362280,
+    "link_table": "treasure"
+   },
+   {
+    "column": "weight_2",
+    "type": "int",
+    "type_id": 3,
+    "offset": 88,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "item_2",
+    "type": "link",
+    "type_id": 8,
+    "offset": 92,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "table_2",
+    "type": "link",
+    "type_id": 8,
+    "offset": 96,
+    "arg": 124,
+    "link": 6362280,
+    "link_table": "treasure"
+   },
+   {
+    "column": "weight_3",
+    "type": "int",
+    "type_id": 3,
+    "offset": 100,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "item_3",
+    "type": "link",
+    "type_id": 8,
+    "offset": 104,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "table_3",
+    "type": "link",
+    "type_id": 8,
+    "offset": 108,
+    "arg": 124,
+    "link": 6362280,
+    "link_table": "treasure"
+   },
+   {
+    "column": "weight_4",
+    "type": "int",
+    "type_id": 3,
+    "offset": 112,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "item_4",
+    "type": "link",
+    "type_id": 8,
+    "offset": 116,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "table_4",
+    "type": "link",
+    "type_id": 8,
+    "offset": 120,
+    "arg": 124,
+    "link": 6362280,
+    "link_table": "treasure"
+   }
+  ]
+ },
+ {
+  "table": "runewords",
+  "txt": "xls\\runewords.txt",
+  "gbe": "xls\\runewords.gbe",
+  "descriptor": 6323888,
+  "columns_va": 6098592,
+  "definitions_global": 6362300,
+  "count_global": 6362296,
+  "record_size": 116,
+  "struct": "runeword_definition_data",
+  "columns": [
+   {
+    "column": "runeword",
+    "type": "name",
+    "type_id": 1,
+    "offset": 0,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "final_item",
+    "type": "link",
+    "type_id": 8,
+    "offset": 64,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "any_crystal",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 80,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "any_weapon",
+    "type": "bool",
+    "type_id": 7,
+    "offset": 72,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "weapon_type",
+    "type": "int",
+    "type_id": 3,
+    "offset": 76,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "armor_slot",
+    "type": "link",
+    "type_id": 8,
+    "offset": 68,
+    "arg": 72,
+    "link": 6362196,
+    "link_table": "equipment_slots"
+   },
+   {
+    "column": "runeword_item",
+    "type": "link",
+    "type_id": 8,
+    "offset": 84,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "item_1",
+    "type": "link",
+    "type_id": 8,
+    "offset": 88,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "item_2",
+    "type": "link",
+    "type_id": 8,
+    "offset": 92,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "item_3",
+    "type": "link",
+    "type_id": 8,
+    "offset": 96,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "item_4",
+    "type": "link",
+    "type_id": 8,
+    "offset": 100,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "item_5",
+    "type": "link",
+    "type_id": 8,
+    "offset": 104,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "item_6",
+    "type": "link",
+    "type_id": 8,
+    "offset": 108,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "item_7",
+    "type": "link",
+    "type_id": 8,
+    "offset": 112,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   }
+  ]
+ },
+ {
+  "table": "recipes",
+  "txt": "xls\\recipes.txt",
+  "gbe": "xls\\recipes.gbe",
+  "descriptor": 6328960,
+  "columns_va": 6099712,
+  "definitions_global": 6362308,
+  "count_global": 6362304,
+  "record_size": 148,
+  "struct": "recipe_definition_data",
+  "columns": [
+   {
+    "column": "recipe_name",
+    "type": "name",
+    "type_id": 1,
+    "offset": 0,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "desc_string",
+    "type": "link",
+    "type_id": 8,
+    "offset": 64,
+    "arg": 2116,
+    "link": 6340968,
+    "link_table": "strings"
+   },
+   {
+    "column": "sort_order",
+    "type": "int",
+    "type_id": 3,
+    "offset": 68,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "reveal_group",
+    "type": "int",
+    "type_id": 3,
+    "offset": 72,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "category",
+    "type": "int",
+    "type_id": 3,
+    "offset": 76,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "final_item",
+    "type": "link",
+    "type_id": 8,
+    "offset": 80,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "final_quantity",
+    "type": "int",
+    "type_id": 3,
+    "offset": 84,
+    "arg": 1,
+    "link": 0
+   },
+   {
+    "column": "quantity_1",
+    "type": "int",
+    "type_id": 3,
+    "offset": 88,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "item_1",
+    "type": "link",
+    "type_id": 8,
+    "offset": 104,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "mushroom_1",
+    "type": "int",
+    "type_id": 3,
+    "offset": 120,
+    "arg": 4294967295,
+    "link": 0
+   },
+   {
+    "column": "quantity_2",
+    "type": "int",
+    "type_id": 3,
+    "offset": 92,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "item_2",
+    "type": "link",
+    "type_id": 8,
+    "offset": 108,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "mushroom_2",
+    "type": "int",
+    "type_id": 3,
+    "offset": 124,
+    "arg": 4294967295,
+    "link": 0
+   },
+   {
+    "column": "quantity_3",
+    "type": "int",
+    "type_id": 3,
+    "offset": 96,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "item_3",
+    "type": "link",
+    "type_id": 8,
+    "offset": 112,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "mushroom_3",
+    "type": "int",
+    "type_id": 3,
+    "offset": 128,
+    "arg": 4294967295,
+    "link": 0
+   },
+   {
+    "column": "quantity_4",
+    "type": "int",
+    "type_id": 3,
+    "offset": 100,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "item_4",
+    "type": "link",
+    "type_id": 8,
+    "offset": 116,
+    "arg": 256,
+    "link": 6362204,
+    "link_table": "items"
+   },
+   {
+    "column": "mushroom_4",
+    "type": "int",
+    "type_id": 3,
+    "offset": 132,
+    "arg": 4294967295,
+    "link": 0
+   },
+   {
+    "column": "nearby_object",
+    "type": "link",
+    "type_id": 8,
+    "offset": 136,
+    "arg": 220,
+    "link": 6362244,
+    "link_table": "objects"
+   },
+   {
+    "column": "crystal_shards",
+    "type": "int",
+    "type_id": 3,
+    "offset": 140,
+    "arg": 0,
+    "link": 0
+   },
+   {
+    "column": "compost",
+    "type": "int",
+    "type_id": 3,
+    "offset": 144,
+    "arg": 0,
+    "link": 0
+   }
+  ]
+ }
+]

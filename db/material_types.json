@@ -1,0 +1,548 @@
+[
+ {
+  "i": 0,
+  "name": "shaders\\dx11\\plain",
+  "n": 2,
+  "elems": [
+   [
+    "POSITION",
+    0,
+    "DXGI_FORMAT_R32G32B32_FLOAT",
+    0
+   ],
+   [
+    "COLOR",
+    0,
+    "DXGI_FORMAT_R8G8B8A8_UNORM",
+    12
+   ]
+  ],
+  "layout": "0x383E014",
+  "vsize": 16,
+  "vcopy": "0x4100c0",
+  "blend": "alpha",
+  "sampler": null,
+  "fns": [
+   "0x40ff60",
+   "0x40ff70",
+   "0x40ffc0",
+   "0x40fff0",
+   "0x4100b0",
+   "0x4100c0"
+  ],
+  "table": "0x5c8814"
+ },
+ {
+  "i": 1,
+  "name": "shaders\\dx11\\block",
+  "n": 3,
+  "elems": [
+   [
+    "POSITION",
+    0,
+    "DXGI_FORMAT_R32G32B32_FLOAT",
+    0
+   ],
+   [
+    "TEXCOORD",
+    0,
+    "DXGI_FORMAT_R32G32_FLOAT",
+    12
+   ],
+   [
+    "COLOR",
+    0,
+    "DXGI_FORMAT_R8G8B8A8_UNORM",
+    20
+   ]
+  ],
+  "layout": "0x383DFFC",
+  "vsize": 24,
+  "vcopy": "0x40f080",
+  "blend": "none",
+  "sampler": "0",
+  "fns": [
+   "0x40f660",
+   "0x40f670",
+   "0x40f6c0",
+   "0x40f6e0",
+   "0x40f070",
+   "0x40f080"
+  ],
+  "table": "0x5c8550"
+ },
+ {
+  "i": 2,
+  "name": "shaders\\dx11\\overlay",
+  "n": 4,
+  "elems": [
+   [
+    "POSITION",
+    0,
+    "DXGI_FORMAT_R32G32B32_FLOAT",
+    0
+   ],
+   [
+    "TEXCOORD",
+    0,
+    "DXGI_FORMAT_R32G32_FLOAT",
+    12
+   ],
+   [
+    "BLENDWEIGHT",
+    0,
+    "DXGI_FORMAT_R32_FLOAT",
+    20
+   ],
+   [
+    "COLOR",
+    0,
+    "DXGI_FORMAT_R8G8B8A8_UNORM",
+    24
+   ]
+  ],
+  "layout": "0x383E00C",
+  "vsize": 28,
+  "vcopy": "0x40f900",
+  "blend": "alpha",
+  "sampler": "0",
+  "fns": [
+   "0x40fcc0",
+   "0x40fcd0",
+   "0x40fd20",
+   "0x40fd40",
+   "0x40f2b0",
+   "0x40f900"
+  ],
+  "table": "0x5c8750"
+ },
+ {
+  "i": 3,
+  "name": "shaders\\dx11\\sprite",
+  "n": 4,
+  "elems": [
+   [
+    "POSITION",
+    0,
+    "DXGI_FORMAT_R32G32B32_FLOAT",
+    0
+   ],
+   [
+    "TEXCOORD",
+    0,
+    "DXGI_FORMAT_R32G32_FLOAT",
+    12
+   ],
+   [
+    "BLENDWEIGHT",
+    0,
+    "DXGI_FORMAT_R32_FLOAT",
+    20
+   ],
+   [
+    "COLOR",
+    0,
+    "DXGI_FORMAT_R8G8B8A8_UNORM",
+    24
+   ]
+  ],
+  "layout": "0x383E018",
+  "vsize": 28,
+  "vcopy": "0x40f900",
+  "blend": "alpha",
+  "sampler": "0",
+  "fns": [
+   "0x4101a0",
+   "0x4101b0",
+   "0x410200",
+   "0x410220",
+   "0x40f2b0",
+   "0x40f900"
+  ],
+  "table": "0x5c8878"
+ },
+ {
+  "i": 4,
+  "name": "shaders\\dx11\\alpha_sprite",
+  "n": 3,
+  "elems": [
+   [
+    "POSITION",
+    0,
+    "DXGI_FORMAT_R32G32B32_FLOAT",
+    0
+   ],
+   [
+    "TEXCOORD",
+    0,
+    "DXGI_FORMAT_R32G32_FLOAT",
+    12
+   ],
+   [
+    "COLOR",
+    0,
+    "DXGI_FORMAT_R8G8B8A8_UNORM",
+    20
+   ]
+  ],
+  "layout": "0x383DFF0",
+  "vsize": 24,
+  "vcopy": "0x40f080",
+  "blend": "alpha",
+  "sampler": "0",
+  "fns": [
+   "0x40ef20",
+   "0x40ef30",
+   "0x40ef80",
+   "0x40efa0",
+   "0x40f070",
+   "0x40f080"
+  ],
+  "table": "0x5c8418"
+ },
+ {
+  "i": 5,
+  "name": "shaders\\dx11\\parallax",
+  "n": 3,
+  "elems": [
+   [
+    "SV_POSITION",
+    0,
+    "DXGI_FORMAT_R32G32B32A32_FLOAT",
+    0
+   ],
+   [
+    "TEXCOORD",
+    0,
+    "DXGI_FORMAT_R32G32_FLOAT",
+    16
+   ],
+   [
+    "COLOR",
+    0,
+    "DXGI_FORMAT_R8G8B8A8_UNORM",
+    24
+   ]
+  ],
+  "layout": "0x383E010",
+  "vsize": 28,
+  "vcopy": "0x40f900",
+  "blend": "none",
+  "sampler": "0",
+  "fns": [
+   "0x40fe10",
+   "0x40fe20",
+   "0x40fe70",
+   "0x40fe90",
+   "0x40f2b0",
+   "0x40f900"
+  ],
+  "table": "0x5c87c0"
+ },
+ {
+  "i": 6,
+  "name": "shaders\\dx11\\ui",
+  "n": 3,
+  "elems": [
+   [
+    "SV_POSITION",
+    0,
+    "DXGI_FORMAT_R32G32B32A32_FLOAT",
+    0
+   ],
+   [
+    "TEXCOORD",
+    0,
+    "DXGI_FORMAT_R32G32_FLOAT",
+    16
+   ],
+   [
+    "COLOR",
+    0,
+    "DXGI_FORMAT_R8G8B8A8_UNORM",
+    24
+   ]
+  ],
+  "layout": "0x383E020",
+  "vsize": 28,
+  "vcopy": "0x40f900",
+  "blend": "none",
+  "sampler": "0",
+  "fns": [
+   "0x410440",
+   "0x410450",
+   "0x4104a0",
+   "0x4104c0",
+   "0x40f2b0",
+   "0x40f900"
+  ],
+  "table": "0x5c8968"
+ },
+ {
+  "i": 7,
+  "name": "shaders\\dx11\\alpha_ui",
+  "n": 2,
+  "elems": [
+   [
+    "SV_POSITION",
+    0,
+    "DXGI_FORMAT_R32G32B32A32_FLOAT",
+    0
+   ],
+   [
+    "COLOR",
+    0,
+    "DXGI_FORMAT_R8G8B8A8_UNORM",
+    16
+   ]
+  ],
+  "layout": "0x383DFF8",
+  "vsize": 20,
+  "vcopy": "0x40f580",
+  "blend": "alpha",
+  "sampler": null,
+  "fns": [
+   "0x40f430",
+   "0x40f440",
+   "0x40f490",
+   "0x40f4b0",
+   "0x40f570",
+   "0x40f580"
+  ],
+  "table": "0x5c84ec"
+ },
+ {
+  "i": 8,
+  "name": "shaders\\dx11\\alpha_sprite_ui",
+  "n": 3,
+  "elems": [
+   [
+    "SV_POSITION",
+    0,
+    "DXGI_FORMAT_R32G32B32A32_FLOAT",
+    0
+   ],
+   [
+    "TEXCOORD",
+    0,
+    "DXGI_FORMAT_R32G32_FLOAT",
+    16
+   ],
+   [
+    "COLOR",
+    0,
+    "DXGI_FORMAT_R8G8B8A8_UNORM",
+    24
+   ]
+  ],
+  "layout": "0x383DFF4",
+  "vsize": 28,
+  "vcopy": "0x40f2c0",
+  "blend": "alpha",
+  "sampler": "0",
+  "fns": [
+   "0x40f160",
+   "0x40f170",
+   "0x40f1c0",
+   "0x40f1e0",
+   "0x40f2b0",
+   "0x40f2c0"
+  ],
+  "table": "0x5c8498"
+ },
+ {
+  "i": 9,
+  "name": "shaders\\dx11\\title_ui",
+  "n": 3,
+  "elems": [
+   [
+    "SV_POSITION",
+    0,
+    "DXGI_FORMAT_R32G32B32A32_FLOAT",
+    0
+   ],
+   [
+    "TEXCOORD",
+    0,
+    "DXGI_FORMAT_R32G32_FLOAT",
+    16
+   ],
+   [
+    "COLOR",
+    0,
+    "DXGI_FORMAT_R8G8B8A8_UNORM",
+    24
+   ]
+  ],
+  "layout": "0x383E01C",
+  "vsize": 28,
+  "vcopy": "0x40f900",
+  "blend": "alpha",
+  "sampler": "0",
+  "fns": [
+   "0x4102f0",
+   "0x410300",
+   "0x410350",
+   "0x410370",
+   "0x40f2b0",
+   "0x40f900"
+  ],
+  "table": "0x5c88e8"
+ },
+ {
+  "i": 10,
+  "name": "shaders\\dx11\\ui",
+  "n": 3,
+  "elems": [
+   [
+    "SV_POSITION",
+    0,
+    "DXGI_FORMAT_R32G32B32A32_FLOAT",
+    0
+   ],
+   [
+    "TEXCOORD",
+    0,
+    "DXGI_FORMAT_R32G32_FLOAT",
+    16
+   ],
+   [
+    "COLOR",
+    0,
+    "DXGI_FORMAT_R8G8B8A8_UNORM",
+    24
+   ]
+  ],
+  "layout": "0x383E024",
+  "vsize": 28,
+  "vcopy": "0x40f900",
+  "blend": "alpha",
+  "sampler": "2",
+  "fns": [
+   "0x410590",
+   "0x4105a0",
+   "0x4105f0",
+   "0x410610",
+   "0x40f2b0",
+   "0x40f900"
+  ],
+  "table": "0x5c89e8"
+ },
+ {
+  "i": 11,
+  "name": "shaders\\dx11\\map",
+  "n": 3,
+  "elems": [
+   [
+    "SV_POSITION",
+    0,
+    "DXGI_FORMAT_R32G32B32A32_FLOAT",
+    0
+   ],
+   [
+    "TEXCOORD",
+    0,
+    "DXGI_FORMAT_R32G32_FLOAT",
+    16
+   ],
+   [
+    "COLOR",
+    0,
+    "DXGI_FORMAT_R8G8B8A8_UNORM",
+    24
+   ]
+  ],
+  "layout": "0x383E008",
+  "vsize": 28,
+  "vcopy": "0x40f900",
+  "blend": "alpha",
+  "sampler": "v4",
+  "fns": [
+   "0x40fb50",
+   "0x40fb60",
+   "0x40fbb0",
+   "0x40fbd0",
+   "0x40f2b0",
+   "0x40f900"
+  ],
+  "table": "0x5c86d0"
+ },
+ {
+  "i": 12,
+  "name": "shaders\\dx11\\blur",
+  "n": 3,
+  "elems": [
+   [
+    "SV_POSITION",
+    0,
+    "DXGI_FORMAT_R32G32B32A32_FLOAT",
+    0
+   ],
+   [
+    "TEXCOORD",
+    0,
+    "DXGI_FORMAT_R32G32_FLOAT",
+    16
+   ],
+   [
+    "COLOR",
+    0,
+    "DXGI_FORMAT_R8G8B8A8_UNORM",
+    24
+   ]
+  ],
+  "layout": "0x383E004",
+  "vsize": 28,
+  "vcopy": "0x40f900",
+  "blend": "alpha",
+  "sampler": "0",
+  "fns": [
+   "0x40fa00",
+   "0x40fa10",
+   "0x40fa60",
+   "0x40fa80",
+   "0x40f2b0",
+   "0x40f900"
+  ],
+  "table": "0x5c8650"
+ },
+ {
+  "i": 13,
+  "name": "shaders\\dx11\\bloom_blend",
+  "n": 3,
+  "elems": [
+   [
+    "SV_POSITION",
+    0,
+    "DXGI_FORMAT_R32G32B32A32_FLOAT",
+    0
+   ],
+   [
+    "TEXCOORD",
+    0,
+    "DXGI_FORMAT_R32G32_FLOAT",
+    16
+   ],
+   [
+    "COLOR",
+    0,
+    "DXGI_FORMAT_R8G8B8A8_UNORM",
+    24
+   ]
+  ],
+  "layout": "0x383E000",
+  "vsize": 28,
+  "vcopy": "0x40f900",
+  "blend": "none",
+  "sampler": "2",
+  "fns": [
+   "0x40f7b0",
+   "0x40f7c0",
+   "0x40f810",
+   "0x40f830",
+   "0x40f2b0",
+   "0x40f900"
+  ],
+  "table": "0x5c85d0"
+ }
+]

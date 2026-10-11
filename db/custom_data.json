@@ -1,0 +1,3490 @@
+{
+ "player": {
+  "size": null,
+  "size_confirmed": false,
+  "last_access_end": 5676,
+  "members": [
+   {
+    "offset": 0,
+    "type": "dword",
+    "name": "field_0",
+    "accesses": 5
+   },
+   {
+    "offset": 4,
+    "type": "dword",
+    "name": "field_4",
+    "accesses": 5
+   },
+   {
+    "offset": 8,
+    "type": "dword",
+    "name": "field_8",
+    "accesses": 2
+   },
+   {
+    "offset": 12,
+    "type": "dword",
+    "name": "field_12",
+    "accesses": 4
+   },
+   {
+    "offset": 16,
+    "type": "dword",
+    "name": "field_16",
+    "accesses": 2
+   },
+   {
+    "offset": 20,
+    "type": "dword",
+    "name": "field_20",
+    "accesses": 4
+   },
+   {
+    "offset": 24,
+    "type": "dword",
+    "name": "field_24",
+    "accesses": 4
+   },
+   {
+    "offset": 28,
+    "type": "dword",
+    "name": "field_28",
+    "accesses": 4
+   },
+   {
+    "offset": 32,
+    "type": "dword",
+    "name": "field_32",
+    "accesses": 1
+   },
+   {
+    "offset": 36,
+    "type": "dword",
+    "name": "field_36",
+    "accesses": 4
+   },
+   {
+    "offset": 40,
+    "type": "dword",
+    "name": "field_40",
+    "accesses": 4
+   },
+   {
+    "offset": 44,
+    "type": "int",
+    "name": "field_44",
+    "accesses": 1
+   },
+   {
+    "offset": 48,
+    "type": "dword",
+    "name": "field_48",
+    "accesses": 2
+   },
+   {
+    "offset": 52,
+    "type": "dword",
+    "name": "field_52",
+    "accesses": 2
+   },
+   {
+    "offset": 56,
+    "type": "dword",
+    "name": "field_56",
+    "accesses": 2
+   },
+   {
+    "offset": 60,
+    "type": "dword",
+    "name": "field_60",
+    "accesses": 2
+   },
+   {
+    "offset": 68,
+    "type": "byte",
+    "name": "field_68",
+    "accesses": 15
+   },
+   {
+    "offset": 72,
+    "type": "dword",
+    "name": "field_72",
+    "accesses": 1
+   },
+   {
+    "offset": 76,
+    "type": "dword",
+    "name": "field_76",
+    "accesses": 2
+   },
+   {
+    "offset": 80,
+    "type": "dword",
+    "name": "field_80",
+    "accesses": 1
+   },
+   {
+    "offset": 84,
+    "type": "dword",
+    "name": "field_84",
+    "accesses": 5
+   },
+   {
+    "offset": 88,
+    "type": "dword",
+    "name": "field_88",
+    "accesses": 3
+   },
+   {
+    "offset": 92,
+    "type": "dword",
+    "name": "field_92",
+    "accesses": 4
+   },
+   {
+    "offset": 96,
+    "type": "dword",
+    "name": "field_96",
+    "accesses": 4
+   },
+   {
+    "offset": 100,
+    "type": "dword",
+    "name": "field_100",
+    "accesses": 2
+   },
+   {
+    "offset": 104,
+    "type": "dword",
+    "name": "field_104",
+    "accesses": 1
+   },
+   {
+    "offset": 108,
+    "type": "dword",
+    "name": "field_108",
+    "accesses": 7
+   },
+   {
+    "offset": 112,
+    "type": "dword",
+    "name": "field_112",
+    "accesses": 3
+   },
+   {
+    "offset": 116,
+    "type": "dword",
+    "name": "field_116",
+    "accesses": 4
+   },
+   {
+    "offset": 120,
+    "type": "dword",
+    "name": "field_120",
+    "accesses": 8
+   },
+   {
+    "offset": 124,
+    "type": "dword",
+    "name": "field_124",
+    "accesses": 2
+   },
+   {
+    "offset": 128,
+    "type": "dword",
+    "name": "field_128",
+    "accesses": 2
+   },
+   {
+    "offset": 132,
+    "type": "dword",
+    "name": "field_132",
+    "accesses": 2
+   },
+   {
+    "offset": 136,
+    "type": "dword",
+    "name": "field_136",
+    "accesses": 1
+   },
+   {
+    "offset": 140,
+    "type": "dword",
+    "name": "field_140",
+    "accesses": 18
+   },
+   {
+    "offset": 144,
+    "type": "dword",
+    "name": "field_144",
+    "accesses": 3
+   },
+   {
+    "offset": 148,
+    "type": "dword",
+    "name": "field_148",
+    "accesses": 3
+   },
+   {
+    "offset": 152,
+    "type": "dword",
+    "name": "max_mana",
+    "accesses": 12
+   },
+   {
+    "offset": 156,
+    "type": "dword",
+    "name": "field_156",
+    "accesses": 12
+   },
+   {
+    "offset": 160,
+    "type": "dword",
+    "name": "recharge_count",
+    "accesses": 7
+   },
+   {
+    "offset": 164,
+    "type": "dword",
+    "name": "field_164",
+    "accesses": 3
+   },
+   {
+    "offset": 168,
+    "type": "dword",
+    "name": "field_168",
+    "accesses": 4
+   },
+   {
+    "offset": 172,
+    "type": "float",
+    "name": "field_172",
+    "accesses": 1
+   },
+   {
+    "offset": 176,
+    "type": "float",
+    "name": "field_176",
+    "accesses": 3
+   },
+   {
+    "offset": 180,
+    "type": "dword",
+    "name": "recharge_bar_black_id",
+    "accesses": 4
+   },
+   {
+    "offset": 184,
+    "type": "float",
+    "name": "field_184",
+    "accesses": 1
+   },
+   {
+    "offset": 188,
+    "type": "float",
+    "name": "field_188",
+    "accesses": 1
+   },
+   {
+    "offset": 192,
+    "type": "int",
+    "name": "field_192",
+    "accesses": 3
+   },
+   {
+    "offset": 196,
+    "type": "dword",
+    "name": "field_196",
+    "accesses": 1
+   },
+   {
+    "offset": 200,
+    "type": "byte",
+    "name": "field_200",
+    "accesses": 10
+   },
+   {
+    "offset": 204,
+    "type": "dword",
+    "name": "field_204",
+    "accesses": 4
+   },
+   {
+    "offset": 208,
+    "type": "float",
+    "name": "field_208",
+    "accesses": 1
+   },
+   {
+    "offset": 212,
+    "type": "float",
+    "name": "field_212",
+    "accesses": 1
+   },
+   {
+    "offset": 220,
+    "type": "dword",
+    "name": "field_220",
+    "accesses": 2
+   },
+   {
+    "offset": 224,
+    "type": "dword",
+    "name": "field_224",
+    "accesses": 3
+   },
+   {
+    "offset": 228,
+    "type": "dword",
+    "name": "field_228",
+    "accesses": 12
+   },
+   {
+    "offset": 232,
+    "type": "dword",
+    "name": "field_232",
+    "accesses": 8
+   },
+   {
+    "offset": 236,
+    "type": "dword",
+    "name": "field_236",
+    "accesses": 1
+   },
+   {
+    "offset": 240,
+    "type": "dword",
+    "name": "field_240",
+    "accesses": 5
+   },
+   {
+    "offset": 244,
+    "type": "dword",
+    "name": "field_244",
+    "accesses": 8
+   },
+   {
+    "offset": 248,
+    "type": "dword",
+    "name": "field_248",
+    "accesses": 57
+   },
+   {
+    "offset": 252,
+    "type": "dword",
+    "name": "field_252",
+    "accesses": 2
+   },
+   {
+    "offset": 256,
+    "type": "dword",
+    "name": "field_256",
+    "accesses": 6
+   },
+   {
+    "offset": 260,
+    "type": "dword",
+    "name": "field_260",
+    "accesses": 8
+   },
+   {
+    "offset": 264,
+    "type": "dword",
+    "name": "field_264",
+    "accesses": 8
+   },
+   {
+    "offset": 268,
+    "type": "dword",
+    "name": "field_268",
+    "accesses": 8
+   },
+   {
+    "offset": 272,
+    "type": "dword",
+    "name": "field_272",
+    "accesses": 20
+   },
+   {
+    "offset": 276,
+    "type": "dword",
+    "name": "animation_mode",
+    "accesses": 11
+   },
+   {
+    "offset": 280,
+    "type": "dword",
+    "name": "field_280",
+    "accesses": 10
+   },
+   {
+    "offset": 284,
+    "type": "float",
+    "name": "field_284",
+    "accesses": 4
+   },
+   {
+    "offset": 288,
+    "type": "float",
+    "name": "field_288",
+    "accesses": 1
+   },
+   {
+    "offset": 292,
+    "type": "dword",
+    "name": "field_292",
+    "accesses": 7
+   },
+   {
+    "offset": 296,
+    "type": "float",
+    "name": "field_296",
+    "accesses": 5
+   },
+   {
+    "offset": 300,
+    "type": "float",
+    "name": "field_300",
+    "accesses": 11
+   },
+   {
+    "offset": 304,
+    "type": "float",
+    "name": "field_304",
+    "accesses": 11
+   },
+   {
+    "offset": 308,
+    "type": "float",
+    "name": "field_308",
+    "accesses": 5
+   },
+   {
+    "offset": 312,
+    "type": "dword",
+    "name": "field_312",
+    "accesses": 8
+   },
+   {
+    "offset": 316,
+    "type": "dword",
+    "name": "field_316",
+    "accesses": 25
+   },
+   {
+    "offset": 320,
+    "type": "byte",
+    "name": "field_320",
+    "accesses": 12
+   },
+   {
+    "offset": 321,
+    "type": "byte",
+    "name": "field_321",
+    "accesses": 4
+   },
+   {
+    "offset": 324,
+    "type": "dword",
+    "name": "field_324",
+    "accesses": 20
+   },
+   {
+    "offset": 328,
+    "type": "dword",
+    "name": "field_328",
+    "accesses": 13
+   },
+   {
+    "offset": 332,
+    "type": "dword",
+    "name": "field_332",
+    "accesses": 10
+   },
+   {
+    "offset": 336,
+    "type": "dword",
+    "name": "field_336",
+    "accesses": 14
+   },
+   {
+    "offset": 340,
+    "type": "dword",
+    "name": "field_340",
+    "accesses": 1
+   },
+   {
+    "offset": 344,
+    "type": "dword",
+    "name": "field_344",
+    "accesses": 5
+   },
+   {
+    "offset": 348,
+    "type": "dword",
+    "name": "field_348",
+    "accesses": 5
+   },
+   {
+    "offset": 352,
+    "type": "dword",
+    "name": "field_352",
+    "accesses": 4
+   },
+   {
+    "offset": 356,
+    "type": "byte",
+    "name": "homestone_return_set",
+    "accesses": 2
+   },
+   {
+    "offset": 360,
+    "type": "dword",
+    "name": "field_360",
+    "accesses": 2
+   },
+   {
+    "offset": 364,
+    "type": "dword",
+    "name": "field_364",
+    "accesses": 2
+   },
+   {
+    "offset": 368,
+    "type": "dword",
+    "name": "field_368",
+    "accesses": 2
+   },
+   {
+    "offset": 372,
+    "type": "dword",
+    "name": "field_372",
+    "accesses": 2
+   },
+   {
+    "offset": 376,
+    "type": "dword",
+    "name": "field_376",
+    "accesses": 1
+   },
+   {
+    "offset": 380,
+    "type": "dword",
+    "name": "field_380",
+    "accesses": 1
+   },
+   {
+    "offset": 384,
+    "type": "dword",
+    "name": "field_384",
+    "accesses": 1
+   },
+   {
+    "offset": 388,
+    "type": "dword",
+    "name": "field_388",
+    "accesses": 1
+   },
+   {
+    "offset": 392,
+    "type": "dword",
+    "name": "hotbar_selection",
+    "accesses": 14
+   },
+   {
+    "offset": 396,
+    "type": "dword",
+    "name": "field_396",
+    "accesses": 3
+   },
+   {
+    "offset": 400,
+    "type": "dword",
+    "name": "field_400",
+    "accesses": 3
+   },
+   {
+    "offset": 404,
+    "type": "dword",
+    "name": "field_404",
+    "accesses": 3
+   },
+   {
+    "offset": 408,
+    "type": "dword",
+    "name": "field_408",
+    "accesses": 3
+   },
+   {
+    "offset": 436,
+    "type": "dword",
+    "name": "field_436",
+    "accesses": 2
+   },
+   {
+    "offset": 440,
+    "type": "dword",
+    "name": "field_440",
+    "accesses": 1
+   },
+   {
+    "offset": 444,
+    "type": "dword",
+    "name": "field_444",
+    "accesses": 1
+   },
+   {
+    "offset": 456,
+    "type": "dword",
+    "name": "field_456",
+    "accesses": 1
+   },
+   {
+    "offset": 604,
+    "type": "dword",
+    "name": "field_604",
+    "accesses": 1
+   },
+   {
+    "offset": 608,
+    "type": "dword",
+    "name": "field_608",
+    "accesses": 1
+   },
+   {
+    "offset": 612,
+    "type": "dword",
+    "name": "field_612",
+    "accesses": 1
+   },
+   {
+    "offset": 616,
+    "type": "dword",
+    "name": "field_616",
+    "accesses": 1
+   },
+   {
+    "offset": 620,
+    "type": "dword",
+    "name": "field_620",
+    "accesses": 1
+   },
+   {
+    "offset": 624,
+    "type": "dword",
+    "name": "field_624",
+    "accesses": 1
+   },
+   {
+    "offset": 628,
+    "type": "dword",
+    "name": "field_628",
+    "accesses": 1
+   },
+   {
+    "offset": 632,
+    "type": "dword",
+    "name": "field_632",
+    "accesses": 1
+   },
+   {
+    "offset": 636,
+    "type": "dword",
+    "name": "field_636",
+    "accesses": 1
+   },
+   {
+    "offset": 640,
+    "type": "dword",
+    "name": "field_640",
+    "accesses": 1
+   },
+   {
+    "offset": 644,
+    "type": "dword",
+    "name": "field_644",
+    "accesses": 1
+   },
+   {
+    "offset": 648,
+    "type": "dword",
+    "name": "field_648",
+    "accesses": 1
+   },
+   {
+    "offset": 652,
+    "type": "dword",
+    "name": "field_652",
+    "accesses": 1
+   },
+   {
+    "offset": 656,
+    "type": "dword",
+    "name": "field_656",
+    "accesses": 1
+   },
+   {
+    "offset": 660,
+    "type": "dword",
+    "name": "field_660",
+    "accesses": 1
+   },
+   {
+    "offset": 664,
+    "type": "dword",
+    "name": "field_664",
+    "accesses": 1
+   },
+   {
+    "offset": 672,
+    "type": "dword",
+    "name": "field_672",
+    "accesses": 6
+   },
+   {
+    "offset": 676,
+    "type": "dword",
+    "name": "field_676",
+    "accesses": 2
+   },
+   {
+    "offset": 680,
+    "type": "dword",
+    "name": "field_680",
+    "accesses": 53
+   },
+   {
+    "offset": 684,
+    "type": "int",
+    "name": "mouse_item_stack_mode",
+    "accesses": 70
+   },
+   {
+    "offset": 688,
+    "type": "byte",
+    "name": "field_688",
+    "accesses": 6
+   },
+   {
+    "offset": 692,
+    "type": "int",
+    "name": "mouse_item_from_location",
+    "accesses": 74
+   },
+   {
+    "offset": 696,
+    "type": "dword",
+    "name": "field_696",
+    "accesses": 122
+   },
+   {
+    "offset": 700,
+    "type": "dword",
+    "name": "field_700",
+    "accesses": 57
+   },
+   {
+    "offset": 2144,
+    "type": "int",
+    "name": "num_banking_slots",
+    "accesses": 40
+   },
+   {
+    "offset": 2148,
+    "type": "dword",
+    "name": "field_2148",
+    "accesses": 6
+   },
+   {
+    "offset": 2152,
+    "type": "byte",
+    "name": "field_2152",
+    "accesses": 1
+   },
+   {
+    "offset": 2156,
+    "type": "dword",
+    "name": "field_2156",
+    "accesses": 1
+   },
+   {
+    "offset": 2160,
+    "type": "dword",
+    "name": "field_2160",
+    "accesses": 1
+   },
+   {
+    "offset": 2164,
+    "type": "dword",
+    "name": "field_2164",
+    "accesses": 1
+   },
+   {
+    "offset": 2168,
+    "type": "dword",
+    "name": "field_2168",
+    "accesses": 1
+   },
+   {
+    "offset": 2172,
+    "type": "dword",
+    "name": "field_2172",
+    "accesses": 1
+   },
+   {
+    "offset": 2176,
+    "type": "dword",
+    "name": "field_2176",
+    "accesses": 1
+   },
+   {
+    "offset": 2180,
+    "type": "dword",
+    "name": "field_2180",
+    "accesses": 1
+   },
+   {
+    "offset": 2184,
+    "type": "dword",
+    "name": "field_2184",
+    "accesses": 1
+   },
+   {
+    "offset": 2188,
+    "type": "dword",
+    "name": "field_2188",
+    "accesses": 4
+   },
+   {
+    "offset": 2192,
+    "type": "dword",
+    "name": "field_2192",
+    "accesses": 3
+   },
+   {
+    "offset": 2196,
+    "type": "dword",
+    "name": "field_2196",
+    "accesses": 3
+   },
+   {
+    "offset": 2200,
+    "type": "dword",
+    "name": "field_2200",
+    "accesses": 3
+   },
+   {
+    "offset": 2204,
+    "type": "dword",
+    "name": "field_2204",
+    "accesses": 3
+   },
+   {
+    "offset": 2208,
+    "type": "dword",
+    "name": "field_2208",
+    "accesses": 3
+   },
+   {
+    "offset": 2212,
+    "type": "dword",
+    "name": "field_2212",
+    "accesses": 2
+   },
+   {
+    "offset": 2216,
+    "type": "dword",
+    "name": "field_2216",
+    "accesses": 2
+   },
+   {
+    "offset": 2220,
+    "type": "dword",
+    "name": "field_2220",
+    "accesses": 2
+   },
+   {
+    "offset": 2224,
+    "type": "dword",
+    "name": "field_2224",
+    "accesses": 2
+   },
+   {
+    "offset": 2228,
+    "type": "dword",
+    "name": "field_2228",
+    "accesses": 2
+   },
+   {
+    "offset": 2232,
+    "type": "dword",
+    "name": "field_2232",
+    "accesses": 2
+   },
+   {
+    "offset": 2236,
+    "type": "dword",
+    "name": "field_2236",
+    "accesses": 2
+   },
+   {
+    "offset": 2240,
+    "type": "dword",
+    "name": "field_2240",
+    "accesses": 2
+   },
+   {
+    "offset": 2761,
+    "type": "dword",
+    "name": "field_2761",
+    "accesses": 1
+   },
+   {
+    "offset": 2767,
+    "type": "byte",
+    "name": "field_2767",
+    "accesses": 1
+   },
+   {
+    "offset": 2769,
+    "type": "word",
+    "name": "field_2769",
+    "accesses": 1
+   },
+   {
+    "offset": 2771,
+    "type": "byte",
+    "name": "field_2771",
+    "accesses": 1
+   },
+   {
+    "offset": 2900,
+    "type": "byte",
+    "name": "field_2900",
+    "accesses": 3
+   },
+   {
+    "offset": 2907,
+    "type": "byte",
+    "name": "field_2907",
+    "accesses": 1
+   },
+   {
+    "offset": 2908,
+    "type": "byte",
+    "name": "field_2908",
+    "accesses": 1
+   },
+   {
+    "offset": 2910,
+    "type": "byte",
+    "name": "field_2910",
+    "accesses": 1
+   },
+   {
+    "offset": 2985,
+    "type": "byte",
+    "name": "field_2985",
+    "accesses": 1
+   },
+   {
+    "offset": 2986,
+    "type": "word",
+    "name": "field_2986",
+    "accesses": 1
+   },
+   {
+    "offset": 2988,
+    "type": "byte",
+    "name": "field_2988",
+    "accesses": 1
+   },
+   {
+    "offset": 2989,
+    "type": "byte",
+    "name": "field_2989",
+    "accesses": 1
+   },
+   {
+    "offset": 3044,
+    "type": "word",
+    "name": "field_3044",
+    "accesses": 1
+   },
+   {
+    "offset": 3413,
+    "type": "byte",
+    "name": "field_3413",
+    "accesses": 4
+   },
+   {
+    "offset": 3415,
+    "type": "byte",
+    "name": "field_3415",
+    "accesses": 1
+   },
+   {
+    "offset": 3416,
+    "type": "byte",
+    "name": "field_3416",
+    "accesses": 1
+   },
+   {
+    "offset": 3419,
+    "type": "byte",
+    "name": "field_3419",
+    "accesses": 1
+   },
+   {
+    "offset": 3420,
+    "type": "byte",
+    "name": "field_3420",
+    "accesses": 1
+   },
+   {
+    "offset": 3422,
+    "type": "byte",
+    "name": "field_3422",
+    "accesses": 1
+   },
+   {
+    "offset": 3424,
+    "type": "byte",
+    "name": "field_3424",
+    "accesses": 2
+   },
+   {
+    "offset": 3425,
+    "type": "byte",
+    "name": "field_3425",
+    "accesses": 1
+   },
+   {
+    "offset": 3428,
+    "type": "byte",
+    "name": "field_3428",
+    "accesses": 1
+   },
+   {
+    "offset": 3429,
+    "type": "byte",
+    "name": "field_3429",
+    "accesses": 2
+   },
+   {
+    "offset": 3437,
+    "type": "byte",
+    "name": "field_3437",
+    "accesses": 2
+   },
+   {
+    "offset": 3444,
+    "type": "byte",
+    "name": "field_3444",
+    "accesses": 1
+   },
+   {
+    "offset": 3449,
+    "type": "byte",
+    "name": "field_3449",
+    "accesses": 1
+   },
+   {
+    "offset": 3450,
+    "type": "byte",
+    "name": "field_3450",
+    "accesses": 4
+   },
+   {
+    "offset": 3452,
+    "type": "byte",
+    "name": "field_3452",
+    "accesses": 1
+   },
+   {
+    "offset": 3454,
+    "type": "byte",
+    "name": "field_3454",
+    "accesses": 4
+   },
+   {
+    "offset": 3455,
+    "type": "byte",
+    "name": "field_3455",
+    "accesses": 1
+   },
+   {
+    "offset": 3456,
+    "type": "byte",
+    "name": "field_3456",
+    "accesses": 1
+   },
+   {
+    "offset": 3457,
+    "type": "byte",
+    "name": "field_3457",
+    "accesses": 1
+   },
+   {
+    "offset": 3458,
+    "type": "byte",
+    "name": "field_3458",
+    "accesses": 1
+   },
+   {
+    "offset": 3468,
+    "type": "byte",
+    "name": "field_3468",
+    "accesses": 1
+   },
+   {
+    "offset": 3469,
+    "type": "byte",
+    "name": "field_3469",
+    "accesses": 1
+   },
+   {
+    "offset": 3479,
+    "type": "byte",
+    "name": "field_3479",
+    "accesses": 1
+   },
+   {
+    "offset": 3514,
+    "type": "byte",
+    "name": "field_3514",
+    "accesses": 1
+   },
+   {
+    "offset": 3532,
+    "type": "byte",
+    "name": "field_3532",
+    "accesses": 1
+   },
+   {
+    "offset": 3533,
+    "type": "byte",
+    "name": "field_3533",
+    "accesses": 1
+   },
+   {
+    "offset": 3800,
+    "type": "dword",
+    "name": "field_3800",
+    "accesses": 11
+   },
+   {
+    "offset": 3812,
+    "type": "dword",
+    "name": "field_3812",
+    "accesses": 3
+   },
+   {
+    "offset": 3816,
+    "type": "dword",
+    "name": "field_3816",
+    "accesses": 2
+   },
+   {
+    "offset": 4076,
+    "type": "dword",
+    "name": "field_4076",
+    "accesses": 1
+   },
+   {
+    "offset": 4080,
+    "type": "dword",
+    "name": "field_4080",
+    "accesses": 5
+   },
+   {
+    "offset": 4084,
+    "type": "dword",
+    "name": "field_4084",
+    "accesses": 1
+   },
+   {
+    "offset": 4088,
+    "type": "dword",
+    "name": "field_4088",
+    "accesses": 1
+   },
+   {
+    "offset": 4092,
+    "type": "dword",
+    "name": "field_4092",
+    "accesses": 1
+   },
+   {
+    "offset": 4192,
+    "type": "dword",
+    "name": "field_4192",
+    "accesses": 2
+   },
+   {
+    "offset": 4248,
+    "type": "dword",
+    "name": "field_4248",
+    "accesses": 1
+   },
+   {
+    "offset": 4304,
+    "type": "dword",
+    "name": "field_4304",
+    "accesses": 1
+   },
+   {
+    "offset": 4312,
+    "type": "dword",
+    "name": "field_4312",
+    "accesses": 1
+   },
+   {
+    "offset": 4320,
+    "type": "dword",
+    "name": "field_4320",
+    "accesses": 2
+   },
+   {
+    "offset": 4324,
+    "type": "dword",
+    "name": "field_4324",
+    "accesses": 1
+   },
+   {
+    "offset": 4328,
+    "type": "dword",
+    "name": "field_4328",
+    "accesses": 1
+   },
+   {
+    "offset": 4332,
+    "type": "dword",
+    "name": "field_4332",
+    "accesses": 1
+   },
+   {
+    "offset": 4336,
+    "type": "dword",
+    "name": "field_4336",
+    "accesses": 2
+   },
+   {
+    "offset": 4340,
+    "type": "dword",
+    "name": "field_4340",
+    "accesses": 1
+   },
+   {
+    "offset": 4344,
+    "type": "dword",
+    "name": "field_4344",
+    "accesses": 1
+   },
+   {
+    "offset": 4348,
+    "type": "dword",
+    "name": "field_4348",
+    "accesses": 1
+   },
+   {
+    "offset": 4352,
+    "type": "dword",
+    "name": "field_4352",
+    "accesses": 2
+   },
+   {
+    "offset": 4360,
+    "type": "dword",
+    "name": "field_4360",
+    "accesses": 1
+   },
+   {
+    "offset": 4364,
+    "type": "dword",
+    "name": "field_4364",
+    "accesses": 3
+   },
+   {
+    "offset": 4368,
+    "type": "dword",
+    "name": "field_4368",
+    "accesses": 1
+   },
+   {
+    "offset": 4372,
+    "type": "dword",
+    "name": "field_4372",
+    "accesses": 2
+   },
+   {
+    "offset": 4376,
+    "type": "dword",
+    "name": "field_4376",
+    "accesses": 9
+   },
+   {
+    "offset": 4380,
+    "type": "float",
+    "name": "field_4380",
+    "accesses": 2
+   },
+   {
+    "offset": 4384,
+    "type": "float",
+    "name": "field_4384",
+    "accesses": 1
+   },
+   {
+    "offset": 4388,
+    "type": "dword",
+    "name": "field_4388",
+    "accesses": 9
+   },
+   {
+    "offset": 4392,
+    "type": "float",
+    "name": "field_4392",
+    "accesses": 1
+   },
+   {
+    "offset": 4396,
+    "type": "float",
+    "name": "field_4396",
+    "accesses": 1
+   },
+   {
+    "offset": 4400,
+    "type": "dword",
+    "name": "field_4400",
+    "accesses": 9
+   },
+   {
+    "offset": 4404,
+    "type": "float",
+    "name": "field_4404",
+    "accesses": 2
+   },
+   {
+    "offset": 4408,
+    "type": "float",
+    "name": "field_4408",
+    "accesses": 2
+   },
+   {
+    "offset": 4412,
+    "type": "dword",
+    "name": "field_4412",
+    "accesses": 9
+   },
+   {
+    "offset": 4416,
+    "type": "float",
+    "name": "field_4416",
+    "accesses": 2
+   },
+   {
+    "offset": 4420,
+    "type": "float",
+    "name": "field_4420",
+    "accesses": 2
+   },
+   {
+    "offset": 4424,
+    "type": "dword",
+    "name": "field_4424",
+    "accesses": 2
+   },
+   {
+    "offset": 4428,
+    "type": "dword",
+    "name": "field_4428",
+    "accesses": 3
+   },
+   {
+    "offset": 4432,
+    "type": "dword",
+    "name": "field_4432",
+    "accesses": 1
+   },
+   {
+    "offset": 4436,
+    "type": "dword",
+    "name": "field_4436",
+    "accesses": 4
+   },
+   {
+    "offset": 4440,
+    "type": "dword",
+    "name": "field_4440",
+    "accesses": 1
+   },
+   {
+    "offset": 4444,
+    "type": "dword",
+    "name": "field_4444",
+    "accesses": 1
+   },
+   {
+    "offset": 4448,
+    "type": "dword",
+    "name": "field_4448",
+    "accesses": 1
+   },
+   {
+    "offset": 4452,
+    "type": "dword",
+    "name": "field_4452",
+    "accesses": 1
+   },
+   {
+    "offset": 4456,
+    "type": "dword",
+    "name": "field_4456",
+    "accesses": 1
+   },
+   {
+    "offset": 4460,
+    "type": "dword",
+    "name": "field_4460",
+    "accesses": 1
+   },
+   {
+    "offset": 4464,
+    "type": "dword",
+    "name": "field_4464",
+    "accesses": 1
+   },
+   {
+    "offset": 4468,
+    "type": "dword",
+    "name": "field_4468",
+    "accesses": 4
+   },
+   {
+    "offset": 4472,
+    "type": "dword",
+    "name": "field_4472",
+    "accesses": 1
+   },
+   {
+    "offset": 4476,
+    "type": "dword",
+    "name": "field_4476",
+    "accesses": 5
+   },
+   {
+    "offset": 4480,
+    "type": "dword",
+    "name": "field_4480",
+    "accesses": 4
+   },
+   {
+    "offset": 4484,
+    "type": "float",
+    "name": "field_4484",
+    "accesses": 7
+   },
+   {
+    "offset": 4488,
+    "type": "float",
+    "name": "field_4488",
+    "accesses": 6
+   },
+   {
+    "offset": 4492,
+    "type": "dword",
+    "name": "field_4492",
+    "accesses": 4
+   },
+   {
+    "offset": 4496,
+    "type": "dword",
+    "name": "field_4496",
+    "accesses": 3
+   },
+   {
+    "offset": 5524,
+    "type": "byte",
+    "name": "field_5524",
+    "accesses": 12
+   },
+   {
+    "offset": 5528,
+    "type": "dword",
+    "name": "field_5528",
+    "accesses": 1
+   },
+   {
+    "offset": 5532,
+    "type": "dword",
+    "name": "field_5532",
+    "accesses": 4
+   },
+   {
+    "offset": 5536,
+    "type": "dword",
+    "name": "field_5536",
+    "accesses": 2
+   },
+   {
+    "offset": 5540,
+    "type": "dword",
+    "name": "field_5540",
+    "accesses": 2
+   },
+   {
+    "offset": 5544,
+    "type": "dword",
+    "name": "field_5544",
+    "accesses": 3
+   },
+   {
+    "offset": 5548,
+    "type": "dword",
+    "name": "field_5548",
+    "accesses": 1
+   },
+   {
+    "offset": 5552,
+    "type": "dword",
+    "name": "field_5552",
+    "accesses": 1
+   },
+   {
+    "offset": 5556,
+    "type": "dword",
+    "name": "field_5556",
+    "accesses": 1
+   },
+   {
+    "offset": 5560,
+    "type": "dword",
+    "name": "field_5560",
+    "accesses": 1
+   },
+   {
+    "offset": 5564,
+    "type": "dword",
+    "name": "field_5564",
+    "accesses": 1
+   },
+   {
+    "offset": 5568,
+    "type": "dword",
+    "name": "field_5568",
+    "accesses": 1
+   },
+   {
+    "offset": 5572,
+    "type": "dword",
+    "name": "field_5572",
+    "accesses": 1
+   },
+   {
+    "offset": 5576,
+    "type": "dword",
+    "name": "field_5576",
+    "accesses": 1
+   },
+   {
+    "offset": 5580,
+    "type": "dword",
+    "name": "field_5580",
+    "accesses": 1
+   },
+   {
+    "offset": 5584,
+    "type": "dword",
+    "name": "field_5584",
+    "accesses": 1
+   },
+   {
+    "offset": 5668,
+    "type": "dword",
+    "name": "field_5668",
+    "accesses": 4
+   },
+   {
+    "offset": 5672,
+    "type": "dword",
+    "name": "field_5672",
+    "accesses": 3
+   }
+  ],
+  "arrays": [
+   {
+    "base": 460,
+    "stride": 4,
+    "accesses": 127
+   },
+   {
+    "base": 704,
+    "stride": 4,
+    "accesses": 69
+   },
+   {
+    "base": 644,
+    "stride": 4,
+    "accesses": 49
+   },
+   {
+    "base": 2156,
+    "stride": 4,
+    "accesses": 30
+   },
+   {
+    "base": 2212,
+    "stride": 4,
+    "accesses": 30
+   },
+   {
+    "base": 412,
+    "stride": 4,
+    "accesses": 29
+   },
+   {
+    "base": 3544,
+    "stride": 4,
+    "accesses": 3
+   },
+   {
+    "base": 2188,
+    "stride": 4,
+    "accesses": 2
+   },
+   {
+    "base": 4096,
+    "stride": 4,
+    "accesses": 1
+   },
+   {
+    "base": 3820,
+    "stride": 4,
+    "accesses": 1
+   },
+   {
+    "base": 2244,
+    "stride": 2,
+    "accesses": 1
+   }
+  ]
+ },
+ "monster": {
+  "size": 2112,
+  "size_confirmed": true,
+  "last_access_end": 2000,
+  "members": [
+   {
+    "offset": 0,
+    "type": "int",
+    "name": "flags",
+    "accesses": 45
+   },
+   {
+    "offset": 4,
+    "type": "dword",
+    "name": "field_4",
+    "accesses": 4
+   },
+   {
+    "offset": 8,
+    "type": "dword",
+    "name": "field_8",
+    "accesses": 2
+   },
+   {
+    "offset": 12,
+    "type": "dword",
+    "name": "field_12",
+    "accesses": 2
+   },
+   {
+    "offset": 16,
+    "type": "float",
+    "name": "field_16",
+    "accesses": 1
+   },
+   {
+    "offset": 20,
+    "type": "dword",
+    "name": "field_20",
+    "accesses": 3
+   },
+   {
+    "offset": 24,
+    "type": "dword",
+    "name": "field_24",
+    "accesses": 24
+   },
+   {
+    "offset": 28,
+    "type": "dword",
+    "name": "is_beam",
+    "accesses": 16
+   },
+   {
+    "offset": 32,
+    "type": "dword",
+    "name": "field_32",
+    "accesses": 2
+   },
+   {
+    "offset": 36,
+    "type": "dword",
+    "name": "field_36",
+    "accesses": 2
+   },
+   {
+    "offset": 40,
+    "type": "dword",
+    "name": "field_40",
+    "accesses": 2
+   },
+   {
+    "offset": 44,
+    "type": "dword",
+    "name": "field_44",
+    "accesses": 2
+   },
+   {
+    "offset": 48,
+    "type": "dword",
+    "name": "field_48",
+    "accesses": 2
+   },
+   {
+    "offset": 52,
+    "type": "dword",
+    "name": "field_52",
+    "accesses": 2
+   },
+   {
+    "offset": 56,
+    "type": "dword",
+    "name": "field_56",
+    "accesses": 4
+   },
+   {
+    "offset": 64,
+    "type": "dword",
+    "name": "field_64",
+    "accesses": 47
+   },
+   {
+    "offset": 68,
+    "type": "dword",
+    "name": "field_68",
+    "accesses": 52
+   },
+   {
+    "offset": 76,
+    "type": "dword",
+    "name": "target_id",
+    "accesses": 169
+   },
+   {
+    "offset": 80,
+    "type": "dword",
+    "name": "field_80",
+    "accesses": 2
+   },
+   {
+    "offset": 84,
+    "type": "dword",
+    "name": "field_84",
+    "accesses": 11
+   },
+   {
+    "offset": 88,
+    "type": "dword",
+    "name": "field_88",
+    "accesses": 33
+   },
+   {
+    "offset": 92,
+    "type": "dword",
+    "name": "field_92",
+    "accesses": 2
+   },
+   {
+    "offset": 96,
+    "type": "dword",
+    "name": "field_96",
+    "accesses": 11
+   },
+   {
+    "offset": 100,
+    "type": "float",
+    "name": "field_100",
+    "accesses": 5
+   },
+   {
+    "offset": 104,
+    "type": "float",
+    "name": "field_104",
+    "accesses": 21
+   },
+   {
+    "offset": 108,
+    "type": "float",
+    "name": "field_108",
+    "accesses": 19
+   },
+   {
+    "offset": 112,
+    "type": "float",
+    "name": "field_112",
+    "accesses": 3
+   },
+   {
+    "offset": 116,
+    "type": "dword",
+    "name": "field_116",
+    "accesses": 16
+   },
+   {
+    "offset": 120,
+    "type": "dword",
+    "name": "field_120",
+    "accesses": 2
+   },
+   {
+    "offset": 124,
+    "type": "float",
+    "name": "field_124",
+    "accesses": 8
+   },
+   {
+    "offset": 128,
+    "type": "float",
+    "name": "field_128",
+    "accesses": 8
+   },
+   {
+    "offset": 132,
+    "type": "dword",
+    "name": "field_132",
+    "accesses": 7
+   },
+   {
+    "offset": 136,
+    "type": "dword",
+    "name": "field_136",
+    "accesses": 3
+   },
+   {
+    "offset": 140,
+    "type": "dword",
+    "name": "field_140",
+    "accesses": 10
+   },
+   {
+    "offset": 144,
+    "type": "dword",
+    "name": "field_144",
+    "accesses": 5
+   },
+   {
+    "offset": 148,
+    "type": "dword",
+    "name": "field_148",
+    "accesses": 9
+   },
+   {
+    "offset": 152,
+    "type": "float",
+    "name": "field_152",
+    "accesses": 2
+   },
+   {
+    "offset": 156,
+    "type": "float",
+    "name": "field_156",
+    "accesses": 2
+   },
+   {
+    "offset": 160,
+    "type": "dword",
+    "name": "hp_bar_black",
+    "accesses": 9
+   },
+   {
+    "offset": 164,
+    "type": "float",
+    "name": "field_164",
+    "accesses": 2
+   },
+   {
+    "offset": 168,
+    "type": "float",
+    "name": "field_168",
+    "accesses": 2
+   },
+   {
+    "offset": 172,
+    "type": "dword",
+    "name": "field_172",
+    "accesses": 4
+   },
+   {
+    "offset": 176,
+    "type": "byte",
+    "name": "field_176",
+    "accesses": 32
+   },
+   {
+    "offset": 177,
+    "type": "byte",
+    "name": "field_177",
+    "accesses": 5
+   },
+   {
+    "offset": 184,
+    "type": "dword",
+    "name": "field_184",
+    "accesses": 86
+   },
+   {
+    "offset": 188,
+    "type": "dword",
+    "name": "field_188",
+    "accesses": 60
+   },
+   {
+    "offset": 192,
+    "type": "dword",
+    "name": "field_192",
+    "accesses": 31
+   },
+   {
+    "offset": 196,
+    "type": "dword",
+    "name": "field_196",
+    "accesses": 30
+   },
+   {
+    "offset": 200,
+    "type": "dword",
+    "name": "field_200",
+    "accesses": 34
+   },
+   {
+    "offset": 204,
+    "type": "dword",
+    "name": "field_204",
+    "accesses": 9
+   },
+   {
+    "offset": 208,
+    "type": "dword",
+    "name": "field_208",
+    "accesses": 6
+   },
+   {
+    "offset": 212,
+    "type": "dword",
+    "name": "field_212",
+    "accesses": 2
+   },
+   {
+    "offset": 216,
+    "type": "float",
+    "name": "field_216",
+    "accesses": 51
+   },
+   {
+    "offset": 220,
+    "type": "float",
+    "name": "field_220",
+    "accesses": 20
+   },
+   {
+    "offset": 224,
+    "type": "float",
+    "name": "field_224",
+    "accesses": 5
+   },
+   {
+    "offset": 228,
+    "type": "float",
+    "name": "field_228",
+    "accesses": 1
+   },
+   {
+    "offset": 248,
+    "type": "float",
+    "name": "field_248",
+    "accesses": 44
+   },
+   {
+    "offset": 252,
+    "type": "float",
+    "name": "field_252",
+    "accesses": 52
+   },
+   {
+    "offset": 256,
+    "type": "float",
+    "name": "field_256",
+    "accesses": 26
+   },
+   {
+    "offset": 260,
+    "type": "float",
+    "name": "field_260",
+    "accesses": 23
+   },
+   {
+    "offset": 264,
+    "type": "float",
+    "name": "field_264",
+    "accesses": 21
+   },
+   {
+    "offset": 268,
+    "type": "float",
+    "name": "field_268",
+    "accesses": 17
+   },
+   {
+    "offset": 272,
+    "type": "float",
+    "name": "field_272",
+    "accesses": 4
+   },
+   {
+    "offset": 276,
+    "type": "float",
+    "name": "field_276",
+    "accesses": 5
+   },
+   {
+    "offset": 280,
+    "type": "float",
+    "name": "field_280",
+    "accesses": 6
+   },
+   {
+    "offset": 284,
+    "type": "float",
+    "name": "field_284",
+    "accesses": 6
+   },
+   {
+    "offset": 288,
+    "type": "dword",
+    "name": "field_288",
+    "accesses": 4
+   },
+   {
+    "offset": 292,
+    "type": "dword",
+    "name": "field_292",
+    "accesses": 2
+   },
+   {
+    "offset": 296,
+    "type": "dword",
+    "name": "field_296",
+    "accesses": 1
+   },
+   {
+    "offset": 300,
+    "type": "dword",
+    "name": "field_300",
+    "accesses": 1
+   },
+   {
+    "offset": 304,
+    "type": "dword",
+    "name": "field_304",
+    "accesses": 1
+   },
+   {
+    "offset": 308,
+    "type": "dword",
+    "name": "field_308",
+    "accesses": 1
+   },
+   {
+    "offset": 312,
+    "type": "dword",
+    "name": "field_312",
+    "accesses": 54
+   },
+   {
+    "offset": 316,
+    "type": "dword",
+    "name": "field_316",
+    "accesses": 49
+   },
+   {
+    "offset": 320,
+    "type": "dword",
+    "name": "field_320",
+    "accesses": 11
+   },
+   {
+    "offset": 324,
+    "type": "dword",
+    "name": "field_324",
+    "accesses": 16
+   },
+   {
+    "offset": 328,
+    "type": "dword",
+    "name": "field_328",
+    "accesses": 6
+   },
+   {
+    "offset": 332,
+    "type": "dword",
+    "name": "field_332",
+    "accesses": 3
+   },
+   {
+    "offset": 344,
+    "type": "dword",
+    "name": "field_344",
+    "accesses": 3
+   },
+   {
+    "offset": 348,
+    "type": "dword",
+    "name": "field_348",
+    "accesses": 3
+   },
+   {
+    "offset": 352,
+    "type": "dword",
+    "name": "field_352",
+    "accesses": 3
+   },
+   {
+    "offset": 356,
+    "type": "dword",
+    "name": "field_356",
+    "accesses": 5
+   },
+   {
+    "offset": 360,
+    "type": "float",
+    "name": "field_360",
+    "accesses": 1
+   },
+   {
+    "offset": 364,
+    "type": "float",
+    "name": "field_364",
+    "accesses": 1
+   },
+   {
+    "offset": 368,
+    "type": "float",
+    "name": "field_368",
+    "accesses": 1
+   },
+   {
+    "offset": 372,
+    "type": "float",
+    "name": "field_372",
+    "accesses": 1
+   },
+   {
+    "offset": 376,
+    "type": "float",
+    "name": "field_376",
+    "accesses": 1
+   },
+   {
+    "offset": 380,
+    "type": "float",
+    "name": "field_380",
+    "accesses": 1
+   },
+   {
+    "offset": 384,
+    "type": "float",
+    "name": "field_384",
+    "accesses": 1
+   },
+   {
+    "offset": 388,
+    "type": "float",
+    "name": "field_388",
+    "accesses": 1
+   },
+   {
+    "offset": 392,
+    "type": "float",
+    "name": "field_392",
+    "accesses": 1
+   },
+   {
+    "offset": 396,
+    "type": "float",
+    "name": "field_396",
+    "accesses": 1
+   },
+   {
+    "offset": 400,
+    "type": "float",
+    "name": "field_400",
+    "accesses": 1
+   },
+   {
+    "offset": 404,
+    "type": "float",
+    "name": "field_404",
+    "accesses": 1
+   },
+   {
+    "offset": 408,
+    "type": "float",
+    "name": "field_408",
+    "accesses": 1
+   },
+   {
+    "offset": 412,
+    "type": "float",
+    "name": "field_412",
+    "accesses": 1
+   },
+   {
+    "offset": 416,
+    "type": "float",
+    "name": "field_416",
+    "accesses": 1
+   },
+   {
+    "offset": 420,
+    "type": "float",
+    "name": "field_420",
+    "accesses": 1
+   },
+   {
+    "offset": 1384,
+    "type": "dword",
+    "name": "field_1384",
+    "accesses": 2
+   },
+   {
+    "offset": 1392,
+    "type": "dword",
+    "name": "field_1392",
+    "accesses": 1
+   },
+   {
+    "offset": 1400,
+    "type": "dword",
+    "name": "field_1400",
+    "accesses": 1
+   },
+   {
+    "offset": 1416,
+    "type": "dword",
+    "name": "field_1416",
+    "accesses": 1
+   },
+   {
+    "offset": 1424,
+    "type": "dword",
+    "name": "field_1424",
+    "accesses": 1
+   },
+   {
+    "offset": 1432,
+    "type": "dword",
+    "name": "field_1432",
+    "accesses": 3
+   },
+   {
+    "offset": 1436,
+    "type": "dword",
+    "name": "field_1436",
+    "accesses": 1
+   },
+   {
+    "offset": 1440,
+    "type": "dword",
+    "name": "field_1440",
+    "accesses": 1
+   },
+   {
+    "offset": 1444,
+    "type": "dword",
+    "name": "field_1444",
+    "accesses": 2
+   },
+   {
+    "offset": 1448,
+    "type": "dword",
+    "name": "field_1448",
+    "accesses": 2
+   },
+   {
+    "offset": 1452,
+    "type": "dword",
+    "name": "field_1452",
+    "accesses": 2
+   },
+   {
+    "offset": 1456,
+    "type": "dword",
+    "name": "field_1456",
+    "accesses": 2
+   },
+   {
+    "offset": 1460,
+    "type": "dword",
+    "name": "field_1460",
+    "accesses": 3
+   },
+   {
+    "offset": 1480,
+    "type": "dword",
+    "name": "field_1480",
+    "accesses": 2
+   },
+   {
+    "offset": 1496,
+    "type": "dword",
+    "name": "field_1496",
+    "accesses": 5
+   },
+   {
+    "offset": 1508,
+    "type": "dword",
+    "name": "field_1508",
+    "accesses": 1
+   },
+   {
+    "offset": 1512,
+    "type": "dword",
+    "name": "field_1512",
+    "accesses": 1
+   },
+   {
+    "offset": 1520,
+    "type": "dword",
+    "name": "field_1520",
+    "accesses": 1
+   },
+   {
+    "offset": 1540,
+    "type": "dword",
+    "name": "field_1540",
+    "accesses": 4
+   },
+   {
+    "offset": 1552,
+    "type": "dword",
+    "name": "field_1552",
+    "accesses": 1
+   },
+   {
+    "offset": 1628,
+    "type": "dword",
+    "name": "field_1628",
+    "accesses": 5
+   },
+   {
+    "offset": 1636,
+    "type": "dword",
+    "name": "field_1636",
+    "accesses": 2
+   },
+   {
+    "offset": 1640,
+    "type": "dword",
+    "name": "field_1640",
+    "accesses": 2
+   },
+   {
+    "offset": 1644,
+    "type": "dword",
+    "name": "field_1644",
+    "accesses": 1
+   },
+   {
+    "offset": 1648,
+    "type": "dword",
+    "name": "field_1648",
+    "accesses": 1
+   },
+   {
+    "offset": 1732,
+    "type": "dword",
+    "name": "field_1732",
+    "accesses": 9
+   },
+   {
+    "offset": 1856,
+    "type": "dword",
+    "name": "field_1856",
+    "accesses": 3
+   },
+   {
+    "offset": 1860,
+    "type": "float",
+    "name": "field_1860",
+    "accesses": 2
+   },
+   {
+    "offset": 1864,
+    "type": "float",
+    "name": "field_1864",
+    "accesses": 2
+   },
+   {
+    "offset": 1868,
+    "type": "float",
+    "name": "field_1868",
+    "accesses": 3
+   },
+   {
+    "offset": 1872,
+    "type": "dword",
+    "name": "field_1872",
+    "accesses": 2
+   },
+   {
+    "offset": 1880,
+    "type": "dword",
+    "name": "field_1880",
+    "accesses": 2
+   },
+   {
+    "offset": 1884,
+    "type": "dword",
+    "name": "field_1884",
+    "accesses": 5
+   },
+   {
+    "offset": 1984,
+    "type": "dword",
+    "name": "field_1984",
+    "accesses": 4
+   },
+   {
+    "offset": 1988,
+    "type": "dword",
+    "name": "field_1988",
+    "accesses": 5
+   },
+   {
+    "offset": 1992,
+    "type": "dword",
+    "name": "field_1992",
+    "accesses": 5
+   },
+   {
+    "offset": 1996,
+    "type": "dword",
+    "name": "field_1996",
+    "accesses": 13
+   }
+  ],
+  "arrays": [
+   {
+    "base": 248,
+    "stride": 8,
+    "accesses": 6
+   },
+   {
+    "base": 252,
+    "stride": 8,
+    "accesses": 5
+   },
+   {
+    "base": 24,
+    "stride": 4,
+    "accesses": 5
+   },
+   {
+    "base": 360,
+    "stride": 8,
+    "accesses": 3
+   },
+   {
+    "base": 364,
+    "stride": 8,
+    "accesses": 3
+   },
+   {
+    "base": 312,
+    "stride": 4,
+    "accesses": 2
+   },
+   {
+    "base": 272,
+    "stride": 8,
+    "accesses": 1
+   },
+   {
+    "base": 276,
+    "stride": 8,
+    "accesses": 1
+   }
+  ]
+ },
+ "missile": {
+  "size": null,
+  "size_confirmed": false,
+  "last_access_end": 140,
+  "members": [
+   {
+    "offset": 4,
+    "type": "float",
+    "name": "field_4",
+    "accesses": 7
+   },
+   {
+    "offset": 8,
+    "type": "float",
+    "name": "field_8",
+    "accesses": 2
+   },
+   {
+    "offset": 12,
+    "type": "dword",
+    "name": "field_12",
+    "accesses": 5
+   },
+   {
+    "offset": 16,
+    "type": "float",
+    "name": "field_16",
+    "accesses": 1
+   },
+   {
+    "offset": 20,
+    "type": "byte",
+    "name": "field_20",
+    "accesses": 2
+   },
+   {
+    "offset": 24,
+    "type": "dword",
+    "name": "field_24",
+    "accesses": 3
+   },
+   {
+    "offset": 28,
+    "type": "byte",
+    "name": "field_28",
+    "accesses": 1
+   },
+   {
+    "offset": 32,
+    "type": "dword",
+    "name": "field_32",
+    "accesses": 3
+   },
+   {
+    "offset": 36,
+    "type": "dword",
+    "name": "field_36",
+    "accesses": 2
+   },
+   {
+    "offset": 40,
+    "type": "dword",
+    "name": "field_40",
+    "accesses": 2
+   },
+   {
+    "offset": 44,
+    "type": "dword",
+    "name": "field_44",
+    "accesses": 1
+   },
+   {
+    "offset": 48,
+    "type": "dword",
+    "name": "field_48",
+    "accesses": 1
+   },
+   {
+    "offset": 52,
+    "type": "dword",
+    "name": "field_52",
+    "accesses": 1
+   },
+   {
+    "offset": 56,
+    "type": "dword",
+    "name": "field_56",
+    "accesses": 1
+   },
+   {
+    "offset": 60,
+    "type": "dword",
+    "name": "field_60",
+    "accesses": 1
+   },
+   {
+    "offset": 64,
+    "type": "dword",
+    "name": "field_64",
+    "accesses": 1
+   },
+   {
+    "offset": 68,
+    "type": "dword",
+    "name": "field_68",
+    "accesses": 1
+   },
+   {
+    "offset": 72,
+    "type": "dword",
+    "name": "field_72",
+    "accesses": 1
+   },
+   {
+    "offset": 76,
+    "type": "byte",
+    "name": "field_76",
+    "accesses": 5
+   },
+   {
+    "offset": 88,
+    "type": "dword",
+    "name": "field_88",
+    "accesses": 1
+   },
+   {
+    "offset": 92,
+    "type": "dword",
+    "name": "field_92",
+    "accesses": 1
+   },
+   {
+    "offset": 96,
+    "type": "dword",
+    "name": "field_96",
+    "accesses": 1
+   },
+   {
+    "offset": 100,
+    "type": "dword",
+    "name": "field_100",
+    "accesses": 1
+   },
+   {
+    "offset": 104,
+    "type": "dword",
+    "name": "field_104",
+    "accesses": 1
+   },
+   {
+    "offset": 108,
+    "type": "dword",
+    "name": "field_108",
+    "accesses": 1
+   },
+   {
+    "offset": 112,
+    "type": "dword",
+    "name": "field_112",
+    "accesses": 1
+   },
+   {
+    "offset": 116,
+    "type": "dword",
+    "name": "field_116",
+    "accesses": 1
+   },
+   {
+    "offset": 120,
+    "type": "dword",
+    "name": "field_120",
+    "accesses": 1
+   },
+   {
+    "offset": 124,
+    "type": "dword",
+    "name": "field_124",
+    "accesses": 1
+   },
+   {
+    "offset": 128,
+    "type": "dword",
+    "name": "field_128",
+    "accesses": 1
+   },
+   {
+    "offset": 132,
+    "type": "dword",
+    "name": "field_132",
+    "accesses": 1
+   },
+   {
+    "offset": 136,
+    "type": "dword",
+    "name": "field_136",
+    "accesses": 1
+   }
+  ],
+  "arrays": [
+   {
+    "base": 44,
+    "stride": 4,
+    "accesses": 1
+   }
+  ]
+ },
+ "object": {
+  "size": 332,
+  "size_confirmed": true,
+  "last_access_end": 328,
+  "members": [
+   {
+    "offset": 0,
+    "type": "dword",
+    "name": "object_flags",
+    "accesses": 64
+   },
+   {
+    "offset": 8,
+    "type": "dword",
+    "name": "field_8",
+    "accesses": 4
+   },
+   {
+    "offset": 12,
+    "type": "dword",
+    "name": "field_12",
+    "accesses": 3
+   },
+   {
+    "offset": 16,
+    "type": "dword",
+    "name": "field_16",
+    "accesses": 2
+   },
+   {
+    "offset": 20,
+    "type": "dword",
+    "name": "field_20",
+    "accesses": 1
+   },
+   {
+    "offset": 24,
+    "type": "float",
+    "name": "field_24",
+    "accesses": 3
+   },
+   {
+    "offset": 32,
+    "type": "float",
+    "name": "field_32",
+    "accesses": 4
+   },
+   {
+    "offset": 36,
+    "type": "float",
+    "name": "field_36",
+    "accesses": 2
+   },
+   {
+    "offset": 40,
+    "type": "float",
+    "name": "field_40",
+    "accesses": 4
+   },
+   {
+    "offset": 44,
+    "type": "float",
+    "name": "field_44",
+    "accesses": 3
+   },
+   {
+    "offset": 48,
+    "type": "dword",
+    "name": "field_48",
+    "accesses": 4
+   },
+   {
+    "offset": 52,
+    "type": "dword",
+    "name": "field_52",
+    "accesses": 6
+   },
+   {
+    "offset": 68,
+    "type": "dword",
+    "name": "field_68",
+    "accesses": 5
+   },
+   {
+    "offset": 72,
+    "type": "dword",
+    "name": "field_72",
+    "accesses": 11
+   },
+   {
+    "offset": 84,
+    "type": "dword",
+    "name": "field_84",
+    "accesses": 4
+   },
+   {
+    "offset": 88,
+    "type": "dword",
+    "name": "field_88",
+    "accesses": 2
+   },
+   {
+    "offset": 204,
+    "type": "dword",
+    "name": "field_204",
+    "accesses": 5
+   },
+   {
+    "offset": 208,
+    "type": "dword",
+    "name": "field_208",
+    "accesses": 3
+   },
+   {
+    "offset": 324,
+    "type": "dword",
+    "name": "field_324",
+    "accesses": 1
+   }
+  ],
+  "arrays": []
+ },
+ "npc": {
+  "size": 200,
+  "size_confirmed": true,
+  "last_access_end": 200,
+  "members": [
+   {
+    "offset": 0,
+    "type": "dword",
+    "name": "field_0",
+    "accesses": 18
+   },
+   {
+    "offset": 4,
+    "type": "float",
+    "name": "field_4",
+    "accesses": 1
+   },
+   {
+    "offset": 8,
+    "type": "float",
+    "name": "field_8",
+    "accesses": 1
+   },
+   {
+    "offset": 12,
+    "type": "float",
+    "name": "field_12",
+    "accesses": 3
+   },
+   {
+    "offset": 16,
+    "type": "float",
+    "name": "field_16",
+    "accesses": 3
+   },
+   {
+    "offset": 20,
+    "type": "float",
+    "name": "field_20",
+    "accesses": 3
+   },
+   {
+    "offset": 24,
+    "type": "float",
+    "name": "field_24",
+    "accesses": 1
+   },
+   {
+    "offset": 40,
+    "type": "float",
+    "name": "field_40",
+    "accesses": 3
+   },
+   {
+    "offset": 44,
+    "type": "float",
+    "name": "field_44",
+    "accesses": 3
+   },
+   {
+    "offset": 52,
+    "type": "bool",
+    "name": "is_vendor",
+    "accesses": 3
+   },
+   {
+    "offset": 56,
+    "type": "dword",
+    "name": "field_56",
+    "accesses": 1
+   },
+   {
+    "offset": 124,
+    "type": "dword",
+    "name": "field_124",
+    "accesses": 13
+   },
+   {
+    "offset": 132,
+    "type": "dword",
+    "name": "field_132",
+    "accesses": 3
+   },
+   {
+    "offset": 136,
+    "type": "dword",
+    "name": "particle_id",
+    "accesses": 20
+   },
+   {
+    "offset": 144,
+    "type": "dword",
+    "name": "field_144",
+    "accesses": 16
+   },
+   {
+    "offset": 148,
+    "type": "dword",
+    "name": "field_148",
+    "accesses": 1
+   },
+   {
+    "offset": 152,
+    "type": "dword",
+    "name": "field_152",
+    "accesses": 1
+   },
+   {
+    "offset": 156,
+    "type": "dword",
+    "name": "field_156",
+    "accesses": 1
+   },
+   {
+    "offset": 160,
+    "type": "dword",
+    "name": "field_160",
+    "accesses": 1
+   },
+   {
+    "offset": 164,
+    "type": "dword",
+    "name": "field_164",
+    "accesses": 1
+   },
+   {
+    "offset": 168,
+    "type": "dword",
+    "name": "field_168",
+    "accesses": 1
+   },
+   {
+    "offset": 172,
+    "type": "dword",
+    "name": "field_172",
+    "accesses": 1
+   },
+   {
+    "offset": 176,
+    "type": "dword",
+    "name": "field_176",
+    "accesses": 1
+   },
+   {
+    "offset": 180,
+    "type": "dword",
+    "name": "field_180",
+    "accesses": 1
+   },
+   {
+    "offset": 184,
+    "type": "dword",
+    "name": "field_184",
+    "accesses": 1
+   },
+   {
+    "offset": 188,
+    "type": "dword",
+    "name": "field_188",
+    "accesses": 1
+   },
+   {
+    "offset": 192,
+    "type": "dword",
+    "name": "field_192",
+    "accesses": 1
+   },
+   {
+    "offset": 196,
+    "type": "dword",
+    "name": "field_196",
+    "accesses": 1
+   }
+  ],
+  "arrays": []
+ },
+ "ambient": {
+  "size": null,
+  "size_confirmed": false,
+  "last_access_end": 76,
+  "members": [
+   {
+    "offset": 4,
+    "type": "float",
+    "name": "field_4",
+    "accesses": 3
+   },
+   {
+    "offset": 8,
+    "type": "float",
+    "name": "field_8",
+    "accesses": 3
+   },
+   {
+    "offset": 12,
+    "type": "dword",
+    "name": "field_12",
+    "accesses": 1
+   },
+   {
+    "offset": 16,
+    "type": "dword",
+    "name": "field_16",
+    "accesses": 1
+   },
+   {
+    "offset": 20,
+    "type": "dword",
+    "name": "field_20",
+    "accesses": 1
+   },
+   {
+    "offset": 24,
+    "type": "dword",
+    "name": "field_24",
+    "accesses": 1
+   },
+   {
+    "offset": 28,
+    "type": "dword",
+    "name": "field_28",
+    "accesses": 1
+   },
+   {
+    "offset": 32,
+    "type": "dword",
+    "name": "field_32",
+    "accesses": 1
+   },
+   {
+    "offset": 36,
+    "type": "dword",
+    "name": "field_36",
+    "accesses": 1
+   },
+   {
+    "offset": 40,
+    "type": "dword",
+    "name": "field_40",
+    "accesses": 1
+   },
+   {
+    "offset": 44,
+    "type": "dword",
+    "name": "field_44",
+    "accesses": 1
+   },
+   {
+    "offset": 48,
+    "type": "dword",
+    "name": "field_48",
+    "accesses": 1
+   },
+   {
+    "offset": 52,
+    "type": "dword",
+    "name": "field_52",
+    "accesses": 1
+   },
+   {
+    "offset": 56,
+    "type": "dword",
+    "name": "field_56",
+    "accesses": 1
+   },
+   {
+    "offset": 60,
+    "type": "dword",
+    "name": "field_60",
+    "accesses": 1
+   },
+   {
+    "offset": 64,
+    "type": "dword",
+    "name": "field_64",
+    "accesses": 2
+   },
+   {
+    "offset": 68,
+    "type": "dword",
+    "name": "field_68",
+    "accesses": 1
+   },
+   {
+    "offset": 72,
+    "type": "dword",
+    "name": "field_72",
+    "accesses": 2
+   }
+  ],
+  "arrays": []
+ },
+ "item": {
+  "size": 364,
+  "size_confirmed": true,
+  "last_access_end": 360,
+  "members": [
+   {
+    "offset": 0,
+    "type": "byte",
+    "name": "field_0",
+    "accesses": 7
+   },
+   {
+    "offset": 1,
+    "type": "bool",
+    "name": "in_world",
+    "accesses": 21
+   },
+   {
+    "offset": 2,
+    "type": "byte",
+    "name": "field_2",
+    "accesses": 2
+   },
+   {
+    "offset": 4,
+    "type": "dword",
+    "name": "field_4",
+    "accesses": 3
+   },
+   {
+    "offset": 8,
+    "type": "int",
+    "name": "field_8",
+    "accesses": 4
+   },
+   {
+    "offset": 12,
+    "type": "dword",
+    "name": "field_12",
+    "accesses": 21
+   },
+   {
+    "offset": 16,
+    "type": "dword",
+    "name": "field_16",
+    "accesses": 3
+   },
+   {
+    "offset": 20,
+    "type": "dword",
+    "name": "field_20",
+    "accesses": 78
+   },
+   {
+    "offset": 24,
+    "type": "dword",
+    "name": "field_24",
+    "accesses": 58
+   },
+   {
+    "offset": 28,
+    "type": "dword",
+    "name": "field_28",
+    "accesses": 24
+   },
+   {
+    "offset": 32,
+    "type": "dword",
+    "name": "field_32",
+    "accesses": 13
+   },
+   {
+    "offset": 36,
+    "type": "dword",
+    "name": "field_36",
+    "accesses": 33
+   },
+   {
+    "offset": 40,
+    "type": "dword",
+    "name": "field_40",
+    "accesses": 4
+   },
+   {
+    "offset": 44,
+    "type": "dword",
+    "name": "field_44",
+    "accesses": 15
+   },
+   {
+    "offset": 48,
+    "type": "dword",
+    "name": "field_48",
+    "accesses": 10
+   },
+   {
+    "offset": 52,
+    "type": "dword",
+    "name": "field_52",
+    "accesses": 4
+   },
+   {
+    "offset": 56,
+    "type": "dword",
+    "name": "field_56",
+    "accesses": 2
+   },
+   {
+    "offset": 60,
+    "type": "dword",
+    "name": "field_60",
+    "accesses": 14
+   },
+   {
+    "offset": 64,
+    "type": "dword",
+    "name": "field_64",
+    "accesses": 1
+   },
+   {
+    "offset": 68,
+    "type": "dword",
+    "name": "field_68",
+    "accesses": 1
+   },
+   {
+    "offset": 72,
+    "type": "int",
+    "name": "slot_shape",
+    "accesses": 8
+   },
+   {
+    "offset": 76,
+    "type": "dword",
+    "name": "field_76",
+    "accesses": 3
+   },
+   {
+    "offset": 80,
+    "type": "dword",
+    "name": "field_80",
+    "accesses": 24
+   },
+   {
+    "offset": 84,
+    "type": "dword",
+    "name": "field_84",
+    "accesses": 29
+   },
+   {
+    "offset": 88,
+    "type": "dword",
+    "name": "field_88",
+    "accesses": 1
+   },
+   {
+    "offset": 92,
+    "type": "dword",
+    "name": "field_92",
+    "accesses": 26
+   },
+   {
+    "offset": 96,
+    "type": "byte",
+    "name": "field_96",
+    "accesses": 15
+   },
+   {
+    "offset": 100,
+    "type": "dword",
+    "name": "field_100",
+    "accesses": 6
+   },
+   {
+    "offset": 104,
+    "type": "dword",
+    "name": "field_104",
+    "accesses": 9
+   },
+   {
+    "offset": 108,
+    "type": "byte",
+    "name": "field_108",
+    "accesses": 26
+   },
+   {
+    "offset": 112,
+    "type": "dword",
+    "name": "field_112",
+    "accesses": 5
+   },
+   {
+    "offset": 116,
+    "type": "byte",
+    "name": "field_116",
+    "accesses": 1
+   },
+   {
+    "offset": 124,
+    "type": "byte",
+    "name": "field_124",
+    "accesses": 1
+   },
+   {
+    "offset": 132,
+    "type": "dword",
+    "name": "field_132",
+    "accesses": 10
+   },
+   {
+    "offset": 136,
+    "type": "int",
+    "name": "num_crystal_slots",
+    "accesses": 13
+   },
+   {
+    "offset": 140,
+    "type": "dword",
+    "name": "field_140",
+    "accesses": 16
+   },
+   {
+    "offset": 224,
+    "type": "dword",
+    "name": "field_224",
+    "accesses": 1
+   },
+   {
+    "offset": 232,
+    "type": "dword",
+    "name": "field_232",
+    "accesses": 1
+   },
+   {
+    "offset": 236,
+    "type": "dword",
+    "name": "field_236",
+    "accesses": 2
+   },
+   {
+    "offset": 240,
+    "type": "dword",
+    "name": "field_240",
+    "accesses": 9
+   },
+   {
+    "offset": 244,
+    "type": "dword",
+    "name": "field_244",
+    "accesses": 1
+   },
+   {
+    "offset": 248,
+    "type": "dword",
+    "name": "field_248",
+    "accesses": 11
+   },
+   {
+    "offset": 252,
+    "type": "dword",
+    "name": "field_252",
+    "accesses": 2
+   },
+   {
+    "offset": 256,
+    "type": "dword",
+    "name": "field_256",
+    "accesses": 2
+   },
+   {
+    "offset": 260,
+    "type": "dword",
+    "name": "field_260",
+    "accesses": 2
+   },
+   {
+    "offset": 264,
+    "type": "dword",
+    "name": "field_264",
+    "accesses": 4
+   },
+   {
+    "offset": 268,
+    "type": "dword",
+    "name": "field_268",
+    "accesses": 2
+   },
+   {
+    "offset": 272,
+    "type": "dword",
+    "name": "field_272",
+    "accesses": 2
+   },
+   {
+    "offset": 276,
+    "type": "dword",
+    "name": "field_276",
+    "accesses": 2
+   },
+   {
+    "offset": 280,
+    "type": "dword",
+    "name": "crystal_ancient_affix_id",
+    "accesses": 5
+   },
+   {
+    "offset": 284,
+    "type": "dword",
+    "name": "field_284",
+    "accesses": 1
+   },
+   {
+    "offset": 288,
+    "type": "dword",
+    "name": "field_288",
+    "accesses": 7
+   },
+   {
+    "offset": 356,
+    "type": "dword",
+    "name": "field_356",
+    "accesses": 1
+   }
+  ],
+  "arrays": [
+   {
+    "base": 264,
+    "stride": 4,
+    "accesses": 1
+   },
+   {
+    "base": 248,
+    "stride": 4,
+    "accesses": 1
+   }
+  ]
+ }
+}
