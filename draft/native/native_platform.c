@@ -17,6 +17,7 @@ int vsnprintf( char *, size_t, const char *, va_list );
 void *calloc( size_t, size_t );
 int strcasecmp( const char *, const char * );
 long long atoll( const char * );
+char *getenv( const char * );
 long time( long * );
 double sin( double ); double cos( double ); double sqrt( double );
 
@@ -286,11 +287,12 @@ int __cdecl __wrap_SDL_CreateWindow( _DWORD title, _DWORD x, _DWORD y, _DWORD w,
 // it is not needed: the renderer clears the window. The three calls do nothing here.
 // ... and stays there: the game centres its window when it applies the display settings.
 void __real_SDL_SetWindowPosition( _DWORD window, _DWORD x, _DWORD y );
-void __cdecl __wrap_SDL_SetWindowPosition( _DWORD window, _DWORD x, _DWORD y )
+int __cdecl __wrap_SDL_SetWindowPosition( _DWORD window, _DWORD x, _DWORD y )      // (int: as the game code declares SDL_SetWindowPosition)
 {
     if ( getenv( "ILB_WINDOW_X" ) ) x = atoi( getenv( "ILB_WINDOW_X" ) );
     if ( getenv( "ILB_WINDOW_Y" ) ) y = atoi( getenv( "ILB_WINDOW_Y" ) );
     __real_SDL_SetWindowPosition( window, x, y );
+    return 0;
 }
 
 void ILB_native_window_position( int *x, int *y )       // for a copy about to restart itself (port/net/net_session.c)

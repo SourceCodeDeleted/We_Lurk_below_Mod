@@ -12,6 +12,8 @@ void ILB_image_init( void );
 void ILB_native_trace_init( void );
 void gge_gl_load_nothing( void );
 void ILB_native_assert_summary( void );
+int ILB_input_net_in_place( void );
+int ILB_input_net_session( void );
 
 void abort( void );
 

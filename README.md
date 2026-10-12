@@ -43,13 +43,19 @@ Not in the repository (see `.gitignore`): `game/` (your copy of the game) and `b
 
 - Your own copy of the game, from [GOG](https://www.gog.com/game/it_lurks_below) or
   [Steam](https://store.steampowered.com/app/697550/It_Lurks_Below/). Put or link the game's folder as
-  `game/` at the top of this repository, or set `ILB_GAME=<folder>`; the build itself only needs
-  `ILB.gbp` from it (and `SDL2.dll` for the Windows build). Development and testing use the GOG build.
+  `game/` at the top of this repository, or set `ILB_GAME=<folder>`. The program needs `ILB.gbp` from it to
+  run, and the Windows build takes `SDL2.dll` from it. The game code in `draft/build/src` and its data image
+  `draft/build/ILB_image.bin` were made from the GOG build of 2022-01-09 (where the image is missing,
+  `tools/make_image.py` makes it again from that build's `ILB.exe`; this needs Python 3). Development and
+  testing use the GOG build.
 - Linux (developed on Ubuntu 22.04): clang 14 or newer, CMake 3.20+, Ninja, Python 3, `gcc-multilib`,
   and the 32-bit SDL2 and OpenGL runtime libraries (`libsdl2-2.0-0:i386`, `libgl1:i386`).
-- For the Windows build, additionally: `lld-link`, `llvm-dlltool`, `llvm-objcopy`, and the Windows SDK and
-  C runtime libraries fetched with [xwin](https://github.com/Jake-Shadle/xwin) into `~/xwin`
-  (`xwin --arch x86 splat --output ~/xwin`).
+- For the Windows build on Windows: LLVM (clang, lld-link), CMake and Ninja
+  (`winget install LLVM.LLVM Kitware.CMake Ninja-build.Ninja`), and the C++ build tools of Visual Studio with
+  a Windows SDK, which supply the libraries.
+- For the Windows build on Linux, additionally to the Linux tools: `lld-link`, `llvm-dlltool`, `llvm-readobj`,
+  `llvm-objcopy`, and the Windows SDK and C runtime libraries fetched with
+  [xwin](https://github.com/Jake-Shadle/xwin) into `~/xwin` (`xwin --arch x86 splat --output ~/xwin`).
 - For the lobby server: Rust 1.70 or newer.
 
 ## Building
@@ -69,17 +75,39 @@ The game runs in `draft/build/native/run/`; saves are in `native_appdata/` there
 
 ### Windows
 
-Cross-built on Linux; it is the same code as the Linux play build.
+The same code as the Linux play build, built by the same `CMakeLists.txt`.
 
-    tools/build_windows.sh            # -> build/windows/ILB_windows.exe
+On Windows:
 
-Copy `ILB_windows.exe` into a folder with the game's `ILB.gbp` and `SDL2.dll` and start it there. Saves go
-to `native_appdata\` in that folder and the log to `ILB_windows.log`. `tools/run_windows.sh` starts it on
-Linux under Proton's Wine for testing, and `tools/windows_where.py` names the functions behind crash
-addresses. Building on Windows itself is not set up.
+    tools\build_windows.ps1                   # optimised -> build\windows\ILB_windows.exe
+    tools\build_windows.ps1 -Variant native   # not optimised, for finding a crash -> build\windows-native\
+
+`ILB.gbp` and `SDL2.dll` are copied next to the program, which runs where it is built.
+
+On Linux, either of:
+
+    tools/build_windows.sh            # the older script -> build/windows/ILB_windows.exe
+    cmake -G Ninja -B build/windows -DILB_VARIANT=play --toolchain cmake/i686-windows-xwin.cmake && cmake --build build/windows
+
+(the CMake route from Linux is new and has not been run yet; the script is the tested one.) With the script,
+copy `ILB_windows.exe` into a folder with the game's `ILB.gbp` and `SDL2.dll` and start it there.
+`tools/run_windows.sh` starts it on Linux under Proton's Wine for testing.
+
+Saves go to `native_appdata\` in the folder the program is started in and the log to `ILB_windows.log` there
+(in the temporary folder if that one cannot be written to; `ILB_LOG_CONSOLE=1` sends it to the console
+instead). A crash is written to the end of the log with the addresses involved, and
+`tools/windows_where.py <address> ...` names the functions behind them from the link map. `ILB_NO_CRASH_BOX=1`
+leaves out the message box that otherwise says so.
 
 The older `tools/draft_symbols.sh` + `tools/link_draft.sh` pair links the unported Direct3D 11 / FMOD
 draft as a Windows program; it predates the port and is kept for comparison with the original.
+
+### Automatic builds
+
+`.github/workflows/build.yml` builds the Linux and the Windows program and the lobby server on GitHub for
+every push and pull request; the results are the artifacts of the run (Actions tab). They hold no game
+data: put `ILB.gbp` of your copy of the game next to the program. The Windows one comes with an SDL2.dll
+released by libsdl.org; the Linux one needs the 32-bit SDL2 and OpenGL libraries named above.
 
 ### Options
 
@@ -117,7 +145,9 @@ encrypted. Running a public server is described in `server/README.md`.
 
 ## Working on the decompilation
 
-Not needed to build or play. The game code in `draft/build/src/` is generated: IDA Pro (with the Hex-Rays
+Not needed to build or play: the generated game code is in the repository (`draft/build/src`, the three
+headers in `draft/build` and `draft/build/native/generated_stubs.c`), and is committed again after it has
+been regenerated. The game code in `draft/build/src/` is generated: IDA Pro (with the Hex-Rays
 x86 decompiler) exports the program using the names and types in `db/`, and `tools/draft_fix.py` followed by
 `tools/draft_data.py` turns that export into compilable C. The order of the IDA scripts is given at the top
 of `tools/run_offline.sh`. Always run `draft_data.py` after `draft_fix.py`: the first one empties

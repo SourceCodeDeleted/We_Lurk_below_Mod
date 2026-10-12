@@ -1,0 +1,21 @@
+// real_thunks.c - __real_X of the wrapped SDL functions for the Windows build (hand-written; see wrap.h):
+// each is a jump to the function in SDL2.dll through the program's import table. The same list as in wrap.h.
+#define REAL( name ) __asm__( ".globl ___real_" #name "\n___real_" #name ":\n jmp *__imp__" #name "\n" );
+REAL( SDL_RWFromFile )
+REAL( SDL_PollEvent )
+REAL( SDL_CreateWindow )
+REAL( SDL_GetWindowSurface )
+REAL( SDL_FillRect )
+REAL( SDL_UpdateWindowSurface )
+REAL( SDL_GetMouseState )
+REAL( SDL_GetKeyboardState )
+REAL( SDL_SetWindowPosition )
+REAL( SDL_NumJoysticks )
+REAL( SDL_IsGameController )
+REAL( SDL_GameControllerOpen )
+REAL( SDL_GameControllerGetJoystick )
+REAL( SDL_JoystickInstanceID )
+REAL( SDL_GameControllerGetVendor )
+REAL( SDL_GameControllerName )
+REAL( SDL_GameControllerGetAxis )
+REAL( SDL_GameControllerClose )

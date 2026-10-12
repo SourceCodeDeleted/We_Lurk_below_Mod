@@ -17,6 +17,9 @@ static trace_sigaction previous[ 32 ];
 NO_TRACE void __cyg_profile_func_enter( void *function, void *call_site ) { ring[ ring_at++ % RING ] = function; }
 NO_TRACE void __cyg_profile_func_exit( void *function, void *call_site ) { }
 
+// The ring for a crash report made elsewhere (port/windows/windows_shim.c): the i-th most recent entry, 0 at the end.
+NO_TRACE void *ILB_native_trace_entry( unsigned int i ) { return i < RING && i < ring_at ? ring[ ( ring_at - 1 - i ) % RING ] : 0; }
+
 NO_TRACE static void put( const char *text )
 {
     unsigned long n = 0;

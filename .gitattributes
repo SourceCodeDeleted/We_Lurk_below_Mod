@@ -1,0 +1,5 @@
+# shell scripts keep Unix line ends on every machine (a checkout on Windows would otherwise break them)
+*.sh text eol=lf
+# never converted
+*.bin binary
+*.raw binary

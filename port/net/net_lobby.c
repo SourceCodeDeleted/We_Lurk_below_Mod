@@ -74,7 +74,13 @@ static void copy_reason( const char *answer, char *error, int error_size )
 const char *lobby_build_id( void )
 {
     static char id[ 65 ];
+#ifdef _WIN32
+    char program[ 1024 ];
+    DWORD length = GetModuleFileNameA( 0, program, sizeof program );
+    if ( id[ 0 ] == 0 && ( length == 0 || length >= sizeof program || !sha256_file_hex( program, id ) ) )
+#else
     if ( id[ 0 ] == 0 && !sha256_file_hex( "/proc/self/exe", id ) )
+#endif
         strcpy( id, "0000000000000000" );
     id[ 16 ] = 0;
     return id;

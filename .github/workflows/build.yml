@@ -1,0 +1,98 @@
+# Builds the game for Linux and for Windows, and the lobby server for both, on every push and pull request.
+# The results are kept as artifacts of the run ("Actions" tab -> the run -> Artifacts). None of them holds
+# game data: ILB.gbp of your own copy of the game goes next to the program before it is started.
+name: build
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # the 32-bit SDL2 the Windows program is linked against and shipped with (a release from libsdl.org)
+  SDL2_VERSION: 2.30.9
+  SDL2_SHA256: c5c0d309d24fe995163b540a64320222336150e60103d7f456c007d5aa911545
+
+jobs:
+  linux:
+    runs-on: ubuntu-22.04       # what the game is developed on: clang 14 and the 32-bit libraries of this release
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tools and 32-bit libraries
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt-get update
+          sudo apt-get install -y clang-14 ninja-build gcc-multilib libsdl2-2.0-0:i386 libgl1:i386
+      - name: Build the game
+        run: |
+          cmake -G Ninja -B build/play -DILB_VARIANT=play -DCMAKE_C_COMPILER=clang-14
+          cmake --build build/play
+      - name: Build and test the lobby server
+        working-directory: server
+        run: |
+          cargo test --release
+          cargo build --release
+      - name: Collect
+        run: |
+          mkdir -p out
+          cp build/play/ILB_play README.md out/
+          cp server/target/release/ilb-lobby out/
+          ls -la out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ItLurksBelow-linux-x86
+          path: out/
+          if-no-files-found: error
+
+  windows:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tools
+        shell: pwsh
+        run: |
+          if (-not (Get-Command ninja -ErrorAction SilentlyContinue)) { choco install ninja -y --no-progress }
+          clang --version
+          cmake --version
+      - name: SDL2
+        shell: pwsh
+        run: |
+          $zip = "SDL2-$env:SDL2_VERSION-win32-x86.zip"
+          Invoke-WebRequest "https://github.com/libsdl-org/SDL/releases/download/release-$env:SDL2_VERSION/$zip" -OutFile $zip
+          if ((Get-FileHash $zip -Algorithm SHA256).Hash -ne $env:SDL2_SHA256) { throw "$zip is not the file expected" }
+          Expand-Archive $zip -DestinationPath sdl2
+      - name: Build the game
+        shell: pwsh
+        run: |
+          cmake -G Ninja -B build/windows -DILB_VARIANT=play "-DILB_SDL2_DLL=$PWD/sdl2/SDL2.dll"
+          cmake --build build/windows
+      - name: Build and test the lobby server
+        working-directory: server
+        shell: pwsh
+        run: |
+          cargo test --release
+          cargo build --release
+      - name: Collect
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory out, symbols | Out-Null
+          Copy-Item build/windows/ILB_windows.exe, build/windows/SDL2.dll, sdl2/README-SDL.txt, README.md out/
+          Copy-Item server/target/release/ilb-lobby.exe out/
+          # for reading a crash report (tools/windows_where.py) and for a debugger
+          Copy-Item build/windows/ILB_windows.map, build/windows/ILB_windows.pdb symbols/
+          Get-ChildItem out, symbols
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ItLurksBelow-windows-x86
+          path: out/
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ItLurksBelow-windows-x86-symbols
+          path: symbols/
+          if-no-files-found: error

@@ -41,3 +41,6 @@
 /server/target/
 __pycache__/
 *.log
+
+# the game's data file: never in the repository, wherever a copy of it lies
+*.gbp
