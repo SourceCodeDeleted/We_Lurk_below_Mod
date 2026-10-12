@@ -13,7 +13,18 @@
 /draft/ILB_raw*.c
 /draft/ILB_try.c
 /draft/*.err
-/draft/build/
+# draft/build: only the generated game code that the build compiles is kept; everything else there is
+# build output, run folders, saves, recordings and Wine prefixes
+/draft/build/*
+!/draft/build/src/
+/draft/build/src/*.uninit
+!/draft/build/ILB_defs.h
+!/draft/build/ILB_draft_decls.h
+!/draft/build/ILB_draft_types.h
+!/draft/build/ILB_image.bin
+!/draft/build/native/
+/draft/build/native/*
+!/draft/build/native/generated_stubs.c
 
 # build output, and settings a run from this folder leaves behind
 /native_appdata/
