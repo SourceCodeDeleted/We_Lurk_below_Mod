@@ -25,6 +25,13 @@
 !/draft/build/native/
 /draft/build/native/*
 !/draft/build/native/generated_stubs.c
+# ... and the plain (non-holiday) vendor sheet, taken from a 2020 release that can no longer be downloaded;
+# the holiday sheets are rebuilt from current releases by tools/make_season_npcs.py
+!/draft/build/native/run/
+/draft/build/native/run/*
+!/draft/build/native/run/mods/
+/draft/build/native/run/mods/*
+!/draft/build/native/run/mods/npcs_plain.raw
 
 # build output, and settings a run from this folder leaves behind
 /native_appdata/
