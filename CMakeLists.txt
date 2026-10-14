@@ -44,6 +44,9 @@ if(WIN32)
     if(ILB_VARIANT STREQUAL "headless")
         message(FATAL_ERROR "The Windows program is built as -DILB_VARIANT=play or -DILB_VARIANT=native; headless is a Linux build")
     endif()
+    # the C runtime every Windows machine has (ucrtbase.dll, vcruntime140.dll), never the debug one that only
+    # comes with Visual Studio, whatever the build type
+    set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreadedDLL)
     # no libraries but the ones named below: the game has its own stand-ins for much of the Windows API
     set(CMAKE_C_STANDARD_LIBRARIES "-lkernel32 -luser32 -lws2_32 -loldnames")
     set(ILB_M32 "")

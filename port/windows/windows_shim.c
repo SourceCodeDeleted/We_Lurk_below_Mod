@@ -82,6 +82,56 @@ static LONG WINAPI on_crash( EXCEPTION_POINTERS *info )
     return EXCEPTION_EXECUTE_HANDLER;
 }
 
+// Hang report: a watcher thread looks at the main thread once a second. A game that is running normally
+// spends part of every frame outside the program (in the graphics driver, in SDL, waiting for the next
+// frame); one that is caught in a loop of its own stays inside. After 15 seconds of that, where it is goes to
+// the log, in the same form as a crash report, and again each time it has left the program and got stuck anew.
+static HANDLE main_thread;
+static const unsigned int *main_stack_top;
+
+static void report_stuck( unsigned int base, unsigned int shift )
+{
+    CONTEXT c;
+    c.ContextFlags = CONTEXT_CONTROL | CONTEXT_INTEGER;
+    if ( SuspendThread( main_thread ) == (DWORD)-1 ) return;
+    if ( GetThreadContext( main_thread, &c ) )
+    {
+        int shown = 0;
+        fprintf( stderr, "native: STUCK for 15 seconds in the program's own code, at %08lx; eax %08lx ebx %08lx ecx %08lx edx %08lx esi %08lx edi %08lx ebp %08lx esp %08lx\n",
+                 c.Eip + shift, c.Eax, c.Ebx, c.Ecx, c.Edx, c.Esi, c.Edi, c.Ebp, c.Esp );
+        fprintf( stderr, "native:   stack:" );
+        for ( const unsigned int *stack = (const unsigned int *)c.Esp; stack + 1 <= main_stack_top && shown < 48; stack++ )
+            if ( in_program_code( *stack, base ) ) { fprintf( stderr, " %08x", *stack + shift ); shown++; }
+        fprintf( stderr, "\n" );
+        if ( ILB_native_trace_entry( 0 ) )
+        {
+            fprintf( stderr, "native:   entered, most recent first:" );
+            for ( unsigned int i = 0; i < 64 && ILB_native_trace_entry( i ); i++ )
+                fprintf( stderr, " %08x", (unsigned int)ILB_native_trace_entry( i ) + shift );
+            fprintf( stderr, "\n" );
+        }
+    }
+    ResumeThread( main_thread );
+}
+
+static DWORD WINAPI watch_main_thread( void *unused )
+{
+    unsigned int base = (unsigned int)GetModuleHandleA( 0 ), shift = LINKED_BASE - base, inside = 0;
+    (void)unused;
+    for ( ;; )
+    {
+        CONTEXT c;
+        Sleep( 1000 );
+        c.ContextFlags = CONTEXT_CONTROL;
+        if ( SuspendThread( main_thread ) == (DWORD)-1 ) return 0;
+        int ok = GetThreadContext( main_thread, &c );
+        ResumeThread( main_thread );
+        inside = ok && in_program_code( c.Eip, base ) ? inside + 1 : 0;
+        if ( inside == 15 )
+            report_stuck( base, shift );
+    }
+}
+
 static void on_abort( int signal_number )
 {
     (void)signal_number;
@@ -123,8 +173,13 @@ __attribute__(( constructor )) static void shim_start( void )
     signal( SIGABRT, on_abort );
     _set_abort_behavior( 0, _WRITE_ABORT_MSG | _CALL_REPORTFAULT );
     _set_invalid_parameter_handler( on_bad_argument );
+    main_stack_top = (const unsigned int *)( (NT_TIB *)NtCurrentTeb() )->StackBase;
+    if ( DuplicateHandle( GetCurrentProcess(), GetCurrentThread(), GetCurrentProcess(), &main_thread, 0, FALSE, DUPLICATE_SAME_ACCESS ) )
+        CreateThread( 0, 0, watch_main_thread, 0, 0, 0 );   // (its handle stays open: the platform layer has a CloseHandle of its own, for files)
     if ( getenv( "ILB_TEST_CRASH" ) )       // to see the crash report work
         *(volatile int *)4 = 0;
+    if ( getenv( "ILB_TEST_HANG" ) )        // to see the hang report work
+        for ( volatile int spin = 1; spin; ) ;
 }
 
 // (the Windows headers have their own inline _snprintf and _vsnprintf, so these two get their link names by hand)
