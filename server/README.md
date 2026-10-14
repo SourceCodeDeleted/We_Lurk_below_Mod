@@ -35,7 +35,7 @@ prints one line per event (who hosted, who joined, how many bytes a game relayed
 
 - Passwords are never sent: the host registers `sha256(salt + password)`, a joiner answers a fresh random
   challenge with `sha256(challenge + that)`. The server stores only the hashed form, in memory.
-- Limits: 200 games, 8 connections per address, 512-byte lines, 32-character names without control
+- Limits: 200 games, 8 connections per address, 1024-byte lines, 32-character names without control
   characters, 90 seconds of silence in the lobby, 120 seconds of silence in a game.
 - Only copies of the same game build are shown to and matched with each other.
 - The traffic is **not encrypted**. Someone who can read the network between a player and the server can

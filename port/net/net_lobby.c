@@ -19,10 +19,11 @@ int net_link_receive_all( void *data, int size, int seconds );
 void sha256_hex( const void *first, size_t first_size, const void *second, size_t second_size, char hex[ 65 ] );
 int sha256_file_hex( const char *path, char hex[ 65 ] );
 
-typedef struct { int id, locked, age; char name[ 100 ], host[ 100 ], salt[ 20 ]; } lobby_game;
+#include "net_lobby.h"
 
 static char nonce[ 40 ];
-static char pending[ 1024 ];        // what has arrived of the next line (only lobby_wait leaves any)
+static char pending[ 2048 ];        // what has arrived of the next line (only lobby_wait leaves any)
+static char character[ 481 ];       // the host's character, sent with HOST (lobby_set_character)
 static int pending_size;
 static time_t last_ping;
 
@@ -118,10 +119,18 @@ void lobby_disconnect( void )
     net_link_adopt( -1 );
 }
 
+// The host's character as the lobby list shows it to others: lower-case hex, at most 480 characters (the
+// server's limit). Kept until changed; 0 or "" sends none.
+void lobby_set_character( const char *hex )
+{
+    snprintf( character, sizeof character, "%s", hex ? hex : "" );
+}
+
 // Offer a game. An empty password means anyone may join. Returns 1, or 0 with a reason.
 int lobby_host( const char *name, const char *password, char *error, int error_size )
 {
-    char line[ 600 ], salt[ 65 ] = "-", verifier[ 65 ] = "-";
+    char line[ 1200 ], salt[ 65 ] = "-", verifier[ 65 ] = "-";
+    int with_character = character[ 0 ] != 0;
     if ( password && password[ 0 ] )
     {
         // the salt only has to differ from game to game; the time and this copy's challenge do that
@@ -130,20 +139,33 @@ int lobby_host( const char *name, const char *password, char *error, int error_s
         salt[ 16 ] = 0;
         sha256_hex( salt, 16, password, strlen( password ), verifier );
     }
-    snprintf( line, sizeof line, "HOST\t%.32s\t%s\t%s", name, salt, verifier );
-    if ( !say( line ) || hear( line, sizeof line, 1 ) != 1 || strncmp( line, "HOSTING\t", 8 ) != 0 )
+    for ( ;; )
     {
+        char request[ 1200 ];
+        snprintf( request, sizeof request, "HOST\t%.32s\t%s\t%s%s%s", name, salt, verifier, with_character ? "\t" : "", with_character ? character : "" );
+        if ( !say( request ) || hear( line, sizeof line, 1 ) != 1 )
+        {
+            copy_reason( "", error, error_size );
+            return 0;
+        }
+        if ( strncmp( line, "HOSTING\t", 8 ) == 0 )
+            return 1;
+        // a server from before the character field: host without it
+        if ( with_character && strncmp( line, "ERROR\t", 6 ) == 0 && ( strstr( line, "unknown request" ) || strstr( line, "character" ) ) )
+        {
+            with_character = 0;
+            continue;
+        }
         copy_reason( line, error, error_size );
         return 0;
     }
-    return 1;
 }
 
 // While hosting: has someone joined? 0 not yet, 1 yes (their name is filled in and the connection now
 // belongs to the game), -1 the server is gone. Call it a few times a second.
 int lobby_wait( char *joiner, int joiner_size )
 {
-    char line[ 600 ];
+    char line[ 1200 ];
     int heard;
     if ( time( 0 ) - last_ping >= 20 )
     {
@@ -162,16 +184,19 @@ int lobby_wait( char *joiner, int joiner_size )
 // The games on offer for this build. Returns how many were put in `games`, or -1 with a reason.
 int lobby_list( lobby_game *games, int max, char *error, int error_size )
 {
-    char line[ 600 ];
+    char line[ 1200 ];
     int count = 0;
     if ( !say( "LIST" ) ) { snprintf( error, (size_t)error_size, "the game server is gone" ); return -1; }
     for ( ;; )
     {
         lobby_game game = { 0 };
+        int fields;
         if ( hear( line, sizeof line, 1 ) != 1 ) { snprintf( error, (size_t)error_size, "the game server is gone" ); return -1; }
         if ( strcmp( line, "END" ) == 0 ) return count;
-        if ( sscanf( line, "GAME\t%d\t%99[^\t]\t%d\t%99[^\t]\t%d\t%19s", &game.id, game.name, &game.locked, game.host, &game.age, game.salt ) == 6
-             && count < max )
+        // the seventh field, the host's character, is missing from older servers
+        fields = sscanf( line, "GAME\t%d\t%99[^\t]\t%d\t%99[^\t]\t%d\t%19s\t%480s", &game.id, game.name, &game.locked, game.host, &game.age, game.salt, game.character );
+        if ( fields < 7 || strcmp( game.character, "-" ) == 0 ) game.character[ 0 ] = 0;
+        if ( fields >= 6 && count < max )
             games[ count++ ] = game;
     }
 }
@@ -179,7 +204,7 @@ int lobby_list( lobby_game *games, int max, char *error, int error_size )
 // Join a game from the list. Returns 1 (the connection now belongs to the game), or 0 with a reason.
 int lobby_join( const lobby_game *game, const char *password, char *error, int error_size )
 {
-    char line[ 600 ], verifier[ 65 ], proof[ 65 ] = "-";
+    char line[ 1200 ], verifier[ 65 ], proof[ 65 ] = "-";
     if ( game->locked )
     {
         sha256_hex( game->salt, strlen( game->salt ), password ? password : "", password ? strlen( password ) : 0, verifier );

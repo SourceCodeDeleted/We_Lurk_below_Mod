@@ -53,6 +53,8 @@ struct Game {
     build: String,
     salt: Option<String>,
     verifier: Option<String>,
+    /// The host's character, as the game sends it (see protocol.rs); passed on unread.
+    character: Option<String>,
     since: Instant,
     /// Where an accepted joiner is put for the host's thread to find.
     matched: Sender<Joiner>,
@@ -193,12 +195,13 @@ impl Lobby {
                             .iter()
                             .map(|(id, g)| {
                                 format!(
-                                    "GAME\t{id}\t{}\t{}\t{}\t{}\t{}",
+                                    "GAME\t{id}\t{}\t{}\t{}\t{}\t{}\t{}",
                                     g.name,
                                     u8::from(g.verifier.is_some()),
                                     g.host,
                                     g.since.elapsed().as_secs(),
-                                    g.salt.as_deref().unwrap_or("-")
+                                    g.salt.as_deref().unwrap_or("-"),
+                                    g.character.as_deref().unwrap_or("-")
                                 )
                             })
                             .collect()
@@ -208,7 +211,7 @@ impl Lobby {
                     }
                     send(&mut out, "END")?;
                 }
-                Ok(Request::Host { name, salt, verifier }) => {
+                Ok(Request::Host { name, salt, verifier, character }) => {
                     let (matched, waiting) = mpsc::channel();
                     let id = self.next_id.fetch_add(1, Ordering::Relaxed);
                     {
@@ -220,7 +223,16 @@ impl Lobby {
                         }
                         state.games.insert(
                             id,
-                            Game { name: name.clone(), host: player.clone(), build: build.clone(), salt, verifier, since: Instant::now(), matched },
+                            Game {
+                                name: name.clone(),
+                                host: player.clone(),
+                                build: build.clone(),
+                                salt,
+                                verifier,
+                                character,
+                                since: Instant::now(),
+                                matched,
+                            },
                         );
                     }
                     println!("{address}: {player} hosts game {id} \"{name}\"");

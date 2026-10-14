@@ -80,6 +80,7 @@ typedef struct
     void ( GGE_GL_CALL *ClearDepthf )( float depth );
     unsigned int ( GGE_GL_CALL *CheckFramebufferStatus )( unsigned int target );
     unsigned int ( GGE_GL_CALL *GetError )( void );
+    void ( GGE_GL_CALL *ReadPixels )( int x, int y, int width, int height, unsigned int format, unsigned int type, void *data );
 } gge_gl_functions;
 
 extern gge_gl_functions gl;

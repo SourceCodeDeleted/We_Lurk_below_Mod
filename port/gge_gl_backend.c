@@ -605,6 +605,67 @@ int gge_gl_DrawIndexed( void *context, unsigned int count, unsigned int start, i
 
 __attribute__(( weak )) int ILB_native_hide_picture( void ) { return 0; }      // the real one: draft/native/native_platform.c
 
+// ILB_SCREENSHOTS=<folder>: for tests, every 90th picture shown is also written there as shot_<n>.bmp, at
+// half size. Nothing else on the screen is in it, only what the game drew.
+char *getenv( const char * );
+FILE *fopen( const char *, const char * );
+unsigned int fwrite( const void *, unsigned int, unsigned int, FILE * );
+int fclose( FILE * );
+int snprintf( char *, unsigned int, const char *, ... );
+void *malloc( unsigned int );
+void free( void * );
+
+static int screenshot_wanted;
+void gge_gl_screenshot_next( void ) { screenshot_wanted = 1; }     // the next picture as well, whatever its number
+
+static void screenshot( void )
+{
+    static unsigned int presents, taken;
+    const char *folder = getenv( "ILB_SCREENSHOTS" );
+    int width = 0, height = 0, wanted = screenshot_wanted;
+    screenshot_wanted = 0;
+    if ( folder == 0 || ( presents++ % 90 != 0 && !wanted ) || gl.ReadPixels == 0 )
+        return;
+    SDL_GL_GetDrawableSize( ILB_window, &width, &height );
+    if ( width < 2 || height < 2 || width > 8192 || height > 8192 )
+        return;
+    unsigned char *pixels = (unsigned char *)malloc( (unsigned int)( width * height * 4 ) );
+    if ( pixels == 0 ) return;
+    gl.BindFramebuffer( 0x8D40, 0 );                // the window's own picture
+    gl.PixelStorei( 0x0D05, 1 );                    // GL_PACK_ALIGNMENT
+    gl.ReadPixels( 0, 0, width, height, 0x80E1, 0x1401, pixels );     // GL_BGRA, GL_UNSIGNED_BYTE; bottom row first, as BMP has it
+    int w = width / 2, h = height / 2, row = ( w * 3 + 3 ) & ~3;
+    unsigned char header[ 54 ] = { 'B', 'M' };
+    unsigned int file_size = 54 + (unsigned int)( row * h ), *field;
+    field = (unsigned int *)( header + 2 );  *field = file_size;
+    field = (unsigned int *)( header + 10 ); *field = 54;
+    field = (unsigned int *)( header + 14 ); *field = 40;
+    field = (unsigned int *)( header + 18 ); *field = (unsigned int)w;
+    field = (unsigned int *)( header + 22 ); *field = (unsigned int)h;
+    header[ 26 ] = 1; header[ 28 ] = 24;
+    char path[ 1024 ];
+    snprintf( path, sizeof path, "%s/shot_%04u.bmp", folder, taken++ );
+    FILE *file = fopen( path, "wb" );
+    if ( file )
+    {
+        unsigned char *line = (unsigned char *)malloc( (unsigned int)row );
+        fwrite( header, 1, 54, file );
+        for ( int y = 0; line && y < h; y++ )
+        {
+            for ( int x = 0; x < row; x++ ) line[ x ] = 0;
+            for ( int x = 0; x < w; x++ )
+            {
+                const unsigned char *p = pixels + ( ( 2 * y ) * width + 2 * x ) * 4;
+                line[ 3 * x ] = p[ 0 ]; line[ 3 * x + 1 ] = p[ 1 ]; line[ 3 * x + 2 ] = p[ 2 ];
+            }
+            fwrite( line, 1, (unsigned int)row, file );
+        }
+        free( line );
+        fclose( file );
+    }
+    free( pixels );
+}
+
 int gge_gl_Present( void *swap_chain, unsigned int sync_interval, unsigned int flags )
 {
     CALL( 0, 0, 0, 0 );
@@ -621,6 +682,7 @@ int gge_gl_Present( void *swap_chain, unsigned int sync_interval, unsigned int f
         gl.ClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
         gl.Clear( 0x4000 );
     }
+    screenshot();
     SDL_GL_SwapWindow( ILB_window );
     state.dirty_targets = 1;
     return 0;

@@ -65,6 +65,18 @@ fn verifier(salt: &str, password: &str) -> String {
 }
 
 #[test]
+fn the_hosts_character_is_passed_on_with_the_list() {
+    let (_lobby, port) = start(Limits::default());
+    let mut host = Client::connect(port, "Host", BUILD);
+    let mut joiner = Client::connect(port, "Guest", BUILD);
+    let character = "0a1b".repeat(102);                 // 408 hex characters, the size the game sends
+    assert!(host.ask(&format!("HOST\tWith hero\t-\t-\t{character}")).starts_with("HOSTING\t"));
+    let games = joiner.list();
+    assert_eq!(games.len(), 1);
+    assert!(games[0].ends_with(&format!("\t-\t{character}")), "{}", games[0]);
+}
+
+#[test]
 fn open_game_is_listed_joined_and_relayed_both_ways() {
     let (lobby, port) = start(Limits::default());
     let mut host = Client::connect(port, "Host", BUILD);
@@ -76,6 +88,7 @@ fn open_game_is_listed_joined_and_relayed_both_ways() {
     let games = joiner.list();
     assert_eq!(games.len(), 1);
     assert!(games[0].starts_with("GAME\t1\tFriday night\t0\tHost\t"), "{}", games[0]);
+    assert!(games[0].ends_with("\t-\t-"), "no password, no character: {}", games[0]);
 
     joiner.say("JOIN\t1\t-");
     assert_eq!(host.hear(), "JOINED\tGuest");

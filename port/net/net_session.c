@@ -402,12 +402,7 @@ void net_session_keep( int in_step )
 //   ILB_LOBBY_JOIN=<game name>   join the game of that name
 // with ILB_LOBBY_PASSWORD (optional), ILB_SLOT (this player's character slot, default 1) and ILB_LOBBY
 // (server address, default 127.0.0.1:27960). Does not return when it works.
-typedef struct { int id, locked, age; char name[ 100 ], host[ 100 ], salt[ 20 ]; } lobby_game;
-int lobby_connect( const char *address, const char *player, char *error, int error_size );
-int lobby_host( const char *name, const char *password, char *error, int error_size );
-int lobby_wait( char *joiner, int joiner_size );
-int lobby_list( lobby_game *games, int max, char *error, int error_size );
-int lobby_join( const lobby_game *game, const char *password, char *error, int error_size );
+#include "net_lobby.h"
 
 const char *net_session_lobby_address( void )
 {

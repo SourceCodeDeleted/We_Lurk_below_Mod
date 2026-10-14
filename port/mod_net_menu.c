@@ -38,13 +38,7 @@ unsigned int strlen( const char * );
 char *strcpy( char *, const char * );
 
 // port/net/ (built with the system headers; see there)
-typedef struct { int id, locked, age; char name[ 100 ], host[ 100 ], salt[ 20 ]; } lobby_game;
-int lobby_connect( const char *address, const char *player, char *error, int error_size );
-void lobby_disconnect( void );
-int lobby_host( const char *name, const char *password, char *error, int error_size );
-int lobby_wait( char *joiner, int joiner_size );
-int lobby_list( lobby_game *games, int max, char *error, int error_size );
-int lobby_join( const lobby_game *game, const char *password, char *error, int error_size );
+#include "net/net_lobby.h"
 const char *net_session_lobby_address( void );
 const char *net_session_player_name( void );
 void net_session_root( int is_host, char *root, int size );
@@ -144,8 +138,372 @@ static void option( int line, const char *text )
     text_at( text, -1, y, scale, cursor == line ? YELLOW : WHITE );     // the highlighted line is yellow, as in the game's menus
 }
 
+// ---------------------------------------------------------------------------------------- the list of games
+// Drawn the way the game draws its character screen (draw_char_select, 0x42C5C0): one panel per game with the
+// host's character in it, five at a time, and in place of that screen's delete icon a join icon. The art is
+// the game's UI picture (ui_gfx\ui.gs3): entries of its rectangle table at 0x5D0158 (pixels) / 0xB05F50 (UV).
+// The host's character comes from the lobby server (net_lobby.c: lobby_set_character); its portrait is made
+// by the character screen's own code in the character slot records, which that screen reloads from the
+// saves whenever it opens.
+#define UI_PANEL            193                                     // the slot panel
+#define UI_PANEL_HOVER      171
+#define UI_FRAME            127                                     // the portrait frame
+#define UI_JOIN             195                                     // the icon next to the trash icon (194) in the picture
+#define UI_ICON_HOVER       172                                     // the trash icon's highlight, the same size
+#define UI_WIDTH( k )       ( *(float *)ILB_ADDR( 0x5D0158 + 16 * ( k ) + 8 ) )
+#define UI_HEIGHT( k )      ( *(float *)ILB_ADDR( 0x5D0158 + 16 * ( k ) + 12 ) )
+#define UI_UV( k )          ( (const int *)ILB_ADDR( 0xB05F50 + 16 * ( k ) ) )
+#define UI_SCALE            ( *(float *)ILB_ADDR( 0x611448 ) )
+#define SLOT( i )           ( (unsigned char *)ILB_ADDR( 0x60E898 + 260 * ( i ) ) )      // the character screen's slot records
+#define LOADING_PROGRESS    ( *(int *)ILB_ADDR( 0x38A5A94 ) )
+#define VISIBLE             5
+#define BUTTON_GAME         100                                     // + row: the panel
+#define BUTTON_JOIN         200                                     // + row: the join icon
+#define BUTTON_REFRESH      998
+#define BUTTON_BACK         999
+#define WINDOW_MENU         108                                     // the window sub_495D10 makes for this mode
+
+// What the host sends of its character: the parts of its slot record the character screen shows.
+typedef struct
+{
+    char name[ 32 ];
+    int level, character_class, race, style;
+    unsigned char look[ 0x9C ];
+} lobby_character;
+
+static int list_top;                    // the first game shown
+static int ui_model = -1;
+static int portrait_made[ VISIBLE ];
+static int buttons[ 2 * VISIBLE + 2 ][ 19 ];     // the game's button records (button_definition_data)
+static int buttons_added;
+static int text_hover;                  // Refresh or Back under the mouse: BUTTON_REFRESH, BUTTON_BACK or 0
+
+static int bits( float value )         { return *(int *)&value; }
+
+static void character_to_hex( const unsigned char *slot, char *hex )
+{
+    lobby_character c = { { 0 } };
+    const unsigned char *bytes = (const unsigned char *)&c;
+    for ( int i = 0; i < 31 && slot[ 3 + i ]; i++ ) c.name[ i ] = (char)slot[ 3 + i ];
+    c.level = *(const int *)( slot + 0x44 );
+    c.character_class = *(const int *)( slot + 0x48 );
+    c.race = *(const int *)( slot + 0xA4 );
+    c.style = *(const int *)( slot + 0xE8 );
+    for ( int i = 0; i < 0x9C; i++ ) c.look[ i ] = slot[ 0x4C + i ];
+    for ( unsigned int i = 0; i < sizeof c; i++ )
+    {
+        hex[ 2 * i ] = "0123456789abcdef"[ bytes[ i ] >> 4 ];
+        hex[ 2 * i + 1 ] = "0123456789abcdef"[ bytes[ i ] & 15 ];
+    }
+    hex[ 2 * sizeof c ] = 0;
+}
+
+static int character_from_hex( const char *hex, lobby_character *c )
+{
+    unsigned char *bytes = (unsigned char *)c;
+    for ( unsigned int i = 0; i < sizeof *c; i++ )
+    {
+        int high = hex[ 2 * i ], low = high ? hex[ 2 * i + 1 ] : 0;
+        if ( !( ( high >= '0' && high <= '9' ) || ( high >= 'a' && high <= 'f' ) ) || !( ( low >= '0' && low <= '9' ) || ( low >= 'a' && low <= 'f' ) ) )
+            return 0;
+        bytes[ i ] = (unsigned char)( ( ( high <= '9' ? high - '0' : high - 'a' + 10 ) << 4 ) | ( low <= '9' ? low - '0' : low - 'a' + 10 ) );
+    }
+    c->name[ 31 ] = 0;
+    // it came over the network: only what the character screen itself could hold
+    return hex[ 2 * sizeof *c ] == 0 && c->level >= 1 && c->level <= 1000 && c->character_class >= 0
+        && c->character_class < num_character_class_definitions_60E894 && c->style >= 0 && c->style <= 4;
+}
+
+// The host's own character, for the list: from its slot record, filled while the character screen is up.
+static void offer_character( int chosen_slot )
+{
+    char hex[ 2 * sizeof( lobby_character ) + 1 ];
+    character_to_hex( SLOT( chosen_slot - 1 ), hex );
+    lobby_set_character( hex );
+}
+
+static void free_portraits( void )
+{
+    for ( int i = 0; i < VISIBLE; i++ )
+    {
+        int *handle = (int *)( SLOT( i ) + 0xF0 );         // material, texture, model
+        if ( !portrait_made[ i ] ) continue;
+        if ( handle[ 2 ] != -1 ) sub_4113E0( handle[ 2 ] );
+        if ( handle[ 0 ] != -1 ) gge_material_free( handle[ 0 ] );
+        if ( handle[ 1 ] != -1 ) gge_texture_free( handle[ 1 ] );
+        handle[ 0 ] = handle[ 1 ] = handle[ 2 ] = -1;
+        SLOT( i )[ 0 ] = 0;
+        portrait_made[ i ] = 0;
+    }
+}
+
+// Slot record i holds the character of the i-th game shown, and its portrait.
+static void make_portraits( void )
+{
+    free_portraits();
+    for ( int i = 0; i < VISIBLE && list_top + i < game_count; i++ )
+    {
+        lobby_character c;
+        unsigned char *slot = SLOT( i );
+        int *handle = (int *)( slot + 0xF0 );
+        if ( !games[ list_top + i ].character[ 0 ] || !character_from_hex( games[ list_top + i ].character, &c ) )
+            continue;
+        memset( slot, 0, 260 );
+        slot[ 0 ] = 1;                                      // in use
+        slot[ 2 ] = 1;                                      // selectable: the name is drawn white
+        for ( int k = 0; k < 31 && c.name[ k ]; k++ ) slot[ 3 + k ] = (unsigned char)c.name[ k ];
+        *(int *)( slot + 0x44 ) = c.level;
+        *(int *)( slot + 0x48 ) = c.character_class;
+        for ( int k = 0; k < 0x9C; k++ ) slot[ 0x4C + k ] = c.look[ k ];
+        *(int *)( slot + 0xA4 ) = c.race != 0;
+        *(int *)( slot + 0xE8 ) = c.style;
+        slot[ 0xEC ] = 1;
+        handle[ 0 ] = handle[ 1 ] = handle[ 2 ] = -1;
+        sub_42E6B0( i );                                    // create_slot_graphics
+        portrait_made[ i ] = 1;
+    }
+}
+
+static int __cdecl on_button( unsigned int id, int pressed );
+
+static void remove_buttons( void )
+{
+    if ( !buttons_added ) return;
+    for ( int i = 0; i < 2 * VISIBLE + 2; i++ )
+        if ( buttons[ i ][ 0 ] ) ui_core_button_remove( (button_definition_data *)buttons[ i ] );
+    memset( buttons, 0, sizeof buttons );
+    buttons_added = 0;
+}
+
+static void add_button( int index, int id, float x, float y, float w, float h )
+{
+    int *b = buttons[ index ];
+    memset( b, 0, sizeof buttons[ index ] );
+    b[ 0 ] = WINDOW_MENU;
+    b[ 1 ] = -1;
+    b[ 2 ] = -1;
+    b[ 3 ] = id;
+    b[ 4 ] = (int)( x + 0.5f ); b[ 5 ] = (int)( y + 0.5f ); b[ 6 ] = (int)( w + 0.5f ); b[ 7 ] = (int)( h + 0.5f );
+    b[ 9 ] = (int)on_button;
+    ui_core_button_add( (button_definition_data *)b );
+}
+
+// The geometry of draw_char_select: a portrait frame, the panel, and the icon to its right, centred.
+typedef struct { float frame_left, panel_left, panel_right, icon_left, icon_right, title_y, first_top, row_height, step; } list_layout;
+
+static list_layout layout( void )
+{
+    list_layout l;
+    float s = UI_SCALE, gap = s * 4.0f, header = 2.0f * gap + ( flt_61143C + 1.0f ) * 16.0f;
+    float row = UI_HEIGHT( UI_FRAME ) * s;
+    float total = UI_WIDTH( UI_FRAME ) * s + gap + UI_WIDTH( UI_PANEL ) * s + gap + UI_WIDTH( UI_JOIN ) * s + gap;
+    l.panel_left = ( (float)WINDOW_WIDTH - total ) * 0.5f + UI_WIDTH( UI_FRAME ) * s + gap;
+    l.panel_right = l.panel_left + UI_WIDTH( UI_PANEL ) * s;
+    l.frame_left = l.panel_left - gap - UI_WIDTH( UI_FRAME ) * s;
+    l.icon_left = l.panel_right + gap;
+    l.icon_right = l.icon_left + UI_WIDTH( UI_JOIN ) * s;
+    l.title_y = ( (float)WINDOW_HEIGHT - ( ( row + gap ) * VISIBLE + header + gap + s * 16.0f ) ) * 0.5f;
+    l.first_top = l.title_y + header;
+    l.row_height = UI_HEIGHT( UI_PANEL ) * s;
+    l.step = l.row_height + gap;
+    return l;
+}
+
+static void add_buttons( void )
+{
+    list_layout l = layout();
+    float s = UI_SCALE, bottom = (float)WINDOW_HEIGHT - flt_61143C * 16.0f - 96.0f;
+    remove_buttons();
+    for ( int i = 0; i < VISIBLE && list_top + i < game_count; i++ )
+    {
+        float top = l.first_top + l.step * (float)i;
+        add_button( i, BUTTON_GAME + i, l.frame_left, top, l.panel_right - l.frame_left, l.row_height );
+        add_button( VISIBLE + i, BUTTON_JOIN + i, l.icon_left, top + 2.0f * s, UI_WIDTH( UI_JOIN ) * s, UI_HEIGHT( UI_JOIN ) * s );
+    }
+    // Back where the character screen has its own, Refresh next to it
+    add_button( 2 * VISIBLE, BUTTON_BACK, 32.0f, bottom, flt_61143C * 64.0f, flt_61143C * 16.0f );
+    add_button( 2 * VISIBLE + 1, BUTTON_REFRESH, 32.0f + flt_61143C * 96.0f, bottom, flt_61143C * 96.0f, flt_61143C * 16.0f );
+    buttons_added = 1;
+}
+
+static void quad( int entry, float x0, float y0, float x1, float y1 )
+{
+    const int *uv = UI_UV( entry );
+    ui_add_vert( -1, bits( x0 ), bits( y0 ), uv[ 0 ], uv[ 1 ] );
+    ui_add_vert( -1, bits( x0 ), bits( y1 ), uv[ 0 ], uv[ 3 ] );
+    ui_add_vert( -1, bits( x1 ), bits( y1 ), uv[ 2 ], uv[ 3 ] );
+    ui_add_vert( -1, bits( x0 ), bits( y0 ), uv[ 0 ], uv[ 1 ] );
+    ui_add_vert( -1, bits( x1 ), bits( y1 ), uv[ 2 ], uv[ 3 ] );
+    ui_add_vert( -1, bits( x1 ), bits( y0 ), uv[ 2 ], uv[ 1 ] );
+}
+
+static void ascii_to_text( const char *text )
+{
+    int n = 0;
+    for ( ; text[ n ] && n < 250; n++ ) stru_60B960.text[ n ] = (unsigned char)text[ n ];
+    stru_60B960.text[ n ] = 0;
+    stru_60B960.length = n;
+}
+
+static void text_in_panel( int color, const list_layout *l, float y )      // the text in stru_60B960, centred in the panel
+{
+    float width = ui_font_pixel_strlen( &stru_60B960, flt_61144C ).m128_f32[ 0 ];
+    float x = ( ( l->panel_right - l->panel_left ) - ( width - 2.0f * flt_61144C ) ) * 0.5f + l->panel_left;
+    ui_font_draw_string( color, &stru_60B960.length, (_OWORD)*(unsigned int *)&x, bits( y ), bits( flt_61144C ), 1 );
+}
+
+static int button_state( int index )    { return buttons_added && buttons[ index ][ 0 ] ? ui_core_get_button_state( (button_definition_data *)buttons[ index ] ) : 0; }
+
+static void list_set_up( void );
+
+static void reset_vertices( int model )         // gge_model_reset_vertices, which the game has only inlined
+{
+    if ( (unsigned int)model < 0x400 )
+    {
+        *(int *)ILB_ADDR( 0x3846048 + 48 * model ) = 0;
+        *(int *)ILB_ADDR( 0x3846050 + 48 * model ) = 0;
+    }
+}
+
+static void draw_list( void )
+{
+    list_layout l = layout();
+    char line[ 240 ];
+    float s = UI_SCALE;
+    list_set_up();
+    if ( ui_model < 0 ) return;
+    reset_vertices( ui_model );
+    for ( int i = 0; i < VISIBLE; i++ )                     // the portraits are drawn afresh each frame too
+        if ( portrait_made[ i ] ) reset_vertices( *(int *)( SLOT( i ) + 0xF8 ) );
+    dword_6114AC = 0;
+    text_at( "Join a game", -1, l.title_y, flt_61143C + 1.0f, WHITE );
+    if ( game_count == 0 )
+        text_at( "Nobody is hosting a game right now.", -1, l.first_top + l.step * 2.0f, normal(), GREY );
+    for ( int i = 0; i < VISIBLE && list_top + i < game_count; i++ )
+    {
+        const lobby_game *game = &games[ list_top + i ];
+        float top = l.first_top + l.step * (float)i, bottom = top + l.row_height;
+        int lit = button_state( i ) >= 1 || button_state( VISIBLE + i ) >= 1 || cursor == list_top + i;
+        quad( UI_PANEL, l.panel_left, top, l.panel_right, bottom );
+        quad( UI_FRAME, l.frame_left, top, l.frame_left + UI_WIDTH( UI_FRAME ) * s, top + UI_HEIGHT( UI_FRAME ) * s );
+        if ( lit ) quad( UI_PANEL_HOVER, l.panel_left, top, l.panel_right, bottom );
+        quad( UI_JOIN, l.icon_left, top + 2.0f * s, l.icon_right, top + 2.0f * s + UI_HEIGHT( UI_JOIN ) * s );
+        if ( button_state( VISIBLE + i ) >= 1 ) quad( UI_ICON_HOVER, l.icon_left, top + 2.0f * s, l.icon_right, top + 2.0f * s + UI_HEIGHT( UI_JOIN ) * s );
+        if ( portrait_made[ i ] )
+        {
+            unsigned char *slot = SLOT( i );
+            wchar_t number[ 16 ];
+            char_slot_draw_character( i, l.frame_left, top );
+            ascii_to_text( (const char *)slot + 3 );
+            text_in_panel( WHITE, &l, top + 10.0f );
+            // "Level <n> <race> <class>", as the character screen writes it
+            safestring_create_from_id( (int)&stru_60B960, 20 );
+            sub_40A0F0( number, 16, (wchar_t *)L"%i", *(int *)( slot + 0x44 ) );
+            safestring_concat_str( &stru_60B960, (const unsigned short *)number );
+            safestring_concat_str( &stru_60B960, (const unsigned short *)L" " );
+            safestring_concat_from_id( &stru_60B960, *(int *)( slot + 0xA4 ) ? 3312 : 3310 );
+            safestring_concat_str( &stru_60B960, (const unsigned short *)L" " );
+            safestring_concat_from_id( &stru_60B960, character_class_definitions_60CB44[ *(int *)( slot + 0x48 ) ].char_class_string );
+            text_in_panel( WHITE, &l, top + 10.0f + flt_61144C * 19.0f );
+        }
+        else
+        {
+            ascii_to_text( game->host );
+            text_in_panel( WHITE, &l, top + 10.0f );
+        }
+        snprintf( line, sizeof line, "%s%s  -  %s", game->name, game->locked ? " [password]" : "", game->host );
+        ascii_to_text( line );
+        text_in_panel( game->locked ? YELLOW : GREY, &l, top + 10.0f + flt_61144C * 38.0f );
+    }
+    if ( list_top > 0 )
+        text_at( "^", -1, l.first_top - l.step * 0.35f, normal(), GREY );
+    if ( list_top + VISIBLE < game_count )
+        text_at( "v", -1, l.first_top + l.step * VISIBLE, normal(), GREY );
+    {
+        float bottom = (float)WINDOW_HEIGHT - flt_61143C * 16.0f - 96.0f;
+        text_at( "Back", 32.0f, bottom, flt_61143C, button_state( 2 * VISIBLE ) >= 1 || cursor == game_count + 1 ? YELLOW : WHITE );
+        text_at( "Refresh", 32.0f + flt_61143C * 96.0f, bottom, flt_61143C, button_state( 2 * VISIBLE + 1 ) >= 1 || cursor == game_count ? YELLOW : WHITE );
+    }
+    gge_model_add_vertices( ui_model, dword_6114AC, (int)dword_B01350 );
+}
+
+// The list is set up on its first frame in this mode: the list is often asked for while the character
+// screen is still up (a character was just picked), and that screen's exit takes down the UI and the slot
+// graphics. Only once this mode's own set-up (sub_495D10, which makes WINDOW_MENU) has run do they stay.
+static int list_ready;
+
+static void list_opened( void )
+{
+    if ( list_top > game_count - VISIBLE ) list_top = game_count - VISIBLE;
+    if ( list_top < 0 ) list_top = 0;
+    list_ready = 0;
+}
+
+static void list_set_up( void )
+{
+    if ( list_ready || APP_MODE != MODE_NET_MENU ) return;
+    if ( ui_model < 0 ) ui_model = gge_model_new( dword_5D0E98, 512 );
+    make_portraits();
+    add_buttons();
+    list_ready = 1;
+}
+
+static void list_closed( void )
+{
+    remove_buttons();
+    free_portraits();
+    if ( ui_model >= 0 ) sub_4113E0( ui_model );
+    ui_model = -1;
+    list_ready = 0;
+}
+
+static void scroll_to( int game )       // keeps `game` among the five shown
+{
+    int top = list_top;
+    if ( game < top ) top = game;
+    if ( game >= top + VISIBLE ) top = game - VISIBLE + 1;
+    if ( top > game_count - VISIBLE ) top = game_count - VISIBLE;
+    if ( top < 0 ) top = 0;
+    if ( top != list_top ) { list_top = top; if ( list_ready ) { make_portraits(); add_buttons(); } }
+}
+
+// ---------------------------------------------------------------------------------------- the loading picture
+// While a joiner connects and the files go back and forth, the game's own loading screen (the church in town),
+// drawn by its mode 10 functions without loading anything. Freed again before the session restores the
+// start state: the session's real loading screen then shows the same picture.
+static int loading_up;
+void gge_gl_screenshot_next( void );    // port/gge_gl_backend.c
+
+static void loading_picture( int percent )
+{
+    if ( !loading_up )
+    {
+        sub_492C00();
+        loading_up = 1;
+    }
+    LOADING_PROGRESS = percent;
+    // what the menu drew last stays in its models until drawn again: the pointer and the two text layers
+    reset_vertices( *(int *)ILB_ADDR( 0x5E254C ) );
+    reset_vertices( *(int *)ILB_ADDR( 0x5E2654 ) );
+    reset_vertices( *(int *)ILB_ADDR( 0x5E25FC ) );
+    gge_gl_screenshot_next();           // (only with ILB_SCREENSHOTS set: the tests see this picture)
+    sub_493790();
+}
+
+static void loading_picture_done( void )
+{
+    if ( loading_up ) sub_492D80();
+    loading_up = 0;
+}
+
 // ---------------------------------------------------------------------------------------- what the choices do
-static void show( int which )       { screen = which; cursor = 0; }
+static void show( int which )
+{
+    if ( screen == SCREEN_LIST && which != SCREEN_LIST ) list_closed();
+    screen = which;
+    cursor = 0;
+    if ( which == SCREEN_LIST ) list_opened();
+}
 static void say( const char *text ) { snprintf( message, sizeof message, "%s", text ); show( SCREEN_MESSAGE ); }
 
 static void leave_lobby( void )
@@ -189,6 +547,11 @@ static void start_session( int is_host )
     net_session_root( is_host, root, sizeof root );
     if ( net_session_prepare( is_host, slot, root, &seed, error, sizeof error ) )
     {
+        if ( !is_host )
+        {
+            loading_picture( 30 );
+            loading_picture_done();             // freed before the start state comes back; the picture stays up (frozen)
+        }
         if ( getenv( "ILB_NET_RESTART" ) == 0 )
         {
             // Neither copy restarts. The game is put back to its start state inside the running program and
@@ -212,6 +575,7 @@ static void start_session( int is_host )
         net_session_run( is_host, root, seed, ILB_argv );   // a fresh run of the program, straight into the session
         snprintf( error, sizeof error, "could not start the game" );
     }
+    loading_picture_done();
     connected = 0;                      // the connection was the game's; it is of no use any more
     lobby_disconnect();
     say( error );
@@ -220,12 +584,35 @@ static void start_session( int is_host )
 static void join_chosen( void )
 {
     char error[ 160 ];
+    list_closed();                      // nothing of the list may be left to draw over the loading picture
+    loading_picture( 0 );
     if ( !lobby_join( &games[ chosen_game ], password, error, sizeof error ) )
     {
+        loading_picture_done();
         say( error );                   // wrong password, game gone, ...: still connected, back to the list afterwards
         return;
     }
+    loading_picture( 10 );
     start_session( 0 );
+}
+
+// A click on the list (the game's button system calls this; see add_buttons).
+static int __cdecl on_button( unsigned int id, int pressed )
+{
+    (void)pressed;
+    if ( screen != SCREEN_LIST ) return 0;
+    channel_play( 1, 1.0f );
+    if ( id == BUTTON_BACK ) { leave_lobby(); show( SCREEN_TYPE ); return 0; }
+    if ( id == BUTTON_REFRESH ) { refresh_list(); return 0; }
+    {
+        int game = list_top + (int)( id >= BUTTON_JOIN ? id - BUTTON_JOIN : id - BUTTON_GAME );
+        if ( game < 0 || game >= game_count ) return 0;
+        cursor = chosen_game = game;
+        password[ 0 ] = 0;
+        if ( games[ chosen_game ].locked ) show( SCREEN_PASSWORD );
+        else join_chosen();
+    }
+    return 0;
 }
 
 static void choose( void )
@@ -319,11 +706,22 @@ static char *field_being_typed( void )
 static void on_enter_mode( void )
 {
     sub_495D10();                       // the same set-up the game's "next player" text screen uses
+    memset( buttons, 0, sizeof buttons );   // the UI was reset by that: no button of the list is there any more
+    buttons_added = 0;
+    list_ready = 0;
 }
 
 static void on_leave_mode( void )
 {
+    list_closed();
+    loading_picture_done();
     sub_495D90();
+}
+
+static void on_wheel( int delta )       // the list scrolls a game at a time, as the character screen does
+{
+    if ( screen != SCREEN_LIST || game_count <= VISIBLE ) return;
+    scroll_to( delta > 0 ? list_top - 1 : list_top + VISIBLE );
 }
 
 static void go_back( void );
@@ -364,17 +762,35 @@ static void move_highlight( int line )
 {
     if ( line != cursor ) channel_play( 1, 1.0f );      // the tick the game's menus make
     cursor = line;
+    if ( screen == SCREEN_LIST && line < game_count ) scroll_to( line );
 }
 
 static void on_mouse_move( int x, int y, int modifiers )
 {
     sub_42A680( x, y );                 // what the game's own menus do with the mouse: this moves the pointer on the screen
+    if ( screen == SCREEN_LIST )        // the list's panels are the game's own buttons, which follow the mouse themselves
+    {
+        mouse_line = -1;
+        for ( int i = 0; i < 2 * VISIBLE + 2; i++ )
+            if ( button_state( i ) >= 1 )
+            {
+                int id = buttons[ i ][ 3 ];
+                cursor = id == BUTTON_BACK ? game_count + 1 : id == BUTTON_REFRESH ? game_count
+                       : list_top + ( id >= BUTTON_JOIN ? id - BUTTON_JOIN : id - BUTTON_GAME );
+            }
+        return;
+    }
     mouse_line = line_under( x, y );
     if ( mouse_line >= 0 ) move_highlight( mouse_line );
 }
 
 static void on_left_button( int down, int modifiers )
 {
+    if ( screen == SCREEN_LIST )
+    {
+        sub_42A6A0( (char)down, (char)modifiers );         // the game's button system: a click on a panel or icon calls on_button
+        return;
+    }
     if ( down && mouse_line >= 0 )      // a click picks the line it is on, and nothing when it is on none
     {
         cursor = mouse_line;
@@ -450,16 +866,7 @@ static void on_update( void )
             text_at( "Waiting for a player to join...", -1, line_y( 2 ), normal(), YELLOW );
             break;
         case SCREEN_LIST:
-            title( "Join a game", 0 );
-            if ( game_count == 0 )
-                text_at( "Nobody is hosting a game right now.", -1, line_y( -1 ), normal(), GREY );
-            for ( int i = 0; i < game_count; i++ )
-            {
-                snprintf( line, sizeof line, "%s%s  -  hosted by %s", games[ i ].name, games[ i ].locked ? "  [password]" : "", games[ i ].host );
-                option( i, line );
-            }
-            option( game_count, "Refresh the list" );
-            option( game_count + 1, "Back" );
+            draw_list();
             break;
         case SCREEN_PASSWORD:
             title( "Join a game", "Type the password and press Enter" );
@@ -489,6 +896,7 @@ static void install( void )
     handlers[ 2 ] = (void *)on_update;
     handlers[ 3 ] = (void *)on_mouse_move;
     handlers[ 4 ] = (void *)on_left_button;
+    handlers[ 6 ] = (void *)on_wheel;
     handlers[ 7 ] = (void *)on_key_down;
     handlers[ 9 ] = (void *)on_character;
     handlers[ 10 ] = (void *)on_controller_axis;
@@ -567,12 +975,13 @@ void ILB_mod_net_menu_background( void )
         slot = getenv( "ILB_AUTOHOST_SLOT" ) ? atoi( getenv( "ILB_AUTOHOST_SLOT" ) ) : 1;
         snprintf( game_name, sizeof game_name, "%s", getenv( "ILB_AUTOHOST_NAME" ) );
         snprintf( password, sizeof password, "%s", getenv( "ILB_AUTOHOST_PASSWORD" ) ? getenv( "ILB_AUTOHOST_PASSWORD" ) : "" );
+        want = WANT_NOTHING;
+        sub_42BCC0();                           // the character screen's set-up: loads the slot records, then "this slot was picked"
+        offer_character( slot );
         if ( reach_lobby() && lobby_host( game_name, password, error, sizeof error ) )
             hosting_while_playing = 1;
         else
             fprintf( stderr, "net menu: could not put the game back on the list; playing on alone\n" );
-        want = WANT_NOTHING;
-        sub_42BCC0();
         cs_do_select( 99 + slot );
         return;
     }
@@ -637,6 +1046,7 @@ int ILB_mod_net_menu_character( unsigned int button )
     channel_play( 1, 1.0f );
     if ( want == WANT_HOST )
     {
+        offer_character( slot );        // the slot records are loaded while the character screen is up
         if ( game_name[ 0 ] == 0 ) snprintf( game_name, sizeof game_name, "%.20s's game", net_session_player_name() );
         password[ 0 ] = 0;
         show( SCREEN_HOST_FORM );

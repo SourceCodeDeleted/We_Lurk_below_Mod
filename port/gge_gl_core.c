@@ -31,7 +31,7 @@ int gge_gl_load( void )
     LOAD( DrawBuffers ) LOAD( GenVertexArrays ) LOAD( BindVertexArray ) LOAD( EnableVertexAttribArray ) LOAD( DisableVertexAttribArray )
     LOAD( VertexAttribPointer ) LOAD( Enable ) LOAD( Disable ) LOAD( BlendFuncSeparate ) LOAD( BlendEquationSeparate )
     LOAD( ColorMask ) LOAD( Viewport ) LOAD( ClearColor ) LOAD( Clear ) LOAD( DrawArrays )
-    LOAD( DrawElementsBaseVertex ) LOAD( ClipControl ) LOAD( PixelStorei )
+    LOAD( DrawElementsBaseVertex ) LOAD( ClipControl ) LOAD( PixelStorei ) LOAD( ReadPixels )
     return ok;
 }
 
