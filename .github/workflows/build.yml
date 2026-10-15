@@ -1,11 +1,16 @@
 # Builds the game for Linux and for Windows, and the lobby server for both, on every push and pull request.
 # The results are kept as artifacts of the run ("Actions" tab -> the run -> Artifacts). None of them holds
 # game data: ILB.gbp of your own copy of the game goes next to the program before it is started.
+#
+# A version tag makes a GitHub Release of the same files, for players to download:
+#   git tag v0.1 && git push origin v0.1
+# Players of one network game must use the same release: the lobby only matches identical programs.
 name: build
 
 on:
   push:
     branches: [master]
+    tags: ['v*']
   pull_request:
   workflow_dispatch:
 
@@ -96,3 +101,28 @@ jobs:
           name: ItLurksBelow-windows-x86-symbols
           path: symbols/
           if-no-files-found: error
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [linux, windows]
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - name: Pack
+        run: |
+          cd artifacts
+          for name in ItLurksBelow-linux-x86 ItLurksBelow-windows-x86 ItLurksBelow-windows-x86-symbols; do
+            (cd "$name" && zip -r "../../$name-${GITHUB_REF_NAME}.zip" .)
+          done
+          ls -la ..
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --title "$GITHUB_REF_NAME" --notes \
+            "Windows: unzip, put ILB.gbp from your own copy of It Lurks Below next to ILB_windows.exe, start it. Linux: the same with ILB_play (needs the 32-bit SDL2 and OpenGL libraries). No game data is included. Network games: both players need this same release; the lobby server is welurkbelow.com." \
+            ItLurksBelow-*-"$GITHUB_REF_NAME".zip
