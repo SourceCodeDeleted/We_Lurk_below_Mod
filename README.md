@@ -136,10 +136,14 @@ had them before.
 Two players, each with their own copy and their own character; the host's world is used. Both copies run
 the whole game and exchange only their input, so they must be the same build.
 
-    tools/lobby_server.sh             # lobby server on this machine, port 27960
+The game finds the public lobby server at `welurkbelow.com:27960`. `ILB_LOBBY=<address[:port]>`, or a file
+`lobby.txt` next to `ILB.gbp` holding the address, points it at another one; a build made with
+`-DILB_DEFAULT_LOBBY=\"address:port\"` in its compile flags uses that by default. For testing on one machine:
 
-The game looks for the server at `127.0.0.1:27960` unless `ILB_LOBBY=<address[:port]>` is set or a file
-`lobby.txt` next to `ILB.gbp` holds the address. Then choose Play, Host a game on one copy and Play, Join a
+    tools/lobby_server.sh             # lobby server on this machine, port 27960
+    ILB_LOBBY=127.0.0.1               # ... and each copy of the game pointed at it
+
+Then choose Play, Host a game on one copy and Play, Join a
 game on the other. A game can have a password; it is never sent in clear, but the traffic is not
 encrypted. Running a public server is described in `server/README.md`.
 

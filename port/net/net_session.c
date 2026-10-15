@@ -401,8 +401,14 @@ void net_session_keep( int in_step )
 //   ILB_LOBBY_HOST=<game name>   offer a game and wait for a player
 //   ILB_LOBBY_JOIN=<game name>   join the game of that name
 // with ILB_LOBBY_PASSWORD (optional), ILB_SLOT (this player's character slot, default 1) and ILB_LOBBY
-// (server address, default 127.0.0.1:27960). Does not return when it works.
+// (server address, default ILB_DEFAULT_LOBBY below). Does not return when it works.
 #include "net_lobby.h"
+
+// The public lobby server. -DILB_DEFAULT_LOBBY=\"host:port\" builds the game for another one; ILB_LOBBY or
+// lobby.txt next to ILB.gbp still choose one at run time (127.0.0.1 for a server on this machine).
+#ifndef ILB_DEFAULT_LOBBY
+#define ILB_DEFAULT_LOBBY "welurkbelow.com:27960"
+#endif
 
 const char *net_session_lobby_address( void )
 {
@@ -414,7 +420,7 @@ const char *net_session_lobby_address( void )
         if ( fgets( address, sizeof address, file ) ) address[ strcspn( address, "\r\n " ) ] = 0;
         fclose( file );
     }
-    return address[ 0 ] ? address : "127.0.0.1:27960";
+    return address[ 0 ] ? address : ILB_DEFAULT_LOBBY;
 }
 
 const char *net_session_player_name( void )
