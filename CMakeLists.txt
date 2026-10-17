@@ -210,6 +210,9 @@ if(ILB_MOD_COOP_SPAWN)
     target_compile_definitions(ilb PRIVATE ILB_MOD_COOP_SPAWN)
 endif()
 target_compile_definitions(ilb PRIVATE ILB_MOD_PER_STEP)    # the once-per-step hook the port modules share
+# sin, cos and atan2 are the game's own (port/ilb_math.c, from musl), so that Linux and Windows copies of a
+# network game compute the same: the two C libraries round these differently in the last bit
+target_compile_definitions(ilb PRIVATE sin=ilb_sin cos=ilb_cos atan2=ilb_atan2)
 if(ILB_MOD_NET_MENU)
     target_compile_definitions(ilb PRIVATE ILB_MOD_NET_MENU)
 endif()
@@ -240,6 +243,30 @@ if(WIN32)
 endif()
 target_link_libraries(ilb PRIVATE net_link)
 target_compile_definitions(ilb PRIVATE ILB_NET_INPUT)
+
+# Which copies the lobby matches with each other (port/net/net_lobby.c): the same version of the source and
+# the same modules switched on, whatever the platform. The version is what git calls this commit (a tag such
+# as v0.2 for a release; "-dirty" when there are changes not yet committed).
+find_package(Git QUIET)
+set(ILB_SOURCE_VERSION "unknown")
+if(GIT_FOUND AND EXISTS ${CMAKE_SOURCE_DIR}/.git)
+    execute_process(COMMAND ${GIT_EXECUTABLE} describe --tags --match "v[0-9]*" --always --dirty WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        OUTPUT_VARIABLE ILB_SOURCE_VERSION OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_QUIET)
+    foreach(ref HEAD index packed-refs)         # configure again when a commit or tag is made
+        if(EXISTS ${CMAKE_SOURCE_DIR}/.git/${ref})
+            set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/.git/${ref})
+        endif()
+    endforeach()
+endif()
+set(ILB_GAME_VERSION "${ILB_SOURCE_VERSION}")
+foreach(module ILB_MOD_SEASON_OUTFITS ILB_MOD_SEASON_EVENTS ILB_MOD_SEASON_BUILDINGS ILB_MOD_LOCAL_COOP ILB_FIX_STUCK_PLAYER
+               ILB_MOD_COOP_SPAWN ILB_MOD_NET_MENU ILB_MOD_START_FLOW ILB_CHEATS)
+    if(${module})
+        string(APPEND ILB_GAME_VERSION "+${module}")
+    endif()
+endforeach()
+message(STATUS "Game version for the lobby: ${ILB_GAME_VERSION}")
+target_compile_definitions(net_link PRIVATE "ILB_GAME_VERSION=\"${ILB_GAME_VERSION}\"")
 
 if(ILB_VARIANT STREQUAL "native" OR ILB_VARIANT STREQUAL "play")
     # Ogg Vorbis decoder for the music (public domain, one file); built on its own with the normal C headers

@@ -28,6 +28,8 @@ jobs:
     runs-on: ubuntu-22.04       # what the game is developed on: clang 14 and the 32-bit libraries of this release
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0              # with the tags: the version the lobby matches by (CMakeLists.txt)
       - name: Tools and 32-bit libraries
         run: |
           sudo dpkg --add-architecture i386
@@ -58,6 +60,8 @@ jobs:
     runs-on: windows-2022
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0              # with the tags: the version the lobby matches by (CMakeLists.txt)
       - name: Tools
         shell: pwsh
         run: |

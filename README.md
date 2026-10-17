@@ -18,9 +18,9 @@ distributed with this project.
   online two-player games through a small lobby server, a changed story start, seasonal vendor outfits and
   drops, test cheats.
 - Known limits: 32-bit only. Around 200 functions still carry values the decompiler lost, so gameplay bugs
-  remain. The Windows build is new and has had far less testing than the Linux one. Players on Linux and
-  Windows should not expect to stay in step with each other in a network game (the two C libraries round
-  differently); same-platform games are what is tested.
+  remain. The Windows build is new and has had far less testing than the Linux one. Linux and Windows
+  copies of the same version can play network games together (see below); that is newer than
+  same-platform play and has been checked by replaying one recorded session on both.
 
 `PROGRESS.md` lists every original source file with how many of its functions are named and rewritten.
 
@@ -134,7 +134,11 @@ had them before.
 ## Network games
 
 Two players, each with their own copy and their own character; the host's world is used. Both copies run
-the whole game and exchange only their input, so they must be the same build.
+the whole game and exchange only their input, so they must compute exactly the same: the lobby matches
+copies of the same version (the git tag, e.g. `v0.2`) with the same modules switched on, on Linux and Windows
+alike. The functions whose results differ between the two C libraries (sin, cos, atan2) are the game's own
+(`port/ilb_math.c`, from musl). `tools/check_determinism.sh` replays a session recorded on Windows
+(`tests/determinism/`) and compares the game state tick by tick.
 
 The game finds the public lobby server at `welurkbelow.com:27960`. `ILB_LOBBY=<address[:port]>`, or a file
 `lobby.txt` next to `ILB.gbp` holding the address, points it at another one; a build made with

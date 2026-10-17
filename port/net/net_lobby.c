@@ -70,12 +70,18 @@ static void copy_reason( const char *answer, char *error, int error_size )
     snprintf( error, (size_t)error_size, "%s", tab ? tab + 1 : answer[ 0 ] ? answer : "the server did not answer" );
 }
 
-// Who this copy is: the first 16 hex characters of the hash of its own program file, so that only copies
-// of exactly the same build are matched.
+// Who this copy is, as the first 16 hex characters of a hash: copies are matched only when it is the same.
+// Built with CMake, it is the game's version and modules (ILB_GAME_VERSION), so the Linux and Windows builds
+// of one release play together (their simulation is the same: see port/ilb_math.c). Otherwise it is the
+// hash of the program file itself: only copies of exactly the same build.
 const char *lobby_build_id( void )
 {
     static char id[ 65 ];
-#ifdef _WIN32
+#ifdef ILB_GAME_VERSION
+    if ( id[ 0 ] == 0 )
+        sha256_hex( "It Lurks Below rebuild ", 23, ILB_GAME_VERSION, strlen( ILB_GAME_VERSION ), id );
+    if ( 0 )
+#elif defined( _WIN32 )
     char program[ 1024 ];
     DWORD length = GetModuleFileNameA( 0, program, sizeof program );
     if ( id[ 0 ] == 0 && ( length == 0 || length >= sizeof program || !sha256_file_hex( program, id ) ) )
