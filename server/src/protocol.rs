@@ -7,7 +7,8 @@
 //! HOST <game name> <salt|-> <verifier|-> [<character>]
 //!                                                HOSTING <id>          | ERROR <reason>
 //! PING                                           PONG
-//! LIST                                           GAME <id> <name> <locked 0|1> <host> <age s> <salt|-> <character|->  ...  END
+//! LIST                                           GAME <id> <name> <locked 0|1> <host> <age s> <salt|-> <character|->  ...
+//!                                                [OTHER <count of games of other builds, not shown>]  END
 //! JOIN <id> <proof|->                            OK                    | DENIED <reason>
 //! (host, when someone has joined)                JOINED <player name>
 //! READY                                          (both connections now carry the game's own bytes)

@@ -377,7 +377,14 @@ static void draw_list( void )
         if ( portrait_made[ i ] ) reset_vertices( *(int *)( SLOT( i ) + 0xF8 ) );
     dword_6114AC = 0;
     text_at( "Join a game", -1, l.title_y, flt_61143C + 1.0f, WHITE );
-    if ( game_count == 0 )
+    if ( game_count == 0 && lobby_other_games() > 0 )
+    {
+        snprintf( line, sizeof line, "%d game%s running a different version of the game.", lobby_other_games(), lobby_other_games() == 1 ? " is" : "s are" );
+        text_at( line, -1, l.first_top + l.step * 2.0f, normal(), GREY );
+        snprintf( line, sizeof line, "Yours: %.200s", lobby_version() );
+        text_at( line, -1, l.first_top + l.step * 3.0f, normal(), GREY );
+    }
+    else if ( game_count == 0 )
         text_at( "Nobody is hosting a game right now.", -1, l.first_top + l.step * 2.0f, normal(), GREY );
     for ( int i = 0; i < VISIBLE && list_top + i < game_count; i++ )
     {
@@ -530,6 +537,12 @@ static void refresh_list( void )
     char error[ 160 ];
     if ( !reach_lobby() ) return;
     game_count = lobby_list( games, 32, error, sizeof error );
+    if ( game_count < 0 )
+    {
+        leave_lobby();                  // the server lets a quiet connection go after a while: once more, afresh
+        if ( !reach_lobby() ) return;
+        game_count = lobby_list( games, 32, error, sizeof error );
+    }
     if ( game_count < 0 )
     {
         leave_lobby();

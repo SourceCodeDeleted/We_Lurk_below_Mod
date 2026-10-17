@@ -179,6 +179,7 @@ impl Lobby {
             Some(Err(reason)) => return send(&mut out, &format!("ERROR\t{reason}")),
             _ => return send(&mut out, "ERROR\tsay HELLO first"),
         };
+        println!("{address}: {player} says hello, build {build}");
         let nonce = nonce();
         send(&mut out, &format!("OK\t{nonce}"))?;
 
@@ -187,11 +188,13 @@ impl Lobby {
                 Err(reason) => send(&mut out, &format!("ERROR\t{reason}"))?,
                 Ok(Request::Ping) => send(&mut out, "PONG")?,
                 Ok(Request::List) => {
-                    let lines: Vec<String> = {
+                    let (lines, others) = {
                         let state = self.state.lock().unwrap();
+                        // games of other builds are not offered, only counted, so the player learns why the list is short
+                        let others = state.games.values().filter(|g| g.build != build).count();
                         let mut games: Vec<(&u32, &Game)> = state.games.iter().filter(|(_, g)| g.build == build).collect();
                         games.sort_by_key(|(id, _)| **id);
-                        games
+                        let lines = games
                             .iter()
                             .map(|(id, g)| {
                                 format!(
@@ -204,10 +207,14 @@ impl Lobby {
                                     g.character.as_deref().unwrap_or("-")
                                 )
                             })
-                            .collect()
+                            .collect::<Vec<String>>();
+                        (lines, others)
                     };
                     for line in lines {
                         send(&mut out, &line)?;
+                    }
+                    if others > 0 {
+                        send(&mut out, &format!("OTHER\t{others}"))?;
                     }
                     send(&mut out, "END")?;
                 }

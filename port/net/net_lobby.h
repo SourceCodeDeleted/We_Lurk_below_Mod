@@ -14,3 +14,5 @@ int lobby_wait( char *joiner, int joiner_size );
 int lobby_list( lobby_game *games, int max, char *error, int error_size );
 int lobby_join( const lobby_game *game, const char *password, char *error, int error_size );
 const char *lobby_build_id( void );
+const char *lobby_version( void );
+int lobby_other_games( void );

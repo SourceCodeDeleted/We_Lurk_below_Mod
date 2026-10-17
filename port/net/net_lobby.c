@@ -93,6 +93,21 @@ const char *lobby_build_id( void )
     return id;
 }
 
+// The version the build id is made from, to show players whose lists stay empty.
+const char *lobby_version( void )
+{
+#ifdef ILB_GAME_VERSION
+    return ILB_GAME_VERSION;
+#else
+    return "this exact program file";
+#endif
+}
+
+static int other_games;
+
+// How many games the last list left out because they run a different version (servers before OTHER: 0).
+int lobby_other_games( void ) { return other_games; }
+
 // Connect to the lobby at "address[:port]" and introduce this copy. Returns 1, or 0 with a reason in `error`.
 int lobby_connect( const char *address, const char *player, char *error, int error_size )
 {
@@ -192,6 +207,7 @@ int lobby_list( lobby_game *games, int max, char *error, int error_size )
 {
     char line[ 1200 ];
     int count = 0;
+    other_games = 0;
     if ( !say( "LIST" ) ) { snprintf( error, (size_t)error_size, "the game server is gone" ); return -1; }
     for ( ;; )
     {
@@ -199,6 +215,7 @@ int lobby_list( lobby_game *games, int max, char *error, int error_size )
         int fields;
         if ( hear( line, sizeof line, 1 ) != 1 ) { snprintf( error, (size_t)error_size, "the game server is gone" ); return -1; }
         if ( strcmp( line, "END" ) == 0 ) return count;
+        if ( sscanf( line, "OTHER\t%d", &other_games ) == 1 ) continue;
         // the seventh field, the host's character, is missing from older servers
         fields = sscanf( line, "GAME\t%d\t%99[^\t]\t%d\t%99[^\t]\t%d\t%19s\t%480s", &game.id, game.name, &game.locked, game.host, &game.age, game.salt, game.character );
         if ( fields < 7 || strcmp( game.character, "-" ) == 0 ) game.character[ 0 ] = 0;

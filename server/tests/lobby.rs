@@ -147,7 +147,7 @@ fn games_are_only_shown_to_and_joinable_by_the_same_build() {
     let mut host = Client::connect(port, "Host", BUILD);
     host.ask("HOST\tOld build\t-\t-");
     let mut other = Client::connect(port, "Guest", "ffffffffffffffff");
-    assert!(other.list().is_empty());
+    assert_eq!(other.list(), vec!["OTHER\t1".to_string()]);
     assert_eq!(other.ask("JOIN\t1\t-"), "DENIED\tthat game runs a different build");
 }
 
