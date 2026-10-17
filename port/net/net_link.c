@@ -99,7 +99,12 @@ int net_link_send( const void *data, int size )
 unsigned int net_link_ms( void )
 {
 #ifdef _WIN32
-    return (unsigned int)GetTickCount();
+    // not GetTickCount: the game has its own, a step counter (native_platform.c), and the two would clash
+    static LARGE_INTEGER frequency;
+    LARGE_INTEGER now;
+    if ( frequency.QuadPart == 0 ) QueryPerformanceFrequency( &frequency );
+    QueryPerformanceCounter( &now );
+    return (unsigned int)( now.QuadPart * 1000 / frequency.QuadPart );
 #else
     struct timeval now;
     gettimeofday( &now, 0 );
