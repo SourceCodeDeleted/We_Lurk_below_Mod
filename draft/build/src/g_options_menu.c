@@ -112,7 +112,7 @@ unsigned int __cdecl sub_4D97E0(int a1)
         v6 = 40.0;
       else
         v6 = 53.0;
-      dword_38C776C = fminf(31.0, fmaxf(20.0, (float)((float)v5 / v6) * 20.0));
+      *(float *)&dword_38C776C = fminf(31.0, fmaxf(20.0, (float)((float)v5 / v6) * 20.0));
       break;
     case 203:
       byte_38C7716 = byte_38C7716 == 0;

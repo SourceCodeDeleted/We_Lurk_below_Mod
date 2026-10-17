@@ -213,6 +213,8 @@ target_compile_definitions(ilb PRIVATE ILB_MOD_PER_STEP)    # the once-per-step 
 # sin, cos and atan2 are the game's own (port/ilb_math.c, from musl), so that Linux and Windows copies of a
 # network game compute the same: the two C libraries round these differently in the last bit
 target_compile_definitions(ilb PRIVATE sin=ilb_sin cos=ilb_cos atan2=ilb_atan2)
+# ... and memory from malloc starts as zeros on every platform (port/ilb_alloc.c)
+target_compile_definitions(ilb PRIVATE malloc=ilb_malloc)
 if(ILB_MOD_NET_MENU)
     target_compile_definitions(ilb PRIVATE ILB_MOD_NET_MENU)
 endif()

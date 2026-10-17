@@ -252,7 +252,7 @@ LABEL_9:
         v5 = 40.0;
       else
         v5 = 53.0;
-      dword_60A084 = fminf(31.0, fmaxf(20.0, (float)((float)(v4 / 32) / v5) * 20.0));
+      *(float *)&dword_60A084 = fminf(31.0, fmaxf(20.0, (float)((float)(v4 / 32) / v5) * 20.0));
       break;
     case 6:
       ILB_stack.m_v12.v = atof(a2);

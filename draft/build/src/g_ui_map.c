@@ -918,7 +918,7 @@ LABEL_6:
       v4 = 1.0 - *(float *)&dword_60A074;
       dword_60A080 = 0;
       dword_E8B78C[5 * v0] = 1077936128;
-      dword_60A078 = fmaxf(0.1, fminf(1.0, v4));
+      *(float *)&dword_60A078 = fmaxf(0.1, fminf(1.0, v4));
       goto LABEL_23;
     case 2:
       dword_60A080 = 0;

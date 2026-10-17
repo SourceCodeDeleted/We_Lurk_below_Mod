@@ -6872,7 +6872,7 @@ LABEL_23:
         v7 = 40.0;
       else
         v7 = 53.0;
-      dword_60A084 = fminf(31.0, fmaxf(20.0, (float)((float)(v1 / 32) / v7) * 20.0));
+      *(float *)&dword_60A084 = fminf(31.0, fmaxf(20.0, (float)((float)(v1 / 32) / v7) * 20.0));
       break;
     default:
       break;

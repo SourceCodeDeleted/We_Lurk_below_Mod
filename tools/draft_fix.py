@@ -776,6 +776,20 @@ def signed_zero_test(b):
     return "".join(out) + b[at:]
 kept = [signed_zero_test(b) for b in kept]
 
+# rule: a float result stored straight into an int-typed global ("dword_60A084 = fminf(31.0, ...)") is a store
+# of the float's bits: the original moved the register to memory unchanged, and the other uses of these
+# globals read them as floats ("*(float *)&dword_60A084"). As C assignments the value was converted to an
+# integer: without a settings file, the camera distance became the bits of the integer 24 (a float of 3e-44)
+# and a new world was drawn from nearly inside the scene, fog and parallax everywhere (and on some machines a
+# loop over the background strips never ended). Map transparency had the same fault.
+float_stores = 0
+def float_store(b):
+    global float_stores
+    b, n = re.subn(r"^(\s*)((?:dword|unk)_[0-9A-F]+) = ((?:fminf|fmaxf)\()", r"\1*(float *)&\2 = \3", b, flags=re.M)
+    float_stores += n
+    return b
+kept = [float_store(b) for b in kept]
+
 # rule: rand() takes no arguments. Where the compiler reserved a stack slot with "push ecx" just before
 # calling it, the decompiler shows a call through a cast with an argument, in one place as __stdcall:
 # "((int (__stdcall *)(int))rand)(v9)". Recompiled, that expects rand to remove the argument, which it does
@@ -988,6 +1002,7 @@ print("Direct3D calls turned into OpenGL backend calls: %d; methods the backend 
 print("calls of rand() through a cast made plain: %d" % rand_casts)
 print("narrow literals that are really wide strings: %d" % wide_literals)
 print("unsigned countdown tests made signed: %d" % signed_countdowns)
+print("float results stored as their bits into int-typed globals: %d" % float_stores)
 print("unsigned reads tested against zero made signed: %d" % signed_zero_tests)
 print("types used with their tag because a variable shares the name: %s" % ", ".join(ambiguous))
 print("functions whose stack variables are kept at their original offsets: %d" % stack_functions)

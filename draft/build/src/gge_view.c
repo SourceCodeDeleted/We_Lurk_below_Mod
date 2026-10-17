@@ -421,7 +421,7 @@ char sub_412E60()
         v5 = 40.0;
       else
         v5 = 53.0;
-      dword_60A084 = fminf(31.0, fmaxf(20.0, (float)((float)(v3 / 32) / v5) * 20.0));
+      *(float *)&dword_60A084 = fminf(31.0, fmaxf(20.0, (float)((float)(v3 / 32) / v5) * 20.0));
       sub_4610D0(v3, v4);
     }
   }
