@@ -81,6 +81,12 @@ typedef struct
     unsigned int ( GGE_GL_CALL *CheckFramebufferStatus )( unsigned int target );
     unsigned int ( GGE_GL_CALL *GetError )( void );
     void ( GGE_GL_CALL *ReadPixels )( int x, int y, int width, int height, unsigned int format, unsigned int type, void *data );
+    // a joiner's picture drawn at the host's size and scaled into its window (gge_gl_backend.c)
+    void ( GGE_GL_CALL *BlitFramebuffer )( int x0, int y0, int x1, int y1, int dx0, int dy0, int dx1, int dy1, unsigned int mask, unsigned int filter );
+    void ( GGE_GL_CALL *GenRenderbuffers )( int count, unsigned int *names );
+    void ( GGE_GL_CALL *BindRenderbuffer )( unsigned int target, unsigned int name );
+    void ( GGE_GL_CALL *RenderbufferStorage )( unsigned int target, unsigned int format, int width, int height );
+    void ( GGE_GL_CALL *FramebufferRenderbuffer )( unsigned int target, unsigned int attachment, unsigned int kind, unsigned int name );
 } gge_gl_functions;
 
 extern gge_gl_functions gl;

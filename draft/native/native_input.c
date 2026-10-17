@@ -28,6 +28,7 @@ extern FILE *stderr;
 int fprintf( FILE *, const char *, ... );
 FILE *fopen( const char *, const char * );
 unsigned int fread( void *, unsigned int, unsigned int, FILE * );
+int fclose( FILE * );
 unsigned int fwrite( const void *, unsigned int, unsigned int, FILE * );
 int fflush( FILE * );
 char *getenv( const char * );
@@ -439,12 +440,83 @@ static int net_keep( unsigned int type )
     return keyboard_or_mouse || controller;
 }
 
-static void net_gather( const unsigned char *event )
+// ---- a joiner whose window is not the host's size
+// The size of the picture is part of what the game computes from (the interface layout, the picture scale),
+// so in a session both copies must use the same one: the host's. A joiner whose window differs - another
+// screen, or a desktop the game caps the window to - plays at the host's size inside (virtual_width x
+// virtual_height); only the final picture is scaled into its real window (port/gge_gl_backend.c, with bars
+// where the shapes differ) and its mouse positions are scaled back before they are sent.
+static int host_width, host_height;         // the host's picture size, as its hello said (0: not known)
+static int virtual_width, virtual_height;   // non-zero while this copy plays at a size not its window's
+
+void ILB_input_host_size( int width, int height ) { host_width = width; host_height = height; }
+void ILB_input_game_size( int *width, int *height )
 {
+    *width = mode == 3 && view_base_width ? view_base_width : GAME_WIDTH;     // one view's size, not the doubled one
+    *height = *(int *)ILB_ADDR( 0x65213C );
+}
+int ILB_input_virtual_size( int *width, int *height )
+{
+    if ( mode != 3 || virtual_width == 0 ) return 0;
+    *width = virtual_width;
+    *height = virtual_height;
+    return 1;
+}
+
+void SDL_GetWindowSize( void *window, int *w, int *h );
+extern void *ILB_window;
+
+// Where the picture lands in a window of `width` x `height`: as large as fits, centred.
+void ILB_input_letterbox( int width, int height, int *x, int *y, int *w, int *h )
+{
+    if ( (long long)width * virtual_height > (long long)height * virtual_width )
+    {
+        *h = height;
+        *w = (int)( (long long)height * virtual_width / virtual_height );
+    }
+    else
+    {
+        *w = width;
+        *h = (int)( (long long)width * virtual_height / virtual_width );
+    }
+    *x = ( width - *w ) / 2;
+    *y = ( height - *h ) / 2;
+}
+
+// A mouse event from this copy's window, in the coordinates of the picture the game computes with.
+static void to_virtual( unsigned char *event )
+{
+    unsigned int type = *(const unsigned int *)event;
+    int width = 0, height = 0, x, y, w, h, *field = (int *)( event + 20 );
+    if ( virtual_width == 0 || ( type != 0x400 && type != 0x401 && type != 0x402 ) || ILB_window == 0 )
+        return;
+    SDL_GetWindowSize( ILB_window, &width, &height );
+    if ( width <= 0 || height <= 0 ) return;
+    ILB_input_letterbox( width, height, &x, &y, &w, &h );
+    if ( w <= 0 || h <= 0 ) return;
+    // SDL's mouse events: x and y at 20 and 24, and for motion the relative movement at 28 and 32
+    field[ 0 ] = (int)( (long long)( field[ 0 ] - x ) * virtual_width / w );
+    field[ 1 ] = (int)( (long long)( field[ 1 ] - y ) * virtual_height / h );
+    if ( field[ 0 ] < 0 ) field[ 0 ] = 0;
+    if ( field[ 0 ] >= virtual_width ) field[ 0 ] = virtual_width - 1;
+    if ( field[ 1 ] < 0 ) field[ 1 ] = 0;
+    if ( field[ 1 ] >= virtual_height ) field[ 1 ] = virtual_height - 1;
+    if ( type == 0x400 )
+    {
+        field[ 2 ] = (int)( (long long)field[ 2 ] * virtual_width / w );
+        field[ 3 ] = (int)( (long long)field[ 3 ] * virtual_height / h );
+    }
+}
+
+static void net_gather( const unsigned char *original )
+{
+    unsigned char event[ EVENT_SIZE ];
     // a step whose input has gone out already cannot take more: when the delay has just shrunk, the first open one
     unsigned int step = TICK + net_delay < net_sent_through ? net_sent_through : TICK + net_delay;
     net_bucket *bucket = &net_mine[ step % NET_RING ];
-    unsigned int type = *(const unsigned int *)event;
+    unsigned int type = *(const unsigned int *)original;
+    memcpy( event, original, EVENT_SIZE );
+    to_virtual( event );
     static unsigned int seen_kinds[ 16 ], seen;
     for ( unsigned int i = 0; i <= seen && i < 16; i++ )       // say once which kinds of event this copy's devices give
     {
@@ -914,6 +986,13 @@ static void net_epoch( int guest, unsigned int agreed_seed )
     event_player = -1;
     net_guest = guest;
     mode = 3;
+    if ( net_fake ) { fclose( net_fake ); net_fake = 0; }
+    if ( getenv( "ILB_NET_FAKE" ) && ( net_fake = fopen( getenv( "ILB_NET_FAKE" ), "rb" ) ) != 0 )     // tests: as in net_start
+    {
+        unsigned char skip[ 12 ];
+        fread( skip, 12, 1, net_fake );
+        net_fake_have = fread( &net_fake_tick, 4, 1, net_fake ) == 1 && fread( net_fake_event, EVENT_SIZE, 1, net_fake ) == 1;
+    }
     setenv( "ILB_SCRIPT", "coop", 1 );
     setenv( "ILB_SLOT", "1", 1 );
     setenv( "ILB_SLOT2", "2", 1 );
@@ -939,11 +1018,25 @@ int ILB_input_net_begin( int guest, unsigned int agreed_seed )
         return 0;
     restore_start_state();              // (the caller has left the screen this copy was in: ILB_input_leave_screen)
     appdata_file_load();                // the settings file of the session folder, which is the host's
-    if ( guest && ( *(int *)ILB_ADDR( 0x60A030 ) != GAME_WIDTH || *(int *)ILB_ADDR( 0x60A034 ) != *(int *)ILB_ADDR( 0x65213C ) ) )
+    virtual_width = virtual_height = 0;
+    view_base_width = 0;                // found again when the session makes its views, from this session's size
+    if ( guest )
     {
-        fprintf( stderr, "native input: the host plays at %dx%d and this window is %dx%d; starting afresh at the host's size\n",
-                 *(int *)ILB_ADDR( 0x60A030 ), *(int *)ILB_ADDR( 0x60A034 ), GAME_WIDTH, *(int *)ILB_ADDR( 0x65213C ) );
-        return 0;
+        int width = host_width ? host_width : *(int *)ILB_ADDR( 0x60A030 ), height = host_height ? host_height : *(int *)ILB_ADDR( 0x60A034 );
+        if ( width >= 320 && height >= 200 && width <= 8192 && height <= 8192 && ( width != GAME_WIDTH || height != *(int *)ILB_ADDR( 0x65213C ) ) )
+        {
+            fprintf( stderr, "native input: the host plays at %dx%d and this window is %dx%d; playing at the host's size, scaled to this window\n",
+                     width, height, GAME_WIDTH, *(int *)ILB_ADDR( 0x65213C ) );
+            virtual_width = width;
+            virtual_height = height;
+            GAME_WIDTH = width;                             // what the game draws and lays out for
+            *(int *)ILB_ADDR( 0x65213C ) = height;
+            *(int *)ILB_ADDR( 0x652158 ) = width;           // the copy it keeps of its window size
+            *(int *)ILB_ADDR( 0x65215C ) = height;
+            *(float *)ILB_ADDR( 0x652148 ) = 1.0f;          // mouse scale: positions arrive in the picture's own pixels
+            *(float *)ILB_ADDR( 0x65214C ) = 1.0f;
+            sub_4610D0( width, height );                    // the interface scale for that size, as the host has it
+        }
     }
     net_in_place = 1;
     net_epoch( guest, agreed_seed );
@@ -960,6 +1053,7 @@ int ILB_input_net_end( void )
     mode = 0;
     net_in_place = 0;
     event_player = -1;
+    virtual_width = virtual_height = 0;     // the start state brings back this copy's own size
     unsetenv( "ILB_SCRIPT" );
     restore_start_state();              // (the caller has left the game's screen while still in the session folder)
     appdata_file_load();                // this copy's own settings again (the caller is back in its own folder)

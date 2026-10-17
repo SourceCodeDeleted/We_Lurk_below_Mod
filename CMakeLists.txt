@@ -237,7 +237,7 @@ endif()
 
 # the TCP link between two copies of the game: built on its own with the system's C headers
 add_library(net_link STATIC ${CMAKE_SOURCE_DIR}/port/net/net_link.c ${CMAKE_SOURCE_DIR}/port/net/net_lobby.c
-    ${CMAKE_SOURCE_DIR}/port/net/net_session.c ${CMAKE_SOURCE_DIR}/port/net/sha256.c)
+    ${CMAKE_SOURCE_DIR}/port/net/net_session.c ${CMAKE_SOURCE_DIR}/port/net/sha256.c ${CMAKE_SOURCE_DIR}/port/net/net_compress.c)
 target_compile_options(net_link PRIVATE ${ILB_M32} -O1 -w)
 if(WIN32)
     target_compile_definitions(net_link PRIVATE _CRT_SECURE_NO_WARNINGS)

@@ -432,6 +432,44 @@ int gge_gl_OMSetRenderTargets( void *context, unsigned int count, void *const *v
     return 0;
 }
 
+// A joiner playing at the host's picture size (draft/native/native_input.c, "a joiner whose window is not the
+// host's size"): what the game draws for the window goes into a picture of that size instead, which Present
+// scales into the real window. Returns the framebuffer to draw into, or 0 for the window itself.
+int ILB_input_virtual_size( int *width, int *height );
+void ILB_input_letterbox( int width, int height, int *x, int *y, int *w, int *h );
+static unsigned int scaled_framebuffer, scaled_colour, scaled_depth;
+static int scaled_width, scaled_height;
+
+static unsigned int scaled_target( int *width, int *height )
+{
+    if ( !ILB_input_virtual_size( width, height ) )
+        return 0;
+    if ( scaled_framebuffer == 0 )
+    {
+        gl.GenFramebuffers( 1, &scaled_framebuffer );
+        gl.GenRenderbuffers( 1, &scaled_colour );
+        gl.GenRenderbuffers( 1, &scaled_depth );
+    }
+    if ( scaled_width != *width || scaled_height != *height )
+    {
+        scaled_width = *width;
+        scaled_height = *height;
+        gl.BindRenderbuffer( 0x8D41, scaled_colour );                          // GL_RENDERBUFFER
+        gl.RenderbufferStorage( 0x8D41, 0x8058, *width, *height );             // GL_RGBA8
+        gl.BindRenderbuffer( 0x8D41, scaled_depth );
+        gl.RenderbufferStorage( 0x8D41, 0x88F0, *width, *height );             // GL_DEPTH24_STENCIL8
+        gl.BindRenderbuffer( 0x8D41, 0 );
+        gl.BindFramebuffer( 0x8D40, scaled_framebuffer );
+        gl.FramebufferRenderbuffer( 0x8D40, 0x8CE0, 0x8D41, scaled_colour );   // COLOR_ATTACHMENT0
+        gl.FramebufferRenderbuffer( 0x8D40, 0x821A, 0x8D41, scaled_depth );    // DEPTH_STENCIL_ATTACHMENT
+        if ( gl.CheckFramebufferStatus( 0x8D40 ) != 0x8CD5 )
+            fprintf( stderr, "gge_gl: the scaled picture (%dx%d) is not usable (status %x)\n", *width, *height, gl.CheckFramebufferStatus( 0x8D40 ) );
+        else
+            fprintf( stderr, "gge_gl: drawing at %dx%d, scaled into the window\n", *width, *height );
+    }
+    return scaled_framebuffer;
+}
+
 // makes the current render targets and viewport OpenGL's
 static void apply_targets( void )
 {
@@ -445,9 +483,11 @@ static void apply_targets( void )
     state.target_is_window = first == 0 || first->is_backbuffer;
     if ( state.target_is_window )
     {
-        gl.BindFramebuffer( 0x8D40, 0 );
+        unsigned int scaled = scaled_target( &window_width, &window_height );
+        gl.BindFramebuffer( 0x8D40, scaled );
         gl.ClipControl( 0x8CA1, 0x935F );                                   // lower left, depth 0..1
-        SDL_GL_GetDrawableSize( ILB_window, &window_width, &window_height );
+        if ( scaled == 0 )
+            SDL_GL_GetDrawableSize( ILB_window, &window_width, &window_height );
         // two copies of a network game each show one of the two views: the picture is shifted so that this
         // copy's half lands on the window (draft/native/native_input.c, "one view per copy")
         gl.Viewport( (int)state.viewport[ 0 ] - ILB_input_view_offset(), window_height - (int)( state.viewport[ 1 ] + state.viewport[ 3 ] ),
@@ -692,6 +732,22 @@ int gge_gl_Present( void *swap_chain, unsigned int sync_interval, unsigned int f
         gl.ColorMask( 1, 1, 1, 1 );
         gl.ClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
         gl.Clear( 0x4000 );
+    }
+    else
+    {
+        int width, height, window_width = 0, window_height = 0, x, y, w, h;
+        if ( scaled_target( &width, &height ) )             // the picture drawn at the host's size, into the window
+        {
+            SDL_GL_GetDrawableSize( ILB_window, &window_width, &window_height );
+            ILB_input_letterbox( window_width, window_height, &x, &y, &w, &h );
+            gl.BindFramebuffer( 0x8D40, 0 );
+            gl.ColorMask( 1, 1, 1, 1 );
+            gl.ClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
+            gl.Clear( 0x4000 );                             // the bars
+            gl.BindFramebuffer( 0x8CA8, scaled_framebuffer );   // GL_READ_FRAMEBUFFER
+            gl.BlitFramebuffer( 0, 0, width, height, x, y, x + w, y + h, 0x4000, 0x2601 );     // colour, GL_LINEAR
+            gl.BindFramebuffer( 0x8D40, 0 );
+        }
     }
     screenshot();
     SDL_GL_SwapWindow( ILB_window );

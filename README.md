@@ -35,7 +35,7 @@ distributed with this project.
 | `server/` | Lobby and relay server for network games (Rust, no dependencies); see `server/README.md` |
 | `src/`, `tests/` | Hand-rewritten C++ of the engine core (`ec_*`, `gge_*`) with tests; not yet what the game is built from |
 | `docs/SOURCE_NOTES.md` | Notes on the original source files (structures, constants, file layout) taken from a public developer stream |
-| `third_party/` | stb_vorbis (public domain) |
+| `third_party/` | stb_vorbis (public domain), musl_math (MIT), miniz (MIT; packs the save files sent when a player joins) |
 
 Not in the repository (see `.gitignore`): `game/` (your copy of the game) and `build/` (what you build).
 

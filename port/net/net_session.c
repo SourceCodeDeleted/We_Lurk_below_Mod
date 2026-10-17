@@ -92,14 +92,18 @@ static int acceptable_name( const char *name )
     return 1;
 }
 
+unsigned char *net_pack( const unsigned char *data, unsigned int size, unsigned int *packed_size );     // net_compress.c
+int net_unpack( const unsigned char *packed, unsigned int packed_size, unsigned char *out, unsigned int size );
+
 // Send one of this copy's files under the name it has in the session, and put it in this copy's own
 // session folder too. `must` 0: a missing file is skipped.
 static int share( const char *real_folder, const char *real_name, const char *session_folder, const char *session_name, int must,
                   int keep, char *error, int error_size )
 {
-    char path[ 1200 ], header[ 1 + 64 + 4 + 64 ] = { 'F' }, digest[ 65 ];
-    unsigned int size = 0;
-    unsigned char *data;
+    // 'F', name, size, digest of the file as it is, size of the packed form that follows
+    char path[ 1200 ], header[ 1 + 64 + 4 + 64 + 4 ] = { 'F' }, digest[ 65 ];
+    unsigned int size = 0, packed_size = 0;
+    unsigned char *data, *packed;
     snprintf( path, sizeof path, "%s/%s", real_folder, real_name );
     data = read_file( path, &size );
     if ( data == 0 )
@@ -108,11 +112,21 @@ static int share( const char *real_folder, const char *real_name, const char *se
     snprintf( header + 1, 64, "%s", session_name );
     memcpy( header + 65, &size, 4 );
     memcpy( header + 69, digest, 64 );
-    if ( !net_link_send( header, sizeof header ) || !net_link_send( data, (int)size ) )
+    packed = net_pack( data, size, &packed_size );
+    if ( packed == 0 )
     {
+        free( data );
+        return fail( error, error_size, "cannot pack this copy's save file", real_name );
+    }
+    memcpy( header + 133, &packed_size, 4 );
+    fprintf( stderr, "net: sending %s, %u bytes packed into %u\n", session_name, size, packed_size );
+    if ( !net_link_send( header, sizeof header ) || !net_link_send( packed, (int)packed_size ) )
+    {
+        free( packed );
         free( data );
         return fail( error, error_size, "the other player has left", 0 );
     }
+    free( packed );
     if ( keep )         // remember where it goes back to afterwards
         snprintf( keep_list + strlen( keep_list ), sizeof keep_list - strlen( keep_list ), "%s\t%s/%s\n", session_name, real_folder, real_name );
     snprintf( path, sizeof path, "%s/%s", session_folder, session_name );
@@ -126,19 +140,28 @@ static int receive_files( const char *session_folder, char *error, int error_siz
     for ( ;; )
     {
         char kind, name[ 65 ] = { 0 }, digest[ 65 ] = { 0 }, actual[ 65 ], path[ 1200 ];
-        unsigned int size;
-        unsigned char *data;
+        unsigned int size, packed_size;
+        unsigned char *data, *packed;
         if ( !net_link_receive_all( &kind, 1, 60 ) ) return fail( error, error_size, "the other player has left", 0 );
         if ( kind == 'E' ) return 1;
         if ( kind != 'F' || !net_link_receive_all( name, 64, 30 ) || !net_link_receive_all( &size, 4, 30 ) || !net_link_receive_all( digest, 64, 30 )
-             || !acceptable_name( name ) || size > MAX_FILE )
+             || !net_link_receive_all( &packed_size, 4, 30 ) || !acceptable_name( name ) || size > MAX_FILE || packed_size > MAX_FILE + MAX_FILE / 64 + 1024 )
             return fail( error, error_size, "the other copy sent something unexpected", 0 );
         data = malloc( size + 1 );
-        if ( data == 0 || !net_link_receive_all( data, (int)size, 60 ) )
+        packed = malloc( packed_size + 1 );
+        if ( data == 0 || packed == 0 || !net_link_receive_all( packed, (int)packed_size, 60 ) )
         {
+            free( packed );
             free( data );
             return fail( error, error_size, "the other player's files did not arrive", name );
         }
+        if ( !net_unpack( packed, packed_size, data, size ) )
+        {
+            free( packed );
+            free( data );
+            return fail( error, error_size, "a file arrived damaged", name );
+        }
+        free( packed );
         sha256_hex( data, size, "", 0, actual );
         snprintf( path, sizeof path, "%s/%s", session_folder, name );
         if ( memcmp( actual, digest, 64 ) != 0 || !write_file( path, data, size ) )
@@ -204,6 +227,9 @@ static void link_here( const char *target, const char *path )
 
 // After the lobby matched two players: exchange the files and build this copy's session folder under
 // `session_root`. `slot` is the character slot this player chose. Returns 1 and the seed both will use.
+void ILB_input_game_size( int *width, int *height );          // draft/native/native_input.c
+void ILB_input_host_size( int width, int height );
+
 int net_session_prepare( int is_host, int slot, const char *session_root, unsigned int *seed, char *error, int error_size )
 {
     char folder[ 1100 ], mine[ 32 ], world[ 32 ], path[ 1200 ], here[ 900 ];
@@ -219,10 +245,14 @@ int net_session_prepare( int is_host, int slot, const char *session_root, unsign
     keep_list[ 0 ] = 0;
     if ( is_host )
     {
-        char hello[ 5 + 32 ] = { 'S' }, theirs[ 33 ] = { 0 };
+        // 'S', seed, host's name, the size of the host's picture (the joiner plays at that size)
+        char hello[ 5 + 32 + 8 ] = { 'S' }, theirs[ 33 ] = { 0 };
+        int size[ 2 ];
         *seed = getenv( "ILB_SEED" ) ? (unsigned int)atoi( getenv( "ILB_SEED" ) ) : (unsigned int)time( 0 );
         memcpy( hello + 1, seed, 4 );
         snprintf( hello + 5, 32, "%s", net_session_player_name() );
+        ILB_input_game_size( &size[ 0 ], &size[ 1 ] );
+        memcpy( hello + 37, size, 8 );
         if ( !net_link_send( hello, sizeof hello ) || !net_link_receive_all( theirs, 32, 60 ) )
             return fail( error, error_size, "the other player has left", 0 );
         remember_names( net_session_player_name(), theirs );
@@ -235,9 +265,13 @@ int net_session_prepare( int is_host, int slot, const char *session_root, unsign
     }
     else
     {
-        char hello[ 5 + 32 + 1 ] = { 0 }, mine_name[ 32 ] = { 0 };
-        if ( !net_link_receive_all( hello, 5 + 32, 60 ) || hello[ 0 ] != 'S' ) return fail( error, error_size, "the host did not start the game", 0 );
+        char hello[ 5 + 32 + 8 + 1 ] = { 0 }, mine_name[ 32 ] = { 0 };
+        int size[ 2 ];
+        if ( !net_link_receive_all( hello, 5 + 32 + 8, 60 ) || hello[ 0 ] != 'S' ) return fail( error, error_size, "the host did not start the game", 0 );
         memcpy( seed, hello + 1, 4 );
+        memcpy( size, hello + 37, 8 );
+        hello[ 37 ] = 0;                                    // the name ends here at the latest
+        ILB_input_host_size( size[ 0 ], size[ 1 ] );
         snprintf( mine_name, sizeof mine_name, "%s", net_session_player_name() );
         if ( !net_link_send( mine_name, 32 ) ) return fail( error, error_size, "the other player has left", 0 );
         remember_names( hello + 5, mine_name );

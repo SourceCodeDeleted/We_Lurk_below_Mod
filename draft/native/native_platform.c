@@ -613,12 +613,14 @@ void ILB_native_assert_summary( void )
 void SDL_GetWindowSize( void *window, int *w, int *h );
 #endif
 int ILB_input_view_width( int real );
+int ILB_input_virtual_size( int *width, int *height );
 BOOL __stdcall GetWindowInfo( HWND hwnd, PWINDOWINFO pwi )
 {
     int *info = (int *)pwi, width = 1920, height = 1080;
 #ifdef ILB_WINDOW
     if ( ILB_window ) SDL_GetWindowSize( ILB_window, &width, &height );
 #endif
+    ILB_input_virtual_size( &width, &height );  // a joiner playing at the host's size: that is the window it believes in
     width = ILB_input_view_width( width );      // one view per copy of a network game: see native_input.c
     info[ 1 ] = info[ 5 ] = 0;
     info[ 2 ] = info[ 6 ] = 0;

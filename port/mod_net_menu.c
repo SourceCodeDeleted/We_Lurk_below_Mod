@@ -1016,8 +1016,9 @@ void ILB_mod_net_menu_background( void )
         fprintf( stderr, "net menu: %s is joining; saving and starting the two-player game\n", other_player );
         hosting_while_playing = joiner_arrived = 0;
         game_save( 0, 0 );
-        start_session( 1 );                     // returns only if it failed
-        fprintf( stderr, "net menu: %s\n", message );
+        start_session( 1 );                     // returns when the session began in place, or when it failed
+        if ( !ILB_input_net_in_place() )
+            fprintf( stderr, "net menu: %s\n", message );
     }
 }
 

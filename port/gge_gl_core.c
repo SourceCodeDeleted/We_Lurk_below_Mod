@@ -32,6 +32,7 @@ int gge_gl_load( void )
     LOAD( VertexAttribPointer ) LOAD( Enable ) LOAD( Disable ) LOAD( BlendFuncSeparate ) LOAD( BlendEquationSeparate )
     LOAD( ColorMask ) LOAD( Viewport ) LOAD( ClearColor ) LOAD( Clear ) LOAD( DrawArrays )
     LOAD( DrawElementsBaseVertex ) LOAD( ClipControl ) LOAD( PixelStorei ) LOAD( ReadPixels )
+    LOAD( BlitFramebuffer ) LOAD( GenRenderbuffers ) LOAD( BindRenderbuffer ) LOAD( RenderbufferStorage ) LOAD( FramebufferRenderbuffer )
     return ok;
 }
 
