@@ -208,11 +208,22 @@ int gge_gl_CreateTexture2D( void *device, const void *desc, const void *initial,
         t->is_depth = 1;
         gl.TexImage2D( 0x0DE1, 0, d[ 4 ] == 55 ? 0x81A5 : 0x81A6, t->width, t->height, 0, 0x1902, 0x1405, 0 );    // DEPTH_COMPONENT16 / 24
     }
-    else if ( d[ 4 ] == 2 )                                                 // R32G32B32A32_FLOAT: the game's render targets
-        gl.TexImage2D( 0x0DE1, 0, 0x8814, t->width, t->height, 0, 0x1908, 0x1406, 0 );    // RGBA32F
     else
-        gl.TexImage2D( 0x0DE1, 0, 0x8058, t->width, t->height, 0, 0x80E1, 0x1401,         // RGBA8 from BGRA bytes
-                       initial ? *(const void *const *)initial : 0 );
+    {
+        // A texture made without contents starts out as zeros, as Direct3D's do in practice. OpenGL leaves them
+        // undefined, and some drivers (Intel's on Windows) hand out junk: a new world's maps that the game
+        // fills in only later then covered the picture.
+        int is_float = d[ 4 ] == 2;                                         // R32G32B32A32_FLOAT: the game's render targets
+        const void *pixels = initial ? *(const void *const *)initial : 0;
+        void *zeros = 0;
+        if ( pixels == 0 && t->width > 0 && t->height > 0 )
+            pixels = zeros = calloc( (size_t)t->width * t->height, is_float ? 16 : 4 );
+        if ( is_float )
+            gl.TexImage2D( 0x0DE1, 0, 0x8814, t->width, t->height, 0, 0x1908, 0x1406, pixels );    // RGBA32F
+        else
+            gl.TexImage2D( 0x0DE1, 0, 0x8058, t->width, t->height, 0, 0x80E1, 0x1401, pixels );    // RGBA8 from BGRA bytes
+        free( zeros );
+    }
     gl.TexParameteri( 0x0DE1, 0x2801, 0x2600 );                             // MIN_FILTER nearest (no mip maps exist)
     gl.TexParameteri( 0x0DE1, 0x2800, 0x2600 );
     gl.TexParameteri( 0x0DE1, 0x813D, 0 );                                  // MAX_LEVEL 0

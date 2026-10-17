@@ -1038,8 +1038,13 @@ int ILB_mod_net_menu_character( unsigned int button )
     snprintf( path, sizeof path, "native_appdata/Graybeard Games/It Lurks Below/ilbc_%u.sav", button - 99 );
     if ( ( file = fopen( path, "rb" ) ) == 0 )
     {
-        want = WANT_NOTHING;            // an empty slot: the game goes on to make a new character, as always
-        return 0;
+        // An empty slot. Making a character here would end in a single-player game (the game generates its
+        // world and starts it), so a network game asks for an existing character instead.
+        want = WANT_NOTHING;
+        channel_play( 1, 1.0f );
+        say( "Make a character in Single player first, then host or join with it." );    // (one line on the screen)
+        APP_MODE_WANTED = MODE_NET_MENU;
+        return 1;
     }
     fclose( file );
     slot = (int)( button - 99 );
