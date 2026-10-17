@@ -275,23 +275,28 @@ int ILB_input_replaying( void )                             { return ILB_input_a
 // Both copies run the whole game with two players, as local co-op does: player 1 on keyboard and mouse,
 // player 2 on a controller. The hosting copy contributes its keyboard and mouse, the joining copy its
 // controller; neither uses its own devices directly. Each simulation step works like this on both sides:
-//   - input gathered while the step counter is t is sent, to be used when the counter is t + NET_DELAY;
+//   - input gathered while the step counter is t is sent, to be used when the counter is t + net_delay;
+//     each copy picks its own net_delay from the round trip it measures (see net_adapt_delay), because the
+//     step number travels with the input and the copies need not agree on it;
 //   - the game is given the host's events for the current step, then the joiner's, always in that order;
 //   - the game may not take its next step before that has happened (ILB_input_tick_allowed, called from the
 //     game's own "is a step due" routine), so a copy that is ahead waits for the other.
 // The copies stay identical because they are given identical input on identical steps; nothing else is
 // sent. Both must start from the same saves and the same build (see the checksum file to verify).
 //
-// Wire format, both directions: "hello" = 'H', seed (4 bytes); a step = 'T', step (4), count (4), events.
+// Wire format, both directions: "hello" = 'H', seed (4 bytes); a step = 'T', step (4), count (4), events;
+// a state hash = 'C', step (4), hash (4); a ping = 'P', sender's clock (4), answered by 'Q' with the same clock.
 int net_link_host( int port );
 int net_link_join( const char *host, int port, int seconds );
 int net_link_send( const void *data, int size );
 int net_link_receive( void *data, int size, int wait );
+unsigned int net_link_ms( void );
 int atoi( const char * );
 void *memset( void *, int, unsigned int );
 void exit( int );
 
-#define NET_DELAY       3                   // steps between pressing and acting: 48 ms, hides ordinary lag
+#define NET_DELAY       3                   // steps between pressing and acting at the start: 48 ms, hides ordinary lag
+#define NET_DELAY_MAX   60                  // a second: beyond that the game is not playable anyway
 #define NET_RING        256                 // steps kept; far more than either side can be ahead
 #define NET_MAX_EVENTS  192                 // per step and side; a burst beyond that loses its tail
 typedef struct { unsigned int count; unsigned char events[ NET_MAX_EVENTS ][ EVENT_SIZE ]; } net_bucket;
@@ -304,6 +309,8 @@ static unsigned int net_deliver_position;
 static unsigned char net_inbox[ 1 << 16 ];
 static unsigned int net_inbox_size;
 static unsigned int net_gathered, net_received;
+static unsigned int net_delay = NET_DELAY;  // this copy's steps between pressing and acting, from the round trip
+static unsigned int net_ping_sent_ms, net_rtt[ 8 ], net_rtt_count;
 static FILE *net_fake;                      // ILB_NET_FAKE=<recording>: this copy's "devices" for tests
 static unsigned int net_fake_tick, net_fake_have;
 static unsigned char net_fake_event[ EVENT_SIZE ];
@@ -434,7 +441,9 @@ static int net_keep( unsigned int type )
 
 static void net_gather( const unsigned char *event )
 {
-    net_bucket *bucket = &net_mine[ ( TICK + NET_DELAY ) % NET_RING ];
+    // a step whose input has gone out already cannot take more: when the delay has just shrunk, the first open one
+    unsigned int step = TICK + net_delay < net_sent_through ? net_sent_through : TICK + net_delay;
+    net_bucket *bucket = &net_mine[ step % NET_RING ];
     unsigned int type = *(const unsigned int *)event;
     static unsigned int seen_kinds[ 16 ], seen;
     for ( unsigned int i = 0; i <= seen && i < 16; i++ )       // say once which kinds of event this copy's devices give
@@ -452,6 +461,24 @@ static void net_gather( const unsigned char *event )
         memcpy( bucket->events[ bucket->count++ ], event, EVENT_SIZE );
         net_gathered++;
     }
+}
+
+// A ping has come back after `rtt` ms. Input from this copy reaches the other half a round trip later, and must
+// be there before the other copy wants to take that step; so the delay covers the longest of the last eight
+// round trips' halves, plus two steps for unevenness. It grows at once and shrinks one step at a time.
+static void net_adapt_delay( unsigned int rtt )
+{
+    unsigned int longest = 0, want;
+    net_rtt[ net_rtt_count++ % 8 ] = rtt;
+    for ( unsigned int i = 0; i < 8 && i < net_rtt_count; i++ )
+        if ( net_rtt[ i ] > longest ) longest = net_rtt[ i ];
+    want = ( longest / 2 + 15 ) / 16 + 2;
+    if ( want < NET_DELAY ) want = NET_DELAY;
+    if ( want > NET_DELAY_MAX ) want = NET_DELAY_MAX;
+    if ( want < net_delay ) want = net_delay - 1;
+    if ( want != net_delay )
+        fprintf( stderr, "native input: round trip %u ms (longest lately %u): input delay %u steps instead of %u\n", rtt, longest, want, net_delay );
+    net_delay = want;
 }
 
 static void net_receive( void )
@@ -477,6 +504,21 @@ static void net_receive( void )
             used += 9;
             progress = 1;
         }
+        while ( net_inbox_size - used >= 5 && ( net_inbox[ used ] == 'P' || net_inbox[ used ] == 'Q' ) )
+        {
+            unsigned int stamp;
+            memcpy( &stamp, net_inbox + used + 1, 4 );
+            if ( net_inbox[ used ] == 'P' )
+            {
+                unsigned char answer[ 5 ] = { 'Q' };
+                memcpy( answer + 1, &stamp, 4 );
+                if ( !net_link_send( answer, 5 ) ) { net_lost( "the other player has left" ); return; }
+            }
+            else
+                net_adapt_delay( net_link_ms() - stamp );
+            used += 5;
+            progress = 1;
+        }
         while ( net_inbox_size - used >= 9 && net_inbox[ used ] == 'T' )
         {
             unsigned int step, count;
@@ -498,7 +540,7 @@ static void net_receive( void )
         }
         }
         while ( progress );
-        if ( used < net_inbox_size && net_inbox[ used ] != 'T' && net_inbox[ used ] != 'C' )
+        if ( used < net_inbox_size && net_inbox[ used ] != 'T' && net_inbox[ used ] != 'C' && net_inbox[ used ] != 'P' && net_inbox[ used ] != 'Q' )
         {
             fprintf( stderr, "native input: unknown message kind 0x%02x (%u bytes waiting, %u used)\n", net_inbox[ used ], net_inbox_size, used );
             net_lost( "the other copy sent something unexpected" );
@@ -533,7 +575,7 @@ static int net_poll( int ( *real_poll )( void * ), void *event )
         net_fake_have = fread( &net_fake_tick, 4, 1, net_fake ) == 1 && fread( net_fake_event, EVENT_SIZE, 1, net_fake ) == 1;
     }
     // everything gathered for steps that can no longer receive input goes out
-    while ( net_sent_through < tick + NET_DELAY )
+    while ( net_sent_through < tick + net_delay )
     {
         net_bucket *bucket = &net_mine[ net_sent_through % NET_RING ];
         unsigned char head[ 9 ] = { 'T' };
@@ -545,7 +587,13 @@ static int net_poll( int ( *real_poll )( void * ), void *event )
             return 0;
         }
         net_sent_through++;
-        net_mine[ ( net_sent_through + NET_DELAY - 1 ) % NET_RING ].count = 0;     // the bucket that opens next
+    }
+    if ( net_link_ms() - net_ping_sent_ms >= 500 )     // twice a second: how far away the other copy is
+    {
+        unsigned char ping[ 5 ] = { 'P' };
+        net_ping_sent_ms = net_link_ms();
+        memcpy( ping + 1, &net_ping_sent_ms, 4 );
+        if ( !net_link_send( ping, 5 ) ) { net_lost( "the other player has left" ); return 0; }
     }
     if ( one_view() && view_base_width && GAME_VIEWS == 1 && GAME_WIDTH != view_base_width )
         GAME_WIDTH = view_base_width;           // the game went back to a single view (title menu)
@@ -581,6 +629,7 @@ static int net_poll( int ( *real_poll )( void * ), void *event )
         }
         net_delivered_through = (int)tick;
         net_deliver_position = 0;
+        net_mine[ tick % NET_RING ].count = 0;         // done with: free for the step NET_RING later
         if ( tick % NET_CHECK == 0 )                    // both copies are at the same point of the same step here
         {
             unsigned char message[ 9 ] = { 'C' };
@@ -854,6 +903,8 @@ static void net_epoch( int guest, unsigned int agreed_seed )
     memset( net_my_hash_step, 0, sizeof net_my_hash_step );
     memset( net_their_hash_step, 0, sizeof net_their_hash_step );
     net_sent_through = net_have_through = NET_DELAY;
+    net_delay = NET_DELAY;
+    net_rtt_count = 0;
     net_delivered_through = -1;
     net_deliver_position = net_inbox_size = net_gathered = net_received = 0;
     net_out_of_step = announced = 0;

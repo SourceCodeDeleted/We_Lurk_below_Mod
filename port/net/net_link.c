@@ -95,6 +95,18 @@ int net_link_send( const void *data, int size )
     return 1;
 }
 
+// Milliseconds of real time (the game's own clock is a step counter); only differences between two readings mean anything.
+unsigned int net_link_ms( void )
+{
+#ifdef _WIN32
+    return (unsigned int)GetTickCount();
+#else
+    struct timeval now;
+    gettimeofday( &now, 0 );
+    return (unsigned int)( now.tv_sec * 1000u + now.tv_usec / 1000 );
+#endif
+}
+
 // Receive up to `size` bytes. With `wait` 0 it returns at once: the number of bytes, 0 for nothing yet,
 // -1 if the connection is gone.
 int net_link_receive( void *data, int size, int wait )
