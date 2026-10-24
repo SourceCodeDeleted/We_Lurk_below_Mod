@@ -64,12 +64,24 @@ typedef struct
     // "is it still playing?" and makes random choices when the answer turns to no, and two copies of the game
     // fed the same input must get the same answer on the same simulation step.
     int game_playing, game_paused, game_forever;
+    int silent;                         // played without being heard (see session_start_quiet)
     unsigned int game_end_tick, game_pause_tick, game_length;   // steps of 16 ms (the game's counter at 0x1703C3C)
 } channel;
 
 extern unsigned char ILB_image[];
 #define GAME_TICK ( *(unsigned int *)( ILB_image + ( 0x1703C3C - 0x400000 ) ) )
 float stb_vorbis_stream_length_in_seconds( stb_vorbis *f );
+
+// A network session starts with a script that goes through the title menu, the two-player set-up and the
+// character screen on both copies (draft/native/native_input.c). Their sounds - above all the character screen's
+// "start game" sound at full volume - would sound out of nowhere for players who pressed nothing. They are played
+// silently: the game's own bookkeeping of the channel is unchanged, so both copies stay identical.
+int ILB_input_net_session( void );
+#define APP_MODE ( *(int *)( ILB_image + ( 0x3A73CC0 - 0x400000 ) ) )
+static int session_start_quiet( void )
+{
+    return ILB_input_net_session() && ( APP_MODE == 2 || APP_MODE == 6 || APP_MODE == 8 );    // title, characters, two-player set-up
+}
 
 static int game_still_playing( channel *ch )
 {
@@ -141,8 +153,8 @@ static void mix_channel( channel *ch, float *out, int frames )
             left = a[ 0 ] * ( 1 - t ) + b[ 0 ] * t;
             right = s->channels > 1 ? a[ 1 ] * ( 1 - t ) + b[ 1 ] * t : left;
         }
-        out[ i * 2 ] += left * ch->volume;
-        out[ i * 2 + 1 ] += right * ch->volume;
+        out[ i * 2 ] += ch->silent ? 0.0f : left * ch->volume;
+        out[ i * 2 + 1 ] += ch->silent ? 0.0f : right * ch->volume;
         ch->position += step;
     }
 }
@@ -323,6 +335,7 @@ int STDCALL FMOD__System__playSound( void *system, void *sound_object, void *gro
         ch->source = s;
         ch->volume = 1.0f;
         ch->paused = paused != 0;
+        ch->silent = session_start_quiet();
         ch->loop_count = s->loops ? -1 : 0;
         ch->rate = s->rate;
         if ( s->is_vorbis )

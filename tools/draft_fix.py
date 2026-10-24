@@ -940,6 +940,13 @@ VALUE_HOOKS = [      # function, option, declaration, decompiled text, replaceme
      "item_new(a1->world_id, 1022,", "item_new(a1->world_id, ILB_mod_season_currency( 1022 ),"),
     (0x43BEF0, "ILB_MOD_SEASON_BUILDINGS", "int ILB_mod_season_building_tile( int );",   # dungeon_spawn_blueprint: a template tile
      "switch ( *(_DWORD *)(a5 + 4 * v7) )", "switch ( ILB_mod_season_building_tile( *(_DWORD *)(a5 + 4 * v7) ) )"),
+    # collecting from a chicken nest (eggs) and a beehive (honey): the sound of picking a crop - each of those
+    # items' own pick-up sound, sound_item_food (49), at 0.75 as object_pick_up plays it - instead of
+    # sound_pickup_success (132) at full volume, which players found too loud and grating
+    (0x4C9310, "ILB_MOD_SOFT_COLLECT", "/* sound_item_food */",
+     "channel_play(0x84u, 1.0);", "channel_play(49u, 0.75);"),
+    (0x4CA160, "ILB_MOD_SOFT_COLLECT", "/* sound_item_food */",
+     "channel_play(0x84u, 1.0);", "channel_play(49u, 0.75);"),
     (0x4CD2F0, "ILB_MOD_SEASON_BUILDINGS", "void ILB_mod_season_buildings_art( void );",  # objects_update_seasons_gfx, Autumn
      "result = gge_texture_update_combined_gs3files(aUnitsObjectsAu_5E07CC);",
      "result = gge_texture_update_combined_gs3files(aUnitsObjectsAu_5E07CC); ILB_mod_season_buildings_art();"),

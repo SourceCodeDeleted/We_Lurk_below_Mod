@@ -62,6 +62,10 @@ unsigned long strtoul( const char *, char **, int );
 int atexit( void ( * )( void ) );
 int atoi( const char * );
 static int net_poll( int ( *real_poll )( void * ), void *event );
+int ILB_chat_event( const unsigned char *event );      // port/mod_chat.c
+void ILB_chat_frame( void );
+void ILB_chat_received( const char *text, int length );
+void ILB_chat_reset( void );
 static FILE *file;
 static unsigned int seed, have_seed;
 static unsigned int next_tick, have_next, events_done;
@@ -288,7 +292,8 @@ int ILB_input_replaying( void )                             { return ILB_input_a
 //
 // Wire format, both directions: "hello" = 'H', seed (4 bytes); a step = 'T', step (4), count (4), events;
 // a state hash = 'C', step (4), hash (4); a ping = 'P', sender's clock (4), answered by 'Q' with the same clock;
-// "I am stopping" = 'X', reason (1), step (4), sent before a copy ends the session for a reason of its own.
+// "I am stopping" = 'X', reason (1), step (4), sent before a copy ends the session for a reason of its own;
+// a chat line = 'M', length (1), text - shown to the player, never part of the game (port/mod_chat.c).
 int net_link_host( int port );
 int net_link_join( const char *host, int port, int seconds );
 int net_link_send( const void *data, int size );
@@ -622,6 +627,12 @@ static void net_receive( void )
             net_lost( reason < 3 ? stop_reasons[ reason ] : stop_reasons[ 0 ] );
             return;
         }
+        while ( net_inbox_size - used >= 2 && net_inbox[ used ] == 'M' && net_inbox_size - used >= 2u + net_inbox[ used + 1 ] )
+        {
+            ILB_chat_received( (const char *)net_inbox + used + 2, net_inbox[ used + 1 ] );
+            used += 2 + net_inbox[ used + 1 ];
+            progress = 1;
+        }
         while ( net_inbox_size - used >= 5 && ( net_inbox[ used ] == 'P' || net_inbox[ used ] == 'Q' ) )
         {
             unsigned int stamp;
@@ -658,7 +669,7 @@ static void net_receive( void )
         }
         }
         while ( progress );
-        if ( used < net_inbox_size && net_inbox[ used ] != 'T' && net_inbox[ used ] != 'C' && net_inbox[ used ] != 'P' && net_inbox[ used ] != 'Q' && net_inbox[ used ] != 'X' )
+        if ( used < net_inbox_size && net_inbox[ used ] != 'T' && net_inbox[ used ] != 'C' && net_inbox[ used ] != 'P' && net_inbox[ used ] != 'Q' && net_inbox[ used ] != 'X' && net_inbox[ used ] != 'M' )
         {
             fprintf( stderr, "native input: unknown message kind 0x%02x (%u bytes waiting, %u used)\n", net_inbox[ used ], net_inbox_size, used );
             net_stop( STOP_UNEXPECTED, TICK );
@@ -668,6 +679,17 @@ static void net_receive( void )
         net_inbox_size -= used;
         if ( n <= 0 ) return;
     }
+}
+
+// A chat line to the other copy (port/mod_chat.c). Returns 0 if the connection is gone.
+int ILB_input_net_send_chat( const char *text, int length )
+{
+    unsigned char message[ 2 + 255 ] = { 'M' };
+    if ( mode != 3 || net_ended_why || length <= 0 ) return 0;
+    if ( length > 255 ) length = 255;
+    message[ 1 ] = (unsigned char)length;
+    memcpy( message + 2, text, (unsigned int)length );
+    return net_link_send( message, 2 + length );
 }
 
 static int net_poll( int ( *real_poll )( void * ), void *event )
@@ -681,15 +703,16 @@ static int net_poll( int ( *real_poll )( void * ), void *event )
         return 0;
     }
     unsigned char mine[ EVENT_SIZE ];
+    ILB_chat_frame();
     // this copy's devices (or the test recording standing in for them)
     while ( real_poll && real_poll( mine ) )
     {
         if ( *(unsigned int *)mine == SDL_QUIT ) { window_closing = 1; memcpy( event, mine, EVENT_SIZE ); return 1; }
-        if ( net_fake == 0 ) net_gather( mine );
+        if ( net_fake == 0 && !ILB_chat_event( mine ) ) net_gather( mine );
     }
     while ( net_fake_have && net_fake_tick <= tick )
     {
-        if ( net_fake_tick != QUERY_RECORD ) net_gather( net_fake_event );
+        if ( net_fake_tick != QUERY_RECORD && !ILB_chat_event( net_fake_event ) ) net_gather( net_fake_event );
         net_fake_have = fread( &net_fake_tick, 4, 1, net_fake ) == 1 && fread( net_fake_event, EVENT_SIZE, 1, net_fake ) == 1;
     }
     // everything gathered for steps that can no longer receive input goes out
@@ -1126,6 +1149,7 @@ static void net_epoch( int guest, unsigned int agreed_seed )
     event_player = -1;
     net_guest = guest;
     mode = 3;
+    ILB_chat_reset();
     if ( net_fake ) { fclose( net_fake ); net_fake = 0; }
     if ( net_debug_on() )               // with the debug records: where each random number of the start is drawn
     {

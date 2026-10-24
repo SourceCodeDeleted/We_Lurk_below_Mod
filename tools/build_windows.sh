@@ -28,13 +28,13 @@ if [ -f dump/imports.json ]; then python3 tools/native_stubs.py > /dev/null || e
 
 res="$(clang -print-resource-dir)/include"
 DEFS="-DILB_WINDOW -DILB_NET_INPUT -DILB_MOD_PER_STEP -DILB_MOD_SEASON_OUTFITS -DILB_MOD_SEASON_EVENTS -DILB_MOD_SEASON_BUILDINGS -DILB_MOD_LOCAL_COOP
-      -DILB_FIX_STUCK_PLAYER -DILB_MOD_COOP_SPAWN -DILB_MOD_NET_MENU -DILB_MOD_START_FLOW $cheats $ILB_WINDOWS_DEFS"
+      -DILB_FIX_STUCK_PLAYER -DILB_MOD_COOP_SPAWN -DILB_MOD_NET_MENU -DILB_MOD_START_FLOW -DILB_MOD_SOFT_COLLECT $cheats $ILB_WINDOWS_DEFS"
 # the version the lobby matches copies by, made as CMakeLists.txt makes it (ILB_GAME_VERSION): git's name for
 # this commit, then every module switched on, in CMake's order - so this program meets the Linux build of the
 # same source and modules in the lobby
 version=$(git describe --tags --match "v[0-9]*" --always --dirty 2>/dev/null || echo unknown)
 for module in ILB_MOD_SEASON_OUTFITS ILB_MOD_SEASON_EVENTS ILB_MOD_SEASON_BUILDINGS ILB_MOD_LOCAL_COOP ILB_FIX_STUCK_PLAYER \
-              ILB_MOD_COOP_SPAWN ILB_MOD_NET_MENU ILB_MOD_START_FLOW ILB_CHEATS; do
+              ILB_MOD_COOP_SPAWN ILB_MOD_NET_MENU ILB_MOD_START_FLOW ILB_MOD_SOFT_COLLECT ILB_CHEATS; do
     case " $(echo $DEFS) " in *" -D$module "*) version="$version+$module";; esac
 done
 echo "game version for the lobby: $version"

@@ -3074,6 +3074,9 @@ LABEL_3:
 // inlined: player_get_survival_flags
 void __fastcall interact_chicken(struct unit *a1)
 {
+#ifdef ILB_MOD_SOFT_COLLECT
+  /* sound_item_food */
+#endif
   struct unit *v1; // edi
   char v2; // al
   byte *custom_data; // ebx
@@ -3198,7 +3201,13 @@ LABEL_24:
     while ( v4 != 0 );
     custom_data = ILB_stack.m_v14.v;
   }
-  channel_play(0x84u, 1.0);
+  
+#ifdef ILB_MOD_SOFT_COLLECT
+channel_play(49u, 0.75);
+#else
+channel_play(0x84u, 1.0);
+#endif
+
   constant_particle_end(*((_DWORD *)custom_data + 34));
   *((_DWORD *)custom_data + 34) = -1;
   *((_DWORD *)custom_data + 36) = 0;
@@ -4106,6 +4115,9 @@ LABEL_3:
 // inlined: player_get_survival_flags
 void __fastcall interact_beehive(struct unit *a1)
 {
+#ifdef ILB_MOD_SOFT_COLLECT
+  /* sound_item_food */
+#endif
   struct unit *v1; // ebx
   char v2; // al
   byte *custom_data; // edi
@@ -4234,7 +4246,13 @@ LABEL_24:
     while ( v4 != 0 );
     custom_data = ILB_stack.m_v14.v;
   }
-  channel_play(0x84u, 1.0);
+  
+#ifdef ILB_MOD_SOFT_COLLECT
+channel_play(49u, 0.75);
+#else
+channel_play(0x84u, 1.0);
+#endif
+
   constant_particle_end(*((_DWORD *)custom_data + 34));
   *((_DWORD *)custom_data + 34) = -1;
   *((_DWORD *)custom_data + 36) = 0;

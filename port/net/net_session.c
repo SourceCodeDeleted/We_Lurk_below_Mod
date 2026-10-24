@@ -457,11 +457,25 @@ const char *net_session_lobby_address( void )
     return address[ 0 ] ? address : ILB_DEFAULT_LOBBY;
 }
 
+// The name other players see (game list, "... has joined"): the character's, once one is picked for a network
+// game (port/mod_net_menu.c) - never the computer's user name, which may be personal. ILB_PLAYER overrides it
+// (tests). Kept to what the lobby accepts: printable, no tabs, no spaces at either end, at most 32 characters.
+static char character_name[ 33 ];
+
+void net_session_set_player_name( const char *name )
+{
+    int length = 0;
+    while ( *name == ' ' ) name++;
+    for ( int i = 0; name[ i ] && length < 32; i++ )
+        if ( name[ i ] >= 32 && name[ i ] < 127 ) character_name[ length++ ] = name[ i ];
+    while ( length > 0 && character_name[ length - 1 ] == ' ' ) length--;
+    character_name[ length ] = 0;
+}
+
 const char *net_session_player_name( void )
 {
-    const char *name = getenv( "ILB_PLAYER" ) ? getenv( "ILB_PLAYER" ) : getenv( "USER" );
-    if ( name == 0 ) name = getenv( "USERNAME" );       // Windows
-    return name && name[ 0 ] ? name : "Player";
+    if ( getenv( "ILB_PLAYER" ) && getenv( "ILB_PLAYER" )[ 0 ] ) return getenv( "ILB_PLAYER" );
+    return character_name[ 0 ] ? character_name : "Player";
 }
 
 // Where this copy's session folder goes: next to the run folder, one per role so that two copies on one

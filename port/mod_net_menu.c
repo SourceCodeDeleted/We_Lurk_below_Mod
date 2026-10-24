@@ -41,6 +41,8 @@ char *strcpy( char *, const char * );
 #include "net/net_lobby.h"
 const char *net_session_lobby_address( void );
 const char *net_session_player_name( void );
+void net_session_set_player_name( const char *name );
+int strcmp( const char *, const char * );
 void net_session_root( int is_host, char *root, int size );
 int net_session_prepare( int is_host, int slot, const char *session_root, unsigned int *seed, char *error, int error_size );
 void net_session_run( int is_host, const char *session_root, unsigned int seed, char **argv );
@@ -212,6 +214,20 @@ static int character_from_hex( const char *hex, lobby_character *c )
     // it came over the network: only what the character screen itself could hold
     return hex[ 2 * sizeof *c ] == 0 && c->level >= 1 && c->level <= 1000 && c->character_class >= 0
         && c->character_class < num_character_class_definitions_60E894 && c->style >= 0 && c->style <= 4;
+}
+
+// The character picked for a network game names this player to the others (net_session_player_name). A
+// lobby connection made under another name is closed, so the next one introduces the new name.
+static void leave_lobby( void );
+static void use_character_name( int chosen_slot )
+{
+    char name[ 32 ] = { 0 }, before[ 40 ];
+    const unsigned char *record = SLOT( chosen_slot - 1 );
+    for ( int i = 0; i < 31 && record[ 3 + i ]; i++ ) name[ i ] = (char)record[ 3 + i ];
+    snprintf( before, sizeof before, "%s", net_session_player_name() );
+    net_session_set_player_name( name );
+    if ( connected && strcmp( before, net_session_player_name() ) != 0 )
+        leave_lobby();
 }
 
 // The host's own character, for the list: from its slot record, filled while the character screen is up.
@@ -918,6 +934,19 @@ static void install( void )
 
 // ---------------------------------------------------------------------------------------- while playing
 // Called on every pass of the game's main loop, in every screen (from draft/native/native_platform.c).
+// One line on the game's own message line, as its "Day N" notice is made.
+static void message_line( const char *text )
+{
+    int n = 0;
+    for ( ; text[ n ] && n < 99; n++ ) stru_60B960.text[ n ] = (unsigned char)text[ n ];
+    stru_60B960.text[ n ] = 0;
+    stru_60B960.length = n;
+    sub_5610F0( -256, 0 );
+}
+
+#define JOINING_FRAMES  20              // passes of the main loop the "... is joining" line is shown before the start
+static int joining_wait;
+
 void ILB_mod_net_menu_background( void )
 {
     // a copy that was restarted after a two-player session to carry on alone: host again, load the character
@@ -972,11 +1001,7 @@ void ILB_mod_net_menu_background( void )
     // a line on the screen for a host who is back in its own game: "<name> has left the game"
     if ( notice[ 0 ] && APP_MODE == 11 && ++notice_wait > 90 )
     {
-        int n = 0;
-        for ( ; notice[ n ] && n < 99; n++ ) stru_60B960.text[ n ] = (unsigned char)notice[ n ];
-        stru_60B960.text[ n ] = 0;
-        stru_60B960.length = n;
-        sub_5610F0( -256, 0 );
+        message_line( notice );
         notice[ 0 ] = 0;
         notice_wait = 0;
     }
@@ -990,6 +1015,7 @@ void ILB_mod_net_menu_background( void )
         snprintf( password, sizeof password, "%s", getenv( "ILB_AUTOHOST_PASSWORD" ) ? getenv( "ILB_AUTOHOST_PASSWORD" ) : "" );
         want = WANT_NOTHING;
         sub_42BCC0();                           // the character screen's set-up: loads the slot records, then "this slot was picked"
+        use_character_name( slot );
         offer_character( slot );
         if ( reach_lobby() && lobby_host( game_name, password, error, sizeof error ) )
             hosting_while_playing = 1;
@@ -1013,6 +1039,20 @@ void ILB_mod_net_menu_background( void )
     }
     if ( joiner_arrived && APP_MODE == 11 )     // in play (not on the loading screen): save, then start together
     {
+        // first the news, on the game's message line; the picture that stays on the screen while the game is
+        // saved, sent and started together has it
+        char line[ 140 ];
+        if ( joining_wait == 0 )
+        {
+            snprintf( line, sizeof line, "%.60s is joining the game...", other_player[ 0 ] ? other_player : "A player" );
+            message_line( line );
+        }
+        if ( ++joining_wait < JOINING_FRAMES )
+        {
+            if ( joining_wait == JOINING_FRAMES - 1 ) gge_gl_screenshot_next();     // (tests: the picture the host keeps)
+            return;
+        }
+        joining_wait = 0;
         fprintf( stderr, "net menu: %s is joining; saving and starting the two-player game\n", other_player );
         hosting_while_playing = joiner_arrived = 0;
         game_save( 0, 0 );
@@ -1062,6 +1102,7 @@ int ILB_mod_net_menu_character( unsigned int button )
     }
     fclose( file );
     slot = (int)( button - 99 );
+    use_character_name( slot );         // (the slot records are loaded while the character screen is up)
     channel_play( 1, 1.0f );
     if ( want == WANT_HOST )
     {
