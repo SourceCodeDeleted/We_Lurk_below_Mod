@@ -31,6 +31,7 @@ unsigned int fread( void *, unsigned int, unsigned int, FILE * );
 int fclose( FILE * );
 unsigned int fwrite( const void *, unsigned int, unsigned int, FILE * );
 int fflush( FILE * );
+int snprintf( char *, unsigned int, const char *, ... );
 char *getenv( const char * );
 void *memcpy( void *, const void *, unsigned int );
 int memcmp( const void *, const void *, unsigned int );
@@ -286,7 +287,8 @@ int ILB_input_replaying( void )                             { return ILB_input_a
 // sent. Both must start from the same saves and the same build (see the checksum file to verify).
 //
 // Wire format, both directions: "hello" = 'H', seed (4 bytes); a step = 'T', step (4), count (4), events;
-// a state hash = 'C', step (4), hash (4); a ping = 'P', sender's clock (4), answered by 'Q' with the same clock.
+// a state hash = 'C', step (4), hash (4); a ping = 'P', sender's clock (4), answered by 'Q' with the same clock;
+// "I am stopping" = 'X', reason (1), step (4), sent before a copy ends the session for a reason of its own.
 int net_link_host( int port );
 int net_link_join( const char *host, int port, int seconds );
 int net_link_send( const void *data, int size );
@@ -335,6 +337,8 @@ static void net_at_exit( void )
 
 static void net_lost( const char *why )
 {
+    if ( net_ended_why )                // already stopping (say both copies found the same disagreement)
+        return;
     fprintf( stderr, "native input: %s at step %u; stopping\n", why, TICK );
     // the other player is gone but this player's game is intact: save it as the game does when it is
     // closed, so that what was played is not lost
@@ -349,6 +353,31 @@ static void net_lost( const char *why )
     }
     net_session_continue( !net_out_of_step, ILB_argv );     // a session that began with a restart: restart back
     exit( 0 );
+}
+
+// Why a copy stops, as the 'X' message carries it to the other copy: without it, the other would only see the
+// connection close and tell its player "the other player has left".
+enum { STOP_DISAGREE = 1, STOP_UNEXPECTED = 2 };
+static const char *const stop_reasons[ 3 ] = {
+    "the other copy stopped",
+    "the two copies of the game no longer agree (this is a bug; nothing from this session is kept)",
+    "the two copies could not understand each other (this is a bug)",
+};
+static void net_debug_write( unsigned int step );
+static void net_debug_record( unsigned int step );
+static int net_debug_on( void );
+
+static void net_stop( int reason, unsigned int step )
+{
+    unsigned char message[ 6 ] = { 'X', (unsigned char)reason };
+    memcpy( message + 2, &step, 4 );
+    net_link_send( message, 6 );                // best effort: the other copy may be gone already
+    if ( reason == STOP_DISAGREE )
+    {
+        net_out_of_step = 1;
+        net_debug_write( step );
+    }
+    net_lost( stop_reasons[ reason ] );
 }
 
 // A hash of the game state, taken on the same step by both copies and compared (every NET_CHECK steps):
@@ -381,8 +410,8 @@ static void net_compare( unsigned int step )
     unsigned int slot = ( step / NET_CHECK ) % 64;
     if ( net_my_hash_step[ slot ] == step + 1 && net_their_hash_step[ slot ] == step + 1 && net_my_hash[ slot ] != net_their_hash[ slot ] )
     {
-        net_out_of_step = 1;
-        net_lost( "the two copies of the game no longer agree (this is a bug; nothing from this session is kept)" );
+        fprintf( stderr, "native input: at step %u this copy's state hash is %08x and the other's %08x\n", step, net_my_hash[ slot ], net_their_hash[ slot ] );
+        net_stop( STOP_DISAGREE, step );
     }
 }
 
@@ -576,6 +605,20 @@ static void net_receive( void )
             used += 9;
             progress = 1;
         }
+        if ( net_inbox_size - used >= 6 && net_inbox[ used ] == 'X' )             // the other copy is stopping
+        {
+            if ( net_ended_why ) return;        // so is this one, for a reason of its own
+            unsigned int reason = net_inbox[ used + 1 ], step;
+            memcpy( &step, net_inbox + used + 2, 4 );
+            fprintf( stderr, "native input: the other copy stops at its step %u (reason %u)\n", step, reason );
+            if ( reason == STOP_DISAGREE )
+            {
+                net_out_of_step = 1;
+                net_debug_write( step );        // this copy's record of that step, for comparing with the other's
+            }
+            net_lost( reason < 3 ? stop_reasons[ reason ] : stop_reasons[ 0 ] );
+            return;
+        }
         while ( net_inbox_size - used >= 5 && ( net_inbox[ used ] == 'P' || net_inbox[ used ] == 'Q' ) )
         {
             unsigned int stamp;
@@ -599,7 +642,7 @@ static void net_receive( void )
             if ( count > NET_MAX_EVENTS || step != net_have_through )
             {
                 fprintf( stderr, "native input: input for step %u with %u events arrived where step %u was due\n", step, count, net_have_through );
-                net_lost( "the other copy sent something unexpected" );
+                net_stop( STOP_UNEXPECTED, TICK );
                 return;
             }
             if ( net_inbox_size - used < 9 + count * EVENT_SIZE ) break;
@@ -612,10 +655,10 @@ static void net_receive( void )
         }
         }
         while ( progress );
-        if ( used < net_inbox_size && net_inbox[ used ] != 'T' && net_inbox[ used ] != 'C' && net_inbox[ used ] != 'P' && net_inbox[ used ] != 'Q' )
+        if ( used < net_inbox_size && net_inbox[ used ] != 'T' && net_inbox[ used ] != 'C' && net_inbox[ used ] != 'P' && net_inbox[ used ] != 'Q' && net_inbox[ used ] != 'X' )
         {
             fprintf( stderr, "native input: unknown message kind 0x%02x (%u bytes waiting, %u used)\n", net_inbox[ used ], net_inbox_size, used );
-            net_lost( "the other copy sent something unexpected" );
+            net_stop( STOP_UNEXPECTED, TICK );
             return;
         }
         memcpy( net_inbox, net_inbox + used, net_inbox_size - used );      // overlapping ranges move downwards only
@@ -706,7 +749,7 @@ static int net_poll( int ( *real_poll )( void * ), void *event )
         {
             unsigned char message[ 9 ] = { 'C' };
             unsigned int slot = ( tick / NET_CHECK ) % 64, hash = net_state_hash();
-            if ( getenv( "ILB_NET_DEBUG" ) )
+            if ( net_debug_on() )
             {
                 char *units = *(char **)ILB_ADDR( 0x3A73C9C );
                 int by_type[ 8 ] = { 0 };
@@ -733,6 +776,7 @@ static int net_poll( int ( *real_poll )( void * ), void *event )
             }
             net_my_hash[ slot ] = hash;
             net_my_hash_step[ slot ] = tick + 1;
+            net_debug_record( tick );
             memcpy( message + 1, &tick, 4 );
             memcpy( message + 5, &hash, 4 );
             if ( !net_link_send( message, 9 ) ) { net_lost( "the other player has left" ); return 0; }
@@ -829,6 +873,99 @@ int ILB_input_net_session( void )                           { return ILB_input_a
 // What is outside the game - the window, the sound device, this file's own variables - simply carries on.
 #define GLOBALS_START   0x5C8000
 #define GLOBALS_END     0x3A7C000
+
+void *malloc( unsigned int );
+
+// ---- disagreement report (ILB_NET_DEBUG=1)
+// At every state check, a record of this copy's state in more detail than the one hash the copies exchange: a
+// hash of each 4 KB page of the game's globals and of every live unit. The last DEBUG_KEPT records are kept;
+// when the copies disagree, both write theirs to net_desync_<step>.txt, and tools/compare_desync.py shows what
+// differs between the two files - which units, and which globals (by page) changed first.
+#define DEBUG_PAGES     ( ( GLOBALS_END - GLOBALS_START ) / 4096 )
+#define DEBUG_KEPT      8
+typedef struct { unsigned int id, type, class_, motion, whole; } debug_unit;
+typedef struct { unsigned int step, rand, units; unsigned int pages[ DEBUG_PAGES ]; debug_unit unit[ 0x4000 ]; } debug_record;
+static debug_record *debug_records;
+
+static unsigned int fnv( unsigned int hash, const unsigned char *p, unsigned int size )
+{
+    for ( unsigned int i = 0; i < size; i++ ) hash = ( hash ^ p[ i ] ) * 16777619u;
+    return hash;
+}
+
+// On with ILB_NET_DEBUG=1, or with a file net_debug.txt in the folder the game was started in (easier on Windows).
+static int net_debug_on( void )
+{
+    static int decided = -1;
+    if ( decided < 0 )
+    {
+        char name[ 1100 ];
+        const char *home = getenv( "ILB_NET_HOME" );
+        FILE *file;
+        snprintf( name, sizeof name, "%s%snet_debug.txt", home ? home : "", home ? "/" : "" );
+        decided = getenv( "ILB_NET_DEBUG" ) != 0 || ( file = fopen( name, "rb" ) ) != 0;
+        if ( decided && !getenv( "ILB_NET_DEBUG" ) ) fclose( file );
+        if ( decided ) fprintf( stderr, "native input: disagreement records are on\n" );
+    }
+    return decided;
+}
+
+static void net_debug_record( unsigned int step )
+{
+    debug_record *r;
+    char *units = *(char **)ILB_ADDR( 0x3A73C9C );
+    if ( !net_debug_on() ) return;
+    if ( debug_records == 0 )
+    {
+        if ( ( debug_records = malloc( DEBUG_KEPT * sizeof *debug_records ) ) == 0 ) return;
+        memset( debug_records, 0, DEBUG_KEPT * sizeof *debug_records );
+    }
+    r = &debug_records[ ( step / NET_CHECK ) % DEBUG_KEPT ];
+    r->step = step + 1;                 // + 1: zero means nothing recorded
+    r->rand = ILB_native_rand_state();
+    for ( unsigned int i = 0; i < DEBUG_PAGES; i++ )
+        r->pages[ i ] = fnv( 2166136261u, ILB_ADDR( GLOBALS_START + i * 4096 ), 4096 );
+    r->units = 0;
+    for ( int i = 0; units && i < 0x4000; i++ )
+    {
+        struct unit *u = (struct unit *)( units + i * 8936 );
+        debug_unit *d;
+        if ( u->id == (dword)-1 || ( u->id & 0x3FFF ) != (dword)i ) continue;
+        d = &r->unit[ r->units++ ];
+        d->id = u->id;
+        d->type = (unsigned int)u->unit_type;
+        d->class_ = (unsigned int)u->unit_class;
+        d->motion = fnv( fnv( 2166136261u, (const unsigned char *)&u->position, 8 ), (const unsigned char *)&u->forces, 8 );
+        d->whole = fnv( 2166136261u, (const unsigned char *)u, 8936 );
+    }
+}
+
+static void net_debug_write( unsigned int step )
+{
+    char name[ 1100 ];
+    const char *home = getenv( "ILB_NET_HOME" );        // the folder the game was started in, not the session's
+    FILE *file;
+    if ( debug_records == 0 ) return;
+    snprintf( name, sizeof name, "%s%snet_desync_%u.txt", home ? home : "", home ? "/" : "", step );
+    if ( ( file = fopen( name, "w" ) ) == 0 ) return;
+    fprintf( file, "ILB desync record, %s, disagreement at step %u\n", net_guest ? "joiner" : "host", step );
+    for ( unsigned int k = 0; k < DEBUG_KEPT; k++ )         // oldest first
+    {
+        unsigned int newest = 0;
+        for ( unsigned int j = 0; j < DEBUG_KEPT; j++ ) if ( debug_records[ j ].step > newest ) newest = debug_records[ j ].step;
+        const debug_record *r = 0;
+        for ( unsigned int j = 0; j < DEBUG_KEPT; j++ )
+            if ( debug_records[ j ].step && debug_records[ j ].step + ( DEBUG_KEPT - 1 - k ) * NET_CHECK == newest ) r = &debug_records[ j ];
+        if ( r == 0 ) continue;
+        fprintf( file, "step %u rand %08x units %u\n", r->step - 1, r->rand, r->units );
+        for ( unsigned int i = 0; i < DEBUG_PAGES; i++ )
+            fprintf( file, "page %x %08x\n", GLOBALS_START + i * 4096, r->pages[ i ] );
+        for ( unsigned int i = 0; i < r->units; i++ )
+            fprintf( file, "unit %x type %u class %u motion %08x whole %08x\n", r->unit[ i ].id, r->unit[ i ].type, r->unit[ i ].class_, r->unit[ i ].motion, r->unit[ i ].whole );
+    }
+    fclose( file );
+    fprintf( stderr, "native input: the last %u state records are in %s (compare with the other copy's: tools/compare_desync.py)\n", DEBUG_KEPT, name );
+}
 #define BLOCK_TABLE     0x17044F8                   // 0x2000 entries of 4120 bytes: free flag at +0,
 #define BLOCK_ENTRY     4120                        // size at +0x1010, address at +0x1014 (see drb_malloc)
 #define BLOCK_COUNT     0x2000
