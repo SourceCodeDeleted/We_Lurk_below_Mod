@@ -575,6 +575,29 @@ int __cdecl rand( void )
     return ( rand_state >> 16 ) & 0x7FFF;
 }
 
+// The game's calls of rand(), each with where it comes from (port/rand_trace.h). While a trace is open, each
+// call before step `rand_trace_until` is listed as "<step> <file>:<line>"; native_input.c opens and closes it.
+static FILE *rand_trace;
+static unsigned int rand_trace_until;
+void ILB_native_rand_trace( FILE *file, unsigned int until_step )
+{
+    if ( rand_trace ) fclose( rand_trace );
+    rand_trace = file;
+    rand_trace_until = until_step;
+}
+int ILB_rand_at( const char *file, int line )
+{
+    if ( rand_trace )
+    {
+        unsigned int step = *(unsigned int *)ILB_ADDR( 0x1703C3C );
+        if ( step < rand_trace_until )
+            fprintf( rand_trace, "%u %s:%d\n", step, file, line );
+        else
+            ILB_native_rand_trace( 0, 0 );
+    }
+    return rand();
+}
+
 // ---------------------------------------------------------------- the game's asserts, made visible
 // The linker redirects calls to assert_failed here (--wrap). Each place is printed the first time it fires,
 // with a count at the end of the run; then the game's own handler runs as usual.

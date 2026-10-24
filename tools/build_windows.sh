@@ -29,6 +29,15 @@ if [ -f dump/imports.json ]; then python3 tools/native_stubs.py > /dev/null || e
 res="$(clang -print-resource-dir)/include"
 DEFS="-DILB_WINDOW -DILB_NET_INPUT -DILB_MOD_PER_STEP -DILB_MOD_SEASON_OUTFITS -DILB_MOD_SEASON_EVENTS -DILB_MOD_SEASON_BUILDINGS -DILB_MOD_LOCAL_COOP
       -DILB_FIX_STUCK_PLAYER -DILB_MOD_COOP_SPAWN -DILB_MOD_NET_MENU -DILB_MOD_START_FLOW $cheats $ILB_WINDOWS_DEFS"
+# the version the lobby matches copies by, made as CMakeLists.txt makes it (ILB_GAME_VERSION): git's name for
+# this commit, then every module switched on, in CMake's order - so this program meets the Linux build of the
+# same source and modules in the lobby
+version=$(git describe --tags --match "v[0-9]*" --always --dirty 2>/dev/null || echo unknown)
+for module in ILB_MOD_SEASON_OUTFITS ILB_MOD_SEASON_EVENTS ILB_MOD_SEASON_BUILDINGS ILB_MOD_LOCAL_COOP ILB_FIX_STUCK_PLAYER \
+              ILB_MOD_COOP_SPAWN ILB_MOD_NET_MENU ILB_MOD_START_FLOW ILB_CHEATS; do
+    case " $(echo $DEFS) " in *" -D$module "*) version="$version+$module";; esac
+done
+echo "game version for the lobby: $version"
 # objects made with other options are not reused
 [ "$(cat $obj/defs.txt 2>/dev/null)" = "$(echo $DEFS)" ] || { rm -f $obj/*.o; echo $DEFS > $obj/defs.txt; }
 # the game code and the layer under it: no system headers, they declare everything themselves
@@ -47,11 +56,14 @@ fail=$out/failed.txt; rm -f $fail
 ls draft/build/src/*.c draft/build/native/generated_stubs.c draft/native/*.c port/*.c | xargs -P "$(nproc)" -I{} sh -c '
     f="{}"; o="$OBJ/$(basename "${f%.c}").o"
     [ "$o" -nt "$f" ] && exit 0
-    $GAME_CC "$f" -o "$o" 2> "${o%.o}.err" || { echo "FAILED $f"; head -5 "${o%.o}.err"; echo "$f" >> '"$fail"'; }'
+    case "$f" in draft/build/src/*) extra="-include port/rand_trace.h";; *) extra="";; esac
+    $GAME_CC $extra "$f" -o "$o" 2> "${o%.o}.err" || { echo "FAILED $f"; head -5 "${o%.o}.err"; echo "$f" >> '"$fail"'; }'
 for f in port/net/*.c; do
     o="$obj/net_$(basename "${f%.c}").o"
-    [ "$o" -nt "$f" ] || $SYS_CC "$f" -o "$o" || echo "$f" >> $fail
+    # (net_lobby.o again whenever the version changes: it is in the lobby's hello)
+    [ "$o" -nt "$f" ] && [ "$(cat $obj/version.txt 2>/dev/null)" = "$version" ] || $SYS_CC -DILB_GAME_VERSION="\"$version\"" "$f" -o "$o" || echo "$f" >> $fail
 done
+echo "$version" > $obj/version.txt
 o=$obj/stb_vorbis.o
 [ $o -nt third_party/stb_vorbis.c ] || $SYS_CC -O2 -DSTB_VORBIS_NO_STDIO -DSTB_VORBIS_NO_PUSHDATA_API third_party/stb_vorbis.c -o $o || echo stb_vorbis >> $fail
 o=$obj/windows_shim.o
@@ -87,7 +99,8 @@ $DLLTOOL -m i386 -k -d $out/lib/SDL2.def -l $out/lib/SDL2.lib -D SDL2.dll || exi
 $LLD /out:$out/ILB_windows.exe /map:$out/ILB_windows.map /machine:x86 /subsystem:windows /entry:mainCRTStartup /safeseh:no /largeaddressaware /stack:8388608 \
     /libpath:"$xwin/crt/lib/x86" /libpath:"$xwin/sdk/lib/um/x86" /libpath:"$xwin/sdk/lib/ucrt/x86" /libpath:$out/lib \
     $obj/*.o SDL2.lib \
-    msvcrt.lib vcruntime.lib ucrt.lib oldnames.lib kernel32.lib user32.lib ws2_32.lib \
+    libcmt.lib libvcruntime.lib ucrt.lib oldnames.lib kernel32.lib user32.lib ws2_32.lib \
+    /nodefaultlib:msvcrt.lib /nodefaultlib:vcruntime.lib /nodefaultlib:libucrt.lib \
     > $out/link.log 2>&1
 status=$?
 grep -c "undefined symbol" $out/link.log | sed 's/^/undefined symbols: /'

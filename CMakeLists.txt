@@ -44,9 +44,11 @@ if(WIN32)
     if(ILB_VARIANT STREQUAL "headless")
         message(FATAL_ERROR "The Windows program is built as -DILB_VARIANT=play or -DILB_VARIANT=native; headless is a Linux build")
     endif()
-    # the C runtime every Windows machine has (ucrtbase.dll, vcruntime140.dll), never the debug one that only
-    # comes with Visual Studio, whatever the build type
-    set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreadedDLL)
+    # The C runtime: the Universal C Runtime (ucrtbase.dll) as a DLL, which every Windows 10 and 11 has; the
+    # small Visual C++ part built into the program (libcmt + libvcruntime), because vcruntime140.dll is only
+    # there when some other program has installed the Visual C++ Redistributable - a fresh Windows says
+    # "VCRUNTIME140.dll was not found". Never the debug runtime, whatever the build type.
+    set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreaded)
     # no libraries but the ones named below: the game has its own stand-ins for much of the Windows API
     set(CMAKE_C_STANDARD_LIBRARIES "-lkernel32 -luser32 -lws2_32 -loldnames")
     set(ILB_M32 "")
@@ -116,6 +118,8 @@ else()
 endif()
 
 add_executable(ilb ${DRAFT_SOURCES} ${NATIVE_SOURCES} ${PORT_SOURCES})
+# the game's rand() calls say where they come from (for comparing two copies of a network game)
+set_property(SOURCE ${DRAFT_SOURCES} APPEND PROPERTY COMPILE_OPTIONS -include ${CMAKE_SOURCE_DIR}/port/rand_trace.h)
 set_target_properties(ilb PROPERTIES OUTPUT_NAME ILB_${ILB_VARIANT})
 set_source_files_properties(${DRAFT}/build/src/_image.c PROPERTIES OBJECT_DEPENDS ${DRAFT}/build/ILB_image.bin)
 
@@ -137,12 +141,14 @@ if(WIN32)
     # (the map is what tools/windows_where.py reads; /base is the address crash reports are given for)
     target_link_options(ilb PRIVATE -g LINKER:/subsystem:windows LINKER:/entry:mainCRTStartup LINKER:/safeseh:no
         LINKER:/largeaddressaware LINKER:/stack:8388608 LINKER:/base:0x400000 LINKER:/debug
+        LINKER:/nodefaultlib:libucrt.lib LINKER:/defaultlib:ucrt.lib       # the C runtime's DLL part (see above)
         LINKER:/map:$<TARGET_FILE_DIR:ilb>/$<TARGET_FILE_BASE_NAME:ilb>.map)
 
     # what the platform layer needs from the Windows C library and the crash report: built with the system's headers
     add_library(windows_shim OBJECT ${CMAKE_SOURCE_DIR}/port/windows/windows_shim.c)
     target_compile_options(windows_shim PRIVATE -O1 -w -g -gcodeview)
-    target_compile_definitions(windows_shim PRIVATE _CRT_SECURE_NO_WARNINGS)
+    # _DLL: C library functions by import from the C runtime's DLL, never a same-named game function
+    target_compile_definitions(windows_shim PRIVATE _CRT_SECURE_NO_WARNINGS _DLL)
     target_include_directories(windows_shim SYSTEM PRIVATE ${ILB_SYSTEM_INCLUDES})
     target_sources(ilb PRIVATE $<TARGET_OBJECTS:windows_shim>)
 
@@ -240,7 +246,7 @@ add_library(net_link STATIC ${CMAKE_SOURCE_DIR}/port/net/net_link.c ${CMAKE_SOUR
     ${CMAKE_SOURCE_DIR}/port/net/net_session.c ${CMAKE_SOURCE_DIR}/port/net/sha256.c ${CMAKE_SOURCE_DIR}/port/net/net_compress.c)
 target_compile_options(net_link PRIVATE ${ILB_M32} -O1 -w)
 if(WIN32)
-    target_compile_definitions(net_link PRIVATE _CRT_SECURE_NO_WARNINGS)
+    target_compile_definitions(net_link PRIVATE _CRT_SECURE_NO_WARNINGS _DLL)
     target_include_directories(net_link SYSTEM PRIVATE ${ILB_SYSTEM_INCLUDES})
 endif()
 target_link_libraries(ilb PRIVATE net_link)
@@ -276,7 +282,7 @@ if(ILB_VARIANT STREQUAL "native" OR ILB_VARIANT STREQUAL "play")
     target_compile_options(stb_vorbis PRIVATE ${ILB_M32} -O2 -w)
     target_compile_definitions(stb_vorbis PRIVATE STB_VORBIS_NO_STDIO STB_VORBIS_NO_PUSHDATA_API)
     if(WIN32)
-        target_compile_definitions(stb_vorbis PRIVATE _CRT_SECURE_NO_WARNINGS)
+        target_compile_definitions(stb_vorbis PRIVATE _CRT_SECURE_NO_WARNINGS _DLL)
         target_include_directories(stb_vorbis SYSTEM PRIVATE ${ILB_SYSTEM_INCLUDES})
     endif()
     target_link_libraries(ilb PRIVATE stb_vorbis)

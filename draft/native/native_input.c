@@ -335,10 +335,12 @@ static void net_at_exit( void )
     net_session_keep( !net_out_of_step );
 }
 
+void ILB_native_rand_trace( FILE *file, unsigned int until_step );     // native_platform.c
 static void net_lost( const char *why )
 {
     if ( net_ended_why )                // already stopping (say both copies found the same disagreement)
         return;
+    ILB_native_rand_trace( 0, 0 );      // what the trace has so far is complete up to here
     fprintf( stderr, "native input: %s at step %u; stopping\n", why, TICK );
     // the other player is gone but this player's game is intact: save it as the game does when it is
     // closed, so that what was played is not lost
@@ -366,6 +368,7 @@ static const char *const stop_reasons[ 3 ] = {
 static void net_debug_write( unsigned int step );
 static void net_debug_record( unsigned int step );
 static int net_debug_on( void );
+#define RAND_TRACE_STEPS 400            // the session's start: menus, loading, the first seconds of play
 
 static void net_stop( int reason, unsigned int step )
 {
@@ -1124,6 +1127,14 @@ static void net_epoch( int guest, unsigned int agreed_seed )
     net_guest = guest;
     mode = 3;
     if ( net_fake ) { fclose( net_fake ); net_fake = 0; }
+    if ( net_debug_on() )               // with the debug records: where each random number of the start is drawn
+    {
+        char name[ 1100 ];
+        const char *home = getenv( "ILB_NET_HOME" );
+        snprintf( name, sizeof name, "%s%snet_rand_trace.txt", home ? home : "", home ? "/" : "" );
+        ILB_native_rand_trace( fopen( name, "w" ), RAND_TRACE_STEPS );
+        fprintf( stderr, "native input: random numbers of the first %u steps are listed in %s\n", RAND_TRACE_STEPS, name );
+    }
     if ( getenv( "ILB_NET_FAKE" ) && ( net_fake = fopen( getenv( "ILB_NET_FAKE" ), "rb" ) ) != 0 )     // tests: as in net_start
     {
         unsigned char skip[ 12 ];
@@ -1155,6 +1166,11 @@ int ILB_input_net_begin( int guest, unsigned int agreed_seed )
         return 0;
     restore_start_state();              // (the caller has left the screen this copy was in: ILB_input_leave_screen)
     appdata_file_load();                // the settings file of the session folder, which is the host's
+    // Worked out from the window height in the settings once, at start-up (clouds_create_material): the size of
+    // the screen's cloud particles, and so when one leaves the screen and draws a random number. Each copy's
+    // start state has it from its own settings; in a session both take it from the host's, as the original
+    // computes it - otherwise copies with windows of different heights draw different random numbers.
+    *(float *)ILB_ADDR( 0x389190C ) = (float)( (float)*(int *)ILB_ADDR( 0x60A034 ) / 1080.0 ) * 64.0;
     virtual_width = virtual_height = 0;
     view_base_width = 0;                // found again when the session makes its views, from this session's size
     if ( guest )
